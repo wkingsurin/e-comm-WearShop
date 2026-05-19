@@ -1,6 +1,30 @@
+import Main from "@/components/main";
+import Container from "@/components/shared/container";
+import Section from "@/components/shared/section";
+import SectionTitle from "@/components/shared/section-title";
+import SortSelect from "@/components/shared/sort-select";
+import ProductCard from "@/components/widgets/product-card";
+
 export default function Home() {
 	return (
-		<div className="flex flex-col items-center gap-[20px] m-[30px]">
-		</div>
+		<Main>
+			<Section>
+				<Container>
+					<div className="flex flex-col gap-5">
+						<div className="flex items-center justify-between">
+							<SectionTitle>Hoodies</SectionTitle>
+							<SortSelect />
+						</div>
+						<div className="flex flex-wrap gap-5">
+							<ProductCard />
+							<ProductCard />
+							<ProductCard />
+							<ProductCard />
+							<ProductCard />
+						</div>
+					</div>
+				</Container>
+			</Section>
+		</Main>
 	);
 }
