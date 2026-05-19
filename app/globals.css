@@ -38,6 +38,7 @@
 	--base: 16px;
 	--lg: 18px;
 	--xl: 20px;
+	--2xl: 24px;
 	--base-percent: 100%;
 	--md-percent: 120%;
 	--lg-percent: 140%;
@@ -103,6 +104,7 @@
 	--text-md: var(--md);
 	--text-lg: var(--lg);
 	--text-xl: var(--xl);
+	--text-2xl: var(--2xl);
 	--leading-base: var(--base-percent);
 	--leading-md: var(--md-percent);
 	--leading-lg: var(--lg-percent);
