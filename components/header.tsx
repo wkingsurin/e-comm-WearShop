@@ -17,13 +17,13 @@ export default function Header() {
 	];
 
 	return (
-		<header className="fixed w-full">
+		<header className="fixed z-10000 w-full bg-white">
 			<Container>
-				<div className="flex flex-col gap-5 mt-[30px]">
+				<div className="flex flex-col gap-5 mt-[30px] mb-[20px]">
 					<div className="flex justify-between gap-[50px]">
 						<div className="flex items-center gap-10 flex-1">
 							<Logo />
-							<div className="flex gap-4 flex-1">
+							<div className="hidden md:flex gap-4 flex-1">
 								<Input
 									type="text"
 									placeholder="Search..."
@@ -36,7 +36,7 @@ export default function Header() {
 						</div>
 						<UtilityNav />
 					</div>
-					<nav className="flex gap-3 text-black/50">
+					<nav className="hidden md:flex gap-3 text-black/50">
 						{list.map((item) => (
 							<Link
 								key={item.id}
