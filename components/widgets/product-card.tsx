@@ -1,9 +1,13 @@
-import { Heart, ShoppingBag } from "lucide-react";
+import { Heart, ShoppingBag, Trash, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-export default function ProductCard() {
+interface IProps {
+	fav?: boolean;
+}
+
+export default function ProductCard({ fav }: IProps) {
 	const data = { title: "Under Armour", price: 7790, currency: "$" };
 
 	const src = (size: number) => `/image-${size}.png`;
@@ -23,7 +27,11 @@ export default function ProductCard() {
 					size="icon-lg"
 					className="group/tag absolute top-3 right-3 bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10"
 				>
-					<Heart className="size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404]" />
+					{fav ? (
+						<Trash2 className="size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand" />
+					) : (
+						<Heart className="size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404]" />
+					)}
 				</Button>
 			</div>
 			<div className="flex flex-col gap-4">
