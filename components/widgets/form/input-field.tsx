@@ -1,0 +1,42 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { X } from "lucide-react";
+import { useState } from "react";
+
+interface IProps {
+	id: string;
+	label: string;
+	type: string;
+	placeholder: string;
+}
+
+export default function InputField({ id, label, type, placeholder }: IProps) {
+	const [value, setValue] = useState<string>("");
+
+	const clearField = () => setValue("");
+
+	return (
+		<div className="group/input flex flex-col items-start gap-[6px] w-full">
+			<Label htmlFor={id}>{label}</Label>
+			<div className="relative flex items-center justify-between w-full">
+				<Input
+					id={id}
+					type={type}
+					placeholder={placeholder}
+					value={value}
+					onChange={(e) => setValue(() => e.target.value)}
+				/>
+				<Button
+					variant="link"
+					className="absolute right-0 w-10 h-10 opacity-0 group-hover/input:opacity-100 transition-brand"
+					onClick={clearField}
+				>
+					<X className="size-4 stroke-[1px] stroke-black" />
+				</Button>
+			</div>
+		</div>
+	);
+}
