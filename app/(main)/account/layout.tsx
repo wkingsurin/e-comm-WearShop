@@ -1,3 +1,5 @@
+"use client";
+
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
@@ -14,19 +16,22 @@ import {
 	User,
 } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface IProps {
 	children: React.ReactNode;
 }
 
 export default function AccountLayout({ children }: IProps) {
+	const path = usePathname();
+
 	const navigationData: {
 		id: string;
 		label: string;
 		ref: string;
 		icon: LucideIcon;
 	}[] = [
-		{ id: "1", label: "Profile", ref: "/", icon: User },
+		{ id: "1", label: "Profile", ref: "profile", icon: User },
 		{ id: "2", label: "Orders", ref: "orders", icon: Package },
 		{ id: "3", label: "Purchases", ref: "purchases", icon: Boxes },
 		{ id: "4", label: "Favourites", ref: "favourites", icon: Heart },
@@ -46,12 +51,18 @@ export default function AccountLayout({ children }: IProps) {
 							<nav className="max-w-[305px] w-full">
 								{navigationData.map((item) => {
 									const Icon = item.icon;
+									const href = `/account/${item.ref}`;
+									const isActive = href === path;
 
 									return (
 										<Link
-											href={`/account/${item.ref}`}
+											href={href}
 											key={item.id}
-											className="flex items-center gap-3 h-10 px-3 rounded-xl bg-transparent hover:bg-black/10 transition duration-100"
+											className={`flex items-center gap-3 h-10 px-3 rounded-xl hover:bg-black/5 transition duration-100 ${
+												isActive
+													? "bg-black/10 hover:bg-black/10"
+													: "bg-transparent"
+											}`}
 										>
 											<Icon className="size-5 stroke-[1.5px] stroke-black" />
 											<p className="font-mono tracking-wide">{item.label}</p>
@@ -59,7 +70,7 @@ export default function AccountLayout({ children }: IProps) {
 									);
 								})}
 							</nav>
-							<div>{children}</div>
+							<div className="flex w-full">{children}</div>
 						</div>
 					</div>
 				</Container>

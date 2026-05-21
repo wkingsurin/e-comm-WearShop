@@ -12,6 +12,9 @@ interface IOptions {
 	nameField?: boolean;
 	lastNameField?: boolean;
 	emailField?: boolean;
+	oldPasswordField?: boolean;
+	newPasswordField?: boolean;
+	newPasswordConfirmField?: boolean;
 	passwordField?: boolean;
 	confirmField?: boolean;
 	terms?: { label: string };
@@ -29,6 +32,9 @@ export default function Form({ options }: IProps) {
 		nameField,
 		lastNameField,
 		emailField,
+		oldPasswordField,
+		newPasswordField,
+		newPasswordConfirmField,
 		passwordField,
 		confirmField,
 		terms,
@@ -40,7 +46,7 @@ export default function Form({ options }: IProps) {
 	};
 
 	return (
-		<div className="flex flex-col items-center gap-7 max-w-[480px] bg-black/10 rounded-lg p-[30px]">
+		<div className="flex flex-col items-center gap-7 max-w-[480px] w-full bg-black/10 rounded-lg p-[30px] border-[0.5px] border-black/5">
 			<div className="flex flex-col gap-4 items-center">
 				<span className="uppercase text-lg font-medium leading-md tracking-wider">
 					{title}
@@ -102,7 +108,28 @@ export default function Form({ options }: IProps) {
 						placeholder="Enter password"
 					/>
 				)}
-				<div className="flex flex-col items-center gap-4 w-full mt-5">
+				{oldPasswordField && (
+					<PasswordField
+						id="old-password"
+						label="Old password"
+						placeholder="Enter old password"
+					/>
+				)}
+				{newPasswordField && (
+					<PasswordField
+						id="new-pass"
+						label="New password"
+						placeholder="Enter  password"
+					/>
+				)}
+				{newPasswordConfirmField && (
+					<PasswordField
+						id="new-pass-confirm"
+						label="New password again"
+						placeholder="Enter new password"
+					/>
+				)}
+				<div className="flex flex-col items-center gap-4 w-full mt-[10px]">
 					{terms && <TermsField>{terms.label}</TermsField>}
 					<Button type="submit" className="min-w-[240px]">
 						{buttonText}
