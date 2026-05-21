@@ -13,7 +13,11 @@ export default function ProductCard({ fav }: IProps) {
 	const src = (size: number) => `/image-${size}.png`;
 
 	return (
-		<div className="group/card flex flex-col gap-4 rounded-xl w-full md:w-1/4 md:max-w-[305px]">
+		<div
+			className={`group/card flex flex-col gap-4 rounded-xl w-full ${
+				fav ? "md:w-1/3" : "md:w-1/4"
+			} md:max-w-[305px]`}
+		>
 			<div className="relative flex items-center justify-center w-full h-[380px] rounded-xl bg-[#F4F4F6] border border-transparent group-hover/card:border-black overflow-hidden trnasition-all duration-300">
 				<Image
 					src={src(480)}
