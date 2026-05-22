@@ -1,64 +1,19 @@
+"use client";
+
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import { Button } from "@/components/ui/button";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
+import CartProductCard from "@/components/widgets/cart-product-card";
 import ProductCard from "@/components/widgets/product-card";
-import {
-	ChevronDown,
-	ChevronUp,
-	Heart,
-	Minus,
-	Plus,
-	RefreshCcw,
-	ShoppingBag,
-	Trash2,
-	Truck,
-	Undo,
-} from "lucide-react";
+import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import Image from "next/image";
 
 export default function Cart() {
-	const data: {
-		id: string;
-		title: string;
-		image: string;
-		category: string;
-		size: string;
-		color: string;
-		price: number;
-		currency: string;
-	}[] = [
-		{
-			id: "1",
-			title: "UNDER ARMOUR",
-			image: "image-white-240.png",
-			category: "Hoodie",
-			size: "M",
-			color: "White",
-			price: 11990,
-			currency: "$",
-		},
-		{
-			id: "2",
-			title: "UNDER ARMOUR",
-			image: "image-white-240.png",
-			category: "Hoodie",
-			size: "M",
-			color: "White",
-			price: 11990,
-			currency: "$",
-		},
-	];
+	const data: IProduct[] = useUIStore((s) => s.cart.products);
+	const updateCart = useUIStore((s) => s.updateCart);
 
 	const payments: { id: string; label: string; image: string }[] = [
 		{ id: "1", label: "PayPal", image: "image-pay-1.png" },
@@ -84,64 +39,7 @@ export default function Cart() {
 								</div>
 								<div className="flex flex-col gap-3">
 									{data.map((item) => (
-										<div
-											key={item.id}
-											className="flex gap-[30px] bg-black/5 hover:bg-black/10 rounded-xl p-[3px] pr-[18px] overflow-hidden transition-brand"
-										>
-											<div className="relative w-[160px] h-[192px] bg-[#F4F4F6] rounded-md">
-												<Image
-													src={`/${item.image}`}
-													alt={item.title}
-													width={169}
-													height={240}
-													className="rounded-md w-full h-full object-contain cursor-zoom-in"
-												/>
-												<Button
-													size="icon-lg"
-													className="group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10"
-												>
-													<Heart className="size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404]" />
-												</Button>
-											</div>
-											<div className="flex gap-[60px] justify-between flex-1 py-3">
-												<div className="flex flex-col items-start justify-between">
-													<div className="flex flex-col gap-[6px] font-mono">
-														<span className="font-medium text-lg leading-lg tracking-wider">
-															{item.title}
-														</span>
-														<p className="tracking-wider leading-lg">
-															{item.category}
-														</p>
-														<p className="tracking-wider leading-lg">
-															{item.size}
-														</p>
-														<p className="tracking-wider leading-lg">
-															{item.color}
-														</p>
-													</div>
-
-													<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
-														<Button className="flex gap-3 w-10 h-10 bg-white hover:bg-white">
-															<Minus className="size-4 stroke-[1.5px] stroke-black" />
-														</Button>
-														<span className="flex items-center justify-center w-10 h-10 font-mono tracking-wider leading-lg">
-															1
-														</span>
-														<Button className="flex gap-3 w-10 h-10 bg-white hover:bg-white">
-															<Plus className="size-4 stroke-[1.5px] stroke-black" />
-														</Button>
-													</div>
-												</div>
-												<div className="flex flex-col justify-between items-end">
-													<Button className="group/cancel flex gap-3 w-10 h-10 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75">
-														<Trash2 className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
-													</Button>
-													<span className="font-medium text-lg tracking-wider leading-md">
-														{item.currency} {item.price / 100 + "0"}
-													</span>
-												</div>
-											</div>
-										</div>
+										<CartProductCard key={item.id} data={item} />
 									))}
 								</div>
 							</div>
@@ -150,7 +48,7 @@ export default function Cart() {
 									<div className="flex flex-col gap-3">
 										<div className="flex justify-between font-medium tracking-wider leading-lg">
 											<span>Total</span>
-											<p>$ 239.80</p>
+											<p>$ {(data.length * data[0].price) / 100 + "0"}</p>
 										</div>
 										<div className="flex justify-between font-medium tracking-wider leading-lg">
 											<span>Shipping & Service</span>
@@ -159,7 +57,7 @@ export default function Cart() {
 									</div>
 									<div className="flex justify-between font-medium tracking-wider leading-lg text-xl font-medium text-wider">
 										<span>Total</span>
-										<p>$ 239.80</p>
+										<p>$ {(data.length * data[0].price) / 100 + "0"}</p>
 									</div>
 									<Button>Proceed to checkout</Button>
 								</div>
