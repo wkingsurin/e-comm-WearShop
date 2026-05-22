@@ -22,7 +22,7 @@ export default function UtilityNav() {
 						: Heart;
 
 				return (
-					<ServiceLink key={item.id} href={`/${item.text.toLowerCase()}`}>
+					<ServiceLink key={item.id} href={item.text.toLowerCase()}>
 						<Icon className="size-5 stroke-[1px]" />
 						<p className="text-base leading-base tracking-wide">{item.text}</p>
 					</ServiceLink>

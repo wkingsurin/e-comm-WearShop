@@ -56,8 +56,11 @@ export default function ServiceLink({ href, children }: IProps) {
 							const Icon = item.icon;
 
 							return (
-								<DropdownMenuItem key={item.id} className='p-0'>
-									<Link href={item.ref} className="flex items-center w-full h-full gap-[6px] px-3 py-[6px]">
+								<DropdownMenuItem key={item.id} className="p-0">
+									<Link
+										href={`/account/${item.ref}`}
+										className="flex items-center w-full h-full gap-[6px] px-3 py-[6px]"
+									>
 										<Icon className="size-5 stroke-[1px] stroke-black" />
 										{item.label}
 									</Link>
@@ -70,7 +73,10 @@ export default function ServiceLink({ href, children }: IProps) {
 		);
 
 	return (
-		<Link href={href} className="flex gap-[6px] items-center">
+		<Link
+			href={href.includes("cart") ? `/${href}` : `/account/${href}`}
+			className="flex gap-[6px] items-center"
+		>
 			{children}
 		</Link>
 	);
