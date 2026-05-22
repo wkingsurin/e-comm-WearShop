@@ -7,12 +7,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { useUIStore } from "@/lib/store/ui.store";
 import {
 	ArrowLeft,
 	ArrowRight,
 	Heart,
 	MoveRight,
 	ShoppingBag,
+	X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -77,7 +79,10 @@ export default function FastWatch() {
 	};
 
 	return (
-		<div className="flex gap-[60px] min-h-[527px]">
+		<div
+			className="relative flex gap-[60px] min-h-[527px] bg-white rounded-xl p-4"
+			onClick={(e) => e.stopPropagation()}
+		>
 			<div className="flex flex-col gap-3 max-w-[320px]">
 				<div className="group/product relative h-[384px] bg-[#F4F4F6] rounded-xl">
 					<Image
@@ -199,6 +204,15 @@ export default function FastWatch() {
 					</Link>
 				</div>
 			</div>
+			<Button
+				className="absolute z-10003 top-0 -right-13 w-10 h-10 bg-white rounded-[50%] hover:bg-white hover:shadow-[0_0_9px_-3px_var(--black)]/50"
+				onClick={() => {
+					useUIStore.getState().updateOverlay({ open: false });
+					useUIStore.getState().updateModal({ contentType: null });
+				}}
+			>
+				<X className="size-4 stroke-[1.5px] stroke-black" />
+			</Button>
 		</div>
 	);
 }
