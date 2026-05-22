@@ -1,30 +1,28 @@
 "use client";
 
-import { Heart, ShoppingBag, Trash2 } from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { useUIStore } from "@/lib/store/ui.store";
+import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import { useState } from "react";
+import FavoriteButton from "../shared/favorite-button";
+import RemoveButton from "../shared/remove-button";
+import { useFavorites } from "../hooks/useFavorites";
 
 interface IProps {
-	fav?: boolean;
+	data: IProduct;
+	type?: "Default" | "Favourite";
 }
 
-export default function ProductCard({ fav }: IProps) {
-	const data = { title: "Under Armour", price: 7790, currency: "$" };
-	const [favourite, setFavourite] = useState<boolean>(false);
-
+export default function ProductCard({ data, type = "Default" }: IProps) {
+	// const data = { title: "Under Armour", price: 7790, currency: "$" }
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
 
 	const src = (size: number) => `/image-${size}.png`;
 
-	const type = "FastWatch";
-
-	const toFavourites = () => {
-		setFavourite((prev) => !prev);
-	};
+	const contentType = "FastWatch";
 
 	const deleteItem = (id: string) => {
 		const products = useUIStore.getState().cart.products;
@@ -35,14 +33,14 @@ export default function ProductCard({ fav }: IProps) {
 	return (
 		<div
 			className={`group/card flex flex-col gap-4 rounded-xl w-full ${
-				fav ? "md:w-1/3" : "md:w-1/4"
+				type === "Favourite" ? "md:w-1/3" : "md:w-1/4"
 			} md:max-w-[305px]`}
 		>
 			<div
 				className="relative flex items-center justify-center w-full h-[380px] rounded-xl bg-[#F4F4F6] border border-transparent group-hover/card:border-black overflow-hidden trnasition-all duration-300 cursor-zoom-in"
 				onClick={() => {
 					updateOverlay({ open: true });
-					updateModal({ contentType: type });
+					updateModal({ contentType });
 				}}
 			>
 				<Image
@@ -53,28 +51,11 @@ export default function ProductCard({ fav }: IProps) {
 					priority
 					className="rounded-xl w-[220px] h-[318px]"
 				/>
-				<Button
-					size="icon-lg"
-					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						favourite && !fav && "bg-[#EC0404]/10"
-					}`}
-					onClick={(e) => {
-						e.stopPropagation();
-						toFavourites();
-					}}
-				>
-					{fav ? (
-						<Trash2
-							className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand`}
-						/>
-					) : (
-						<Heart
-							className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-								favourite && !fav && "fill-[#EC0404] stroke-[#EC0404]!"
-							}`}
-						/>
-					)}
-				</Button>
+				{type === "Favourite" ? (
+					<RemoveButton data={data} />
+				) : (
+					<FavoriteButton data={data} />
+				)}
 			</div>
 			<div className="flex flex-col gap-4">
 				<Link
@@ -91,7 +72,7 @@ export default function ProductCard({ fav }: IProps) {
 						className="gap-3"
 						onClick={() => {
 							updateOverlay({ open: true });
-							updateModal({ contentType: type });
+							updateModal({ contentType });
 						}}
 					>
 						<ShoppingBag className="size-4 stroke-[1.5px] stroke-white" />

@@ -1,16 +1,8 @@
+import { IOrder } from "@/lib/store/ui.store";
 import Order from "./order";
 
 export default function Orders() {
-	const data: {
-		id: string;
-		title: string;
-		image: string;
-		category: string;
-		size: string;
-		color: string;
-		price: number;
-		currency: string;
-	}[] = [
+	const data: IOrder[] = [
 		{
 			id: "1",
 			title: "UNDER ARMOUR",

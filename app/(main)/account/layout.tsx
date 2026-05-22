@@ -6,6 +6,7 @@ import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card";
+import { useUIStore } from "@/lib/store/ui.store";
 import {
 	Boxes,
 	Heart,
@@ -38,6 +39,8 @@ export default function AccountLayout({ children }: IProps) {
 		{ id: "5", label: "Security", ref: "security", icon: Lock },
 		{ id: "6", label: "Log out", ref: "/", icon: LogOut },
 	];
+
+	const data = useUIStore((s) => s.showcase);
 
 	return (
 		<Main>
@@ -88,10 +91,9 @@ export default function AccountLayout({ children }: IProps) {
 							</div>
 						</div>
 						<div className="flex flex-wrap gap-5">
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
+							{data.map((item) => (
+								<ProductCard key={item.id} data={item} />
+							))}
 						</div>
 					</div>
 				</Container>

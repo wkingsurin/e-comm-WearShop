@@ -6,7 +6,7 @@ import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import { Button } from "@/components/ui/button";
-import CartProductCard from "@/components/widgets/cart-product-card";
+import CartItem from "@/components/widgets/cart-item";
 import ProductCard from "@/components/widgets/product-card";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import Image from "next/image";
@@ -39,7 +39,7 @@ export default function Cart() {
 								</div>
 								<div className="flex flex-col gap-3">
 									{data.map((item) => (
-										<CartProductCard key={item.id} data={item} />
+										<CartItem key={item.id} data={item} />
 									))}
 								</div>
 							</div>
@@ -98,10 +98,9 @@ export default function Cart() {
 							</div>
 						</div>
 						<div className="flex flex-wrap gap-5">
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard />
+							{data.map((item) => (
+								<ProductCard key={item.id} data={item} />
+							))}
 						</div>
 					</div>
 				</Container>

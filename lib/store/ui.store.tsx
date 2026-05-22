@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { IFavorite } from "./favorites.store";
 
 export interface IOverlay {
 	open: boolean;
@@ -36,12 +37,14 @@ type UIState = {
 	cart: ICart;
 	selectedProduct: IProduct;
 	orders: IOrder[];
+	showcase: IProduct[];
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
 	updateCart: (updatedCart: ICart) => void;
 	updateSelectedProduct: (product: IProduct) => void;
 	updateOrders: (updatedOrders: IOrder[]) => void;
+	updateShowcase: (updatedShowcase: IFavorite[]) => void;
 };
 
 export const useUIStore = create<UIState>()((set) => ({
@@ -103,10 +106,53 @@ export const useUIStore = create<UIState>()((set) => ({
 			currency: "$",
 		},
 	],
+	showcase: [
+		{
+			id: "1",
+			title: "UNDER ARMOUR",
+			image: "image-white-240.png",
+			category: "Hoodie",
+			size: "M",
+			color: "White",
+			price: 11990,
+			currency: "$",
+		},
+		{
+			id: "2",
+			title: "UNDER ARMOUR",
+			image: "image-white-240.png",
+			category: "Hoodie",
+			size: "M",
+			color: "White",
+			price: 11990,
+			currency: "$",
+		},
+		{
+			id: "3",
+			title: "UNDER ARMOUR",
+			image: "image-white-240.png",
+			category: "Hoodie",
+			size: "M",
+			color: "White",
+			price: 11990,
+			currency: "$",
+		},
+		{
+			id: "4",
+			title: "UNDER ARMOUR",
+			image: "image-white-240.png",
+			category: "Hoodie",
+			size: "M",
+			color: "White",
+			price: 11990,
+			currency: "$",
+		},
+	],
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
 	updateCart: (updatedCart) => set({ cart: { ...updatedCart } }),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
 	updateOrders: (updatedOrders) => set({ orders: { ...updatedOrders } }),
+	updateShowcase: (updatedShowcase) => set({ showcase: [...updatedShowcase] }),
 }));

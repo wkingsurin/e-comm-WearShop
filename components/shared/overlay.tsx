@@ -17,7 +17,6 @@ export default function Overlay() {
 		modalContentType === "FastWatch" && modalContentType !== null
 			? FastWatch
 			: CancelReason;
-	console.log(Content);
 
 	useEffect(() => {
 		if (overlay) {

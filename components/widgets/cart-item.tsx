@@ -4,23 +4,21 @@ import { Heart, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { useFavorites } from "../hooks/useFavorites";
 import { useState } from "react";
 
 interface IProps {
 	data: IProduct;
 }
 
-export default function CartProductCard({ data }: IProps) {
+export default function CartItem({ data }: IProps) {
+	const { favoritesIds, toggleFavorite } = useFavorites();
+	const isFavorite = favoritesIds[data.id] || false;
 	const [value, setValue] = useState<number>(1);
-	const [favourite, setFavourite] = useState<boolean>(false);
 
 	const onIncrement = () => setValue((prevValue) => prevValue + 1);
 	const onDecrement = () =>
 		setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue));
-
-	const toFavourites = () => {
-		setFavourite((prev) => !prev);
-	};
 
 	const deleteItem = (id: string) => {
 		const products = useUIStore.getState().cart.products;
@@ -44,13 +42,13 @@ export default function CartProductCard({ data }: IProps) {
 				<Button
 					size="icon-lg"
 					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						favourite && "bg-[#EC0404]/10"
+						isFavorite && "bg-[#EC0404]/10"
 					}`}
-					onClick={toFavourites}
+					onClick={() => toggleFavorite(data)}
 				>
 					<Heart
 						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							favourite && "fill-[#EC0404] stroke-[#EC0404]!"
+							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
 						}`}
 					/>
 				</Button>

@@ -1,25 +1,23 @@
 "use client";
 
+import { useFavorites } from "@/components/hooks/useFavorites";
 import { Button } from "@/components/ui/button";
 import { IOrder, useUIStore } from "@/lib/store/ui.store";
 import { Heart, RefreshCcw, Undo } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
 
 interface IProps {
 	data: IOrder;
 }
 
 export default function Order({ data }: IProps) {
-	const [favourite, setFavourite] = useState<boolean>(false);
+	const { favoritesIds, toggleFavorite } = useFavorites();
+	const isFavorite = favoritesIds[data.id] || false;
+
 	const updatedOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
 
-	const toFavourites = () => {
-		setFavourite((prev) => !prev);
-	};
-
-	const cancleOrder = () => {
+	const cancelOrder = () => {
 		updatedOverlay({ open: true });
 		updateModal({ contentType: "CancelOrder" });
 	};
@@ -44,13 +42,13 @@ export default function Order({ data }: IProps) {
 				<Button
 					size="icon-lg"
 					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						favourite && "bg-[#EC0404]/10"
+						isFavorite && "bg-[#EC0404]/10"
 					}`}
-					onClick={toFavourites}
+					onClick={() => toggleFavorite(data)}
 				>
 					<Heart
 						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							favourite && "fill-[#EC0404] stroke-[#EC0404]!"
+							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
 						}`}
 					/>
 				</Button>
@@ -75,7 +73,7 @@ export default function Order({ data }: IProps) {
 					<Button
 						className="group/cancel flex gap-3 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75"
 						onClick={() => {
-							cancleOrder();
+							cancelOrder();
 						}}
 					>
 						Cancel
