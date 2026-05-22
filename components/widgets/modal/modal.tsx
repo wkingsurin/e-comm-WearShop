@@ -7,7 +7,7 @@ interface IProps {
 
 export default function Modal({ children }: IProps) {
 	return (
-		<div className="relative max-w-[720px] w-full">
+		<div className="relative max-w-[720px]">
 			<div className="w-full p-4 bg-white rounded-xl">
 				{children}
 			</div>

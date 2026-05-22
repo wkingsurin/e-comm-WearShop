@@ -80,7 +80,7 @@ export default function FastWatch() {
 
 	return (
 		<div
-			className="relative flex gap-[60px] min-h-[527px] bg-white rounded-xl p-4"
+			className="relative flex gap-[60px] max-w-[720px] w-full min-h-[527px] bg-white rounded-xl p-4"
 			onClick={(e) => e.stopPropagation()}
 		>
 			<div className="flex flex-col gap-3 max-w-[320px]">

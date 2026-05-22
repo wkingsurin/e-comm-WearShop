@@ -1,10 +1,11 @@
 "use client";
 
-import { Heart, ShoppingBag, Trash, Trash2 } from "lucide-react";
+import { Heart, ShoppingBag, Trash2 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { useUIStore } from "@/lib/store/ui.store";
+import { useState } from "react";
 
 interface IProps {
 	fav?: boolean;
@@ -12,12 +13,24 @@ interface IProps {
 
 export default function ProductCard({ fav }: IProps) {
 	const data = { title: "Under Armour", price: 7790, currency: "$" };
+	const [favourite, setFavourite] = useState<boolean>(false);
+
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
 
 	const src = (size: number) => `/image-${size}.png`;
 
 	const type = "FastWatch";
+
+	const toFavourites = () => {
+		setFavourite((prev) => !prev);
+	};
+
+	const deleteItem = (id: string) => {
+		const products = useUIStore.getState().cart.products;
+		const updatedProducts = products.filter((item) => item.id !== id);
+		useUIStore.getState().updateCart({ products: updatedProducts });
+	};
 
 	return (
 		<div
@@ -42,13 +55,24 @@ export default function ProductCard({ fav }: IProps) {
 				/>
 				<Button
 					size="icon-lg"
-					className="group/tag absolute top-3 right-3 bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10"
-					onClick={(e) => e.stopPropagation()}
+					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
+						favourite && !fav && "bg-[#EC0404]/10"
+					}`}
+					onClick={(e) => {
+						e.stopPropagation();
+						toFavourites();
+					}}
 				>
 					{fav ? (
-						<Trash2 className="size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand" />
+						<Trash2
+							className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand`}
+						/>
 					) : (
-						<Heart className="size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404]" />
+						<Heart
+							className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
+								favourite && !fav && "fill-[#EC0404] stroke-[#EC0404]!"
+							}`}
+						/>
 					)}
 				</Button>
 			</div>
