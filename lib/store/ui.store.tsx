@@ -19,17 +19,29 @@ export interface IProduct {
 export interface ICart {
 	products: IProduct[] | [];
 }
+export interface IOrder {
+	id: string;
+	title: string;
+	image: string;
+	category: string;
+	size: string;
+	color: string;
+	price: number;
+	currency: string;
+}
 
 type UIState = {
 	overlay: IOverlay;
 	modal: IModal;
 	cart: ICart;
 	selectedProduct: IProduct;
+	orders: IOrder[];
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
 	updateCart: (updatedCart: ICart) => void;
 	updateSelectedProduct: (product: IProduct) => void;
+	updateOrders: (updatedOrders: IOrder[]) => void;
 };
 
 export const useUIStore = create<UIState>()((set) => ({
@@ -69,9 +81,32 @@ export const useUIStore = create<UIState>()((set) => ({
 		price: 11990,
 		currency: "$",
 	},
+	orders: [
+		{
+			id: "1",
+			title: "UNDER ARMOUR",
+			image: "image-white-240.png",
+			category: "Hoodie",
+			size: "M",
+			color: "White",
+			price: 11990,
+			currency: "$",
+		},
+		{
+			id: "2",
+			title: "UNDER ARMOUR",
+			image: "image-white-240.png",
+			category: "Hoodie",
+			size: "M",
+			color: "White",
+			price: 11990,
+			currency: "$",
+		},
+	],
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
 	updateCart: (updatedCart) => set({ cart: { ...updatedCart } }),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
+	updateOrders: (updatedOrders) => set({ orders: { ...updatedOrders } }),
 }));
