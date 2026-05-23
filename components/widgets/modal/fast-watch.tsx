@@ -1,3 +1,4 @@
+import useCart from "@/components/hooks/useCart";
 import { Button } from "@/components/ui/button";
 import {
 	Select,
@@ -7,7 +8,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { useUIStore } from "@/lib/store/ui.store";
+import { ICartItem } from "@/lib/store/cart.store";
+import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -77,6 +79,22 @@ export default function FastWatch() {
 		],
 		currency: "$",
 	};
+
+	const target = useUIStore((s) => s.modal.target);
+
+	// const target = {
+	// 	id: "5",
+	// 	title: "UNDER ARMOUR",
+	// 	image: "image-white-240.png",
+	// 	category: "Hoodie",
+	// 	size: "M",
+	// 	color: "White",
+	// 	price: 11990,
+	// 	currency: "$",
+	// 	amount: 1,
+	// };
+
+	const { addItem } = useCart();
 
 	return (
 		<div
@@ -184,7 +202,7 @@ export default function FastWatch() {
 						</Select>
 					</div>
 					<div className="flex gap-4 w-full">
-						<Button className="flex-1">
+						<Button className="flex-1" onClick={() => addItem(target!)}>
 							<ShoppingBag className="size-4 stroke-[1px]" />
 							Pack
 						</Button>
@@ -208,7 +226,7 @@ export default function FastWatch() {
 				className="absolute z-10003 top-0 -right-13 w-10 h-10 bg-white rounded-[50%] hover:bg-white hover:shadow-[0_0_9px_-3px_var(--black)]/50"
 				onClick={() => {
 					useUIStore.getState().updateOverlay({ open: false });
-					useUIStore.getState().updateModal({ contentType: null });
+					useUIStore.getState().changeModalTyle(null);
 				}}
 			>
 				<X className="size-4 stroke-[1.5px] stroke-black" />

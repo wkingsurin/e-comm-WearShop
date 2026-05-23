@@ -6,25 +6,29 @@ import Image from "next/image";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import { useFavorites } from "../hooks/useFavorites";
 import { useState } from "react";
+import useCart from "../hooks/useCart";
+import { ICartItem } from "@/lib/store/cart.store";
 
 interface IProps {
-	data: IProduct;
+	data: ICartItem;
 }
 
 export default function CartItem({ data }: IProps) {
 	const { favoritesIds, toggleFavorite } = useFavorites();
+	const { removeItem, incrementItem, decrementItem } = useCart();
 	const isFavorite = favoritesIds[data.id] || false;
-	const [value, setValue] = useState<number>(1);
 
-	const onIncrement = () => setValue((prevValue) => prevValue + 1);
-	const onDecrement = () =>
-		setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue));
+	// const [value, setValue] = useState<number>(1);
 
-	const deleteItem = (id: string) => {
-		const products = useUIStore.getState().cart.products;
-		const updatedProducts = products.filter((item) => item.id !== id);
-		useUIStore.getState().updateCart({ products: updatedProducts });
-	};
+	// const onIncrement = () => setValue((prevValue) => prevValue + 1);
+	// const onDecrement = () =>
+	// 	setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue));
+
+	// const deleteItem = (id: string) => {
+	// 	const products = useUIStore.getState().cart.products;
+	// 	const updatedProducts = products.filter((item) => item.id !== id);
+	// 	useUIStore.getState().updateCart({ products: updatedProducts });
+	// };
 
 	return (
 		<div
@@ -67,16 +71,16 @@ export default function CartItem({ data }: IProps) {
 					<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-							onClick={onDecrement}
+							onClick={() => decrementItem(data)}
 						>
 							<Minus className="size-4 stroke-[1.5px] stroke-black" />
 						</Button>
 						<span className="flex items-center justify-center w-10 h-10 font-mono tracking-wider leading-lg">
-							{value}
+							{data.amount}
 						</span>
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-							onClick={onIncrement}
+							onClick={() => incrementItem(data)}
 						>
 							<Plus className="size-4 stroke-[1.5px] stroke-black" />
 						</Button>
@@ -86,13 +90,14 @@ export default function CartItem({ data }: IProps) {
 					<Button
 						className="group/cancel flex gap-3 w-10 h-10 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75"
 						onClick={() => {
-							deleteItem(data.id);
+							// deleteItem(data.id);
+							removeItem({ ...data, amount: 1 });
 						}}
 					>
 						<Trash2 className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
 					</Button>
 					<span className="font-medium text-lg tracking-wider leading-md">
-						{data.currency} {(data.price * value) / 100 + "0"}
+						{data.currency} {(data.price * data.amount) / 100 + "0"}
 					</span>
 				</div>
 			</div>

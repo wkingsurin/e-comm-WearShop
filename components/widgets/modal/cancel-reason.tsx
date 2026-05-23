@@ -156,7 +156,7 @@ export default function CancelReason() {
 				className="absolute z-10003 top-0 -right-13 w-10 h-10 bg-white rounded-[50%] hover:bg-white hover:shadow-[0_0_9px_-3px_var(--black)]/50"
 				onClick={() => {
 					useUIStore.getState().updateOverlay({ open: false });
-					useUIStore.getState().updateModal({ contentType: null });
+					useUIStore.getState().changeModalTyle(null);
 				}}
 			>
 				<X className="size-4 stroke-[1.5px] stroke-black" />

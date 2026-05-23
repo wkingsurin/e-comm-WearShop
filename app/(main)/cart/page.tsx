@@ -1,5 +1,6 @@
 "use client";
 
+import useCart from "@/components/hooks/useCart";
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
@@ -12,7 +13,7 @@ import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import Image from "next/image";
 
 export default function Cart() {
-	const data: IProduct[] = useUIStore((s) => s.cart.products);
+	const { cartItemsList, cartTotal } = useCart();
 	const updateCart = useUIStore((s) => s.updateCart);
 
 	const payments: { id: string; label: string; image: string }[] = [
@@ -38,7 +39,7 @@ export default function Cart() {
 									</div>
 								</div>
 								<div className="flex flex-col gap-3">
-									{data.map((item) => (
+									{cartItemsList.map((item) => (
 										<CartItem key={item.id} data={item} />
 									))}
 								</div>
@@ -48,7 +49,7 @@ export default function Cart() {
 									<div className="flex flex-col gap-3">
 										<div className="flex justify-between font-medium tracking-wider leading-lg">
 											<span>Total</span>
-											<p>$ {(data.length * data[0].price) / 100 + "0"}</p>
+											{/* <p>$ {(cartItemsList.length * data[0].price) / 100 + "0"}</p> */}
 										</div>
 										<div className="flex justify-between font-medium tracking-wider leading-lg">
 											<span>Shipping & Service</span>
@@ -57,7 +58,7 @@ export default function Cart() {
 									</div>
 									<div className="flex justify-between font-medium tracking-wider leading-lg text-xl font-medium text-wider">
 										<span>Total</span>
-										<p>$ {(data.length * data[0].price) / 100 + "0"}</p>
+										<p>$ {cartTotal / 100 + "0"}</p>
 									</div>
 									<Button>Proceed to checkout</Button>
 								</div>
@@ -98,7 +99,7 @@ export default function Cart() {
 							</div>
 						</div>
 						<div className="flex flex-wrap gap-5">
-							{data.map((item) => (
+							{cartItemsList.map((item) => (
 								<ProductCard key={item.id} data={item} />
 							))}
 						</div>

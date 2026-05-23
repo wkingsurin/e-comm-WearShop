@@ -40,7 +40,7 @@ export default function ProductCard({ data, type = "Default" }: IProps) {
 				className="relative flex items-center justify-center w-full h-[380px] rounded-xl bg-[#F4F4F6] border border-transparent group-hover/card:border-black overflow-hidden trnasition-all duration-300 cursor-zoom-in"
 				onClick={() => {
 					updateOverlay({ open: true });
-					updateModal({ contentType });
+					updateModal({ target: { ...data, amount: 1 }, contentType });
 				}}
 			>
 				<Image
@@ -72,7 +72,7 @@ export default function ProductCard({ data, type = "Default" }: IProps) {
 						className="gap-3"
 						onClick={() => {
 							updateOverlay({ open: true });
-							updateModal({ contentType });
+							updateModal({ target: { ...data, amount: 1 }, contentType });
 						}}
 					>
 						<ShoppingBag className="size-4 stroke-[1.5px] stroke-white" />

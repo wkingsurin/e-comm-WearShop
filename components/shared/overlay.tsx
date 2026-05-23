@@ -33,7 +33,7 @@ export default function Overlay() {
 			className="fixed bottom-0 flex items-center justify-center w-full h-[calc(100dvh-134px)] bg-black/25"
 			onClick={() => {
 				useUIStore.getState().updateOverlay({ open: false });
-				useUIStore.getState().updateModal({ contentType: null });
+				useUIStore.getState().changeModalTyle(null);
 			}}
 		>
 			{modalContentType !== null && <Content />}

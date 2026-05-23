@@ -1,10 +1,12 @@
 import { create } from "zustand";
 import { IFavorite } from "./favorites.store";
+import { ICartItem } from "./cart.store";
 
 export interface IOverlay {
 	open: boolean;
 }
 export interface IModal {
+	target: ICartItem | null;
 	contentType: "FastWatch" | "CancelOrder" | null;
 }
 export interface IProduct {
@@ -41,6 +43,7 @@ type UIState = {
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
+	changeModalTyle: (type: IModal["contentType"]) => void;
 	updateCart: (updatedCart: ICart) => void;
 	updateSelectedProduct: (product: IProduct) => void;
 	updateOrders: (updatedOrders: IOrder[]) => void;
@@ -49,7 +52,10 @@ type UIState = {
 
 export const useUIStore = create<UIState>()((set) => ({
 	overlay: { open: false },
-	modal: { contentType: "FastWatch" },
+	modal: {
+		target: null,
+		contentType: "FastWatch",
+	},
 	cart: {
 		products: [
 			{
@@ -151,6 +157,8 @@ export const useUIStore = create<UIState>()((set) => ({
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
+	changeModalTyle: (type) =>
+		set((state) => ({ modal: { ...state.modal, contentType: type } })),
 	updateCart: (updatedCart) => set({ cart: { ...updatedCart } }),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
 	updateOrders: (updatedOrders) => set({ orders: { ...updatedOrders } }),
