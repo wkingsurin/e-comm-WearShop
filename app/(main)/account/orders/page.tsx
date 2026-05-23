@@ -1,5 +1,8 @@
+"use client";
+
 import { IOrder } from "@/lib/store/ui.store";
 import Order from "./order";
+import useOrders from "@/components/hooks/useOrders";
 
 export default function Orders() {
 	const data: IOrder[] = [
@@ -25,6 +28,8 @@ export default function Orders() {
 		},
 	];
 
+	const { ordersItemsList } = useOrders();
+
 	return (
 		<div className="flex flex-col gap-3 w-full p-4 rounded-lg border border-black/10 bg-[#D9D9D9]/10">
 			<div className="flex items-center justify-between">
@@ -34,7 +39,7 @@ export default function Orders() {
 				</div>
 			</div>
 			<div className="flex flex-col gap-3">
-				{data.map((item) => {
+				{ordersItemsList.map((item) => {
 					return <Order key={item.id} data={item} />;
 				})}
 			</div>

@@ -15,11 +15,11 @@ export default function Order({ data }: IProps) {
 	const isFavorite = favoritesIds[data.id] || false;
 
 	const updatedOverlay = useUIStore((s) => s.updateOverlay);
-	const updateModal = useUIStore((s) => s.updateModal);
+	const changeModalTyle = useUIStore((s) => s.changeModalTyle);
 
 	const cancelOrder = () => {
 		updatedOverlay({ open: true });
-		updateModal({ contentType: "CancelOrder" });
+		changeModalTyle("CancelOrder");
 	};
 
 	const orderAgain = (id: string) => {

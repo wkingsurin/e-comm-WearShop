@@ -36,7 +36,6 @@ export interface IOrder {
 type UIState = {
 	overlay: IOverlay;
 	modal: IModal;
-	cart: ICart;
 	selectedProduct: IProduct;
 	orders: IOrder[];
 	showcase: IProduct[];
@@ -44,7 +43,6 @@ type UIState = {
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
 	changeModalTyle: (type: IModal["contentType"]) => void;
-	updateCart: (updatedCart: ICart) => void;
 	updateSelectedProduct: (product: IProduct) => void;
 	updateOrders: (updatedOrders: IOrder[]) => void;
 	updateShowcase: (updatedShowcase: IFavorite[]) => void;
@@ -159,7 +157,6 @@ export const useUIStore = create<UIState>()((set) => ({
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
 	changeModalTyle: (type) =>
 		set((state) => ({ modal: { ...state.modal, contentType: type } })),
-	updateCart: (updatedCart) => set({ cart: { ...updatedCart } }),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
 	updateOrders: (updatedOrders) => set({ orders: { ...updatedOrders } }),
 	updateShowcase: (updatedShowcase) => set({ showcase: [...updatedShowcase] }),
