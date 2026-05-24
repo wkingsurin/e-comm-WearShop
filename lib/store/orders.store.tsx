@@ -18,7 +18,7 @@ interface OrdersState {
 
 export const useOrdersStore = create<OrdersState>()(
 	persist(
-		(set, get) => ({
+		(set) => ({
 			ordersIds: {},
 			ordersItems: {},
 			_hasHydrated: false,

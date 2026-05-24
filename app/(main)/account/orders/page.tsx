@@ -1,35 +1,9 @@
 "use client";
 
-import { IOrder } from "@/lib/store/orders.store";
 import Order from "./order";
 import useOrders from "@/components/hooks/useOrders";
 
 export default function Orders() {
-	const data: IOrder[] = [
-		{
-			id: "1",
-			title: "UNDER ARMOUR",
-			image: "image-white-240.png",
-			category: "Hoodie",
-			size: "M",
-			color: "White",
-			price: 11990,
-			currency: "$",
-			totalPrice: 11990,
-		},
-		{
-			id: "2",
-			title: "UNDER ARMOUR",
-			image: "image-white-240.png",
-			category: "Hoodie",
-			size: "M",
-			color: "White",
-			price: 11990,
-			currency: "$",
-			totalPrice: 11990,
-		},
-	];
-
 	const { ordersItemsList } = useOrders();
 
 	return (

@@ -1,12 +1,11 @@
 "use client";
 
-import { useFavoriteStore } from "@/lib/store/favorites.store";
-import { IFavourite } from "@/lib/store/ui.store";
+import { IFavorite, useFavoriteStore } from "@/lib/store/favorites.store";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 
 interface IProps {
-	data: IFavourite;
+	data: IFavorite;
 }
 
 export default function RemoveButton({ data }: IProps) {

@@ -8,8 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { ICartItem } from "@/lib/store/cart.store";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { useUIStore } from "@/lib/store/ui.store";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -81,18 +80,6 @@ export default function FastWatch() {
 	};
 
 	const target = useUIStore((s) => s.modal.target);
-
-	// const target = {
-	// 	id: "5",
-	// 	title: "UNDER ARMOUR",
-	// 	image: "image-white-240.png",
-	// 	category: "Hoodie",
-	// 	size: "M",
-	// 	color: "White",
-	// 	price: 11990,
-	// 	currency: "$",
-	// 	amount: 1,
-	// };
 
 	const { addItem } = useCart();
 

@@ -5,10 +5,8 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
-import { useState } from "react";
 import FavoriteButton from "../shared/favorite-button";
 import RemoveButton from "../shared/remove-button";
-import { useFavorites } from "../hooks/useFavorites";
 
 interface IProps {
 	data: IProduct;
@@ -16,19 +14,12 @@ interface IProps {
 }
 
 export default function ProductCard({ data, type = "Default" }: IProps) {
-	// const data = { title: "Under Armour", price: 7790, currency: "$" }
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
 
 	const src = (size: number) => `/image-${size}.png`;
 
 	const contentType = "FastWatch";
-
-	const deleteItem = (id: string) => {
-		const products = useUIStore.getState().cart.products;
-		const updatedProducts = products.filter((item) => item.id !== id);
-		useUIStore.getState().updateCart({ products: updatedProducts });
-	};
 
 	return (
 		<div

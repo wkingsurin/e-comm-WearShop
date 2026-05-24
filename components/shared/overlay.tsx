@@ -5,10 +5,6 @@ import { useEffect } from "react";
 import FastWatch from "../widgets/modal/fast-watch";
 import CancelReason from "../widgets/modal/cancel-reason";
 
-interface IProps {
-	children: React.ReactNode;
-}
-
 export default function Overlay() {
 	const overlay = useUIStore((s) => s.overlay.open);
 	const modalContentType = useUIStore((s) => s.modal.contentType);
@@ -37,7 +33,6 @@ export default function Overlay() {
 			}}
 		>
 			{modalContentType !== null && <Content />}
-			{/* {children} */}
 		</div>
 	);
 }

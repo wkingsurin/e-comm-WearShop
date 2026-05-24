@@ -3,12 +3,9 @@
 import { Heart, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import { useFavorites } from "../hooks/useFavorites";
-import { useState } from "react";
 import useCart from "../hooks/useCart";
 import { ICartItem } from "@/lib/store/cart.store";
-import useOrders from "../hooks/useOrders";
 
 interface IProps {
 	data: ICartItem;
@@ -18,18 +15,6 @@ export default function CartItem({ data }: IProps) {
 	const { favoritesIds, toggleFavorite } = useFavorites();
 	const { removeItem, incrementItem, decrementItem } = useCart();
 	const isFavorite = favoritesIds[data.id] || false;
-
-	// const [value, setValue] = useState<number>(1);
-
-	// const onIncrement = () => setValue((prevValue) => prevValue + 1);
-	// const onDecrement = () =>
-	// 	setValue((prevValue) => (prevValue > 1 ? prevValue - 1 : prevValue));
-
-	// const deleteItem = (id: string) => {
-	// 	const products = useUIStore.getState().cart.products;
-	// 	const updatedProducts = products.filter((item) => item.id !== id);
-	// 	useUIStore.getState().updateCart({ products: updatedProducts });
-	// };
 
 	return (
 		<div

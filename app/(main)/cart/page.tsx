@@ -19,7 +19,7 @@ export const DTOOrder = (data: ICartItem) => {
 
 export default function Cart() {
 	const { cartItemsList, cartTotal } = useCart();
-	const { createOrder, removeOrder } = useOrders();
+	const { createOrder } = useOrders();
 
 	const payments: { id: string; label: string; image: string }[] = [
 		{ id: "1", label: "PayPal", image: "image-pay-1.png" },
@@ -29,7 +29,6 @@ export default function Cart() {
 
 	const onPurchase = () => {
 		cartItemsList.map((item) => {
-			// removeOrder(item);
 			createOrder(DTOOrder({ ...item }));
 		});
 	};

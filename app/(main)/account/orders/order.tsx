@@ -1,9 +1,7 @@
 "use client";
 
 import { useFavorites } from "@/components/hooks/useFavorites";
-import useOrders from "@/components/hooks/useOrders";
 import { Button } from "@/components/ui/button";
-import { ICartItem } from "@/lib/store/cart.store";
 import { IOrder } from "@/lib/store/orders.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import { Heart, RefreshCcw, Undo } from "lucide-react";
@@ -14,19 +12,15 @@ interface IProps {
 }
 
 export default function Order({ data }: IProps) {
-	// const order: IOrder = DTOOrder(data);
-
 	const { favoritesIds, toggleFavorite } = useFavorites();
 	const isFavorite = favoritesIds[data.id] || false;
-	const { removeOrder } = useOrders();
 
 	const updatedOverlay = useUIStore((s) => s.updateOverlay);
 	const changeModalTyle = useUIStore((s) => s.changeModalTyle);
 
 	const cancelOrder = () => {
-		// updatedOverlay({ open: true });
-		// changeModalTyle("CancelOrder");
-		removeOrder(data);
+		updatedOverlay({ open: true });
+		changeModalTyle("CancelOrder");
 	};
 
 	const orderAgain = (id: string) => {
