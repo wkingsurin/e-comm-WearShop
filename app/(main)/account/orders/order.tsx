@@ -1,8 +1,11 @@
 "use client";
 
 import { useFavorites } from "@/components/hooks/useFavorites";
+import useOrders from "@/components/hooks/useOrders";
 import { Button } from "@/components/ui/button";
-import { IOrder, useUIStore } from "@/lib/store/ui.store";
+import { ICartItem } from "@/lib/store/cart.store";
+import { IOrder } from "@/lib/store/orders.store";
+import { useUIStore } from "@/lib/store/ui.store";
 import { Heart, RefreshCcw, Undo } from "lucide-react";
 import Image from "next/image";
 
@@ -11,15 +14,19 @@ interface IProps {
 }
 
 export default function Order({ data }: IProps) {
+	// const order: IOrder = DTOOrder(data);
+
 	const { favoritesIds, toggleFavorite } = useFavorites();
 	const isFavorite = favoritesIds[data.id] || false;
+	const { removeOrder } = useOrders();
 
 	const updatedOverlay = useUIStore((s) => s.updateOverlay);
 	const changeModalTyle = useUIStore((s) => s.changeModalTyle);
 
 	const cancelOrder = () => {
-		updatedOverlay({ open: true });
-		changeModalTyle("CancelOrder");
+		// updatedOverlay({ open: true });
+		// changeModalTyle("CancelOrder");
+		removeOrder(data);
 	};
 
 	const orderAgain = (id: string) => {
@@ -80,7 +87,7 @@ export default function Order({ data }: IProps) {
 						<Undo className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
 					</Button>
 					<span className="font-medium text-lg tracking-wider leading-md">
-						{data.currency} {data.price / 100 + "0"}
+						{data.currency} {data.totalPrice / 100 + "0"}
 					</span>
 				</div>
 			</div>

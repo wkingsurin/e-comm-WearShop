@@ -1,6 +1,7 @@
 "use client";
 
 import useCart from "@/components/hooks/useCart";
+import useOrders from "@/components/hooks/useOrders";
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
@@ -9,18 +10,29 @@ import SortSelect from "@/components/shared/sort-select";
 import { Button } from "@/components/ui/button";
 import CartItem from "@/components/widgets/cart-item";
 import ProductCard from "@/components/widgets/product-card";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { ICartItem } from "@/lib/store/cart.store";
 import Image from "next/image";
+
+export const DTOOrder = (data: ICartItem) => {
+	return { ...data, totalPrice: data.amount * data.price };
+};
 
 export default function Cart() {
 	const { cartItemsList, cartTotal } = useCart();
-	const updateCart = useUIStore((s) => s.updateCart);
+	const { createOrder, removeOrder } = useOrders();
 
 	const payments: { id: string; label: string; image: string }[] = [
 		{ id: "1", label: "PayPal", image: "image-pay-1.png" },
 		{ id: "2", label: "Visa", image: "image-pay-2.png" },
 		{ id: "3", label: "Mastercard", image: "image-pay-3.png" },
 	];
+
+	const onPurchase = () => {
+		cartItemsList.map((item) => {
+			// removeOrder(item);
+			createOrder(DTOOrder({ ...item }));
+		});
+	};
 
 	return (
 		<Main>
@@ -60,7 +72,7 @@ export default function Cart() {
 										<span>Total</span>
 										<p>$ {cartTotal / 100 + "0"}</p>
 									</div>
-									<Button>Proceed to checkout</Button>
+									<Button onClick={onPurchase}>Proceed to checkout</Button>
 								</div>
 								<div className="flex flex-col gap-3 min-h-[94px] bg-[#D9D9D9]/10 rounded-xl border-[0.5px] border-black/10 p-4">
 									<span>Available payments</span>

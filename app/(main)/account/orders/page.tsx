@@ -1,6 +1,6 @@
 "use client";
 
-import { IOrder } from "@/lib/store/ui.store";
+import { IOrder } from "@/lib/store/orders.store";
 import Order from "./order";
 import useOrders from "@/components/hooks/useOrders";
 
@@ -15,6 +15,7 @@ export default function Orders() {
 			color: "White",
 			price: 11990,
 			currency: "$",
+			totalPrice: 11990,
 		},
 		{
 			id: "2",
@@ -25,6 +26,7 @@ export default function Orders() {
 			color: "White",
 			price: 11990,
 			currency: "$",
+			totalPrice: 11990,
 		},
 	];
 

@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { IFavorite } from "./favorites.store";
 import { ICartItem } from "./cart.store";
+import { IOrder } from "./orders.store";
 
 export interface IOverlay {
 	open: boolean;
@@ -21,16 +22,6 @@ export interface IProduct {
 }
 export interface ICart {
 	products: IProduct[] | [];
-}
-export interface IOrder {
-	id: string;
-	title: string;
-	image: string;
-	category: string;
-	size: string;
-	color: string;
-	price: number;
-	currency: string;
 }
 
 type UIState = {
@@ -98,6 +89,7 @@ export const useUIStore = create<UIState>()((set) => ({
 			color: "White",
 			price: 11990,
 			currency: "$",
+			totalPrice: 11990,
 		},
 		{
 			id: "2",
@@ -108,6 +100,7 @@ export const useUIStore = create<UIState>()((set) => ({
 			color: "White",
 			price: 11990,
 			currency: "$",
+			totalPrice: 11990,
 		},
 	],
 	showcase: [

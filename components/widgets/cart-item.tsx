@@ -8,6 +8,7 @@ import { useFavorites } from "../hooks/useFavorites";
 import { useState } from "react";
 import useCart from "../hooks/useCart";
 import { ICartItem } from "@/lib/store/cart.store";
+import useOrders from "../hooks/useOrders";
 
 interface IProps {
 	data: ICartItem;

@@ -1,5 +1,4 @@
-import { useOrdersStore } from "@/lib/store/orders.store";
-import { IProduct } from "@/lib/store/ui.store";
+import { IOrder, useOrdersStore } from "@/lib/store/orders.store";
 
 export default function useOrders() {
 	const hasHydrated = useOrdersStore((s) => s._hasHydrated);
@@ -8,8 +7,10 @@ export default function useOrders() {
 	if (!hasHydrated) {
 		return {
 			ordersIds: {} as Record<string, string>,
-			ordersItems: {} as Record<string, IProduct>,
+			ordersItems: {} as Record<string, IOrder>,
 			ordersItemsList: [],
+			createOrder: () => {},
+			removeOrder: () => {},
 		};
 	}
 
