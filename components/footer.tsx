@@ -18,13 +18,13 @@ export default function Footer() {
 	return (
 		<footer className="py-[30px] bg-black/5">
 			<Container>
-				<div className="flex justify-between">
-					<p className="font-medium tracking-wider text-black/50">
+				<div className="flex items-start justify-between">
+					<p className="font-medium tracking-wider leading-md text-black/50">
 						© Copyright 2026
 					</p>
 					<nav className="flex gap-5">
 						{navigationData.map((item) => (
-							<Link key={item.id} href={item.ref} className="opacity-75 hover:opacity-100 transition-brand">
+							<Link key={item.id} href={item.ref} className="leading-md opacity-75 hover:opacity-100 transition-brand">
 								{item.label}
 							</Link>
 						))}

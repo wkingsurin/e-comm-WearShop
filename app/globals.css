@@ -39,9 +39,9 @@
 	--lg: 18px;
 	--xl: 20px;
 	--2xl: 24px;
-	--base-percent: 100%;
-	--md-percent: 120%;
-	--lg-percent: 140%;
+	--leading-base: calc(1em);
+	--leading-md: calc(1em * 1.2);
+	--leading-lg: calc(1em * 1.4);
 	--sidebar: oklch(0.985 0 0);
 	--sidebar-foreground: oklch(0.145 0 0);
 	--sidebar-primary: oklch(0.205 0 0);
@@ -105,9 +105,9 @@
 	--text-lg: var(--lg);
 	--text-xl: var(--xl);
 	--text-2xl: var(--2xl);
-	--leading-base: var(--base-percent);
-	--leading-md: var(--md-percent);
-	--leading-lg: var(--lg-percent);
+	--leading-base: var(--leading-base);
+	--leading-md: var(--leading-md);
+	--leading-lg: var(--leading-lg);
 }
 
 .dark {

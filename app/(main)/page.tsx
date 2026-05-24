@@ -16,9 +16,9 @@ export default function Home() {
 			<Section>
 				<Container>
 					<div className="flex flex-col gap-5">
-						<div className="flex items-center justify-between">
+						<div className="relative flex items-center justify-between">
 							<SectionTitle>Hoodies</SectionTitle>
-							<SortSelect />
+							<SortSelect className="absolute -top-[12px] right-0" />
 						</div>
 						<div className="flex flex-wrap gap-5">
 							{data.map((item) => (
