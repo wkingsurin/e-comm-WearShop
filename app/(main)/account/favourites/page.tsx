@@ -2,7 +2,7 @@
 
 import { useFavorites } from "@/components/hooks/useFavorites";
 import SortSelect from "@/components/shared/sort-select";
-import ProductCard from "@/components/widgets/product-card";
+import ProductCard from "@/components/widgets/product-card/product-card";
 
 export default function Favourites() {
 	const { favoritesList } = useFavorites();

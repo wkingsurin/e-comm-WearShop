@@ -9,7 +9,7 @@ import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import { Button } from "@/components/ui/button";
 import CartItem from "@/components/widgets/cart-item";
-import ProductCard from "@/components/widgets/product-card";
+import ProductCard from "@/components/widgets/product-card/product-card";
 import { ICartItem } from "@/lib/store/cart.store";
 import Image from "next/image";
 

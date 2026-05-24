@@ -12,7 +12,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import ProductCard from "@/components/widgets/product-card";
+import ProductCard from "@/components/widgets/product-card/product-card";
 import {
 	ChevronDown,
 	ChevronUp,

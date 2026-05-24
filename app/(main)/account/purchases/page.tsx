@@ -1,7 +1,7 @@
 "use client";
 
 import SortSelect from "@/components/shared/sort-select";
-import ProductCard from "@/components/widgets/product-card";
+import ProductCard from "@/components/widgets/product-card/product-card";
 
 export default function Purchases() {
 	// const { favoritesList } = useFavorites();
