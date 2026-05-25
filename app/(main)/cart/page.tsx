@@ -6,10 +6,9 @@ import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
-import SortSelect from "@/components/shared/sort-select";
 import { Button } from "@/components/ui/button";
 import CartItem from "@/components/widgets/cart-item";
-import ProductCard from "@/components/widgets/product-card/product-card";
+import LastSeenSection from "@/components/widgets/last-seen-section";
 import { ICartItem } from "@/lib/store/cart.store";
 import Image from "next/image";
 
@@ -97,26 +96,7 @@ export default function Cart() {
 					</div>
 				</Container>
 			</Section>
-			<Section>
-				<Container>
-					<div className="flex flex-col gap-5">
-						<div className="flex flex-col gap-[6px]">
-							<span className="uppercase font-medium text-black/50 tracking-wider">
-								You See
-							</span>
-							<div className="flex items-center justify-between">
-								<SectionTitle>Last seen products</SectionTitle>
-								<SortSelect />
-							</div>
-						</div>
-						<div className="flex flex-wrap gap-5">
-							{cartItemsList.map((item) => (
-								<ProductCard key={item.id} data={item} />
-							))}
-						</div>
-					</div>
-				</Container>
-			</Section>
+			<LastSeenSection />
 		</Main>
 	);
 }

@@ -5,7 +5,6 @@ import Container from "@/components/shared/container";
 import FavoriteButton from "@/components/shared/favorite-button";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
-import SortSelect from "@/components/shared/sort-select";
 import { Button } from "@/components/ui/button";
 import {
 	Select,
@@ -15,7 +14,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import ProductCard from "@/components/widgets/product-card/product-card";
+import LastSeenSection from "@/components/widgets/last-seen-section";
+import SimilarSection from "@/components/widgets/similar-section";
 import { ChevronDown, ChevronUp, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 
@@ -223,48 +223,8 @@ export default function ProductPage() {
 					</div>
 				</Container>
 			</Section>
-			<Section>
-				<Container>
-					<div className="flex flex-col gap-5">
-						<div className="flex flex-col gap-[6px]">
-							<span className="uppercase font-medium text-black/50 tracking-wider">
-								You might also like
-							</span>
-							<div className="flex items-center justify-between">
-								<SectionTitle>Similar products</SectionTitle>
-								<SortSelect />
-							</div>
-						</div>
-						<div className="flex flex-wrap gap-5">
-							{/* <ProductCard data={} />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard /> */}
-						</div>
-					</div>
-				</Container>
-			</Section>
-			<Section>
-				<Container>
-					<div className="flex flex-col gap-5">
-						<div className="flex flex-col gap-[6px]">
-							<span className="uppercase font-medium text-black/50 tracking-wider">
-								You See
-							</span>
-							<div className="flex items-center justify-between">
-								<SectionTitle>Last seen products</SectionTitle>
-								<SortSelect />
-							</div>
-						</div>
-						<div className="flex flex-wrap gap-5">
-							{/* <ProductCard />
-							<ProductCard />
-							<ProductCard />
-							<ProductCard /> */}
-						</div>
-					</div>
-				</Container>
-			</Section>
+			<SimilarSection />
+			<LastSeenSection />
 		</Main>
 	);
 }

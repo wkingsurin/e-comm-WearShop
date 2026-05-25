@@ -9,6 +9,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { useSimilarStore } from "@/lib/store/similar.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import { ArrowLeft, ArrowRight, MoveRight, ShoppingBag, X } from "lucide-react";
 import Image from "next/image";
@@ -73,6 +74,7 @@ export default function FastWatch() {
 		currency: "$",
 	};
 
+	const showcase = useUIStore((s) => s.showcase)
 	const target = useUIStore((s) => s.modal.target);
 
 	const { addItem } = useCart();
@@ -195,6 +197,7 @@ export default function FastWatch() {
 						onClick={() => {
 							useUIStore.getState().updateOverlay({ open: false });
 							useUIStore.getState().changeModalTyle(null);
+							useSimilarStore.getState().computeSimilarProducts(target!, showcase)
 						}}
 					>
 						<p className="tracking-wider leading-md">More details</p>

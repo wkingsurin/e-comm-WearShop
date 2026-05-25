@@ -5,6 +5,8 @@ import RemoveButton from "@/components/shared/remove-button";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import Image from "next/image";
 import Discount from "./discount";
+import useLastSeen from "@/components/hooks/useLastSeen";
+import { useSimilarStore } from "@/lib/store/similar.store";
 
 interface IProps {
 	data: IProduct;
@@ -14,10 +16,15 @@ interface IProps {
 export default function ProductFace({ data, type = "Default" }: IProps) {
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
+	const { addLastSeen } = useLastSeen();
+	const computeSimilarProducts = useSimilarStore(
+		(s) => s.computeSimilarProducts
+	);
 
 	const contentType = "FastWatch";
 
-	const src = (size: number) => `/image-${size}.png`;
+	// const src = (size: number) => `/image-${size}.png`;
+	const src = () => `/${data.image}`;
 
 	return (
 		<div
@@ -25,15 +32,17 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 			onClick={() => {
 				updateOverlay({ open: true });
 				updateModal({ target: { ...data, amount: 1 }, contentType });
+				addLastSeen(data);
+				computeSimilarProducts(data, useUIStore.getState().showcase);
 			}}
 		>
 			<Image
-				src={src(480)}
+				src={src()}
 				alt={data.title}
 				width={332}
 				height={480}
 				priority
-				className="rounded-xl w-[220px] h-[318px]"
+				className="rounded-xl w-[220px] h-[318px] object-contain"
 			/>
 			{type === "Favourite" ? (
 				<RemoveButton data={data} />
