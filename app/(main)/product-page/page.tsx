@@ -1,5 +1,8 @@
+"use client";
+
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
+import FavoriteButton from "@/components/shared/favorite-button";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
@@ -13,18 +16,12 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import ProductCard from "@/components/widgets/product-card/product-card";
-import {
-	ChevronDown,
-	ChevronUp,
-	Heart,
-	ShoppingBag,
-	Truck,
-} from "lucide-react";
+import { ChevronDown, ChevronUp, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 
 export default function ProductPage() {
 	const data = {
-		id: "prod-111",
+		id: "1",
 		title: "Under Armour",
 		slug: "basic-under-armour",
 		options: {
@@ -38,7 +35,7 @@ export default function ProductPage() {
 		},
 		variants: [
 			{
-				id: "var-1",
+				id: "1",
 				sku: "HOOD-UA-WHT-S",
 				price: 7790,
 				stock: 15,
@@ -79,6 +76,17 @@ export default function ProductPage() {
 			},
 		],
 		currency: "$",
+	};
+
+	const target = {
+		id: data.id,
+		title: data.title,
+		image: data.variants[0].href.medium,
+		category: "Hoodie",
+		size: data.options.size[1].label,
+		color: data.options.color[0],
+		price: data.variants[0].price,
+		currency: data.currency,
 	};
 
 	return (
@@ -158,17 +166,12 @@ export default function ProductPage() {
 											</SelectContent>
 										</Select>
 									</div>
-									<div className="flex gap-4">
+									<div className="relative flex gap-4">
 										<Button className="flex-1">
 											<ShoppingBag className="size-4 stroke-[1px]" />
 											Pack
 										</Button>
-										<Button
-											variant="link"
-											className="group/fav bg-black/10 w-10 hover:bg-[#EC0404]/10"
-										>
-											<Heart className="size-4 stroke-[1.5px] stroke-black group-hover/fav:stroke-[#EC0404] group-hover/fav:fill-[#EC0404]" />
-										</Button>
+										<FavoriteButton data={target} inline />
 									</div>
 									<div className="flex items-center justify-center gap-3 opacity-50">
 										<Truck className="size-4 stroke-[1.5px]" />
@@ -233,10 +236,10 @@ export default function ProductPage() {
 							</div>
 						</div>
 						<div className="flex flex-wrap gap-5">
+							{/* <ProductCard data={} />
 							<ProductCard />
 							<ProductCard />
-							<ProductCard />
-							<ProductCard />
+							<ProductCard /> */}
 						</div>
 					</div>
 				</Container>
@@ -254,10 +257,10 @@ export default function ProductPage() {
 							</div>
 						</div>
 						<div className="flex flex-wrap gap-5">
+							{/* <ProductCard />
 							<ProductCard />
 							<ProductCard />
-							<ProductCard />
-							<ProductCard />
+							<ProductCard /> */}
 						</div>
 					</div>
 				</Container>

@@ -35,7 +35,6 @@ type UIState = {
 	updateModal: (updatedModal: IModal) => void;
 	changeModalTyle: (type: IModal["contentType"]) => void;
 	updateSelectedProduct: (product: IProduct) => void;
-	updateOrders: (updatedOrders: IOrder[]) => void;
 	updateShowcase: (updatedShowcase: IFavorite[]) => void;
 };
 
@@ -44,30 +43,6 @@ export const useUIStore = create<UIState>()((set) => ({
 	modal: {
 		target: null,
 		contentType: "FastWatch",
-	},
-	cart: {
-		products: [
-			{
-				id: "1",
-				title: "UNDER ARMOUR",
-				image: "image-white-240.png",
-				category: "Hoodie",
-				size: "M",
-				color: "White",
-				price: 11990,
-				currency: "$",
-			},
-			{
-				id: "2",
-				title: "UNDER ARMOUR",
-				image: "image-white-240.png",
-				category: "Hoodie",
-				size: "M",
-				color: "White",
-				price: 11990,
-				currency: "$",
-			},
-		],
 	},
 	selectedProduct: {
 		id: "1",
@@ -151,6 +126,5 @@ export const useUIStore = create<UIState>()((set) => ({
 	changeModalTyle: (type) =>
 		set((state) => ({ modal: { ...state.modal, contentType: type } })),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
-	updateOrders: (updatedOrders) => set({ orders: { ...updatedOrders } }),
 	updateShowcase: (updatedShowcase) => set({ showcase: [...updatedShowcase] }),
 }));

@@ -1,4 +1,5 @@
 import useCart from "@/components/hooks/useCart";
+import FavoriteButton from "@/components/shared/favorite-button";
 import { Button } from "@/components/ui/button";
 import {
 	Select,
@@ -9,14 +10,7 @@ import {
 	SelectValue,
 } from "@/components/ui/select";
 import { useUIStore } from "@/lib/store/ui.store";
-import {
-	ArrowLeft,
-	ArrowRight,
-	Heart,
-	MoveRight,
-	ShoppingBag,
-	X,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, MoveRight, ShoppingBag, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -193,16 +187,15 @@ export default function FastWatch() {
 							<ShoppingBag className="size-4 stroke-[1px]" />
 							Pack
 						</Button>
-						<Button
-							variant="link"
-							className="group/fav bg-black/10 w-10 hover:bg-[#EC0404]/10"
-						>
-							<Heart className="size-4 stroke-[1.5px] stroke-black group-hover/fav:stroke-[#EC0404] group-hover/fav:fill-[#EC0404]" />
-						</Button>
+						<FavoriteButton data={target!} inline />
 					</div>
 					<Link
-						href="/"
+						href="/product-page"
 						className="flex items-center justify-center gap-3 opacity-50"
+						onClick={() => {
+							useUIStore.getState().updateOverlay({ open: false });
+							useUIStore.getState().changeModalTyle(null);
+						}}
 					>
 						<p className="tracking-wider leading-md">More details</p>
 						<MoveRight className="size-4 stroke-[1.5px]" />

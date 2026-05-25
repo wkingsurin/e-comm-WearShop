@@ -6,16 +6,19 @@ import { Heart } from "lucide-react";
 
 interface IProps {
 	data: IFavorite;
+	inline?: boolean;
 }
 
-export default function FavoriteButton({ data }: IProps) {
+export default function FavoriteButton({ data, inline = false }: IProps) {
 	const isFav = useFavoriteStore((s) => !!s.favoritesIds[data.id]);
 	const toggle = useFavoriteStore((s) => s.toggleFavorite);
 
 	return (
 		<Button
 			size="icon-lg"
-			className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
+			className={`group/tag ${
+				inline ? "" : "absolute top-[6px] right-[6px]"
+			} bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
 				isFav && "bg-[#EC0404]/10"
 			}`}
 			onClick={(e) => {
