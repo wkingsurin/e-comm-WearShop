@@ -118,7 +118,7 @@ export default function FastWatch() {
 								className="rounded-sm w-full h-full object-contain"
 							/>
 						</Link> */}
-						<div className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] rounded-sm border border-transparent hover:border-black transition-brand">
+						<div className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent hover:border-black transition-brand">
 							<Image
 								src={`/${target.image}`}
 								alt={target.title}
@@ -177,13 +177,13 @@ export default function FastWatch() {
 								key={target.id}
 								className="group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand"
 							>
-								<div className="w-[60px] h-[80px] border border-transparent group-hover/color:border-black rounded-md overflow-hidden transition-brand">
+								<div className="flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand">
 									<Image
 										src={`/${target.image}`}
 										alt={data.title}
 										width={169}
 										height={240}
-										className="rounded-md w-full h-full object-contain"
+										className="rounded-md w-[49px] h-[70px] object-contain"
 									/>
 								</div>
 								<p className="font-mono tracking-wide">{target.color}</p>

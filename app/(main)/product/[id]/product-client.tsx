@@ -112,28 +112,56 @@ export default function ProductClient({ id }: IProps) {
 						</SectionTitle>
 						<div className="flex gap-[60px]">
 							<div className="flex flex-wrap rounded-xl overflow-hidden max-w-[780px] w-2/3 flex-1">
-								<Image
-									src={`/${product.image}`}
-									// src={`/image-white-480.png`}
-									alt={product.title}
-									width={332}
-									height={480}
-									className="flex flex-col gap-4 w-full h-[347px] object-contain md:w-1/3 md:max-w-[260px] cursor-zoom-in"
-								/>
-								<Image
-									src={`/${product.image}`}
-									alt={product.title}
-									width={332}
-									height={480}
-									className="flex flex-col gap-4 w-full h-[347px] object-contain md:w-1/3 md:max-w-[260px] cursor-zoom-in"
-								/>
-								<Image
-									src={`/${product.image}`}
-									alt={product.title}
-									width={332}
-									height={480}
-									className="flex flex-col gap-4 w-full h-[347px] object-contain md:w-1/3 md:max-w-[260px] cursor-zoom-in"
-								/>
+								<div className="flex flex-col gap-4 items-center justify-center w-full h-[347px] md:w-1/3 md:max-w-[260px] bg-[#F4F4F6] cursor-zoom-in">
+									<Image
+										src={`/${product.image}`}
+										// src={`/image-white-480.png`}
+										alt={product.title}
+										width={332}
+										height={480}
+										className="flex flex-col gap-4 max-w-[220px] max-h-[318px] object-contain"
+									/>
+								</div>
+								<div className="flex flex-col gap-4 items-center justify-center w-full h-[347px] md:w-1/3 md:max-w-[260px] bg-[#F4F4F6] cursor-zoom-in">
+									<Image
+										src={`/${product.image}`}
+										// src={`/image-white-480.png`}
+										alt={product.title}
+										width={332}
+										height={480}
+										className="flex flex-col gap-4 max-w-[220px] max-h-[318px] object-contain"
+									/>
+								</div>
+								<div className="flex flex-col gap-4 items-center justify-center w-full h-[347px] md:w-1/3 md:max-w-[260px] bg-[#F4F4F6] cursor-zoom-in">
+									<Image
+										src={`/${product.image}`}
+										// src={`/image-white-480.png`}
+										alt={product.title}
+										width={332}
+										height={480}
+										className="flex flex-col gap-4 max-w-[220px] max-h-[318px] object-contain"
+									/>
+								</div>
+								<div className="flex flex-col gap-4 items-center justify-center w-full h-[347px] md:w-1/3 md:max-w-[260px] bg-[#F4F4F6] cursor-zoom-in">
+									<Image
+										src={`/${product.image}`}
+										// src={`/image-white-480.png`}
+										alt={product.title}
+										width={332}
+										height={480}
+										className="flex flex-col gap-4 max-w-[220px] max-h-[318px] object-contain"
+									/>
+								</div>
+								<div className="flex flex-col gap-4 items-center justify-center w-full h-[347px] md:w-1/3 md:max-w-[260px] bg-[#F4F4F6] cursor-zoom-in">
+									<Image
+										src={`/${product.image}`}
+										// src={`/image-white-480.png`}
+										alt={product.title}
+										width={332}
+										height={480}
+										className="flex flex-col gap-4 max-w-[220px] max-h-[318px] object-contain"
+									/>
+								</div>
 							</div>
 							<div className="flex flex-col py-4 gap-6 max-w-[440px] w-full">
 								<div className="flex items-center justify-between">
@@ -153,14 +181,14 @@ export default function ProductClient({ id }: IProps) {
 											key={product.id}
 											className="group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand"
 										>
-											<div className="w-[90px] h-[120px] border border-transparent group-hover/color:border-black rounded-md overflow-hidden transition-brand">
+											<div className="flex items-center justify-center w-[90px] h-[120px] border border-transparent group-hover/color:border-black rounded-md bg-[#F4F4F6] overflow-hidden transition-brand">
 												<Image
 													// src={`/image-white-240.png`}
 													src={`/${product.image}`}
 													alt={product.title}
 													width={169}
 													height={240}
-													className="rounded-md"
+													className="rounded-md w-[69px] h-[100px] object-contain"
 												/>
 											</div>
 											<p className="font-mono tracking-wide">{product.color}</p>
