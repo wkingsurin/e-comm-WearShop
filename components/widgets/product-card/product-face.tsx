@@ -6,9 +6,6 @@ import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import Image from "next/image";
 import Discount from "./discount";
 import useLastSeen from "@/components/hooks/useLastSeen";
-import { useSimilarStore } from "@/lib/store/similar.store";
-import { usePathname } from "next/navigation";
-import useShowcase from "@/components/hooks/useShowcase";
 
 interface IProps {
 	data: IProduct;
@@ -20,13 +17,6 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
 	const { addLastSeen } = useLastSeen();
-	const computeSimilarProducts = useSimilarStore(
-		(s) => s.computeSimilarProducts
-	);
-	const { products } = useShowcase();
-
-	const pathname = usePathname();
-	const isProductPage = pathname.includes("product");
 
 	const contentType = "FastWatch";
 
@@ -39,16 +29,6 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 				updateOverlay({ open: true });
 				updateModal({ target: { ...data, amount: 1 }, contentType });
 				addLastSeen(data);
-
-				if (!isProductPage) {
-					computeSimilarProducts(data, products);
-				}
-
-				// if (data.id === productPage?.id || productPage) {
-				// 	return;
-				// }
-
-				// setProductPage(data);
 			}}
 		>
 			<Image

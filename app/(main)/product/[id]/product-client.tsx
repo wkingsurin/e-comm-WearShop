@@ -17,8 +17,10 @@ import {
 } from "@/components/ui/select";
 import LastSeenSection from "@/components/widgets/last-seen-section";
 import SimilarSection from "@/components/widgets/similar-section";
+import { useSimilarStore } from "@/lib/store/similar.store";
 import { ChevronDown, ChevronUp, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
+import { useEffect } from "react";
 
 interface IProps {
 	id: string;
@@ -26,7 +28,17 @@ interface IProps {
 
 export default function ProductClient({ id }: IProps) {
 	const { products: showcase } = useShowcase();
+	const computeSimilarProducts = useSimilarStore(
+		(s) => s.computeSimilarProducts
+	);
+
 	const product = showcase.find((item) => item.id === id) || null;
+
+	useEffect(() => {
+		if (!product) return;
+
+		computeSimilarProducts(product, showcase);
+	}, [product, computeSimilarProducts, showcase]);
 
 	if (!product) {
 		return <span>Product not found!</span>;
