@@ -74,10 +74,12 @@ export default function FastWatch() {
 		currency: "$",
 	};
 
-	const showcase = useUIStore((s) => s.showcase)
+	const showcase = useUIStore((s) => s.showcase);
 	const target = useUIStore((s) => s.modal.target);
 
 	const { addItem } = useCart();
+
+	if (!target) return null;
 
 	return (
 		<div
@@ -85,13 +87,13 @@ export default function FastWatch() {
 			onClick={(e) => e.stopPropagation()}
 		>
 			<div className="flex flex-col gap-3 max-w-[320px]">
-				<div className="group/product relative h-[384px] bg-[#F4F4F6] rounded-xl">
+				<div className="group/product relative flex items-center justify-center w-[320px] h-[384px] bg-[#F4F4F6] rounded-xl">
 					<Image
-						src={data.variants[0].href.medium}
-						alt=""
+						src={`/${target.image}`}
+						alt={target.title}
 						width={332}
 						height={480}
-						className="rounded-xl cursor-zoom-in w-full h-full object-contain"
+						className="rounded-xl cursor-zoom-in w-[220px] h-[318px] object-contain"
 					/>
 					<Button className="absolute top-[calc(50%-16px)] left-3 flex w-8 h-8 rounded-[50%] bg-white opacity-0 hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 group-hover/product:opacity-100">
 						<ArrowLeft className="size-4 stroke-[1.5px] stroke-black" />
@@ -102,21 +104,28 @@ export default function FastWatch() {
 				</div>
 				<div className="relative">
 					<div className="flex gap-2 overflow-hidden">
-						{data.variants[0].images.map((item) => (
-							<Link
-								href="/"
-								key={item.id}
-								className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] rounded-sm border border-transparent hover:border-black transition-brand"
-							>
-								<Image
-									src={item.path}
-									alt={data.title}
-									width={332}
-									height={480}
-									className="rounded-sm"
-								/>
-							</Link>
-						))}
+						{/* <Link
+							href="/"
+							key={target.id}
+							className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] rounded-sm border border-transparent hover:border-black transition-brand"
+						>
+							<Image
+								src={`/${target.image}`}
+								alt={target.title}
+								width={332}
+								height={480}
+								className="rounded-sm w-full h-full object-contain"
+							/>
+						</Link> */}
+						<div className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] rounded-sm border border-transparent hover:border-black transition-brand">
+							<Image
+								src={`/${target.image}`}
+								alt={target.title}
+								width={332}
+								height={480}
+								className="rounded-sm w-full h-full object-contain"
+							/>
+						</div>
 					</div>
 					<Button className="opacity-0 pointer-events-none absolute top-[calc(50%-16px)] -left-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50">
 						<ArrowLeft className="size-4 stroke-[1.5px] stroke-black" />
@@ -132,10 +141,10 @@ export default function FastWatch() {
 						href="/"
 						className="text-xl font-mono font-medium uppercase tracking-wider leading-lg"
 					>
-						{data.title}
+						{target.title}
 					</Link>
 					<span className="font-medium text-2xl tracking-wider leading-md">
-						{data.currency} {data.variants[0].price / 100 + "0"}
+						{target.currency} {target.price / 100 + "0"}
 					</span>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
@@ -143,7 +152,7 @@ export default function FastWatch() {
 						Colors
 					</span>
 					<div className="flex gap-4">
-						{data.variants.map((item) => (
+						{/* {data.variants.map((item) => (
 							<div
 								key={item.id}
 								className="group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand"
@@ -161,7 +170,24 @@ export default function FastWatch() {
 									{item.attributes.color}
 								</p>
 							</div>
-						))}
+						))} */}
+						{target && (
+							<div
+								key={target.id}
+								className="group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand"
+							>
+								<div className="w-[60px] h-[80px] border border-transparent group-hover/color:border-black rounded-md overflow-hidden transition-brand">
+									<Image
+										src={`/${target.image}`}
+										alt={data.title}
+										width={169}
+										height={240}
+										className="rounded-md w-full h-full object-contain"
+									/>
+								</div>
+								<p className="font-mono tracking-wide">{target.color}</p>
+							</div>
+						)}
 					</div>
 				</div>
 				<div className="flex flex-col items-center gap-3 w-full">
@@ -192,12 +218,15 @@ export default function FastWatch() {
 						<FavoriteButton data={target!} inline />
 					</div>
 					<Link
-						href="/product-page"
+						href={`/product/${[target.id]}`}
 						className="flex items-center justify-center gap-3 opacity-50"
+						// prefetch={false}
 						onClick={() => {
 							useUIStore.getState().updateOverlay({ open: false });
 							useUIStore.getState().changeModalTyle(null);
-							useSimilarStore.getState().computeSimilarProducts(target!, showcase)
+							useSimilarStore
+								.getState()
+								.computeSimilarProducts(target!, showcase);
 						}}
 					>
 						<p className="tracking-wider leading-md">More details</p>

@@ -8,7 +8,13 @@ import SortSelect from "../shared/sort-select";
 import ProductCard from "./product-card/product-card";
 
 export default function LastSeenSection() {
-	const { lastSeenItemsList } = useLastSeen();
+	const { lastSeenIds, lastSeenItems } = useLastSeen();
+
+	const orderedProducts = [...lastSeenIds]
+		.reverse()
+		.map((id) => lastSeenItems[id]);
+
+	if (orderedProducts.length === 0) return null;
 
 	return (
 		<Section>
@@ -24,9 +30,9 @@ export default function LastSeenSection() {
 						</div>
 					</div>
 					<div className="flex flex-wrap gap-5">
-						{lastSeenItemsList.map((item) => (
-							<ProductCard key={item.id} data={item} />
-						))}
+						{orderedProducts.map((product) => {
+							return <ProductCard key={product.id} data={product} />;
+						})}
 					</div>
 				</div>
 			</Container>

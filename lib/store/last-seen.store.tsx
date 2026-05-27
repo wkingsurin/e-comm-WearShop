@@ -3,7 +3,7 @@ import { persist } from "zustand/middleware";
 import { IProduct } from "./ui.store";
 
 interface LastSeenState {
-	lastSeenIds: Array<string | number>;
+	lastSeenIds: Array<string>;
 	lastSeenItems: Record<string, IProduct>;
 	_hasHydrated: boolean;
 
@@ -26,13 +26,13 @@ export const useLastSeenStore = create<LastSeenState>()(
 					const nextIds = [...state.lastSeenIds];
 					const nextItems = { ...state.lastSeenItems };
 
-					const existsIdx = nextIds.indexOf(id);
+					const targetIndex = nextIds.indexOf(id);
 
-					if (existsIdx !== -1) {
-						nextIds.splice(existsIdx, 1);
+					if (targetIndex !== -1) {
+						nextIds.splice(targetIndex, 1);
 					} else if (nextIds.length >= LIMIT) {
 						const firstId = nextIds.shift();
-						if (firstId !== undefined) {
+						if (firstId) {
 							delete nextItems[firstId];
 						}
 					}

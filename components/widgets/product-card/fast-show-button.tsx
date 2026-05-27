@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useSimilarStore } from "@/lib/store/similar.store";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import { ShoppingBag } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface IProps {
 	data: IProduct;
@@ -18,6 +19,9 @@ export default function FastShowButton({ data }: IProps) {
 		(s) => s.computeSimilarProducts
 	);
 
+	const pathname = usePathname();
+	const isProductPage = pathname.includes("product");
+
 	const contentType = "FastWatch";
 
 	return (
@@ -27,7 +31,10 @@ export default function FastShowButton({ data }: IProps) {
 				updateOverlay({ open: true });
 				updateModal({ target: { ...data, amount: 1 }, contentType });
 				addLastSeen(data);
-				computeSimilarProducts(data, useUIStore.getState().showcase);
+
+				if (!isProductPage) {
+					computeSimilarProducts(data, useUIStore.getState().showcase);
+				}
 			}}
 		>
 			<ShoppingBag className="size-4 stroke-[1.5px] stroke-white" />

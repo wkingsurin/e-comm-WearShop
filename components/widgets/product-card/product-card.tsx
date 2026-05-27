@@ -10,10 +10,13 @@ interface IProps {
 export default function ProductCard({ data, type = "Default" }: IProps) {
 	return (
 		<div
-			className={`group/card flex flex-col gap-4 rounded-xl w-full ${
+			className={`group/card relative flex flex-col gap-4 rounded-xl w-full ${
 				type === "Favourite" ? "md:w-1/3" : "md:w-1/4"
 			} md:max-w-[305px]`}
 		>
+			<span className="absolute top-3 left-3 z-10002 flex items-center justify-center	 w-[30px] h-[30px] rounded-[50%] bg-white text-base">
+				{data.id}
+			</span>
 			<ProductFace data={data} type={type} />
 			<ProductDescription data={data} />
 		</div>

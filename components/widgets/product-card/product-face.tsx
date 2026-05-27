@@ -7,9 +7,11 @@ import Image from "next/image";
 import Discount from "./discount";
 import useLastSeen from "@/components/hooks/useLastSeen";
 import { useSimilarStore } from "@/lib/store/similar.store";
+import { usePathname } from "next/navigation";
 
 interface IProps {
 	data: IProduct;
+	disablePicking?: boolean;
 	type?: "Default" | "Favourite";
 }
 
@@ -21,9 +23,11 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 		(s) => s.computeSimilarProducts
 	);
 
+	const pathname = usePathname();
+	const isProductPage = pathname.includes("product");
+
 	const contentType = "FastWatch";
 
-	// const src = (size: number) => `/image-${size}.png`;
 	const src = () => `/${data.image}`;
 
 	return (
@@ -33,7 +37,16 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 				updateOverlay({ open: true });
 				updateModal({ target: { ...data, amount: 1 }, contentType });
 				addLastSeen(data);
-				computeSimilarProducts(data, useUIStore.getState().showcase);
+
+				if (!isProductPage) {
+					computeSimilarProducts(data, useUIStore.getState().showcase);
+				}
+
+				// if (data.id === productPage?.id || productPage) {
+				// 	return;
+				// }
+
+				// setProductPage(data);
 			}}
 		>
 			<Image
