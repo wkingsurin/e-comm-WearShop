@@ -8,6 +8,7 @@ import Discount from "./discount";
 import useLastSeen from "@/components/hooks/useLastSeen";
 import { useSimilarStore } from "@/lib/store/similar.store";
 import { usePathname } from "next/navigation";
+import useShowcase from "@/components/hooks/useShowcase";
 
 interface IProps {
 	data: IProduct;
@@ -22,6 +23,7 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 	const computeSimilarProducts = useSimilarStore(
 		(s) => s.computeSimilarProducts
 	);
+	const { products } = useShowcase();
 
 	const pathname = usePathname();
 	const isProductPage = pathname.includes("product");
@@ -39,7 +41,7 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 				addLastSeen(data);
 
 				if (!isProductPage) {
-					computeSimilarProducts(data, useUIStore.getState().showcase);
+					computeSimilarProducts(data, products);
 				}
 
 				// if (data.id === productPage?.id || productPage) {

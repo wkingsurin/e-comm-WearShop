@@ -1,5 +1,6 @@
 "use client";
 
+import useShowcase from "@/components/hooks/useShowcase";
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import FavoriteButton from "@/components/shared/favorite-button";
@@ -16,7 +17,6 @@ import {
 } from "@/components/ui/select";
 import LastSeenSection from "@/components/widgets/last-seen-section";
 import SimilarSection from "@/components/widgets/similar-section";
-import { useUIStore } from "@/lib/store/ui.store";
 import { ChevronDown, ChevronUp, ShoppingBag, Truck } from "lucide-react";
 import Image from "next/image";
 
@@ -25,7 +25,7 @@ interface IProps {
 }
 
 export default function ProductClient({ id }: IProps) {
-	const showcase = useUIStore((s) => s.showcase);
+	const { products: showcase } = useShowcase();
 	const product = showcase.find((item) => item.id === id) || null;
 
 	if (!product) {

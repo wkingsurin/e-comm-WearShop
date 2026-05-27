@@ -1,4 +1,5 @@
 import useCart from "@/components/hooks/useCart";
+import useShowcase from "@/components/hooks/useShowcase";
 import FavoriteButton from "@/components/shared/favorite-button";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,7 +75,7 @@ export default function FastWatch() {
 		currency: "$",
 	};
 
-	const showcase = useUIStore((s) => s.showcase);
+	const { products: showcase } = useShowcase();
 	const target = useUIStore((s) => s.modal.target);
 
 	const { addItem } = useCart();

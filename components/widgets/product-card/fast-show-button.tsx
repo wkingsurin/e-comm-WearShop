@@ -1,6 +1,7 @@
 "use client";
 
 import useLastSeen from "@/components/hooks/useLastSeen";
+import useShowcase from "@/components/hooks/useShowcase";
 import { Button } from "@/components/ui/button";
 import { useSimilarStore } from "@/lib/store/similar.store";
 import { IProduct, useUIStore } from "@/lib/store/ui.store";
@@ -18,6 +19,7 @@ export default function FastShowButton({ data }: IProps) {
 	const computeSimilarProducts = useSimilarStore(
 		(s) => s.computeSimilarProducts
 	);
+	const { products } = useShowcase();
 
 	const pathname = usePathname();
 	const isProductPage = pathname.includes("product");
@@ -33,7 +35,7 @@ export default function FastShowButton({ data }: IProps) {
 				addLastSeen(data);
 
 				if (!isProductPage) {
-					computeSimilarProducts(data, useUIStore.getState().showcase);
+					computeSimilarProducts(data, products);
 				}
 			}}
 		>
