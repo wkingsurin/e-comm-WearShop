@@ -17,7 +17,7 @@ export default function Order({ data }: IProps) {
 	const isFavorite = favoritesIds[data.id] || false;
 
 	const updatedOverlay = useUIStore((s) => s.updateOverlay);
-	const changeModalTyle = useUIStore((s) => s.changeModalTyle);
+	const changeModalType = useUIStore((s) => s.changeModalType);
 	const { removeOrder } = useOrders();
 
 	const cancelOrder = () => {

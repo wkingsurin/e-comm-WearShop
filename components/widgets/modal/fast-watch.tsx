@@ -10,11 +10,13 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import { ICartItem } from "@/lib/store/cart.store";
 import { useSimilarStore } from "@/lib/store/similar.store";
-import { useUIStore } from "@/lib/store/ui.store";
+import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import { ArrowLeft, ArrowRight, MoveRight, ShoppingBag, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function FastWatch() {
 	const data = {
@@ -75,10 +77,30 @@ export default function FastWatch() {
 		currency: "$",
 	};
 
+	const [size, setSize] = useState<string>("M 48");
+	const [color, setColor] = useState<string>("White");
+
 	const { products: showcase } = useShowcase();
 	const target = useUIStore((s) => s.modal.target);
 
 	const { addItem } = useCart();
+
+	const changeSize = (targetSize: string) => {
+		setSize(targetSize);
+		useUIStore
+			.getState()
+			.updateModalTarget({ ...target, size: targetSize } as IProduct);
+		// useUIStore.getState().changeModalType(null);
+	};
+	const changeColor = (targetColor: string) => {
+		setColor(targetColor);
+		console.log(`[color]:`, color);
+		console.log(`[target]:`, target);
+		useUIStore
+			.getState()
+			.updateModalTarget({ ...target, color: targetColor } as IProduct);
+		// useUIStore.getState().changeModalType(null);
+	};
 
 	if (!target) return null;
 
@@ -118,7 +140,11 @@ export default function FastWatch() {
 								className="rounded-sm w-full h-full object-contain"
 							/>
 						</Link> */}
-						<div className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent hover:border-black transition-brand">
+						<div
+							className={`flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent hover:border-black transition-brand ${
+								1 && "border-black!"
+							}`}
+						>
 							<Image
 								src={`/${target.image}`}
 								alt={target.title}
@@ -173,21 +199,37 @@ export default function FastWatch() {
 							</div>
 						))} */}
 						{target && (
-							<div
-								key={target.id}
-								className="group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand"
-							>
-								<div className="flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand">
-									<Image
-										src={`/${target.image}`}
-										alt={data.title}
-										width={169}
-										height={240}
-										className="rounded-md w-[49px] h-[70px] object-contain"
-									/>
+							<>
+								<div
+									key={target.id}
+									data-id={target.color}
+									className={`group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand ${
+										color === "White" && "text-black!"
+									}`}
+									onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+										const color = e.currentTarget.dataset.id;
+
+										if (!color) return;
+
+										changeColor(color);
+									}}
+								>
+									<div
+										className={`flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand ${
+											color === "White" && "border-black!"
+										}`}
+									>
+										<Image
+											src={`/${target.image}`}
+											alt={data.title}
+											width={169}
+											height={240}
+											className="rounded-md w-[49px] h-[70px] object-contain"
+										/>
+									</div>
+									<p className="font-mono tracking-wide">{target.color}</p>
 								</div>
-								<p className="font-mono tracking-wide">{target.color}</p>
-							</div>
+							</>
 						)}
 					</div>
 				</div>
@@ -196,8 +238,16 @@ export default function FastWatch() {
 						<span className="text-lg font-medium leading-lg tracking-wider">
 							Size
 						</span>
-						<Select items={data.options.size}>
-							<SelectTrigger className="w-full">
+						<Select
+							items={data.options.size}
+							value={size}
+							onValueChange={(value) => {
+								if (!value) return;
+
+								changeSize(value);
+							}}
+						>
+							<SelectTrigger className="w-full" data-id={size} value={size}>
 								<SelectValue placeholder="Select size" />
 							</SelectTrigger>
 							<SelectContent>
@@ -212,7 +262,10 @@ export default function FastWatch() {
 						</Select>
 					</div>
 					<div className="flex gap-4 w-full">
-						<Button className="flex-1" onClick={() => addItem(target!)}>
+						<Button
+							className="flex-1"
+							onClick={() => addItem(target as ICartItem)}
+						>
 							<ShoppingBag className="size-4 stroke-[1px]" />
 							Pack
 						</Button>
@@ -224,7 +277,7 @@ export default function FastWatch() {
 						// prefetch={false}
 						onClick={() => {
 							useUIStore.getState().updateOverlay({ open: false });
-							useUIStore.getState().changeModalTyle(null);
+							useUIStore.getState().changeModalType(null);
 							useSimilarStore
 								.getState()
 								.computeSimilarProducts(target!, showcase);
@@ -239,7 +292,7 @@ export default function FastWatch() {
 				className="absolute z-10003 top-0 -right-13 w-10 h-10 bg-white rounded-[50%] hover:bg-white hover:shadow-[0_0_9px_-3px_var(--black)]/50"
 				onClick={() => {
 					useUIStore.getState().updateOverlay({ open: false });
-					useUIStore.getState().changeModalTyle(null);
+					useUIStore.getState().changeModalType(null);
 				}}
 			>
 				<X className="size-4 stroke-[1.5px] stroke-black" />

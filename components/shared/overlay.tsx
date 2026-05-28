@@ -26,10 +26,10 @@ export default function Overlay() {
 
 	return (
 		<div
-			className="fixed bottom-0 flex items-center justify-center w-full h-[calc(100dvh-134px)] bg-black/25"
+			className="fixed bottom-0 z-10005 flex items-center justify-center w-full h-[100dvh] bg-black/25"
 			onClick={() => {
 				useUIStore.getState().updateOverlay({ open: false });
-				useUIStore.getState().changeModalTyle(null);
+				useUIStore.getState().changeModalType(null);
 			}}
 		>
 			{modalContentType !== null && <Content />}

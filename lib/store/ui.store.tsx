@@ -5,7 +5,7 @@ export interface IOverlay {
 	open: boolean;
 }
 export interface IModal {
-	target: ICartItem | null;
+	target: ICartItem | IProduct | null;
 	contentType: "FastWatch" | "CancelOrder" | null;
 }
 export interface IProduct {
@@ -29,7 +29,8 @@ type UIState = {
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
-	changeModalTyle: (type: IModal["contentType"]) => void;
+	changeModalType: (type: IModal["contentType"]) => void;
+	updateModalTarget: (target: ICartItem | IProduct | null) => void;
 	updateSelectedProduct: (product: IProduct) => void;
 };
 
@@ -52,7 +53,9 @@ export const useUIStore = create<UIState>()((set) => ({
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
-	changeModalTyle: (type) =>
+	changeModalType: (type) =>
 		set((state) => ({ modal: { ...state.modal, contentType: type } })),
+	updateModalTarget: (target) =>
+		set((state) => ({ modal: { ...state.modal, target: target } })),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
 }));
