@@ -1,6 +1,7 @@
 "use client";
 
 import { useFavorites } from "@/components/hooks/useFavorites";
+import useOrders from "@/components/hooks/useOrders";
 import { Button } from "@/components/ui/button";
 import { IOrder } from "@/lib/store/orders.store";
 import { useUIStore } from "@/lib/store/ui.store";
@@ -17,10 +18,12 @@ export default function Order({ data }: IProps) {
 
 	const updatedOverlay = useUIStore((s) => s.updateOverlay);
 	const changeModalTyle = useUIStore((s) => s.changeModalTyle);
+	const { removeOrder } = useOrders();
 
 	const cancelOrder = () => {
-		updatedOverlay({ open: true });
-		changeModalTyle("CancelOrder");
+		removeOrder(data);
+		// updatedOverlay({ open: true });
+		// changeModalTyle("CancelOrder");
 	};
 
 	const orderAgain = (id: string) => {

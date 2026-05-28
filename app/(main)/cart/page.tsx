@@ -4,12 +4,14 @@ import useCart from "@/components/hooks/useCart";
 import useOrders from "@/components/hooks/useOrders";
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
+import Dummy from "@/components/shared/dummy";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import { Button } from "@/components/ui/button";
 import CartItem from "@/components/widgets/cart-item";
 import LastSeenSection from "@/components/widgets/last-seen-section";
-import { ICartItem } from "@/lib/store/cart.store";
+import { ICartItem, useCartStore } from "@/lib/store/cart.store";
+import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 
 export const DTOOrder = (data: ICartItem) => {
@@ -17,7 +19,8 @@ export const DTOOrder = (data: ICartItem) => {
 };
 
 export default function Cart() {
-	const { cartItemsList, cartTotal } = useCart();
+	const hasHydrated = useCartStore((s) => s._hasHydrated);
+	const { cartItemsList, removeItem, cartTotal } = useCart();
 	const { createOrder } = useOrders();
 
 	const payments: { id: string; label: string; image: string }[] = [
@@ -30,6 +33,9 @@ export default function Cart() {
 		cartItemsList.map((item) => {
 			createOrder(DTOOrder({ ...item }));
 		});
+		cartItemsList.map((item) => {
+			removeItem(DTOOrder(item));
+		});
 	};
 
 	return (
@@ -39,20 +45,27 @@ export default function Cart() {
 					<div className="flex flex-col gap-5">
 						<SectionTitle>Cart</SectionTitle>
 						<div className="flex gap-5">
-							<div className="flex flex-col gap-3 w-3/4 p-4 rounded-lg border border-black/10 bg-[#D9D9D9]/10">
+							<div className="flex flex-col gap-3 w-3/4 min-h-[492px] p-4 rounded-lg border border-black/10 bg-[#D9D9D9]/10">
 								<div className="flex items-center justify-between">
 									<span className="text-xl font-medium tracking-wider">
 										Delivery
 									</span>
-									<div className="h-7 rounded-md font-medium px-3 py-[3px] bg-black/5 leading-lg">
-										Tue, 5/26 - Sat, 5/30
+									{hasHydrated && cartItemsList.length !== 0 && (
+										<div className="h-7 rounded-md font-medium px-3 py-[3px] bg-black/5 leading-lg">
+											Tue, 5/26 - Sat, 5/30
+										</div>
+									)}
+								</div>
+								{hasHydrated && cartItemsList.length !== 0 && (
+									<div className="flex flex-col gap-3">
+										{cartItemsList.map((item) => (
+											<CartItem key={item.id} data={item} />
+										))}
 									</div>
-								</div>
-								<div className="flex flex-col gap-3">
-									{cartItemsList.map((item) => (
-										<CartItem key={item.id} data={item} />
-									))}
-								</div>
+								)}
+								{hasHydrated && cartItemsList.length === 0 && (
+									<Dummy icon={ShoppingBag} text="No products" />
+								)}
 							</div>
 							<div className="flex flex-col gap-5 w-1/4">
 								<div className="flex flex-col gap-4 min-h-[188px] bg-[#D9D9D9]/10 rounded-xl border-[0.5px] border-black/10 p-4">
@@ -70,7 +83,15 @@ export default function Cart() {
 										<span>Total</span>
 										<p>$ {cartTotal / 100 + "0"}</p>
 									</div>
-									<Button onClick={onPurchase}>Proceed to checkout</Button>
+									<Button
+										onClick={onPurchase}
+										disabled={
+											!hasHydrated ||
+											(hasHydrated && cartItemsList.length === 0)
+										}
+									>
+										Proceed to checkout
+									</Button>
 								</div>
 								<div className="flex flex-col gap-3 min-h-[94px] bg-[#D9D9D9]/10 rounded-xl border-[0.5px] border-black/10 p-4">
 									<span>Available payments</span>
