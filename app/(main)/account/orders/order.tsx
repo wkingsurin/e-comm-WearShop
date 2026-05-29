@@ -1,34 +1,48 @@
 "use client";
 
+import { mapProductToFavorite } from "@/app/mappers/mapper";
 import { useFavorites } from "@/components/hooks/useFavorites";
 import useOrders from "@/components/hooks/useOrders";
+import useShowcase from "@/components/hooks/useShowcase";
 import { Button } from "@/components/ui/button";
-import { IOrder } from "@/lib/store/orders.store";
+import { ICartItem } from "@/lib/store/cart.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import { Heart, RefreshCcw, Undo } from "lucide-react";
 import Image from "next/image";
 
 interface IProps {
-	data: IOrder;
+	data: ICartItem;
 }
 
 export default function Order({ data }: IProps) {
-	const { favoritesIds, toggleFavorite } = useFavorites();
-	const isFavorite = favoritesIds[data.id] || false;
+	const { isFavorite, toggleFavorite } = useFavorites();
+	const isFav = isFavorite(data.id);
+	const { products } = useShowcase();
+	const product = products.find((prod) => prod.id === data.id) || null;
 
-	const updatedOverlay = useUIStore((s) => s.updateOverlay);
+	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const changeModalType = useUIStore((s) => s.changeModalType);
 	const { removeOrder } = useOrders();
 
+	const favData = mapProductToFavorite(data);
+
 	const cancelOrder = () => {
-		removeOrder(data);
-		// updatedOverlay({ open: true });
-		// changeModalTyle("CancelOrder");
+		// removeOrder(data);
+		updateOverlay({ open: true });
+		changeModalType("CancelOrder");
 	};
 
 	const orderAgain = (id: string) => {
 		console.log(`Order again [Item ID]: ${id}`);
 	};
+
+	if (!product) return null;
+
+	const currentVariant = product.variants.find(
+		(item) => item.id === data.variantId
+	);
+	const color = currentVariant!.attributes.color;
+	const size = currentVariant!.attributes.size;
 
 	return (
 		<div
@@ -37,7 +51,7 @@ export default function Order({ data }: IProps) {
 		>
 			<div className="relative w-[160px] h-[192px] bg-[#F4F4F6] rounded-md">
 				<Image
-					src={`/${data.image}`}
+					src={data.image}
 					alt={data.title}
 					width={169}
 					height={240}
@@ -46,13 +60,13 @@ export default function Order({ data }: IProps) {
 				<Button
 					size="icon-lg"
 					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						isFavorite && "bg-[#EC0404]/10"
+						isFav && "bg-[#EC0404]/10"
 					}`}
-					onClick={() => toggleFavorite(data)}
+					onClick={() => toggleFavorite(favData)}
 				>
 					<Heart
 						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
+							isFav && "fill-[#EC0404] stroke-[#EC0404]!"
 						}`}
 					/>
 				</Button>
@@ -63,9 +77,9 @@ export default function Order({ data }: IProps) {
 						<span className="font-medium text-lg leading-lg tracking-wider">
 							{data.title}
 						</span>
-						<p className="tracking-wider leading-lg">{data.category}</p>
-						<p className="tracking-wider leading-lg">{data.size}</p>
-						<p className="tracking-wider leading-lg">{data.color}</p>
+						<p className="tracking-wider leading-lg">{product.category.name}</p>
+						<p className="tracking-wider leading-lg">{size}</p>
+						<p className="tracking-wider leading-lg">{color}</p>
 					</div>
 
 					<Button className="flex gap-3" onClick={() => orderAgain(data.id)}>
@@ -84,7 +98,7 @@ export default function Order({ data }: IProps) {
 						<Undo className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
 					</Button>
 					<span className="font-medium text-lg tracking-wider leading-md">
-						{data.currency} {data.totalPrice / 100 + "0"}
+						{product.currency} {currentVariant!.price / 100 + "0"}
 					</span>
 				</div>
 			</div>

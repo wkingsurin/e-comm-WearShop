@@ -32,7 +32,7 @@ export default function AccountLayout({ children }: IProps) {
 	}[] = [
 		{ id: "1", label: "Profile", ref: "profile", icon: User },
 		{ id: "2", label: "Orders", ref: "orders", icon: Package },
-		{ id: "3", label: "Favourites", ref: "favourites", icon: Heart },
+		{ id: "3", label: "Favorites", ref: "favorites", icon: Heart },
 		{ id: "4", label: "Purchases", ref: "purchases", icon: Boxes },
 		{ id: "5", label: "Security", ref: "security", icon: Lock },
 		{ id: "6", label: "Log out", ref: "/", icon: LogOut },

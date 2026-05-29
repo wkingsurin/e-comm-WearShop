@@ -1,8 +1,9 @@
 "use client";
 
-import { IFavorite, useFavoriteStore } from "@/lib/store/favorites.store";
+import { IFavorite } from "@/lib/store/favorites.store";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
+import { useFavorites } from "../hooks/useFavorites";
 
 interface IProps {
 	data: IFavorite;
@@ -10,8 +11,8 @@ interface IProps {
 }
 
 export default function FavoriteButton({ data, inline = false }: IProps) {
-	const isFav = useFavoriteStore((s) => !!s.favoritesIds[data.id]);
-	const toggle = useFavoriteStore((s) => s.toggleFavorite);
+	const { isFavorite, toggleFavorite } = useFavorites();
+	const isFav = isFavorite(data.productId);
 
 	return (
 		<Button
@@ -23,7 +24,7 @@ export default function FavoriteButton({ data, inline = false }: IProps) {
 			}`}
 			onClick={(e) => {
 				e.stopPropagation();
-				toggle(data);
+				toggleFavorite(data);
 			}}
 		>
 			<Heart

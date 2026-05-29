@@ -7,12 +7,12 @@ export default function useOrders() {
 	if (!hasHydrated) {
 		return {
 			ordersIds: {} as Record<string, string>,
-			ordersItems: {} as Record<string, IOrder>,
-			ordersItemsList: [],
+			orders: {} as Record<string, IOrder>,
+			ordersList: [] as IOrder[],
 			createOrder: () => {},
 			removeOrder: () => {},
 		};
 	}
 
-	return { ...store, ordersItemsList: Object.values(store.ordersItems || {}) };
+	return { ...store, ordersList: Object.values(store.orders || {}) };
 }

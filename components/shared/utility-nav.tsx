@@ -6,7 +6,7 @@ export default function UtilityNav() {
 		{ id: "1", text: "Account" },
 		{ id: "2", text: "Orders" },
 		{ id: "3", text: "Cart" },
-		{ id: "4", text: "Favourites" },
+		{ id: "4", text: "Favorites" },
 	];
 
 	return (

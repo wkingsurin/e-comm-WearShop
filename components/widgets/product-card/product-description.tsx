@@ -18,10 +18,10 @@ export default function ProductDescription({ data }: IProps) {
 			<div className="flex items-center justify-between gap-10">
 				<div className="flex flex-col">
 					<span className="font-medium text-md text-black/25 line-through tracking-wider leading-md">
-						{data.currency} {data.price / 100 + "0"}
+						{data.currency} {data.variants[0].oldPrice! / 100 + "0"}
 					</span>
 					<span className="font-medium text-lg tracking-wider leading-md">
-						{data.currency} {data.price / 100 + "0"}
+						{data.currency} {data.variants[0].price / 100 + "0"}
 					</span>
 				</div>
 				<FastShowButton data={data} />

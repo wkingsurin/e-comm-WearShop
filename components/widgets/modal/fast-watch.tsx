@@ -1,3 +1,7 @@
+import {
+	mapProductToCartItem,
+	mapProductToFavorite,
+} from "@/app/mappers/mapper";
 import useCart from "@/components/hooks/useCart";
 import useShowcase from "@/components/hooks/useShowcase";
 import FavoriteButton from "@/components/shared/favorite-button";
@@ -10,99 +14,44 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { ICartItem } from "@/lib/store/cart.store";
 import { useSimilarStore } from "@/lib/store/similar.store";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { useUIStore } from "@/lib/store/ui.store";
 import { ArrowLeft, ArrowRight, MoveRight, ShoppingBag, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 export default function FastWatch() {
-	const data = {
-		id: "prod-111",
-		title: "Under Armour",
-		slug: "basic-under-armour",
-		options: {
-			color: ["white", "navy"],
-			size: [
-				{ label: "S", value: "46" },
-				{ label: "M", value: "48" },
-				{ label: "L", value: "50" },
-				{ label: "XL", value: "52" },
-			],
-		},
-		variants: [
-			{
-				id: "var-1",
-				sku: "HOOD-UA-WHT-S",
-				price: 7790,
-				stock: 15,
-				attributes: { color: "White", size: "S" },
-				href: {
-					small: "/image-white-240.png",
-					medium: "/image-white-480.png",
-					large: "/image-white-720.png",
-					original: "/image-white-1280.png",
-				},
-				images: [
-					{ id: "1", name: "under-armour-1", path: "/image-white-480.png" },
-					{ id: "2", name: "under-armour-2", path: "/image-white-480.png" },
-					{ id: "3", name: "under-armour-3", path: "/image-white-480.png" },
-					{ id: "4", name: "under-armour-4", path: "/image-white-480.png" },
-					{ id: "5", name: "under-armour-5", path: "/image-white-480.png" },
-				],
-			},
-			{
-				id: "var-2",
-				sku: "HOOD-UA-NAVY",
-				price: 7790,
-				stock: 0,
-				attributes: { color: "Navy", size: "S" },
-				href: {
-					small: "/image-navy-240.png",
-					medium: "/image-navy-480.png",
-					large: "/image-navy-720.png",
-					original: "/image-navy-1280.png",
-				},
-				images: [
-					{ id: "1", name: "under-armour-1", path: "/image-navy-480.png" },
-					{ id: "2", name: "under-armour-2", path: "/image-navy-480.png" },
-					{ id: "3", name: "under-armour-3", path: "/image-navy-480.png" },
-					{ id: "4", name: "under-armour-4", path: "/image-navy-480.png" },
-					{ id: "5", name: "under-armour-5", path: "/image-navy-480.png" },
-				],
-			},
-		],
-		currency: "$",
-	};
-
-	const [size, setSize] = useState<string>("M 48");
-	const [color, setColor] = useState<string>("White");
-
-	const { products: showcase } = useShowcase();
-	const target = useUIStore((s) => s.modal.target);
-
 	const { addItem } = useCart();
+	const { products: showcase } = useShowcase();
+	const product = useUIStore((s) => s.modal.target);
 
+	const [variantIndex, setVariantIndex] = useState<number>(0);
+	const [size, setSize] = useState<string>("");
+
+	const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
+
+	if (!product) return null;
+
+	const currentVariant = product.variants[variantIndex];
+	const selectedSizeLabel = size.split(" ")[0];
+
+	const favData = mapProductToFavorite(product);
+
+	const changeVariant = (index: number) => {
+		setVariantIndex(index);
+		setActiveImageIndex(0);
+	};
 	const changeSize = (targetSize: string) => {
 		setSize(targetSize);
-		useUIStore
-			.getState()
-			.updateModalTarget({ ...target, size: targetSize } as IProduct);
-		// useUIStore.getState().changeModalType(null);
-	};
-	const changeColor = (targetColor: string) => {
-		setColor(targetColor);
-		console.log(`[color]:`, color);
-		console.log(`[target]:`, target);
-		useUIStore
-			.getState()
-			.updateModalTarget({ ...target, color: targetColor } as IProduct);
-		// useUIStore.getState().changeModalType(null);
 	};
 
-	if (!target) return null;
+	const dynamicVariant = {
+		...currentVariant,
+		attributes: { ...currentVariant.attributes, size: selectedSizeLabel },
+	};
+
+	const itemToCart = mapProductToCartItem(product, dynamicVariant, 1);
 
 	return (
 		<div
@@ -112,52 +61,69 @@ export default function FastWatch() {
 			<div className="flex flex-col gap-3 max-w-[320px]">
 				<div className="group/product relative flex items-center justify-center w-[320px] h-[384px] bg-[#F4F4F6] rounded-xl">
 					<Image
-						src={`/${target.image}`}
-						alt={target.title}
+						src={currentVariant.images[activeImageIndex].src}
+						alt={product.title}
 						width={332}
 						height={480}
-						className="rounded-xl cursor-zoom-in w-[220px] h-[318px] object-contain"
+						className={`rounded-xl cursor-zoom-in ${
+							activeImageIndex === 0
+								? "w-[220px] h-[318px] object-contain"
+								: "w-full h-full object-cover"
+						}`}
 					/>
-					<Button className="absolute top-[calc(50%-16px)] left-3 flex w-8 h-8 rounded-[50%] bg-white opacity-0 hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 group-hover/product:opacity-100">
+					<Button
+						className={`absolute top-[calc(50%-16px)] left-3 flex w-8 h-8 rounded-[50%] bg-white opacity-0 hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 ${
+							activeImageIndex > 0 && currentVariant.images.length > 1
+								? "group-hover/product:opacity-100"
+								: "pointer-events-none"
+						}`}
+					>
 						<ArrowLeft className="size-4 stroke-[1.5px] stroke-black" />
 					</Button>
-					<Button className="absolute top-[calc(50%-16px)] right-3 flex w-8 h-8 rounded-[50%] bg-white opacity-0 hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 group-hover/product:opacity-100">
+					<Button
+						className={`absolute top-[calc(50%-16px)] right-3 flex w-8 h-8 rounded-[50%] bg-white opacity-0 hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 ${
+							activeImageIndex < currentVariant.images.length &&
+							currentVariant.images.length > 1
+								? "group-hover/product:opacity-100"
+								: "pointer-events-none"
+						}`}
+					>
 						<ArrowRight className="size-4 stroke-[1.5px] stroke-black" />
 					</Button>
 				</div>
 				<div className="relative">
 					<div className="flex gap-2 overflow-hidden">
-						{/* <Link
-							href="/"
-							key={target.id}
-							className="flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] rounded-sm border border-transparent hover:border-black transition-brand"
-						>
-							<Image
-								src={`/${target.image}`}
-								alt={target.title}
-								width={332}
-								height={480}
-								className="rounded-sm w-full h-full object-contain"
-							/>
-						</Link> */}
-						<div
-							className={`flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent hover:border-black transition-brand ${
-								1 && "border-black!"
-							}`}
-						>
-							<Image
-								src={`/${target.image}`}
-								alt={target.title}
-								width={332}
-								height={480}
-								className="rounded-sm w-full h-full object-contain"
-							/>
-						</div>
+						{currentVariant.images.map((image, index) => {
+							return (
+								<div
+									key={image.id}
+									className={`flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent hover:border-black transition-brand ${
+										currentVariant.images[activeImageIndex].id === image.id &&
+										"border-black!"
+									}`}
+									onClick={() => setActiveImageIndex(index)}
+								>
+									<Image
+										src={`${image.src}`}
+										alt={product.title}
+										width={332}
+										height={480}
+										className="rounded-sm w-full h-full object-contain"
+									/>
+								</div>
+							);
+						})}
 					</div>
 					<Button className="opacity-0 pointer-events-none absolute top-[calc(50%-16px)] -left-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50">
 						<ArrowLeft className="size-4 stroke-[1.5px] stroke-black" />
 					</Button>
-					<Button className="absolute top-[calc(50%-16px)] -right-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50">
+					<Button
+						className={`absolute top-[calc(50%-16px)] ${
+							currentVariant.images.length > 4
+								? "opacity-100"
+								: "opacity-0 pointer-events-none"
+						} -right-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50`}
+					>
 						<ArrowRight className="size-4 stroke-[1.5px] stroke-black" />
 					</Button>
 				</div>
@@ -168,10 +134,10 @@ export default function FastWatch() {
 						href="/"
 						className="text-xl font-mono font-medium uppercase tracking-wider leading-lg"
 					>
-						{target.title}
+						{product.title}
 					</Link>
 					<span className="font-medium text-2xl tracking-wider leading-md">
-						{target.currency} {target.price / 100 + "0"}
+						{product.currency} {currentVariant.price / 100 + "0"}
 					</span>
 				</div>
 				<div className="flex flex-col gap-3 w-full">
@@ -179,58 +145,39 @@ export default function FastWatch() {
 						Colors
 					</span>
 					<div className="flex gap-4">
-						{/* {data.variants.map((item) => (
-							<div
-								key={item.id}
-								className="group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand"
-							>
-								<div className="w-[60px] h-[80px] border border-transparent group-hover/color:border-black rounded-md overflow-hidden transition-brand">
-									<Image
-										src={item.href.small}
-										alt={data.title}
-										width={169}
-										height={240}
-										className="rounded-md"
-									/>
-								</div>
-								<p className="font-mono tracking-wide">
-									{item.attributes.color}
-								</p>
-							</div>
-						))} */}
-						{target && (
-							<>
+						{product.variants.map((variant, index) => {
+							const isCurrentColorActive = variantIndex === index;
+
+							return (
 								<div
-									key={target.id}
-									data-id={target.color}
+									key={variant.id}
+									data-id={variant.attributes.color}
 									className={`group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand ${
-										color === "White" && "text-black!"
+										isCurrentColorActive && "text-black!"
 									}`}
-									onClick={(e: React.MouseEvent<HTMLDivElement>) => {
-										const color = e.currentTarget.dataset.id;
-
-										if (!color) return;
-
-										changeColor(color);
+									onClick={() => {
+										changeVariant(index);
 									}}
 								>
 									<div
 										className={`flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand ${
-											color === "White" && "border-black!"
+											isCurrentColorActive && "border-black!"
 										}`}
 									>
 										<Image
-											src={`/${target.image}`}
-											alt={data.title}
+											src={variant.images[0].src}
+											alt={product.title}
 											width={169}
 											height={240}
 											className="rounded-md w-[49px] h-[70px] object-contain"
 										/>
 									</div>
-									<p className="font-mono tracking-wide">{target.color}</p>
+									<p className="font-mono tracking-wide">
+										{variant.attributes.color}
+									</p>
 								</div>
-							</>
-						)}
+							);
+						})}
 					</div>
 				</div>
 				<div className="flex flex-col items-center gap-3 w-full">
@@ -239,7 +186,7 @@ export default function FastWatch() {
 							Size
 						</span>
 						<Select
-							items={data.options.size}
+							items={product.options.size}
 							value={size}
 							onValueChange={(value) => {
 								if (!value) return;
@@ -252,7 +199,7 @@ export default function FastWatch() {
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									{data.options.size.map((s) => (
+									{product.options.size.map((s) => (
 										<SelectItem key={s.label} value={`${s.label} ${s.value}`}>
 											{s.label} {s.value}
 										</SelectItem>
@@ -264,23 +211,23 @@ export default function FastWatch() {
 					<div className="flex gap-4 w-full">
 						<Button
 							className="flex-1"
-							onClick={() => addItem(target as ICartItem)}
+							disabled={size === "" ? true : false}
+							onClick={() => addItem(itemToCart)}
 						>
 							<ShoppingBag className="size-4 stroke-[1px]" />
 							Pack
 						</Button>
-						<FavoriteButton data={target!} inline />
+						<FavoriteButton data={favData} inline />
 					</div>
 					<Link
-						href={`/product/${[target.id]}`}
+						href={`/product/${[product.id]}/${dynamicVariant.id}`}
 						className="flex items-center justify-center gap-3 opacity-50"
-						// prefetch={false}
 						onClick={() => {
 							useUIStore.getState().updateOverlay({ open: false });
 							useUIStore.getState().changeModalType(null);
 							useSimilarStore
 								.getState()
-								.computeSimilarProducts(target!, showcase);
+								.computeSimilarProducts(product, currentVariant, showcase);
 						}}
 					>
 						<p className="tracking-wider leading-md">More details</p>

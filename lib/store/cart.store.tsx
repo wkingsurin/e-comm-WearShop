@@ -2,8 +2,26 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { IProduct } from "./ui.store";
 
-export interface ICartItem extends IProduct {
-	amount: number;
+export interface ICartItem
+	extends Pick<IProduct, "id" | "title" | "slug" | "currency"> {
+	cartItemId: string;
+
+	variantId: string;
+	sku: string;
+
+	price: number;
+	oldPrice?: number;
+	image: string;
+
+	selectedColor: string;
+	selectedSize: string;
+
+	quantity: number;
+
+	maxStock: number;
+
+	brandName: string;
+	categorySlug: string;
 }
 interface CartState {
 	cartItemsIds: Record<string, string>;
@@ -20,25 +38,26 @@ interface CartState {
 
 export const useCartStore = create<CartState>()(
 	persist(
-		(set, get) => ({
+		(set) => ({
 			cartItemsIds: {},
 			cartItems: {},
 			cartTotal: 0,
 			_hasHydrated: false,
 
 			removeItem: (product) => {
-				const id = product.id;
+				const cartItemId = product.cartItemId;
 
 				set((state) => {
 					const nextIds = { ...state.cartItemsIds };
 					const nextItems = { ...state.cartItems };
 					let nextTotal = state.cartTotal;
 
-					const productTotalPrice = nextItems[id].amount * product.price;
+					const productTotalPrice =
+						nextItems[cartItemId].quantity * product.price;
 					nextTotal -= productTotalPrice;
 
-					delete nextIds[id];
-					delete nextItems[id];
+					delete nextIds[cartItemId];
+					delete nextItems[cartItemId];
 
 					return {
 						cartItemsIds: nextIds,
@@ -48,15 +67,15 @@ export const useCartStore = create<CartState>()(
 				});
 			},
 			addItem: (product) => {
-				const id = product.id;
+				const cartItemId = product.cartItemId;
 
 				set((state) => {
 					const nextIds = { ...state.cartItemsIds };
 					const nextItems = { ...state.cartItems };
 					let nextTotal = state.cartTotal;
 
-					nextIds[id] = id;
-					nextItems[id] = product;
+					nextIds[cartItemId] = product.cartItemId;
+					nextItems[cartItemId] = product;
 					nextTotal += product.price;
 
 					return {
@@ -70,11 +89,10 @@ export const useCartStore = create<CartState>()(
 				const id = product.id;
 
 				set((state) => {
-					const nextIds = { ...state.cartItemsIds };
 					const nextItems = { ...state.cartItems };
 					let nextTotal = state.cartTotal;
 
-					nextItems[id] = { ...product, amount: nextItems[id].amount + 1 };
+					nextItems[id] = { ...product, quantity: nextItems[id].quantity + 1 };
 					nextTotal += product.price;
 
 					return { cartItems: nextItems, cartTotal: nextTotal };
@@ -84,13 +102,12 @@ export const useCartStore = create<CartState>()(
 				const id = product.id;
 
 				set((state) => {
-					const nextIds = { ...state.cartItemsIds };
 					const nextItems = { ...state.cartItems };
 					let nextTotal = state.cartTotal;
 
-					if (product.amount === 1) return { cartTotal: nextTotal };
+					if (product.quantity === 1) return { cartTotal: nextTotal };
 
-					nextItems[id] = { ...product, amount: nextItems[id].amount - 1 };
+					nextItems[id] = { ...product, quantity: nextItems[id].quantity - 1 };
 					nextTotal -= product.price;
 
 					return { cartItems: nextItems, cartTotal: nextTotal };

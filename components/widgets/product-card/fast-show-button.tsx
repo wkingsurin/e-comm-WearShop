@@ -21,7 +21,7 @@ export default function FastShowButton({ data }: IProps) {
 			className="gap-3"
 			onClick={() => {
 				updateOverlay({ open: true });
-				updateModal({ target: { ...data, amount: 1 }, contentType });
+				updateModal({ target: data, contentType });
 				addLastSeen(data);
 			}}
 		>

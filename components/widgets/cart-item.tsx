@@ -6,24 +6,24 @@ import Image from "next/image";
 import { useFavorites } from "../hooks/useFavorites";
 import useCart from "../hooks/useCart";
 import { ICartItem } from "@/lib/store/cart.store";
+import { mapProductToFavorite } from "@/app/mappers/mapper";
 
 interface IProps {
 	data: ICartItem;
 }
 
 export default function CartItem({ data }: IProps) {
-	const { favoritesIds, toggleFavorite } = useFavorites();
+	const { isFavorite, toggleFavorite } = useFavorites();
 	const { removeItem, incrementItem, decrementItem } = useCart();
-	const isFavorite = favoritesIds[data.id] || false;
+	const isFav = isFavorite(data.id);
+
+	const favData = mapProductToFavorite(data);
 
 	return (
-		<div
-			key={data.id}
-			className="flex gap-[30px] bg-black/5 hover:bg-black/10 rounded-xl p-[3px] pr-[18px] overflow-hidden transition-brand"
-		>
+		<div className="flex gap-[30px] bg-black/5 hover:bg-black/10 rounded-xl p-[3px] pr-[18px] overflow-hidden transition-brand">
 			<div className="relative w-[160px] h-[192px] bg-[#F4F4F6] rounded-md">
 				<Image
-					src={`/${data.image}`}
+					src={data.image}
 					alt={data.title}
 					width={169}
 					height={240}
@@ -32,13 +32,13 @@ export default function CartItem({ data }: IProps) {
 				<Button
 					size="icon-lg"
 					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						isFavorite && "bg-[#EC0404]/10"
+						isFav && "bg-[#EC0404]/10"
 					}`}
-					onClick={() => toggleFavorite(data)}
+					onClick={() => toggleFavorite(favData)}
 				>
 					<Heart
 						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
+							isFav && "fill-[#EC0404] stroke-[#EC0404]!"
 						}`}
 					/>
 				</Button>
@@ -47,11 +47,11 @@ export default function CartItem({ data }: IProps) {
 				<div className="flex flex-col items-start justify-between">
 					<div className="flex flex-col gap-[6px] font-mono">
 						<span className="font-medium text-lg leading-lg tracking-wider">
-							{data.title}
+							{data.brandName}
 						</span>
-						<p className="tracking-wider leading-lg">{data.category}</p>
-						<p className="tracking-wider leading-lg">{data.size}</p>
-						<p className="tracking-wider leading-lg">{data.color}</p>
+						<p className="tracking-wider leading-lg">{data.categorySlug}</p>
+						<p className="tracking-wider leading-lg">{data.selectedSize}</p>
+						<p className="tracking-wider leading-lg">{data.selectedColor}</p>
 					</div>
 
 					<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
@@ -62,7 +62,7 @@ export default function CartItem({ data }: IProps) {
 							<Minus className="size-4 stroke-[1.5px] stroke-black" />
 						</Button>
 						<span className="flex items-center justify-center w-10 h-10 font-mono tracking-wider leading-lg">
-							{data.amount}
+							{data.quantity}
 						</span>
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
@@ -77,13 +77,13 @@ export default function CartItem({ data }: IProps) {
 						className="group/cancel flex gap-3 w-10 h-10 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75"
 						onClick={() => {
 							// deleteItem(data.id);
-							removeItem({ ...data, amount: 1 });
+							removeItem({ ...data, quantity: 1 });
 						}}
 					>
 						<Trash2 className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
 					</Button>
 					<span className="font-medium text-lg tracking-wider leading-md">
-						{data.currency} {(data.price * data.amount) / 100 + "0"}
+						{data.currency} {(data.price * data.quantity) / 100 + "0"}
 					</span>
 				</div>
 			</div>

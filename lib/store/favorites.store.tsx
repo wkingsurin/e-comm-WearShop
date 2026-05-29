@@ -3,22 +3,16 @@ import { persist } from "zustand/middleware";
 
 export interface IFavorite {
 	id: string;
-	title: string;
-	image: string;
-	category: string;
-	size: string;
-	color: string;
-	price: number;
-	currency: string;
+	userId: string;
+	productId: string;
+	createdAt: string;
 }
 
 interface FavoriteState {
-	favoritesIds: Record<string, boolean>;
-	favoritesItems: Record<string, IFavorite>;
+	items: IFavorite[];
 	_hasHydrated: boolean;
 
 	toggleFavorite: (product: IFavorite) => void;
-	removeFavorite: (product: IFavorite) => void;
 	isFavorite: (id: string) => boolean;
 	setHydrated: (state: boolean) => void;
 }
@@ -26,48 +20,28 @@ interface FavoriteState {
 export const useFavoriteStore = create<FavoriteState>()(
 	persist(
 		(set, get) => ({
-			favoritesIds: {},
-			favoritesItems: {},
+			items: [],
 			_hasHydrated: false,
 
 			toggleFavorite: (product) => {
-				const id = product.id;
-				const isFav = !!get().favoritesIds[id];
-
 				set((state) => {
-					const nextIds = { ...state.favoritesIds };
-					const nextItems = { ...state.favoritesItems };
+					const exists = state.items.some((item) => item.id === product.id);
 
-					if (isFav) {
-						delete nextIds[id];
-						delete nextItems[id];
-					} else {
-						nextIds[id] = true;
-						nextItems[id] = product;
+					if (exists) {
+						return {
+							items: state.items.filter((item) => item.id !== product.id),
+						};
 					}
 
-					return { favoritesIds: nextIds, favoritesItems: nextItems };
+					return {
+						items: [
+							...state.items,
+							{ ...product, createdAt: new Date().toISOString() },
+						],
+					};
 				});
 			},
-
-			removeFavorite: (product) => {
-				const id = product.id;
-				const isFav = !!get().favoritesIds[id];
-
-				set((state) => {
-					const nextIds = { ...state.favoritesIds };
-					const nextItems = { ...state.favoritesItems };
-
-					if (isFav) {
-						delete nextIds[id];
-						delete nextItems[id];
-					}
-
-					return { favoritesIds: nextIds, favoritesItems: nextItems };
-				});
-			},
-
-			isFavorite: (id) => !!get().favoritesIds[id],
+			isFavorite: (id) => !!get().items.some((item) => item.id === id),
 
 			setHydrated: (state) => set({ _hasHydrated: state }),
 		}),

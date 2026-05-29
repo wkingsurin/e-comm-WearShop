@@ -6,6 +6,7 @@ import { IProduct, useUIStore } from "@/lib/store/ui.store";
 import Image from "next/image";
 import Discount from "./discount";
 import useLastSeen from "@/components/hooks/useLastSeen";
+import { mapProductToFavorite } from "@/app/mappers/mapper";
 
 interface IProps {
 	data: IProduct;
@@ -20,19 +21,19 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 
 	const contentType = "FastWatch";
 
-	const src = () => `/${data.image}`;
+	const favData = mapProductToFavorite(data);
 
 	return (
 		<div
 			className="relative flex items-center justify-center w-full h-[380px] rounded-xl bg-[#F4F4F6] border border-transparent group-hover/card:border-black overflow-hidden trnasition-all duration-300 cursor-zoom-in"
 			onClick={() => {
 				updateOverlay({ open: true });
-				updateModal({ target: { ...data, amount: 1 }, contentType });
+				updateModal({ target: data, contentType });
 				addLastSeen(data);
 			}}
 		>
 			<Image
-				src={src()}
+				src={data.variants[0].images[0].src}
 				alt={data.title}
 				width={332}
 				height={480}
@@ -40,9 +41,9 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 				className="rounded-xl w-[220px] h-[318px] object-contain"
 			/>
 			{type === "Favourite" ? (
-				<RemoveButton data={data} />
+				<RemoveButton data={favData} />
 			) : (
-				<FavoriteButton data={data} />
+				<FavoriteButton data={favData} />
 			)}
 			<Discount value="-35%" />
 		</div>

@@ -1,14 +1,66 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IProduct } from "./ui.store";
+import { ICartItem } from "./cart.store";
 
-export interface IOrder extends IProduct {
+export type OrderStatus =
+	| "pending_payment"
+	| "paid"
+	| "processing"
+	| "shipped"
+	| "delivered"
+	| "completed"
+	| "cancelled"
+	| "refunded";
+
+export type PaymentMethod = "card_online" | "sbp" | "cash_on_delivery";
+
+export type DeliveryMethod = "pickup_point" | "courier" | "post";
+
+export interface IOrderAddress {
+	country: string;
+	city: string;
+	street: string;
+	house: string;
+	apartment?: string;
+	postalCode?: string;
+	pickupPointId?: string;
+}
+
+export interface IOrderUser {
+	userId?: string;
+	firstName: string;
+	lastName: string;
+	email: string;
+	phone: string;
+}
+
+export interface IOrder {
+	id: string;
+	orderNumber: string;
+	createdAt: string;
+	updatedAt: string;
+
+	user: IOrderUser;
+	deliveryMethod: DeliveryMethod;
+	deliveryAddress: IOrderAddress;
+
+	items: ICartItem[];
+
+	currency: string;
+	totalItemsPrice: number;
+	discountAmount: number;
+	deliveryPrice: number;
 	totalPrice: number;
+
+	status: OrderStatus;
+	paymentMethod: PaymentMethod;
+	isPaid: boolean;
+	paymentId?: string;
 }
 
 interface OrdersState {
 	ordersIds: Record<string, string>;
-	ordersItems: Record<string, IOrder>;
+	orders: Record<string, IOrder>;
 	_hasHydrated: boolean;
 
 	setHydrated: (state: boolean) => void;
@@ -20,7 +72,7 @@ export const useOrdersStore = create<OrdersState>()(
 	persist(
 		(set) => ({
 			ordersIds: {},
-			ordersItems: {},
+			orders: {},
 			_hasHydrated: false,
 
 			createOrder: (order) => {
@@ -28,12 +80,12 @@ export const useOrdersStore = create<OrdersState>()(
 
 				set((state) => {
 					const nextIds = { ...state.ordersIds };
-					const nextItems = { ...state.ordersItems };
+					const nextOrders = { ...state.orders };
 
 					nextIds[id] = id;
-					nextItems[id] = order;
+					nextOrders[id] = order;
 
-					return { ordersIds: nextIds, ordersItems: nextItems };
+					return { ordersIds: nextIds, orders: nextOrders };
 				});
 			},
 
@@ -42,12 +94,12 @@ export const useOrdersStore = create<OrdersState>()(
 
 				set((state) => {
 					const nextIds = { ...state.ordersIds };
-					const nextItems = { ...state.ordersItems };
+					const nextOrders = { ...state.orders };
 
 					delete nextIds[id];
-					delete nextItems[id];
+					delete nextOrders[id];
 
-					return { ordersIds: nextIds, ordersItems: nextItems };
+					return { ordersIds: nextIds, orders: nextOrders };
 				});
 			},
 

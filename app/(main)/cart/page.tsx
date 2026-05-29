@@ -1,22 +1,23 @@
 "use client";
 
+import { IOrder } from "@/lib/store/orders.store";
+
+import { mapCartItemsToOrder } from "@/app/mappers/mapper";
+
+import { useCartStore } from "@/lib/store/cart.store";
 import useCart from "@/components/hooks/useCart";
 import useOrders from "@/components/hooks/useOrders";
+
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
-import Dummy from "@/components/shared/dummy";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
-import { Button } from "@/components/ui/button";
-import CartItem from "@/components/widgets/cart-item";
 import LastSeenSection from "@/components/widgets/last-seen-section";
-import { ICartItem, useCartStore } from "@/lib/store/cart.store";
+import Dummy from "@/components/shared/dummy";
+import CartItem from "@/components/widgets/cart-item";
+import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
-
-export const DTOOrder = (data: ICartItem) => {
-	return { ...data, totalPrice: data.amount * data.price };
-};
 
 export default function Cart() {
 	const hasHydrated = useCartStore((s) => s._hasHydrated);
@@ -30,11 +31,11 @@ export default function Cart() {
 	];
 
 	const onPurchase = () => {
+		const order = mapCartItemsToOrder(cartItemsList) as IOrder;
+		createOrder(order);
+
 		cartItemsList.map((item) => {
-			createOrder(DTOOrder({ ...item }));
-		});
-		cartItemsList.map((item) => {
-			removeItem(DTOOrder(item));
+			removeItem(item);
 		});
 	};
 
@@ -44,7 +45,7 @@ export default function Cart() {
 				<Container>
 					<div className="flex flex-col gap-5">
 						<SectionTitle>Cart</SectionTitle>
-						<div className="flex gap-5">
+						<div className="relative flex items-start gap-5">
 							<div className="flex flex-col gap-3 w-3/4 min-h-[492px] p-4 rounded-lg border border-black/10 bg-[#D9D9D9]/10">
 								<div className="flex items-center justify-between">
 									<span className="text-xl font-medium tracking-wider">
@@ -57,9 +58,9 @@ export default function Cart() {
 									)}
 								</div>
 								{hasHydrated && cartItemsList.length !== 0 && (
-									<div className="flex flex-col gap-3">
+									<div className="flex flex-col gap-3 flex-1">
 										{cartItemsList.map((item) => (
-											<CartItem key={item.id} data={item} />
+											<CartItem key={item.cartItemId} data={item} />
 										))}
 									</div>
 								)}
@@ -67,7 +68,7 @@ export default function Cart() {
 									<Dummy icon={ShoppingBag} text="No products" />
 								)}
 							</div>
-							<div className="flex flex-col gap-5 w-1/4">
+							<div className="sticky top-[154px] flex flex-col gap-5 w-1/4">
 								<div className="flex flex-col gap-4 min-h-[188px] bg-[#D9D9D9]/10 rounded-xl border-[0.5px] border-black/10 p-4">
 									<div className="flex flex-col gap-3">
 										<div className="flex justify-between font-medium tracking-wider leading-lg">

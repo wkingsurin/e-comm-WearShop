@@ -8,14 +8,11 @@ export function useFavorites() {
 
 	if (!hasHydrated) {
 		return {
-			favoritesIds: {} as Record<string, boolean>,
-			favoritesItems: {} as Record<string, IFavorite>,
-			favoritesList: [] as IFavorite[],
+			items: [] as IFavorite[],
 			toggleFavorite: () => {},
-			removeFavorite: () => {},
 			isFavorite: () => false,
 		};
 	}
 
-	return { ...store, favoritesList: Object.values(store.favoritesItems || {}) };
+	return { ...store };
 }

@@ -1,15 +1,16 @@
 "use client";
 
-import { IFavorite, useFavoriteStore } from "@/lib/store/favorites.store";
+import { IFavorite } from "@/lib/store/favorites.store";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
+import { useFavorites } from "../hooks/useFavorites";
 
 interface IProps {
 	data: IFavorite;
 }
 
 export default function RemoveButton({ data }: IProps) {
-	const remove = useFavoriteStore((s) => s.removeFavorite);
+	const { toggleFavorite } = useFavorites();
 
 	return (
 		<Button
@@ -17,7 +18,7 @@ export default function RemoveButton({ data }: IProps) {
 			className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10`}
 			onClick={(e) => {
 				e.stopPropagation();
-				remove(data);
+				toggleFavorite(data);
 			}}
 		>
 			<Trash2
