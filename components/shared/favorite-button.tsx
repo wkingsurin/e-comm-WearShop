@@ -23,6 +23,7 @@ export default function FavoriteButton({ data, inline = false }: IProps) {
 				isFav && "bg-[#EC0404]/10"
 			}`}
 			onClick={(e) => {
+				e.preventDefault();
 				e.stopPropagation();
 				toggleFavorite(data);
 			}}
