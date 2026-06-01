@@ -2,11 +2,12 @@
 
 import FavoriteButton from "@/components/shared/favorite-button";
 import RemoveButton from "@/components/shared/remove-button";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { IProduct } from "@/lib/store/ui.store";
 import Image from "next/image";
 import Discount from "./discount";
 import useLastSeen from "@/components/hooks/useLastSeen";
 import { mapProductToFavorite } from "@/app/mappers/mapper";
+import Link from "next/link";
 
 interface IProps {
 	data: IProduct;
@@ -15,20 +16,15 @@ interface IProps {
 }
 
 export default function ProductFace({ data, type = "Default" }: IProps) {
-	const updateOverlay = useUIStore((s) => s.updateOverlay);
-	const updateModal = useUIStore((s) => s.updateModal);
 	const { addLastSeen } = useLastSeen();
-
-	const contentType = "FastWatch";
 
 	const favData = mapProductToFavorite(data);
 
 	return (
-		<div
-			className="relative flex items-center justify-center w-full h-[380px] rounded-xl bg-[#F4F4F6] border border-transparent group-hover/card:border-black overflow-hidden trnasition-all duration-300 cursor-zoom-in"
+		<Link
+			href={`/product/${data.id}/${data.variants[0].id}`}
+			className="relative flex items-center justify-center w-full h-[340px] bg-[#F4F4F6] rounded-xl border-b-[1px] border-transparent overflow-hidden trnasition-all duration-300 cursor-pointer group-hover/card:rounded-none group-hover/card:border-black/15"
 			onClick={() => {
-				updateOverlay({ open: true });
-				updateModal({ target: data, contentType });
 				addLastSeen(data);
 			}}
 		>
@@ -46,6 +42,6 @@ export default function ProductFace({ data, type = "Default" }: IProps) {
 				<FavoriteButton data={favData} />
 			)}
 			<Discount value="-35%" />
-		</div>
+		</Link>
 	);
 }
