@@ -49,12 +49,14 @@ type UIState = {
 	overlay: IOverlay;
 	modal: IModal;
 	selectedProduct: IProduct;
+	sortOption: "higher" | "lower";
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
 	changeModalType: (type: IModal["contentType"]) => void;
 	updateModalTarget: (target: IProduct | null) => void;
 	updateSelectedProduct: (product: IProduct) => void;
+	updateSortOption: (option: "higher" | "lower") => void;
 };
 
 export const useUIStore = create<UIState>()((set) => ({
@@ -130,6 +132,7 @@ export const useUIStore = create<UIState>()((set) => ({
 			},
 		],
 	},
+	sortOption: "lower",
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
@@ -138,4 +141,5 @@ export const useUIStore = create<UIState>()((set) => ({
 	updateModalTarget: (target) =>
 		set((state) => ({ modal: { ...state.modal, target: target } })),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
+	updateSortOption: (option) => set({ sortOption: option }),
 }));

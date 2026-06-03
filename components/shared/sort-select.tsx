@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowUpDown } from "lucide-react";
 import {
 	Select,
@@ -7,12 +9,14 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../ui/select";
+import { useUIStore } from "@/lib/store/ui.store";
 
 interface IProps {
 	className?: string;
 }
 
 export default function SortSelect({ className }: IProps) {
+	const sortOption = useUIStore((s) => s.sortOption);
 	const style = className ? className : "default";
 
 	const data: { label: string; value: string }[] = [
@@ -21,7 +25,13 @@ export default function SortSelect({ className }: IProps) {
 	];
 
 	return (
-		<Select items={data}>
+		<Select
+			items={data}
+			value={sortOption}
+			onValueChange={(value) =>
+				useUIStore.getState().updateSortOption(value as "higher" | "lower")
+			}
+		>
 			<SelectTrigger
 				className={`w-[160px] h-[36px]! rounded-md font-mono tracking-wide ${style}`}
 			>
