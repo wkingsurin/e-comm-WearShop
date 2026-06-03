@@ -1,9 +1,7 @@
 import Container from "../shared/container";
 import Logo from "../shared/logo";
-import { Input } from "../ui/input";
-import { Search } from "lucide-react";
-import { Button } from "../ui/button";
 import UtilityNav from "../shared/utility-nav";
+import SearchInput from "../widgets/search-input";
 import CategoryNavigation from "./category-navigation";
 
 export default function Header() {
@@ -14,16 +12,7 @@ export default function Header() {
 					<div className="flex justify-between gap-[50px]">
 						<div className="flex items-center gap-10 flex-1">
 							<Logo />
-							<div className="hidden md:flex gap-4 flex-1">
-								<Input
-									type="text"
-									placeholder="Search..."
-									className="bg-black/5"
-								/>
-								<Button size="icon-lg">
-									<Search className="size-4 stroke-[2px]" />
-								</Button>
-							</div>
+							<SearchInput />
 						</div>
 						<UtilityNav />
 					</div>
