@@ -1,13 +1,11 @@
-import { IProduct } from "@/lib/store/ui.store";
 import ProductFace from "./product-face";
 import ProductDescription from "./product-description";
+import { IProductCardProps } from "@/app/types/components/widgets/product-card.types";
 
-interface IProps {
-	data: IProduct;
-	type?: "Default" | "Favourite";
-}
-
-export default function ProductCard({ data, type = "Default" }: IProps) {
+export default function ProductCard({
+	data,
+	type = "Default",
+}: IProductCardProps) {
 	return (
 		<div
 			className={`group/card relative flex flex-col gap-4 rounded-xl w-full p-[3px] border-[1px] border-transparent ${

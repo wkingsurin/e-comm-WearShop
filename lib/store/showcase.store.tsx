@@ -1,14 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IProduct } from "./ui.store";
-
-interface ShowcaseState {
-	products: IProduct[] | [];
-	_hasHydrated: boolean;
-
-	setHydrated: (state: boolean) => void;
-	setProducts: (updatedProducts: IProduct[]) => void;
-}
+import { ShowcaseState } from "@/app/types/store/showcase.types";
 
 export const useShowcaseStore = create<ShowcaseState>()(
 	persist(

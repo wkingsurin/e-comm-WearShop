@@ -1,5 +1,6 @@
-import { ICartItem, useCartStore } from "@/lib/store/cart.store";
-import { IProduct } from "@/lib/store/ui.store";
+import { ICartItem } from "@/app/types/store/cart.types";
+import { IProduct } from "@/app/types/store/ui.types";
+import { useCartStore } from "@/lib/store/cart.store";
 
 export default function useCart() {
 	const hasHydrated = useCartStore((s) => s._hasHydrated);

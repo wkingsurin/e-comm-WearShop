@@ -1,40 +1,6 @@
+import { CartState } from "@/app/types/store/cart.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IProduct } from "./ui.store";
-
-export interface ICartItem
-	extends Pick<IProduct, "id" | "title" | "slug" | "currency"> {
-	cartItemId: string;
-
-	variantId: string;
-	sku: string;
-
-	price: number;
-	oldPrice?: number;
-	image: string;
-
-	selectedColor: string;
-	selectedSize: string;
-
-	quantity: number;
-
-	maxStock: number;
-
-	brandName: string;
-	categorySlug: string;
-}
-interface CartState {
-	cartItemsIds: Record<string, string>;
-	cartItems: Record<string, ICartItem>;
-	cartTotal: number;
-	_hasHydrated: boolean;
-
-	addItem: (product: ICartItem) => void;
-	removeItem: (product: ICartItem) => void;
-	incrementItem: (product: ICartItem) => void;
-	decrementItem: (product: ICartItem) => void;
-	setHydrated: (state: boolean) => void;
-}
 
 export const useCartStore = create<CartState>()(
 	persist(

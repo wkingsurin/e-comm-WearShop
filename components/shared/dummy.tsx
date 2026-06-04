@@ -1,11 +1,6 @@
-import { LucideIcon } from "lucide-react";
+import { IDummyProps } from "@/app/types/components/shared/shared.types";
 
-interface IProps {
-	icon: LucideIcon;
-	text: string;
-}
-
-export default function Dummy({ icon, text }: IProps) {
+export default function Dummy({ icon, text }: IDummyProps) {
 	const Icon = icon;
 
 	return (

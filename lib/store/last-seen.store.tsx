@@ -1,15 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IProduct } from "./ui.store";
-
-interface LastSeenState {
-	lastSeenIds: Array<string>;
-	lastSeenItems: Record<string, IProduct>;
-	_hasHydrated: boolean;
-
-	addLastSeen: (product: IProduct) => void;
-	setHydrated: (state: boolean) => void;
-}
+import { LastSeenState } from "@/app/types/store/last-seen.types";
 
 export const useLastSeenStore = create<LastSeenState>()(
 	persist(

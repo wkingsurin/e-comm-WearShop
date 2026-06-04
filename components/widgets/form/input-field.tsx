@@ -1,19 +1,18 @@
 "use client";
 
+import { IInputFieldProps } from "@/app/types/components/widgets/form.types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
 
-interface IProps {
-	id: string;
-	label: string;
-	type: string;
-	placeholder: string;
-}
-
-export default function InputField({ id, label, type, placeholder }: IProps) {
+export default function InputField({
+	id,
+	label,
+	type,
+	placeholder,
+}: IInputFieldProps) {
 	const [value, setValue] = useState<string>("");
 
 	const clearField = () => setValue("");

@@ -1,18 +1,17 @@
 "use client";
 
+import { IPasswordFieldProps } from "@/app/types/components/widgets/form.types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 
-interface IProps {
-	id: string;
-	label: string;
-	placeholder: string;
-}
-
-export default function PasswordField({ id, label, placeholder }: IProps) {
+export default function PasswordField({
+	id,
+	label,
+	placeholder,
+}: IPasswordFieldProps) {
 	const [revealed, setRevealed] = useState<boolean>(false);
 
 	return (

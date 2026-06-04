@@ -1,7 +1,5 @@
 "use client";
 
-import { IOrder } from "@/lib/store/orders.store";
-
 import { mapCartItemsToOrder } from "@/app/mappers/mapper";
 
 import { useCartStore } from "@/lib/store/cart.store";
@@ -18,6 +16,7 @@ import CartItem from "@/components/widgets/cart-item";
 import { Button } from "@/components/ui/button";
 import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
+import { IOrder } from "@/app/types/store/orders.types";
 
 export default function Cart() {
 	const hasHydrated = useCartStore((s) => s._hasHydrated);

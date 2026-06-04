@@ -1,14 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IProduct } from "./ui.store";
-
-interface ProductPageState {
-	product: IProduct | null;
-	_hasHydrated: boolean;
-
-	setHydrated: (state: boolean) => void;
-	setProduct: (product: IProduct | null) => void;
-}
+import { ProductPageState } from "@/app/types/store/product-page.types";
 
 export const useProductPageStore = create<ProductPageState>()(
 	persist(

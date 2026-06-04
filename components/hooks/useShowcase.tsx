@@ -1,5 +1,5 @@
+import { IProduct } from "@/app/types/store/ui.types";
 import { useShowcaseStore } from "@/lib/store/showcase.store";
-import { IProduct } from "@/lib/store/ui.store";
 
 export default function useShowcase() {
 	const hasHydrated = useShowcaseStore((s) => s._hasHydrated);

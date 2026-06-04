@@ -1,4 +1,4 @@
-import { IProduct } from "../store/ui.store";
+import { IProduct } from "@/app/types/store/ui.types";
 
 export function searchProducts(query: string) {
 	const data = localStorage.getItem("showcase");

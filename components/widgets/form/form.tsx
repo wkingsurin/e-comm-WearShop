@@ -5,27 +5,9 @@ import PasswordField from "./password-field";
 import Link from "next/link";
 import TermsField from "./terms-field";
 import { Button } from "@/components/ui/button";
+import { IFormProps } from "@/app/types/components/widgets/form.types";
 
-interface IOptions {
-	title: string;
-	subtitle?: { value: string; linkText: string; linkRef: string };
-	nameField?: boolean;
-	lastNameField?: boolean;
-	emailField?: boolean;
-	oldPasswordField?: boolean;
-	newPasswordField?: boolean;
-	newPasswordConfirmField?: boolean;
-	passwordField?: boolean;
-	confirmField?: boolean;
-	terms?: { label: string };
-	buttonText: string;
-}
-
-interface IProps {
-	options: IOptions;
-}
-
-export default function Form({ options }: IProps) {
+export default function Form({ options }: IFormProps) {
 	const {
 		title,
 		subtitle,

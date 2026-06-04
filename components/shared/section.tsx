@@ -1,9 +1,6 @@
-interface IProps {
-	className?: string;
-	children: React.ReactNode;
-}
+import { ISectionProps } from "@/app/types/components/shared/shared.types";
 
-export default function Section({ className, children }: IProps) {
+export default function Section({ className, children }: ISectionProps) {
 	const style = className ? className : "default";
 
 	return (

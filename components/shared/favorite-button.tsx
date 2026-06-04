@@ -1,16 +1,14 @@
 "use client";
 
-import { IFavorite } from "@/lib/store/favorites.store";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
+import { IFavoriteButtonProps } from "@/app/types/components/shared/shared.types";
 
-interface IProps {
-	data: IFavorite;
-	inline?: boolean;
-}
-
-export default function FavoriteButton({ data, inline = false }: IProps) {
+export default function FavoriteButton({
+	data,
+	inline = false,
+}: IFavoriteButtonProps) {
 	const { isFavorite, toggleFavorite } = useFavorites();
 	const isFav = isFavorite(data.productId);
 

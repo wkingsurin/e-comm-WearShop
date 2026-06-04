@@ -1,5 +1,6 @@
 "use client";
 
+import { IAccountProps } from "@/app/types/account.types";
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
@@ -17,11 +18,7 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-interface IProps {
-	children: React.ReactNode;
-}
-
-export default function AccountLayout({ children }: IProps) {
+export default function AccountLayout({ children }: IAccountProps) {
 	const path = usePathname();
 
 	const navigationData: {

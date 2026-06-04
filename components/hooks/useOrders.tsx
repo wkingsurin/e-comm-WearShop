@@ -1,4 +1,5 @@
-import { IOrder, useOrdersStore } from "@/lib/store/orders.store";
+import { IOrder } from "@/app/types/store/orders.types";
+import { useOrdersStore } from "@/lib/store/orders.store";
 
 export default function useOrders() {
 	const hasHydrated = useOrdersStore((s) => s._hasHydrated);

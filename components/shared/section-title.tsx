@@ -1,7 +1,9 @@
-interface IProps {
-	children: string | React.ReactNode;
-}
+import { ISectionTitleProps } from "@/app/types/components/shared/shared.types";
 
-export default function SectionTitle({ children }: IProps) {
-	return <h3 className="text-2xl font-bold tracking-wider leading-base">{children}</h3>;
+export default function SectionTitle({ children }: ISectionTitleProps) {
+	return (
+		<h3 className="text-2xl font-bold tracking-wider leading-base">
+			{children}
+		</h3>
+	);
 }

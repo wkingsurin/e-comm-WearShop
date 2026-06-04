@@ -1,6 +1,7 @@
 "use client";
 
-import { IFavorite, useFavoriteStore } from "@/lib/store/favorites.store";
+import { IFavorite } from "@/app/types/store/favorites.types";
+import { useFavoriteStore } from "@/lib/store/favorites.store";
 
 export function useFavorites() {
 	const hasHydrated = useFavoriteStore((s) => s._hasHydrated);

@@ -2,10 +2,10 @@ import {
 	mapProductToCartItem,
 	mapProductToFavorite,
 } from "@/app/mappers/mapper";
+import { IProduct, IVariant } from "@/app/types/store/ui.types";
 import useCart from "@/components/hooks/useCart";
 import FavoriteButton from "@/components/shared/favorite-button";
 import { Button } from "@/components/ui/button";
-import { IProduct, IVariant } from "@/lib/store/ui.store";
 import { Minus, Plus, ShoppingBag, Truck } from "lucide-react";
 
 interface IProps {

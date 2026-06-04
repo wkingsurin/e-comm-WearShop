@@ -1,20 +1,15 @@
 "use client";
 
 import { mapProductToFavorite } from "@/app/mappers/mapper";
+import { IOrderProps } from "@/app/types/orders.types";
 import { useFavorites } from "@/components/hooks/useFavorites";
-import useOrders from "@/components/hooks/useOrders";
 import useShowcase from "@/components/hooks/useShowcase";
 import { Button } from "@/components/ui/button";
-import { ICartItem } from "@/lib/store/cart.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import { Heart, RefreshCcw, Undo } from "lucide-react";
 import Image from "next/image";
 
-interface IProps {
-	data: ICartItem;
-}
-
-export default function Order({ data }: IProps) {
+export default function Order({ data }: IOrderProps) {
 	const { isFavorite, toggleFavorite } = useFavorites();
 	const isFav = isFavorite(data.id);
 	const { products } = useShowcase();
@@ -22,12 +17,10 @@ export default function Order({ data }: IProps) {
 
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const changeModalType = useUIStore((s) => s.changeModalType);
-	const { removeOrder } = useOrders();
 
 	const favData = mapProductToFavorite(data);
 
 	const cancelOrder = () => {
-		// removeOrder(data);
 		updateOverlay({ open: true });
 		changeModalType("CancelOrder");
 	};

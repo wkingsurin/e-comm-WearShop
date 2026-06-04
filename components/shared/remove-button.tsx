@@ -1,15 +1,11 @@
 "use client";
 
-import { IFavorite } from "@/lib/store/favorites.store";
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
+import { IRemoveButtonProps } from "@/app/types/components/shared/shared.types";
 
-interface IProps {
-	data: IFavorite;
-}
-
-export default function RemoveButton({ data }: IProps) {
+export default function RemoveButton({ data }: IRemoveButtonProps) {
 	const { toggleFavorite } = useFavorites();
 
 	return (

@@ -3,7 +3,6 @@
 import useShowcase from "@/components/hooks/useShowcase";
 import { useEffect, useState } from "react";
 import { useSimilarStore } from "@/lib/store/similar.store";
-import { IVariant } from "@/lib/store/ui.store";
 
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
@@ -14,6 +13,7 @@ import LastSeenSection from "@/components/widgets/last-seen-section";
 import Gallery from "./gallery";
 import Description from "./description";
 import SellMenu from "./sell-menu";
+import { IVariant } from "@/app/types/store/ui.types";
 
 interface IProps {
 	productId: string;

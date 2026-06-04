@@ -10,12 +10,9 @@ import {
 	SelectValue,
 } from "../ui/select";
 import { useUIStore } from "@/lib/store/ui.store";
+import { ISortProps } from "@/app/types/components/shared/shared.types";
 
-interface IProps {
-	className?: string;
-}
-
-export default function SortSelect({ className }: IProps) {
+export default function SortSelect({ className }: ISortProps) {
 	const sortOption = useUIStore((s) => s.sortOption);
 	const style = className ? className : "default";
 

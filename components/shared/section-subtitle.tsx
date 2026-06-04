@@ -1,7 +1,9 @@
-interface IProps {
-	children: string | React.ReactNode;
-}
+import { ISectionSubtitleProps } from "@/app/types/components/shared/shared.types";
 
-export default function SectionSubtitle({ children }: IProps) {
-	return <span className="font-medium tracking-wider uppercase text-black/50">{children}</span>;
+export default function SectionSubtitle({ children }: ISectionSubtitleProps) {
+	return (
+		<span className="font-medium tracking-wider uppercase text-black/50">
+			{children}
+		</span>
+	);
 }

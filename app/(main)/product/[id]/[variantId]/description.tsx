@@ -6,10 +6,10 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { IProduct, IVariant } from "@/lib/store/ui.store";
 import Image from "next/image";
 import Link from "next/link";
 import { IDetails } from "./product-client";
+import { IProduct, IVariant } from "@/app/types/store/ui.types";
 
 interface IProps {
 	product: IProduct;

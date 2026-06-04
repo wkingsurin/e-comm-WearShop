@@ -5,14 +5,10 @@ import { Button } from "../ui/button";
 import Image from "next/image";
 import { useFavorites } from "../hooks/useFavorites";
 import useCart from "../hooks/useCart";
-import { ICartItem } from "@/lib/store/cart.store";
 import { mapProductToFavorite } from "@/app/mappers/mapper";
+import { ICartItemProps } from "@/app/types/components/widgets/cart-item.types";
 
-interface IProps {
-	data: ICartItem;
-}
-
-export default function CartItem({ data }: IProps) {
+export default function CartItem({ data }: ICartItemProps) {
 	const { isFavorite, toggleFavorite } = useFavorites();
 	const { removeItem, incrementItem, decrementItem } = useCart();
 	const isFav = isFavorite(data.id);

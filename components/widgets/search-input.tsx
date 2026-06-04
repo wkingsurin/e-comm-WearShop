@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import useSearch from "../hooks/use-search";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { IProduct } from "@/lib/store/ui.store";
+import { IProduct } from "@/app/types/store/ui.types";
 
 export default function SearchInput() {
 	const { query, setQuery, results } = useSearch();

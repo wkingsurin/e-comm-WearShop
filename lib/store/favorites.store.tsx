@@ -1,21 +1,6 @@
+import { FavoriteState } from "@/app/types/store/favorites.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-
-export interface IFavorite {
-	id: string;
-	userId: string;
-	productId: string;
-	createdAt: string;
-}
-
-interface FavoriteState {
-	items: IFavorite[];
-	_hasHydrated: boolean;
-
-	toggleFavorite: (product: IFavorite) => void;
-	isFavorite: (id: string) => boolean;
-	setHydrated: (state: boolean) => void;
-}
 
 export const useFavoriteStore = create<FavoriteState>()(
 	persist(

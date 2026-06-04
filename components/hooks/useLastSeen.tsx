@@ -1,5 +1,5 @@
+import { IProduct } from "@/app/types/store/ui.types";
 import { useLastSeenStore } from "@/lib/store/last-seen.store";
-import { IProduct } from "@/lib/store/ui.store";
 
 export default function useLastSeen() {
 	const hasHydrated = useLastSeenStore((s) => s._hasHydrated);

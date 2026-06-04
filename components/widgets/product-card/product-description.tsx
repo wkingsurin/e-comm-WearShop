@@ -1,12 +1,8 @@
-import { IProduct } from "@/lib/store/ui.store";
 import Link from "next/link";
 import FastViewButton from "./fast-view-button";
+import { IProductDescriptionProps } from "@/app/types/components/widgets/product-card.types";
 
-interface IProps {
-	data: IProduct;
-}
-
-export default function ProductDescription({ data }: IProps) {
+export default function ProductDescription({ data }: IProductDescriptionProps) {
 	return (
 		<div className="flex flex-col gap-4 px-3 pb-3">
 			<div className="flex flex-col gap-2 items-start leading-base text-sans uppercase tracking-wider">

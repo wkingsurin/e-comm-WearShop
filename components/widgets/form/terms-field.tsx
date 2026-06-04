@@ -1,11 +1,8 @@
+import { ITermsFieldProps } from "@/app/types/components/widgets/form.types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-interface IProps {
-	children: string | React.ReactNode;
-}
-
-export default function TermsField({ children }: IProps) {
+export default function TermsField({ children }: ITermsFieldProps) {
 	return (
 		<div className="flex gap-3 w-full">
 			<Checkbox id="terms" className="size-5" />

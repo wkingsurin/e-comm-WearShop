@@ -1,14 +1,11 @@
 "use client";
 
+import { IFastViewButtonProps } from "@/app/types/components/widgets/product-card.types";
 import useLastSeen from "@/components/hooks/useLastSeen";
 import { Button } from "@/components/ui/button";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { useUIStore } from "@/lib/store/ui.store";
 
-interface IProps {
-	data: IProduct;
-}
-
-export default function FastViewButton({ data }: IProps) {
+export default function FastViewButton({ data }: IFastViewButtonProps) {
 	const updateOverlay = useUIStore((s) => s.updateOverlay);
 	const updateModal = useUIStore((s) => s.updateModal);
 	const { addLastSeen } = useLastSeen();

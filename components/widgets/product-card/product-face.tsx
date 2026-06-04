@@ -2,20 +2,17 @@
 
 import FavoriteButton from "@/components/shared/favorite-button";
 import RemoveButton from "@/components/shared/remove-button";
-import { IProduct } from "@/lib/store/ui.store";
 import Image from "next/image";
 import Discount from "./discount";
 import useLastSeen from "@/components/hooks/useLastSeen";
 import { mapProductToFavorite } from "@/app/mappers/mapper";
 import Link from "next/link";
+import { IProductFaceProps } from "@/app/types/components/widgets/product-card.types";
 
-interface IProps {
-	data: IProduct;
-	disablePicking?: boolean;
-	type?: "Default" | "Favourite";
-}
-
-export default function ProductFace({ data, type = "Default" }: IProps) {
+export default function ProductFace({
+	data,
+	type = "Default",
+}: IProductFaceProps) {
 	const { addLastSeen } = useLastSeen();
 
 	const favData = mapProductToFavorite(data);

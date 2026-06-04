@@ -1,10 +1,11 @@
 "use client";
 
+import { IProduct } from "@/app/types/store/ui.types";
 import useShowcase from "@/components/hooks/useShowcase";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
-import { IProduct, useUIStore } from "@/lib/store/ui.store";
+import { useUIStore } from "@/lib/store/ui.store";
 
 export default function Category() {
 	const { products: data } = useShowcase();

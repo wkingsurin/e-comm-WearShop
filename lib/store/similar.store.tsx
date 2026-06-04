@@ -1,18 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { IProduct, IVariant } from "./ui.store";
-
-interface SimilarState {
-	similarProducts: IProduct[];
-	_hasHydrated: boolean;
-
-	setHydrated: (state: boolean) => void;
-	computeSimilarProducts: (
-		currentProduct: IProduct,
-		currentVariant: IVariant,
-		allProducts: IProduct[]
-	) => void;
-}
+import { SimilarState } from "@/app/types/store/similar.types";
 
 export const useSimilarStore = create<SimilarState>()(
 	persist(
