@@ -3,26 +3,32 @@
 import { useUIStore } from "@/lib/store/ui.store";
 import { useEffect } from "react";
 import FastWatch from "../widgets/modal/fast-watch";
-import CancelReason from "../widgets/modal/cancel-reason";
+import CancelOrder from "../widgets/modal/cancel-order";
+
+const MODAL_COMPONENTS = {
+	FastWatch: FastWatch,
+	CancelOrder: CancelOrder,
+} as const;
+
+type ModalType = keyof typeof MODAL_COMPONENTS;
 
 export default function Overlay() {
-	const overlay = useUIStore((s) => s.overlay.open);
-	const modalContentType = useUIStore((s) => s.modal.contentType);
+	const open = useUIStore((s) => s.overlay.open);
+	const modalContentType = useUIStore(
+		(s) => s.modal.contentType
+	) as ModalType | null;
 
-	const Content =
-		modalContentType === "FastWatch" && modalContentType !== null
-			? FastWatch
-			: CancelReason;
+	const Content = modalContentType ? MODAL_COMPONENTS[modalContentType] : null;
 
 	useEffect(() => {
-		if (overlay) {
+		if (open) {
 			document.body.style.overflow = "hidden";
 		} else {
 			document.body.style.overflow = "";
 		}
-	}, [overlay]);
+	}, [open]);
 
-	if (!overlay) return null;
+	if (!open) return null;
 
 	return (
 		<div
@@ -32,7 +38,7 @@ export default function Overlay() {
 				useUIStore.getState().changeModalType(null);
 			}}
 		>
-			{modalContentType !== null && <Content />}
+			{Content && <Content />}
 		</div>
 	);
 }

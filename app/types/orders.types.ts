@@ -1,5 +1,5 @@
-import { ICartItem } from "./store/cart.types";
+import { IOrder } from "./store/orders.types";
 
 export interface IOrderProps {
-	data: ICartItem;
+	data: IOrder;
 }

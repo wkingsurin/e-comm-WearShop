@@ -1,8 +1,10 @@
+import { IOrder } from "./orders.types";
+
 export interface IOverlay {
 	open: boolean;
 }
 export interface IModal {
-	target: IProduct | null;
+	target: IProduct | IOrder | null;
 	contentType: "FastWatch" | "CancelOrder" | null;
 }
 
@@ -52,7 +54,7 @@ export type UIState = {
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
 	changeModalType: (type: IModal["contentType"]) => void;
-	updateModalTarget: (target: IProduct | null) => void;
+	updateModalTarget: (target: IProduct | IOrder | null) => void;
 	updateSelectedProduct: (product: IProduct) => void;
 	updateSortOption: (option: "higher" | "lower") => void;
 };
