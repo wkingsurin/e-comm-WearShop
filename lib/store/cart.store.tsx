@@ -52,28 +52,37 @@ export const useCartStore = create<CartState>()(
 				});
 			},
 			incrementItem: (product) => {
-				const id = product.id;
+				const cartItemId = product.cartItemId;
 
 				set((state) => {
 					const nextItems = { ...state.cartItems };
 					let nextTotal = state.cartTotal;
 
-					nextItems[id] = { ...product, quantity: nextItems[id].quantity + 1 };
-					nextTotal += product.price;
+					const nextQuantity = product.quantity + 1;
+
+					if (nextQuantity <= product.maxStock) {
+						nextItems[cartItemId] = { ...product, quantity: nextQuantity };
+						nextTotal += product.price;
+					}
 
 					return { cartItems: nextItems, cartTotal: nextTotal };
 				});
 			},
 			decrementItem: (product) => {
-				const id = product.id;
+				const cartItemId = product.cartItemId;
 
 				set((state) => {
 					const nextItems = { ...state.cartItems };
 					let nextTotal = state.cartTotal;
 
-					if (product.quantity === 1) return { cartTotal: nextTotal };
+					const nextQuantity = product.quantity - 1;
 
-					nextItems[id] = { ...product, quantity: nextItems[id].quantity - 1 };
+					if (nextQuantity <= 0) return { cartTotal: nextTotal };
+
+					nextItems[cartItemId] = {
+						...product,
+						quantity: nextQuantity,
+					};
 					nextTotal -= product.price;
 
 					return { cartItems: nextItems, cartTotal: nextTotal };

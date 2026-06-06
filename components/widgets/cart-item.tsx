@@ -67,6 +67,7 @@ export default function CartItem({ data }: ICartItemProps) {
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
 							onClick={() => decrementItem(data)}
+							disabled={data.quantity <= 1}
 						>
 							<Minus className="size-4 stroke-[1.5px] stroke-black" />
 						</Button>
@@ -76,6 +77,7 @@ export default function CartItem({ data }: ICartItemProps) {
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
 							onClick={() => incrementItem(data)}
+							disabled={data.quantity === data.maxStock}
 						>
 							<Plus className="size-4 stroke-[1.5px] stroke-black" />
 						</Button>
