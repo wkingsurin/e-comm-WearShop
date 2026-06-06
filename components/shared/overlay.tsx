@@ -3,11 +3,11 @@
 import { useUIStore } from "@/lib/store/ui.store";
 import { useEffect } from "react";
 import FastWatch from "../widgets/modal/fast-watch";
-import CancelOrder from "../widgets/modal/cancel-order";
+import ConfirmModal from "../widgets/modal/confirm";
 
 const MODAL_COMPONENTS = {
 	FastWatch: FastWatch,
-	CancelOrder: CancelOrder,
+	ConfirmModal: ConfirmModal,
 } as const;
 
 type ModalType = keyof typeof MODAL_COMPONENTS;

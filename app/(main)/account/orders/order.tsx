@@ -3,27 +3,31 @@
 import { mapProductToFavorite } from "@/app/mappers/mapper";
 import { IOrderProps } from "@/app/types/orders.types";
 import { useFavorites } from "@/components/hooks/useFavorites";
+import useOrders from "@/components/hooks/useOrders";
 import { Button } from "@/components/ui/button";
 import { useUIStore } from "@/lib/store/ui.store";
+import { useState } from "react";
 import { ChevronDown, Heart, RefreshCcw, Undo } from "lucide-react";
 import Image from "next/image";
-import { useState } from "react";
+import OrderConfirmModal from "./order-confirm-modal";
 
 export default function Order({ data }: IOrderProps) {
 	const [open, setOpen] = useState<boolean>(false);
 
+	const openConfirm = useUIStore((s) => s.openConfirm);
+	const { removeOrder } = useOrders();
 	const { isFavorite, toggleFavorite } = useFavorites();
 
 	const orderItems = data.items;
 
-	const updateOverlay = useUIStore((s) => s.updateOverlay);
-	const updateModalTarget = useUIStore((s) => s.updateModalTarget);
-	const changeModalType = useUIStore((s) => s.changeModalType);
-
 	const cancelOrder = () => {
-		updateOverlay({ open: true });
-		updateModalTarget(data);
-		changeModalType("CancelOrder");
+		openConfirm({
+			title: "Cancel this order?",
+			content: <OrderConfirmModal data={data} />,
+			confirmText: "Confirm",
+			cancelText: "Cancel",
+			onConfirm: () => removeOrder(data),
+		});
 	};
 
 	const orderAgain = (id: string) => {

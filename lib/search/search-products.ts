@@ -1,7 +1,8 @@
 import { IProduct } from "@/app/types/store/ui.types";
 
 export function searchProducts(query: string) {
-	const data = localStorage.getItem("showcase");
+	const data =
+		typeof window !== "undefined" ? localStorage.getItem("showcase") : null;
 
 	if (!data) return;
 	const products = JSON.parse(data).state.products;

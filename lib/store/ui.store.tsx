@@ -75,6 +75,7 @@ export const useUIStore = create<UIState>()((set) => ({
 		],
 	},
 	sortOption: "lower",
+	confirmData: null,
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
@@ -84,4 +85,16 @@ export const useUIStore = create<UIState>()((set) => ({
 		set((state) => ({ modal: { ...state.modal, target: target } })),
 	updateSelectedProduct: (product) => set({ selectedProduct: { ...product } }),
 	updateSortOption: (option) => set({ sortOption: option }),
+	openConfirm: (data) =>
+		set((state) => ({
+			overlay: { open: true },
+			modal: { ...state.modal, contentType: "ConfirmModal" },
+			confirmData: data,
+		})),
+	clearConfirm: () =>
+		set((state) => ({
+			overlay: { open: false },
+			modal: { ...state.modal, contentType: null },
+			confirmData: null,
+		})),
 }));

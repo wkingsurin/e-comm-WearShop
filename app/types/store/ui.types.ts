@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { IOrder } from "./orders.types";
 
 export interface IOverlay {
@@ -5,7 +6,7 @@ export interface IOverlay {
 }
 export interface IModal {
 	target: IProduct | IOrder | null;
-	contentType: "FastWatch" | "CancelOrder" | null;
+	contentType: "FastWatch" | "CancelOrder" | "ConfirmModal" | null;
 }
 
 export interface IVariant {
@@ -45,11 +46,20 @@ export interface IProduct {
 	variants: IVariant[];
 }
 
+export interface ConfirmData {
+	title: string;
+	content: ReactNode;
+	confirmText?: string;
+	cancelText?: string;
+	onConfirm: () => void;
+}
+
 export type UIState = {
 	overlay: IOverlay;
 	modal: IModal;
 	selectedProduct: IProduct;
 	sortOption: "higher" | "lower";
+	confirmData: ConfirmData | null;
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
@@ -57,4 +67,6 @@ export type UIState = {
 	updateModalTarget: (target: IProduct | IOrder | null) => void;
 	updateSelectedProduct: (product: IProduct) => void;
 	updateSortOption: (option: "higher" | "lower") => void;
+	openConfirm: (data: ConfirmData) => void;
+	clearConfirm: () => void;
 };

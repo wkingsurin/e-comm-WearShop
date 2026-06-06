@@ -7,13 +7,26 @@ import { useFavorites } from "../hooks/useFavorites";
 import useCart from "../hooks/useCart";
 import { mapProductToFavorite } from "@/app/mappers/mapper";
 import { ICartItemProps } from "@/app/types/components/widgets/cart-item.types";
+import { useUIStore } from "@/lib/store/ui.store";
 
 export default function CartItem({ data }: ICartItemProps) {
+	const openConfirm = useUIStore((s) => s.openConfirm);
+
 	const { isFavorite, toggleFavorite } = useFavorites();
 	const { removeItem, incrementItem, decrementItem } = useCart();
 	const isFav = isFavorite(data.id);
 
 	const favData = mapProductToFavorite(data);
+
+	const handleDelete = () => {
+		openConfirm({
+			title: "Delete this prodict?",
+			content: "You`re sure? Undo this isn`t possible!",
+			confirmText: "Confirm",
+			cancelText: "Cancel",
+			onConfirm: () => removeItem(data),
+		});
+	};
 
 	return (
 		<div className="flex gap-[30px] bg-black/5 hover:bg-black/10 rounded-xl p-[3px] pr-[18px] overflow-hidden transition-brand">
@@ -72,8 +85,7 @@ export default function CartItem({ data }: ICartItemProps) {
 					<Button
 						className="group/cancel flex gap-3 w-10 h-10 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75"
 						onClick={() => {
-							// deleteItem(data.id);
-							removeItem({ ...data, quantity: 1 });
+							handleDelete();
 						}}
 					>
 						<Trash2 className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
