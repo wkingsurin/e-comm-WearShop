@@ -2,6 +2,7 @@ import {
 	mapProductToCartItem,
 	mapProductToFavorite,
 } from "@/app/mappers/mapper";
+import { IProduct } from "@/app/types/store/ui.types";
 import useCart from "@/components/hooks/useCart";
 import useShowcase from "@/components/hooks/useShowcase";
 import FavoriteButton from "@/components/shared/favorite-button";
@@ -24,7 +25,7 @@ import { useState } from "react";
 export default function FastWatch() {
 	const { addItem } = useCart();
 	const { products: showcase } = useShowcase();
-	const product = useUIStore((s) => s.modal.target);
+	const product = useUIStore((s) => s.modal.target as IProduct);
 
 	const [variantIndex, setVariantIndex] = useState<number>(0);
 	const [size, setSize] = useState<string>("");
