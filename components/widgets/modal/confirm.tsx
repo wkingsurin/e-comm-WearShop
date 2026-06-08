@@ -29,7 +29,7 @@ export default function ConfirmModal() {
 				</div>
 				<div className="flex gap-3 w-full">
 					<Button className="flex-1" onClick={onConfirm}>
-						{confirmData.cancelText || "Yes"}
+						{confirmData.confirmText || "Yes"}
 					</Button>
 					<Button className="flex-1" onClick={onCancel}>
 						{confirmData.cancelText || "Back"}
