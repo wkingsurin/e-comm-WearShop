@@ -44,7 +44,10 @@ export default function CarouselSpacing({
 		<Carousel
 			onClick={(e) => e.stopPropagation()}
 			setApi={setApi}
-			opts={{ watchDrag: (emblaApi) => emblaApi.scrollSnapList().length > 1 }}
+			opts={{
+				align: "start",
+				watchDrag: (emblaApi) => emblaApi.scrollSnapList().length > 1,
+			}}
 		>
 			<CarouselContent className="-ml-2">
 				{data.images.map((image, index) => {
@@ -57,7 +60,9 @@ export default function CarouselSpacing({
 							<div
 								key={image.id}
 								className={`flex h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent transition-brand ${
-									activeIndex === index ? "border-black!" : "hover:border-black/50"
+									activeIndex === index
+										? "border-black!"
+										: "hover:border-black/50"
 								}`}
 							>
 								<Image

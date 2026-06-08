@@ -108,42 +108,6 @@ export default function FastWatch() {
 						<ArrowRight className="size-4 stroke-[1.5px] stroke-black" />
 					</Button>
 				</div>
-				{/* <div className="relative">
-					<div className="flex gap-2 overflow-hidden">
-						{currentVariant.images.map((image, index) => {
-							return (
-								<div
-									key={image.id}
-									className={`flex min-w-[calc(25%-6px)] w-[calc(25%-6px)] h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent hover:border-black transition-brand ${
-										currentVariant.images[activeImageIndex].id === image.id &&
-										"border-black!"
-									}`}
-									onClick={() => setActiveImageIndex(index)}
-								>
-									<Image
-										src={`${image.src}`}
-										alt={product.title}
-										width={332}
-										height={480}
-										className="rounded-sm w-full h-full object-contain"
-									/>
-								</div>
-							);
-						})}
-					</div>
-					<Button className="opacity-0 pointer-events-none absolute top-[calc(50%-16px)] -left-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50">
-						<ArrowLeft className="size-4 stroke-[1.5px] stroke-black" />
-					</Button>
-					<Button
-						className={`absolute top-[calc(50%-16px)] ${
-							currentVariant.images.length > 4
-								? "opacity-100"
-								: "opacity-0 pointer-events-none"
-						} -right-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50`}
-					>
-						<ArrowRight className="size-4 stroke-[1.5px] stroke-black" />
-					</Button>
-				</div> */}
 				<CarouselSpacing
 					data={currentVariant}
 					activeIndex={activeImageIndex}

@@ -1,7 +1,7 @@
 "use client";
 
 import { useUIStore } from "@/lib/store/ui.store";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import FastWatch from "../widgets/modal/fast-watch";
 import ConfirmModal from "../widgets/modal/confirm";
 
@@ -20,6 +20,29 @@ export default function Overlay() {
 
 	const Content = modalContentType ? MODAL_COMPONENTS[modalContentType] : null;
 
+	const overlayRef = useRef<HTMLDivElement>(null);
+	const mouseDownTarget = useRef<EventTarget | null>(null);
+
+	const closeModal = () => {
+		useUIStore.getState().updateOverlay({ open: false });
+		useUIStore.getState().changeModalType(null);
+	};
+
+	const handleMouseDown = (e: React.MouseEvent) => {
+		mouseDownTarget.current = e.target;
+	};
+
+	const handleMouseUp = (e: React.MouseEvent) => {
+		if (
+			mouseDownTarget.current === overlayRef.current &&
+			e.target === overlayRef.current
+		) {
+			closeModal();
+		}
+
+		mouseDownTarget.current = null;
+	};
+
 	useEffect(() => {
 		if (open) {
 			document.body.style.overflow = "hidden";
@@ -33,10 +56,9 @@ export default function Overlay() {
 	return (
 		<div
 			className="fixed bottom-0 z-10005 flex items-center justify-center w-full h-[100dvh] bg-black/25"
-			onClick={() => {
-				useUIStore.getState().updateOverlay({ open: false });
-				useUIStore.getState().changeModalType(null);
-			}}
+			onMouseDown={handleMouseDown}
+			onMouseUp={handleMouseUp}
+			ref={overlayRef}
 		>
 			{Content && <Content />}
 		</div>
