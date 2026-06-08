@@ -1,5 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { IFavorite } from "../../store/favorites.types";
+import { IVariant } from "../../store/ui.types";
 
 export interface IDummyProps {
 	icon: LucideIcon;
@@ -35,4 +36,10 @@ export interface IServiceLinkProps {
 
 export interface ISortProps {
 	className?: string;
+}
+
+export interface ICarouselProps {
+	data: IVariant;
+	activeIndex: number;
+	onSelect: (index: number) => void;
 }
