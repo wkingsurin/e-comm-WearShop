@@ -11,12 +11,10 @@ import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import LastSeenSection from "@/components/widgets/last-seen-section";
-import Dummy from "@/components/shared/dummy";
-import CartItem from "@/components/widgets/cart-item";
 import { Button } from "@/components/ui/button";
-import { ShoppingBag } from "lucide-react";
 import Image from "next/image";
 import { IOrder } from "@/app/types/store/orders.types";
+import Content from "./content";
 
 export default function Cart() {
 	const hasHydrated = useCartStore((s) => s._hasHydrated);
@@ -45,30 +43,16 @@ export default function Cart() {
 					<div className="flex flex-col gap-5">
 						<SectionTitle>Cart</SectionTitle>
 						<div className="relative flex items-start gap-5">
-							<div className="flex flex-col gap-3 w-3/4 min-h-[492px] p-4 rounded-lg border border-black/10 bg-[#D9D9D9]/10">
-								<div className="flex items-center justify-between">
-									<span className="text-xl font-medium tracking-wider">
-										Delivery
-									</span>
-									{hasHydrated && cartItemsList.length !== 0 && (
-										<div className="h-7 rounded-md font-medium px-3 py-[3px] bg-black/5 leading-lg">
-											Tue, 5/26 - Sat, 5/30
-										</div>
-									)}
-								</div>
-								{hasHydrated && cartItemsList.length !== 0 && (
-									<div className="flex flex-col gap-3 flex-1">
-										{cartItemsList.map((item) => (
-											<CartItem key={item.cartItemId} data={item} />
-										))}
+							<Content
+								isHydrated={hasHydrated}
+								isEmpty={cartItemsList.length === 0}
+							/>
+							<div className="sticky top-[154px] flex flex-col gap-5 min-w-[320px]">
+								<div className="flex flex-col gap-4 min-h-[188px] rounded-xl border-[0.5px] border-[#E5E7EB] p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+									<div className="flex justify-between font-medium tracking-wider leading-lg text-xl font-medium text-wider pb-4 border-b-[1px] border-[#E5E7EB]">
+										<span>Total</span>
+										<p>$ {cartTotal / 100 + "0"}</p>
 									</div>
-								)}
-								{hasHydrated && cartItemsList.length === 0 && (
-									<Dummy icon={ShoppingBag} text="No products" />
-								)}
-							</div>
-							<div className="sticky top-[154px] flex flex-col gap-5 w-1/4">
-								<div className="flex flex-col gap-4 min-h-[188px] bg-[#D9D9D9]/10 rounded-xl border-[0.5px] border-black/10 p-4">
 									<div className="flex flex-col gap-3">
 										<div className="flex justify-between font-medium tracking-wider leading-lg">
 											<span>Total</span>
@@ -78,10 +62,6 @@ export default function Cart() {
 											<span>Shipping & Service</span>
 											<p>$ 0.00</p>
 										</div>
-									</div>
-									<div className="flex justify-between font-medium tracking-wider leading-lg text-xl font-medium text-wider">
-										<span>Total</span>
-										<p>$ {cartTotal / 100 + "0"}</p>
 									</div>
 									<Button
 										onClick={onPurchase}
@@ -93,7 +73,7 @@ export default function Cart() {
 										Proceed to checkout
 									</Button>
 								</div>
-								<div className="flex flex-col gap-3 min-h-[94px] bg-[#D9D9D9]/10 rounded-xl border-[0.5px] border-black/10 p-4">
+								<div className="flex flex-col gap-3 min-h-[94px] rounded-xl border-[0.5px] border-[#E5E7EB] p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
 									<span>Available payments</span>
 									<div className="flex gap-[6px]">
 										{payments.map((item) => (

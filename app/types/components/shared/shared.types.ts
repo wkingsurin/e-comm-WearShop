@@ -43,3 +43,9 @@ export interface ICarouselProps {
 	activeIndex: number;
 	onSelect: (index: number) => void;
 }
+
+export interface IDashboardWrapperProps {
+	className?: string;
+	children: React.ReactNode;
+	pageTitle: string;
+}

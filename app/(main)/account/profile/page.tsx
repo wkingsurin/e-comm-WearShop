@@ -1,8 +1,9 @@
+import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Form from "@/components/widgets/form/form";
 
 export default function Profile() {
 	return (
-		<div className="flex w-full">
+		<DashboardWrapper pageTitle="Profile">
 			<Form
 				options={{
 					title: "PERSONAL DATA",
@@ -12,6 +13,6 @@ export default function Profile() {
 					buttonText: "Save",
 				}}
 			/>
-		</div>
+		</DashboardWrapper>
 	);
 }

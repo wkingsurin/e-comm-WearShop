@@ -1,8 +1,9 @@
+import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Form from "@/components/widgets/form/form";
 
 export default function Security() {
 	return (
-		<div className="flex w-full">
+		<DashboardWrapper pageTitle="Security">
 			<Form
 				options={{
 					title: "SECURITY DATA",
@@ -12,6 +13,6 @@ export default function Security() {
 					buttonText: "Send code",
 				}}
 			/>
-		</div>
+		</DashboardWrapper>
 	);
 }

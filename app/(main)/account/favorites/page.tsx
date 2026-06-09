@@ -2,6 +2,7 @@
 
 import { useFavorites } from "@/components/hooks/useFavorites";
 import useShowcase from "@/components/hooks/useShowcase";
+import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Dummy from "@/components/shared/dummy";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
@@ -18,7 +19,7 @@ export default function Favorites() {
 		.filter((prod) => prod !== undefined);
 
 	return (
-		<div className="relative flex flex-wrap w-full min-h-[492px] gap-5">
+		<DashboardWrapper pageTitle="Favorites">
 			{hasHydrated && favoriteProducts.length !== 0 && (
 				<SortSelect className="absolute -top-[56px] right-0" />
 			)}
@@ -30,8 +31,8 @@ export default function Favorites() {
 				</>
 			)}
 			{hasHydrated && favoriteProducts.length === 0 && (
-				<Dummy icon={Heart} text="No favorites" />
+				<Dummy icon={Heart} text="You haven`t favorites" />
 			)}
-		</div>
+		</DashboardWrapper>
 	);
 }
