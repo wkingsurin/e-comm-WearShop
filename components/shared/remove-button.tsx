@@ -29,7 +29,7 @@ export default function RemoveButton({ data }: IRemoveButtonProps) {
 	return (
 		<Button
 			size="icon-lg"
-			className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10`}
+			className={`group/tag absolute z-2 top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10`}
 			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();

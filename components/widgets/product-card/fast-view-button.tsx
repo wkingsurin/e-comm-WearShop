@@ -14,8 +14,11 @@ export default function FastViewButton({ data }: IFastViewButtonProps) {
 
 	return (
 		<Button
-			className="gap-3"
-			onClick={() => {
+			className="absolute z-2 bg-white text-black pointer-events-none opacity-0 bottom-0 border-[0.5px] border-transparent scale-90 gap-3 group-hover/card:pointer-events-auto group-hover/card:opacity-100 group-hover/card:bottom-3 group-hover/card:scale-100 group-hover/card:border-[#E5E7EB] hover:shadow-[0_4px_12px_-3px_rgba(0,0,0,.15)] hover:bg-white hover:text-black"
+			onClick={(e) => {
+				console.log(`FastView`);
+				e.preventDefault();
+				e.stopPropagation();
 				updateOverlay({ open: true });
 				updateModal({ target: data, contentType });
 				addLastSeen(data);

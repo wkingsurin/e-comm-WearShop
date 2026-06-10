@@ -8,15 +8,17 @@ export default function ProductCard({
 }: IProductCardProps) {
 	return (
 		<div
-			className={`group/card relative flex flex-col gap-4 rounded-xl w-full p-[3px] border-[1px] border-transparent ${
+			className={`group/card relative rounded-xl w-full ${
 				type === "Favourite" ? "md:w-1/3" : "md:w-1/4"
-			} md:max-w-[305px] hover:border-black/25 hover:bg-[#F4F4F6] transition-brand`}
+			} md:max-w-[305px] transition-brand hover:shadow-[0_4px_4px_-3px_rgba(0,0,0,.10)] transition-brand`}
 		>
-			<span className="absolute top-3 left-3 z-10002 flex items-center justify-center w-[30px] h-[30px] rounded-[50%] bg-white text-base">
+			<div className="flex flex-col gap-4 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.10)] rounded-xl transition-brand">
+				{/* <span className="absolute top-3 left-3 z-10002 flex items-center justify-center w-[30px] h-[30px] rounded-[50%] bg-white text-base">
 				{data.id}
-			</span>
-			<ProductFace data={data} type={type} />
-			<ProductDescription data={data} />
+			</span> */}
+				<ProductFace data={data} type={type} />
+				<ProductDescription data={data} />
+			</div>
 		</div>
 	);
 }

@@ -16,10 +16,8 @@ export default function FavoriteButton({
 		<Button
 			size="icon-lg"
 			className={`group/tag ${
-				inline ? "" : "absolute top-[6px] right-[6px]"
-			} bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-				isFav && "bg-[#EC0404]/10"
-			}`}
+				inline ? "" : "absolute z-2 top-[6px] right-[6px]"
+			} bg-transparent hover:bg-transparent backdrop-blur-[12px] w-[30px] h-[30px]`}
 			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
@@ -27,8 +25,8 @@ export default function FavoriteButton({
 			}}
 		>
 			<Heart
-				className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-					isFav && "fill-[#EC0404] stroke-[#EC0404]!"
+				className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#F51E1E] group-hover/tag:fill-[#F51E1E] ${
+					isFav && "fill-[#F51E1E] stroke-[#F51E1E]!"
 				}`}
 			/>
 		</Button>
