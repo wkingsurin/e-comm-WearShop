@@ -8,7 +8,7 @@ export default function ProductDescription({ data }: IProductDescriptionProps) {
 				<span className="text-black/25">{data.brand.name}</span>
 				<Link
 					href={`/product/${data.id}/${data.variants[0].id}`}
-					className="font-medium tracking-wider leading-md"
+					className="font-medium tracking-wider leading-md hover:underline"
 				>
 					{data.title}
 				</Link>

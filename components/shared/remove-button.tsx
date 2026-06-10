@@ -29,7 +29,7 @@ export default function RemoveButton({ data }: IRemoveButtonProps) {
 	return (
 		<Button
 			size="icon-lg"
-			className={`group/tag absolute z-2 top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10`}
+			className={`group/tag absolute z-2 top-[6px] right-[6px] w-[30px] h-[30px] bg-transparent hover:bg-transparent backdrop-blur-[12px]`}
 			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
@@ -37,7 +37,7 @@ export default function RemoveButton({ data }: IRemoveButtonProps) {
 			}}
 		>
 			<Trash2
-				className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand`}
+				className={`size-4 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand`}
 			/>
 		</Button>
 	);

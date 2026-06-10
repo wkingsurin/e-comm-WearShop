@@ -20,19 +20,21 @@ export default function Purchases() {
 
 	return (
 		<DashboardWrapper pageTitle="Purchases">
-			{hasHydrated && favoriteProducts.length !== 0 && (
-				<SortSelect className="absolute -top-[56px] right-0" />
-			)}
-			{hasHydrated && favoriteProducts.length !== 0 && (
-				<>
-					{favoriteProducts.map((item) => {
-						return <ProductCard key={item.id} data={item} type="Favourite" />;
-					})}
-				</>
-			)}
-			{hasHydrated && favoriteProducts.length === 0 && (
-				<Dummy icon={Boxes} text="You haven`t purchases" />
-			)}
+			<div className="flex gap-4">
+				{hasHydrated && favoriteProducts.length !== 0 && (
+					<SortSelect className="absolute -top-[56px] right-0" />
+				)}
+				{hasHydrated && favoriteProducts.length !== 0 && (
+					<>
+						{favoriteProducts.map((item) => {
+							return <ProductCard key={item.id} data={item} type="Favourite" />;
+						})}
+					</>
+				)}
+				{hasHydrated && favoriteProducts.length === 0 && (
+					<Dummy icon={Boxes} text="You haven`t purchases" />
+				)}
+			</div>
 		</DashboardWrapper>
 	);
 }

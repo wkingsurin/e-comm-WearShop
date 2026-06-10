@@ -43,8 +43,8 @@ export default function AccountLayout({ children }: IAccountProps) {
 						<div className="flex items-center justify-between">
 							<SectionTitle>Account</SectionTitle>
 						</div>
-						<div className="flex items-start gap-5">
-							<nav className="max-w-[270px] w-full p-[6px] rounded-xl border-[1px] border-[#E5E7EB] hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+						<div className="flex items-start gap-4">
+							<nav className="max-w-[265px] w-full p-[6px] rounded-xl border-[1px] border-[#E5E7EB] hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
 								{navigationData.map((item) => {
 									const Icon = item.icon;
 									const href = `/account/${item.ref}`;

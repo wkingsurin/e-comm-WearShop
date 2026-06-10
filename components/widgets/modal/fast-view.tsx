@@ -1,12 +1,8 @@
-import {
-	mapProductToCartItem,
-	mapProductToFavorite,
-} from "@/app/mappers/mapper";
+import { mapProductToCartItem } from "@/app/mappers/mapper";
 import { IProduct } from "@/app/types/store/ui.types";
 import useCart from "@/components/hooks/useCart";
 import useShowcase from "@/components/hooks/useShowcase";
 import CarouselSpacing from "@/components/shared/carousel-spacing";
-import FavoriteButton from "@/components/shared/favorite-button";
 import { Button } from "@/components/ui/button";
 import {
 	Select,
@@ -25,7 +21,6 @@ import {
 	MoveRight,
 	Plus,
 	ShoppingBag,
-	X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -135,7 +130,7 @@ export default function FastView() {
 						<div className="flex items-start justify-between w-full">
 							<Link
 								href={`/product/${product.id}/${product.variants[0].id}`}
-								className="text-xl font-mono font-medium uppercase tracking-wider leading-md"
+								className="text-xl font-mono font-medium uppercase tracking-wider leading-md hover:underline"
 								onClick={() => {
 									useUIStore.getState().updateOverlay({ open: false });
 									useUIStore.getState().changeModalType(null);
