@@ -4,13 +4,31 @@ import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../hooks/useFavorites";
 import { IFavoriteButtonProps } from "@/app/types/components/shared/shared.types";
+import { useUIStore } from "@/lib/store/ui.store";
 
 export default function FavoriteButton({
 	data,
 	inline = false,
 }: IFavoriteButtonProps) {
+	const openConfirm = useUIStore((s) => s.openConfirm);
 	const { isFavorite, toggleFavorite } = useFavorites();
 	const isFav = isFavorite(data.productId);
+
+	const handleDelete = () => {
+		openConfirm({
+			title: "Delete favorite?",
+			content: (
+				<p className="font-sans font-medium tracking-wider">
+					You’re sure? Undo this isn’t possible!
+				</p>
+			),
+			confirmText: "Delete",
+			cancelText: "Cancel",
+			onConfirm: () => {
+				toggleFavorite(data);
+			},
+		});
+	};
 
 	return (
 		<Button
@@ -21,6 +39,11 @@ export default function FavoriteButton({
 			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
+
+				if (isFav) {
+					handleDelete();
+					return;
+				}
 				toggleFavorite(data);
 			}}
 		>
