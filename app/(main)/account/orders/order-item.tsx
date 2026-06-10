@@ -1,9 +1,9 @@
 import { mapProductToFavorite } from "@/app/mappers/mapper";
-import { ICartItem } from "@/app/types/store/cart.types";
-import { useFavorites } from "@/components/hooks/useFavorites";
+import { useFavorites } from "@/hooks/useFavorites";
 import { Button } from "@/components/ui/button";
 import { Heart, RefreshCcw } from "lucide-react";
 import Image from "next/image";
+import { ICartItem } from "@/types/store/cart.types";
 
 export default function OrderItem({ data }: { data: ICartItem }) {
 	const { isFavorite, toggleFavorite } = useFavorites();

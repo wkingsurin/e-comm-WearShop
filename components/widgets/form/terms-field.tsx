@@ -1,6 +1,6 @@
-import { ITermsFieldProps } from "@/app/types/components/widgets/form.types";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { ITermsFieldProps } from "@/types/components/widgets/form.types";
 
 export default function TermsField({ children }: ITermsFieldProps) {
 	return (

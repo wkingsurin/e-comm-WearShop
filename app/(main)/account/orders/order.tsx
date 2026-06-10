@@ -1,9 +1,9 @@
 "use client";
 
-import { IOrderProps } from "@/app/types/orders.types";
 import { useState } from "react";
 import OrderContent from "./order-content";
 import OrderMenu from "./order-menu";
+import { IOrderProps } from "@/types/orders.types";
 
 export default function Order({ data }: IOrderProps) {
 	const [open, setOpen] = useState<boolean>(false);

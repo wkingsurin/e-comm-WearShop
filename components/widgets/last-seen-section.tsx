@@ -1,6 +1,6 @@
 "use client";
 
-import useLastSeen from "../hooks/useLastSeen";
+import useLastSeen from "../../hooks/useLastSeen";
 import Container from "../shared/container";
 import Section from "../shared/section";
 import SectionTitle from "../shared/section-title";

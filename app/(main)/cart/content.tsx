@@ -1,4 +1,4 @@
-import useCart from "@/components/hooks/useCart";
+import useCart from "@/hooks/useCart";
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Dummy from "@/components/shared/dummy";
 import CartItem from "@/components/widgets/cart-item";

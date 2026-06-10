@@ -1,4 +1,4 @@
-import { UIState } from "@/app/types/store/ui.types";
+import { UIState } from "@/types/store/ui.types";
 import { create } from "zustand";
 
 export const useUIStore = create<UIState>()((set) => ({

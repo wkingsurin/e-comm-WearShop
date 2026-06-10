@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import OrderNumber from "./order-number";
 import OrderStatus from "./order-status";
 import { ChevronDown, Undo } from "lucide-react";
-import { IOrder } from "@/app/types/store/orders.types";
 import OrderConfirmModal from "./order-confirm-modal";
-import useOrders from "@/components/hooks/useOrders";
+import useOrders from "@/hooks/useOrders";
 import { useUIStore } from "@/lib/store/ui.store";
+import { IOrder } from "@/types/store/orders.types";
 
 export default function OrderMenu({
 	data,

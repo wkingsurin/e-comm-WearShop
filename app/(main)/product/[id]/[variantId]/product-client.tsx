@@ -1,6 +1,6 @@
 "use client";
 
-import useShowcase from "@/components/hooks/useShowcase";
+import useShowcase from "@/hooks/useShowcase";
 import { useEffect, useState } from "react";
 import { useSimilarStore } from "@/lib/store/similar.store";
 
@@ -13,7 +13,7 @@ import LastSeenSection from "@/components/widgets/last-seen-section";
 import Gallery from "./gallery";
 import Description from "./description";
 import SellMenu from "./sell-menu";
-import { IVariant } from "@/app/types/store/ui.types";
+import { IVariant } from "@/types/store/ui.types";
 
 interface IProps {
 	productId: string;

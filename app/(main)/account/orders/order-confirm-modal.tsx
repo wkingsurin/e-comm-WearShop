@@ -1,4 +1,4 @@
-import { IOrderProps } from "@/app/types/orders.types";
+import { IOrderProps } from "@/types/orders.types";
 import Image from "next/image";
 
 export default function OrderConfirmModal({ data }: IOrderProps) {

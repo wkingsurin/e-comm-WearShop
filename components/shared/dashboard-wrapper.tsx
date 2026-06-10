@@ -1,4 +1,4 @@
-import { IDashboardWrapperProps } from "@/app/types/components/shared/shared.types";
+import { IDashboardWrapperProps } from "@/types/components/shared/shared.types";
 
 export default function DashboardWrapper({
 	className,

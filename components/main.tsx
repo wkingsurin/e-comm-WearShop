@@ -1,4 +1,4 @@
-import { IMainProps } from "@/app/types/components/main.types";
+import { IMainProps } from "@/types/components/main.types";
 import Overlay from "./shared/overlay";
 
 export default function Main({ children }: IMainProps) {

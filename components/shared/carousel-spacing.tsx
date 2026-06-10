@@ -1,6 +1,5 @@
 "use client";
 
-import { ICarouselProps } from "@/app/types/components/shared/shared.types";
 import {
 	Carousel,
 	CarouselApi,
@@ -11,6 +10,7 @@ import { Button } from "../ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
+import { ICarouselProps } from "@/types/components/shared/shared.types";
 
 export default function CarouselSpacing({
 	data,

@@ -1,7 +1,7 @@
 "use client";
 
-import { useFavorites } from "@/components/hooks/useFavorites";
-import useShowcase from "@/components/hooks/useShowcase";
+import { useFavorites } from "@/hooks/useFavorites";
+import useShowcase from "@/hooks/useShowcase";
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Dummy from "@/components/shared/dummy";
 import SortSelect from "@/components/shared/sort-select";

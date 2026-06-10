@@ -1,6 +1,6 @@
-import { IModalProps } from "@/app/types/components/widgets/modal.types";
 import { Button } from "@/components/ui/button";
 import { useUIStore } from "@/lib/store/ui.store";
+import { IModalProps } from "@/types/components/widgets/modal.types";
 import { X } from "lucide-react";
 
 export default function Modal({ className, children }: IModalProps) {

@@ -3,11 +3,11 @@
 import { Heart, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { useFavorites } from "../hooks/useFavorites";
-import useCart from "../hooks/useCart";
+import { useFavorites } from "../../hooks/useFavorites";
+import useCart from "../../hooks/useCart";
 import { mapProductToFavorite } from "@/app/mappers/mapper";
-import { ICartItemProps } from "@/app/types/components/widgets/cart-item.types";
 import { useUIStore } from "@/lib/store/ui.store";
+import { ICartItemProps } from "@/types/components/widgets/cart-item.types";
 
 export default function CartItem({ data }: ICartItemProps) {
 	const openConfirm = useUIStore((s) => s.openConfirm);

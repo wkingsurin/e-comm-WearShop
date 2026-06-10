@@ -1,7 +1,6 @@
 import { mapProductToCartItem } from "@/app/mappers/mapper";
-import { IProduct } from "@/app/types/store/ui.types";
-import useCart from "@/components/hooks/useCart";
-import useShowcase from "@/components/hooks/useShowcase";
+import useCart from "@/hooks/useCart";
+import useShowcase from "@/hooks/useShowcase";
 import CarouselSpacing from "@/components/shared/carousel-spacing";
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +25,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Modal from "./modal";
+import { IProduct } from "@/types/store/ui.types";
 
 export default function FastView() {
 	const { addItem } = useCart();

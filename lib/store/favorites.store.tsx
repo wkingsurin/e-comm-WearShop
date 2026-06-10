@@ -1,4 +1,4 @@
-import { FavoriteState } from "@/app/types/store/favorites.types";
+import { FavoriteState } from "@/types/store/favorites.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

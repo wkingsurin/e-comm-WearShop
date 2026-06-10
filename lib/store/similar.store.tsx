@@ -1,6 +1,6 @@
+import { SimilarState } from "@/types/store/similar.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { SimilarState } from "@/app/types/store/similar.types";
 
 export const useSimilarStore = create<SimilarState>()(
 	persist(

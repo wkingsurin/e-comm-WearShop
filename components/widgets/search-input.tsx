@@ -1,10 +1,10 @@
 "use client";
 
 import { Search } from "lucide-react";
-import useSearch from "../hooks/use-search";
+import useSearch from "../../hooks/use-search";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { IProduct } from "@/app/types/store/ui.types";
+import { IProduct } from "@/types/store/ui.types";
 
 export default function SearchInput() {
 	const { query, setQuery, results } = useSearch();

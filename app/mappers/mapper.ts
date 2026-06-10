@@ -1,5 +1,5 @@
-import { ICartItem } from "../types/store/cart.types";
-import { IProduct, IVariant } from "../types/store/ui.types";
+import { ICartItem } from "@/types/store/cart.types";
+import { IProduct, IVariant } from "@/types/store/ui.types";
 
 export const mapProductToCartItem = (
 	data: IProduct,

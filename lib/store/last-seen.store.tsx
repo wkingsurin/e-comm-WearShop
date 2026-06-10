@@ -1,6 +1,6 @@
+import { LastSeenState } from "@/types/store/last-seen.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LastSeenState } from "@/app/types/store/last-seen.types";
 
 export const useLastSeenStore = create<LastSeenState>()(
 	persist(

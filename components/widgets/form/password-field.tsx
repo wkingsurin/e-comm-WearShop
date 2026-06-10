@@ -1,9 +1,9 @@
 "use client";
 
-import { IPasswordFieldProps } from "@/app/types/components/widgets/form.types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { IPasswordFieldProps } from "@/types/components/widgets/form.types";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
 

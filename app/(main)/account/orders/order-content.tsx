@@ -1,4 +1,4 @@
-import { IOrder } from "@/app/types/store/orders.types";
+import { IOrder } from "@/types/store/orders.types";
 import OrderItems from "./order-items";
 
 export default function OrderContent({ data }: { data: IOrder }) {

@@ -1,6 +1,6 @@
 "use client";
 
-import useShowcase from "@/components/hooks/useShowcase";
+import useShowcase from "@/hooks/useShowcase";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";

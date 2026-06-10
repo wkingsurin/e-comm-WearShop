@@ -17,7 +17,7 @@ import {
 	UserCircle,
 } from "lucide-react";
 import { Button } from "../ui/button";
-import { IServiceLinkProps } from "@/app/types/components/shared/shared.types";
+import { IServiceLinkProps } from "@/types/components/shared/shared.types";
 
 export default function ServiceLink({ href, children }: IServiceLinkProps) {
 	const data: { id: string; label: string; ref: string; icon: LucideIcon }[] = [

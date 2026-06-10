@@ -5,7 +5,7 @@ import PasswordField from "./password-field";
 import Link from "next/link";
 import TermsField from "./terms-field";
 import { Button } from "@/components/ui/button";
-import { IFormProps } from "@/app/types/components/widgets/form.types";
+import { IFormProps } from "@/types/components/widgets/form.types";
 
 export default function Form({ options }: IFormProps) {
 	const {

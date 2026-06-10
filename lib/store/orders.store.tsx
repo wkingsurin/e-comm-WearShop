@@ -1,6 +1,6 @@
+import { OrdersState } from "@/types/store/orders.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { OrdersState } from "@/app/types/store/orders.types";
 
 export const useOrdersStore = create<OrdersState>()(
 	persist(

@@ -2,9 +2,9 @@
 
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
-import { useFavorites } from "../hooks/useFavorites";
-import { IRemoveButtonProps } from "@/app/types/components/shared/shared.types";
+import { useFavorites } from "../../hooks/useFavorites";
 import { useUIStore } from "@/lib/store/ui.store";
+import { IRemoveButtonProps } from "@/types/components/shared/shared.types";
 
 export default function RemoveButton({ data }: IRemoveButtonProps) {
 	const { toggleFavorite } = useFavorites();

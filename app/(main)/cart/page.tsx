@@ -3,8 +3,8 @@
 import { mapCartItemsToOrder } from "@/app/mappers/mapper";
 
 import { useCartStore } from "@/lib/store/cart.store";
-import useCart from "@/components/hooks/useCart";
-import useOrders from "@/components/hooks/useOrders";
+import useCart from "@/hooks/useCart";
+import useOrders from "@/hooks/useOrders";
 
 import Main from "@/components/main";
 import Container from "@/components/shared/container";

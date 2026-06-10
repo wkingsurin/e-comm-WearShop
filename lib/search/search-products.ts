@@ -1,4 +1,4 @@
-import { IProduct } from "@/app/types/store/ui.types";
+import { IProduct } from "@/types/store/ui.types";
 
 export function searchProducts(query: string) {
 	const data =

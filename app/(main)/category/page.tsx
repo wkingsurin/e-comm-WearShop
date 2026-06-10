@@ -1,7 +1,7 @@
 "use client";
 
 import { IProduct } from "@/app/types/store/ui.types";
-import useShowcase from "@/components/hooks/useShowcase";
+import useShowcase from "@/hooks/useShowcase";
 import FiltersButton from "@/components/shared/filters-button";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";

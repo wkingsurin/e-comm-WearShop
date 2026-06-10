@@ -2,7 +2,7 @@
 
 import { useOrdersStore } from "@/lib/store/orders.store";
 import Order from "./order";
-import useOrders from "@/components/hooks/useOrders";
+import useOrders from "@/hooks/useOrders";
 import Dummy from "@/components/shared/dummy";
 import { Package } from "lucide-react";
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";

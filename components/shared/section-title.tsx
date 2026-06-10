@@ -1,4 +1,4 @@
-import { ISectionTitleProps } from "@/app/types/components/shared/shared.types";
+import { ISectionTitleProps } from "@/types/components/shared/shared.types";
 
 export default function SectionTitle({ children }: ISectionTitleProps) {
 	return (

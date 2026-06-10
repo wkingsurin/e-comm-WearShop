@@ -1,6 +1,6 @@
+import { ProductPageState } from "@/types/store/product-page.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { ProductPageState } from "@/app/types/store/product-page.types";
 
 export const useProductPageStore = create<ProductPageState>()(
 	persist(

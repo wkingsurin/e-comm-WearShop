@@ -1,11 +1,11 @@
 "use client";
 
-import { IAccountProps } from "@/app/types/account.types";
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import LastSeenSection from "@/components/widgets/last-seen-section";
+import { IAccountProps } from "@/types/account.types";
 import {
 	Boxes,
 	Heart,

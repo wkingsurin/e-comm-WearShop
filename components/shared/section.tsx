@@ -1,4 +1,4 @@
-import { ISectionProps } from "@/app/types/components/shared/shared.types";
+import { ISectionProps } from "@/types/components/shared/shared.types";
 
 export default function Section({ className, children }: ISectionProps) {
 	const style = className ? className : "default";

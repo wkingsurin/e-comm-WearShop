@@ -1,4 +1,4 @@
-import { ISectionSubtitleProps } from "@/app/types/components/shared/shared.types";
+import { ISectionSubtitleProps } from "@/types/components/shared/shared.types";
 
 export default function SectionSubtitle({ children }: ISectionSubtitleProps) {
 	return (

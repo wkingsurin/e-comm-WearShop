@@ -1,4 +1,4 @@
-import { IDiscountProps } from "@/app/types/components/widgets/product-card.types";
+import { IDiscountProps } from "@/types/components/widgets/product-card.types";
 
 export default function Discount({ value }: IDiscountProps) {
 	return (

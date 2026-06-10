@@ -1,4 +1,4 @@
-import { IDummyProps } from "@/app/types/components/shared/shared.types";
+import { IDummyProps } from "@/types/components/shared/shared.types";
 import Link from "next/link";
 
 export default function Dummy({ icon, text }: IDummyProps) {

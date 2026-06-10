@@ -1,6 +1,6 @@
-import ProductFace from "./product-face";
-import ProductDescription from "./product-description";
-import { IProductCardProps } from "@/app/types/components/widgets/product-card.types";
+import Face from "./face";
+import Description from "./description";
+import { IProductCardProps } from "@/types/components/widgets/product-card.types";
 
 export default function ProductCard({
 	data,
@@ -16,8 +16,8 @@ export default function ProductCard({
 				{/* <span className="absolute top-3 left-3 z-10002 flex items-center justify-center w-[30px] h-[30px] rounded-[50%] bg-white text-base">
 				{data.id}
 			</span> */}
-				<ProductFace data={data} type={type} />
-				<ProductDescription data={data} />
+				<Face data={data} type={type} />
+				<Description data={data} />
 			</div>
 		</div>
 	);

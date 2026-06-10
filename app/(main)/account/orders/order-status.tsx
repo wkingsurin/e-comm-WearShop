@@ -1,5 +1,5 @@
-import { IOrder } from "@/app/types/store/orders.types";
 import { useOrdersStore } from "@/lib/store/orders.store";
+import { IOrder } from "@/types/store/orders.types";
 
 export default function OrderStatus({ orderId }: { orderId: IOrder["id"] }) {
 	const status = useOrdersStore((s) => s.orders[orderId].status);
