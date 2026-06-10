@@ -15,9 +15,9 @@ export default function FavoriteButton({
 	return (
 		<Button
 			size="icon-lg"
-			className={`group/tag ${
-				inline ? "" : "absolute z-2 top-[6px] right-[6px]"
-			} bg-transparent hover:bg-transparent backdrop-blur-[12px] w-[30px] h-[30px]`}
+			className={`group/tag w-[30px] h-[30px] ${
+				inline ? "w-10 h-10" : "absolute z-2 top-[6px] right-[6px]"
+			} bg-transparent hover:bg-transparent backdrop-blur-[12px]`}
 			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();

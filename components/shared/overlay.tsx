@@ -2,11 +2,11 @@
 
 import { useUIStore } from "@/lib/store/ui.store";
 import { useEffect, useRef } from "react";
-import FastWatch from "../widgets/modal/fast-watch";
+import FastView from "../widgets/modal/fast-view";
 import ConfirmModal from "../widgets/modal/confirm";
 
 const MODAL_COMPONENTS = {
-	FastWatch: FastWatch,
+	FastWatch: FastView,
 	ConfirmModal: ConfirmModal,
 } as const;
 
