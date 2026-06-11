@@ -1,0 +1,23 @@
+model OrderItem {
+  id String @id @default(cuid())
+
+  orderId String
+
+  productId String
+  variantId String
+
+  title String
+
+  sku String
+
+  price Int
+
+  quantity Int
+
+  selectedColor String
+  selectedSize  String
+
+  image String
+
+  order Order @relation(fields: [orderId], references: [id])
+}

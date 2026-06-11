@@ -1,0 +1,9 @@
+model Image {
+  id String @id @default(cuid())
+
+  variantId String
+
+  src String
+
+  variant Variant @relation(fields: [variantId], references: [id])
+}

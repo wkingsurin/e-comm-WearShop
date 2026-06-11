@@ -1,0 +1,29 @@
+model Order {
+  id String @id @default(cuid())
+
+  orderNumber String @unique
+
+  userId String?
+
+  user User? @relation(fields: [userId], references: [id])
+
+  status String
+
+  paymentMethod  String
+  deliveryMethon String
+
+  currency String
+
+  totalItemsPrice Int
+  discountAmount  Int
+
+  deliveryPrice Int
+  totalPrice    Int
+
+  isPaid Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items OrderItem[]
+}
