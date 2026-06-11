@@ -1,5 +1,5 @@
-import { IVariant } from "@/app/types/store/ui.types";
 import { Button } from "@/components/ui/button";
+import { IVariant } from "@/types/store/ui.types";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";

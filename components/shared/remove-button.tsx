@@ -37,7 +37,7 @@ export default function RemoveButton({ data }: IRemoveButtonProps) {
 			}}
 		>
 			<Trash2
-				className={`size-4 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand`}
+				className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] transition-brand`}
 			/>
 		</Button>
 	);

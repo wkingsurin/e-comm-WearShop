@@ -3,7 +3,7 @@
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { useFavorites } from "../../hooks/useFavorites";
-import { IFavoriteButtonProps } from "@/app/types/components/shared/shared.types";
+import { IFavoriteButtonProps } from "@/types/components/shared/shared.types";
 import { useUIStore } from "@/lib/store/ui.store";
 
 export default function FavoriteButton({
