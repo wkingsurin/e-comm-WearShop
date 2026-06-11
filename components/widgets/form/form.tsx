@@ -28,7 +28,7 @@ export default function Form({ options }: IFormProps) {
 	};
 
 	return (
-		<div className="flex flex-col items-center gap-7 max-w-[480px] w-full bg-black/10 rounded-lg p-[30px] border-[0.5px] border-black/5">
+		<div className="flex flex-col items-center gap-7 max-w-[480px] w-full bg-black/5 rounded-lg p-[30px] border-[0.5px] border-[#E5E7EB] shadow-[0_4px_12px_-3px_rgba(0,0,0,.10)]">
 			<div className="flex flex-col gap-4 items-center">
 				<span className="uppercase text-lg font-medium leading-md tracking-wider">
 					{title}
@@ -52,22 +52,27 @@ export default function Form({ options }: IFormProps) {
 				className="flex flex-col items-center gap-[10px] w-full"
 				onSubmit={onSubmit}
 			>
-				{nameField && (
-					<InputField
-						id="firstName"
-						label="First name"
-						placeholder="First name"
-						type="text"
-					/>
+				{nameField && lastNameField && (
+					<div className="flex gap-[10px]">
+						{nameField && (
+							<InputField
+								id="firstName"
+								label="First name"
+								placeholder="First name"
+								type="text"
+							/>
+						)}
+						{lastNameField && (
+							<InputField
+								id="lastName"
+								label="Last name"
+								placeholder="Last name"
+								type="text"
+							/>
+						)}
+					</div>
 				)}
-				{lastNameField && (
-					<InputField
-						id="lastName"
-						label="Last name"
-						placeholder="Last name"
-						type="text"
-					/>
-				)}
+
 				{emailField && (
 					<InputField
 						id="email"

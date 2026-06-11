@@ -8,7 +8,7 @@ export default function SignUp() {
 		<Main>
 			<Section>
 				<Container>
-					<div>
+					<div className="flex justify-center">
 						<Form
 							options={{
 								title: "REGISTRATION",

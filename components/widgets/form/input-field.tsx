@@ -20,7 +20,7 @@ export default function InputField({
 	return (
 		<div className="group/input flex flex-col items-start gap-[6px] w-full">
 			<Label htmlFor={id}>{label}</Label>
-			<div className="relative flex items-center justify-between w-full">
+			<div className="relative flex items-center justify-between w-full hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.10)]">
 				<Input
 					id={id}
 					type={type}

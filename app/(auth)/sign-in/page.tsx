@@ -8,7 +8,7 @@ export default function SignIn() {
 		<Main>
 			<Section className="py-[30px]">
 				<Container>
-					<div>
+					<div className="flex justify-center">
 						<Form
 							options={{
 								title: "Authorization",
