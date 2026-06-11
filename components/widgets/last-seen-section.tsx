@@ -3,6 +3,7 @@
 import useLastSeen from "../../hooks/useLastSeen";
 import Container from "../shared/container";
 import Section from "../shared/section";
+import SectionSubtitle from "../shared/section-subtitle";
 import SectionTitle from "../shared/section-title";
 import SortSelect from "../shared/sort-select";
 import ProductCard from "./product-card/product-card";
@@ -21,9 +22,7 @@ export default function LastSeenSection() {
 			<Container>
 				<div className="flex flex-col gap-5">
 					<div className="flex flex-col gap-[6px]">
-						<span className="uppercase font-medium text-black/50 tracking-wider">
-							You See
-						</span>
+						<SectionSubtitle>You See</SectionSubtitle>
 						<div className="flex items-center justify-between">
 							<SectionTitle>Last seen products</SectionTitle>
 							<SortSelect />

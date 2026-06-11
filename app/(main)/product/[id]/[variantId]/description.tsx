@@ -1,15 +1,7 @@
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
-import Image from "next/image";
-import Link from "next/link";
 import { IDetails } from "./product-client";
-import { IProduct, IVariant } from "@/app/types/store/ui.types";
+import { IProduct, IVariant } from "@/types/store/ui.types";
+import Colors from "@/components/widgets/colors/colors";
+import Sizes from "@/components/widgets/sizes/sizes";
 
 interface IProps {
 	product: IProduct;
@@ -21,13 +13,10 @@ interface IProps {
 
 export default function Description({
 	product,
-	productVariant,
 	size,
 	onChangeSize,
 	detailsData,
 }: IProps) {
-	const variantId = productVariant.id;
-
 	return (
 		<div className="flex flex-col py-4 gap-6 min-w-[352px]">
 			<div className="flex flex-col gap-2 justify-between">
@@ -39,72 +28,9 @@ export default function Description({
 				</span>
 			</div>
 
-			{/* Colors */}
-			<div className="flex flex-col gap-[6px]">
-				<span className="text-lg font-medium tracking-wider leading-lg">
-					Colors
-				</span>
-				<div className="flex gap-4">
-					{product.variants.map((variant) => {
-						return (
-							<Link
-								key={variant.id}
-								data-id={variant.attributes.color}
-								href={`./${variant.id}`}
-								className={`group/color flex flex-col gap-3 items-center text-black/50 hover:text-black transition-brand ${
-									variant.id === variantId &&
-									variant.attributes.color &&
-									"text-black!"
-								}`}
-							>
-								<div
-									className={`flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand ${
-										variant.id === variantId &&
-										variant.attributes.color &&
-										"border-black!"
-									}`}
-								>
-									<Image
-										src={variant.images[0].src}
-										alt={product.title}
-										width={169}
-										height={240}
-										className="rounded-md w-[49px] h-[70px] object-contain"
-									/>
-								</div>
-								<p className="font-mono tracking-wide">
-									{variant.attributes.color}
-								</p>
-							</Link>
-						);
-					})}
-				</div>
-			</div>
+			<Colors product={product} type="Page" />
 
-			{/* Size */}
-			<div className="flex flex-col gap-[6px]">
-				<span className="text-lg font-medium leading-lg tracking-wider">
-					Size
-				</span>
-				<Select
-					items={product.options.size}
-					onValueChange={(value) => onChangeSize(value as string)}
-					value={size}
-				>
-					<SelectTrigger className="w-full">
-						<SelectValue placeholder="Select size" />
-					</SelectTrigger>
-					<SelectContent>
-						<SelectGroup>
-							{product.options.size.map((s) => (
-								<SelectItem key={s.label} value={`${s.label} ${s.value}`}>
-									{s.label} {s.value}
-								</SelectItem>
-							))}
-						</SelectGroup>
-					</SelectContent>
-				</Select>
-			</div>
+			<Sizes product={product} onChangeSize={onChangeSize} initialSize={size} />
 			<div className="flex flex-col gap-[6px]">
 				<span className="text-lg font-medium leading-lg tracking-wider">
 					Details

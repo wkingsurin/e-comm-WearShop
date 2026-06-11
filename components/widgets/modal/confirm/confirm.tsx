@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button";
-import Modal from "./modal";
+import Modal from "../modal";
 import { useUIStore } from "@/lib/store/ui.store";
+import ConfirmModalButton from "./button";
 
 export default function ConfirmModal() {
 	const confirmData = useUIStore((s) => s.confirmData);
@@ -28,12 +28,14 @@ export default function ConfirmModal() {
 					<div className="flex flex-col gap-4">{confirmData.content}</div>
 				</div>
 				<div className="flex gap-3 w-full">
-					<Button className="flex-1" onClick={onConfirm}>
-						{confirmData.confirmText || "Yes"}
-					</Button>
-					<Button className="flex-1" onClick={onCancel}>
-						{confirmData.cancelText || "Back"}
-					</Button>
+					<ConfirmModalButton
+						text={confirmData.confirmText || "Yes"}
+						onClick={onConfirm}
+					/>
+					<ConfirmModalButton
+						text={confirmData.cancelText || "Back"}
+						onClick={onCancel}
+					/>
 				</div>
 			</div>
 		</Modal>

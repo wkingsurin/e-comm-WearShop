@@ -13,7 +13,7 @@ import SectionTitle from "@/components/shared/section-title";
 import LastSeenSection from "@/components/widgets/last-seen-section";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { IOrder } from "@/app/types/store/orders.types";
+import { IOrder } from "@/types/store/orders.types";
 import Content from "./content";
 
 export default function Cart() {

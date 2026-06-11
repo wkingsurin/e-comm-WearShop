@@ -6,6 +6,7 @@ import Section from "../shared/section";
 import SectionTitle from "../shared/section-title";
 import SortSelect from "../shared/sort-select";
 import ProductCard from "./product-card/product-card";
+import SectionSubtitle from "../shared/section-subtitle";
 
 export default function SimilarSection() {
 	const similarProducts = useSimilarStore((s) => s.similarProducts);
@@ -17,9 +18,7 @@ export default function SimilarSection() {
 			<Container>
 				<div className="flex flex-col gap-5">
 					<div className="flex flex-col gap-[6px]">
-						<span className="uppercase font-medium text-black/50 tracking-wider">
-							You might also like
-						</span>
+						<SectionSubtitle>You might also like</SectionSubtitle>
 						<div className="flex items-center justify-between">
 							<SectionTitle>Similar products</SectionTitle>
 							<SortSelect />

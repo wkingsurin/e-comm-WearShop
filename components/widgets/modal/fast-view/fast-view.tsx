@@ -3,14 +3,6 @@ import useCart from "@/hooks/useCart";
 import useShowcase from "@/hooks/useShowcase";
 import CarouselSpacing from "@/components/shared/carousel-spacing";
 import { Button } from "@/components/ui/button";
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import { useSimilarStore } from "@/lib/store/similar.store";
 import { useUIStore } from "@/lib/store/ui.store";
 import {
@@ -24,8 +16,10 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Modal from "./modal";
+import Modal from "../modal";
 import { IProduct } from "@/types/store/ui.types";
+import Colors from "../../colors/colors";
+import Sizes from "../../sizes/sizes";
 
 export default function FastView() {
 	const { addItem } = useCart();
@@ -33,7 +27,7 @@ export default function FastView() {
 	const product = useUIStore((s) => s.modal.target as IProduct);
 
 	const [variantIndex, setVariantIndex] = useState<number>(0);
-	const [size, setSize] = useState<string>("");
+	const [size, setSize] = useState<string>("M 48");
 
 	const [quantity, setQuantity] = useState<number>(1);
 
@@ -73,6 +67,7 @@ export default function FastView() {
 	const changeSize = (targetSize: string) => {
 		setSize(targetSize);
 	};
+	const resetQunatity = () => setQuantity(1);
 
 	const dynamicVariant = {
 		...currentVariant,
@@ -144,86 +139,19 @@ export default function FastView() {
 						</div>
 						<span>{product.title}</span>
 					</div>
-					<div className="flex flex-col gap-2 w-full">
-						<span className="font-medium tracking-wider leading-lg">
-							Colors
-						</span>
-						<div className="flex gap-3">
-							{product.variants.map((variant, index) => {
-								const isCurrentColorActive = variantIndex === index;
-
-								return (
-									<div
-										key={variant.id}
-										data-id={variant.attributes.color}
-										className={`group/color flex flex-col gap-1 items-center text-black/50 hover:text-black transition-brand ${
-											isCurrentColorActive && "text-black!"
-										}`}
-										onClick={() => {
-											changeVariant(index);
-											setQuantity(1);
-										}}
-									>
-										<div
-											className={`relative flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand ${
-												isCurrentColorActive && "border-black!"
-											}`}
-										>
-											<div
-												className={`absolute w-full h-full ${
-													isCurrentColorActive
-														? "bg-black/10"
-														: "bg-transparent"
-												}`}
-											></div>
-											<Image
-												src={variant.images[0].src}
-												alt={product.title}
-												width={169}
-												height={240}
-												className="rounded-md w-[49px] h-[70px] object-contain"
-											/>
-										</div>
-										<p className="text-md font-mono tracking-wide">
-											{variant.attributes.color}
-										</p>
-									</div>
-								);
-							})}
-						</div>
-					</div>
+					<Colors
+						product={product}
+						variantIndex={variantIndex}
+						changeVariant={changeVariant}
+						resetQuantity={resetQunatity}
+						type="Modal"
+					/>
 					<div className="flex flex-col items-center gap-2 w-full">
-						<div className="flex flex-col gap-2 w-full">
-							<span className="font-medium leading-lg tracking-wider">
-								Size
-							</span>
-							<Select
-								items={product.options.size}
-								value={size}
-								onValueChange={(value) => {
-									if (!value) return;
-
-									changeSize(value);
-								}}
-							>
-								<SelectTrigger
-									className="w-full border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand"
-									data-id={size}
-									value={size}
-								>
-									<SelectValue placeholder="Select size" />
-								</SelectTrigger>
-								<SelectContent>
-									<SelectGroup>
-										{product.options.size.map((s) => (
-											<SelectItem key={s.label} value={`${s.label} ${s.value}`}>
-												{s.label} {s.value}
-											</SelectItem>
-										))}
-									</SelectGroup>
-								</SelectContent>
-							</Select>
-						</div>
+						<Sizes
+							product={product}
+							initialSize={size}
+							onChangeSize={changeSize}
+						/>
 						<div className="flex gap-4 w-full">
 							<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
 								<Button
