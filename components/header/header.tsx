@@ -1,7 +1,7 @@
 import Container from "../shared/container";
 import Logo from "../shared/logo";
 import UtilityNav from "../shared/utility-nav";
-import SearchInput from "../widgets/search-input";
+// import SearchInput from "../widgets/search-input";
 import CategoryNavigation from "./category-navigation";
 
 export default function Header() {
@@ -12,7 +12,7 @@ export default function Header() {
 					<div className="flex justify-between gap-[50px]">
 						<div className="flex items-center gap-10 flex-1">
 							<Logo />
-							<SearchInput />
+							{/* <SearchInput /> */}
 						</div>
 						<UtilityNav />
 					</div>
