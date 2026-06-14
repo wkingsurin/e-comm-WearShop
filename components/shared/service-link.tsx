@@ -8,14 +8,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import {
-	Boxes,
-	Lock,
-	LogOut,
-	LucideIcon,
-	User,
-	UserCircle,
-} from "lucide-react";
+import { Boxes, Lock, LucideIcon, User, UserCircle } from "lucide-react";
 import { Button } from "../ui/button";
 import { IServiceLinkProps } from "@/types/components/shared/shared.types";
 
@@ -29,7 +22,6 @@ export default function ServiceLink({ href, children }: IServiceLinkProps) {
 		},
 		{ id: "2", label: "Purchases", ref: "purchases", icon: Boxes },
 		{ id: "3", label: "Security", ref: "security", icon: Lock },
-		{ id: "4", label: "Log out", ref: "", icon: LogOut },
 	];
 
 	if (href.includes("account"))
