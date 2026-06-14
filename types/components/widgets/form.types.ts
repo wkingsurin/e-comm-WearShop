@@ -1,32 +1,36 @@
+import { HTMLInputTypeAttribute } from "react";
+
 interface IFormOptions {
 	title: string;
 	subtitle?: { value: string; linkText: string; linkRef: string };
-	nameField?: boolean;
-	lastNameField?: boolean;
 	emailField?: boolean;
-	oldPasswordField?: boolean;
-	newPasswordField?: boolean;
-	newPasswordConfirmField?: boolean;
-	passwordField?: boolean;
-	confirmField?: boolean;
+	codeField?: boolean;
 	terms?: { label: string };
 	buttonText: string;
 }
 
 export interface IFormProps {
 	options: IFormOptions;
+	onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
+	onPrevStep: (e: React.MouseEvent) => void;
+}
+
+export interface IDigitFieldProps {
+	name: string;
 }
 
 export interface IInputFieldProps {
 	id: string;
 	label: string;
-	type: string;
+	name: string;
 	placeholder: string;
+	type: HTMLInputTypeAttribute;
 }
 
 export interface IPasswordFieldProps {
 	id: string;
 	label: string;
+	name: string;
 	placeholder: string;
 }
 

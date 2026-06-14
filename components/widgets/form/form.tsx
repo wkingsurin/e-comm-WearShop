@@ -1,31 +1,13 @@
 "use client";
 
 import InputField from "./input-field";
-import PasswordField from "./password-field";
-import Link from "next/link";
 import TermsField from "./terms-field";
 import { Button } from "@/components/ui/button";
 import { IFormProps } from "@/types/components/widgets/form.types";
+import DigitField from "./digit-field";
 
-export default function Form({ options }: IFormProps) {
-	const {
-		title,
-		subtitle,
-		nameField,
-		lastNameField,
-		emailField,
-		oldPasswordField,
-		newPasswordField,
-		newPasswordConfirmField,
-		passwordField,
-		confirmField,
-		terms,
-		buttonText,
-	} = options;
-
-	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-	};
+export default function Form({ options, onSubmit, onPrevStep }: IFormProps) {
+	const { title, subtitle, emailField, codeField, terms, buttonText } = options;
 
 	return (
 		<div className="flex flex-col items-center gap-7 max-w-[480px] w-full bg-black/5 rounded-lg p-[30px] border-[0.5px] border-[#E5E7EB] shadow-[0_4px_12px_-3px_rgba(0,0,0,.10)]">
@@ -38,12 +20,13 @@ export default function Form({ options }: IFormProps) {
 						<p className="text-md leading-md tracking-wider text-black/50">
 							{subtitle.value}
 						</p>
-						<Link
-							href={subtitle.linkRef}
-							className="text-md leading-md tracking-wider text-black/75 hover:text-black"
+						<Button
+							variant="link"
+							className="w-auto h-auto no-underline! font-sans text-md leading-md tracking-wider text-black/75 hover:text-black"
+							onClick={onPrevStep}
 						>
 							{subtitle.linkText}
-						</Link>
+						</Button>
 					</div>
 				)}
 			</div>
@@ -52,70 +35,16 @@ export default function Form({ options }: IFormProps) {
 				className="flex flex-col items-center gap-[10px] w-full"
 				onSubmit={onSubmit}
 			>
-				{nameField && lastNameField && (
-					<div className="flex gap-[10px]">
-						{nameField && (
-							<InputField
-								id="firstName"
-								label="First name"
-								placeholder="First name"
-								type="text"
-							/>
-						)}
-						{lastNameField && (
-							<InputField
-								id="lastName"
-								label="Last name"
-								placeholder="Last name"
-								type="text"
-							/>
-						)}
-					</div>
-				)}
-
 				{emailField && (
 					<InputField
 						id="email"
+						name="email"
 						label="Email"
 						placeholder="Enter email"
 						type="email"
 					/>
 				)}
-				{passwordField && (
-					<PasswordField
-						id="password"
-						label="Password"
-						placeholder="Enter password"
-					/>
-				)}
-				{confirmField && (
-					<PasswordField
-						id="confirm"
-						label="Confirm password"
-						placeholder="Enter password"
-					/>
-				)}
-				{oldPasswordField && (
-					<PasswordField
-						id="old-password"
-						label="Old password"
-						placeholder="Enter old password"
-					/>
-				)}
-				{newPasswordField && (
-					<PasswordField
-						id="new-pass"
-						label="New password"
-						placeholder="Enter  password"
-					/>
-				)}
-				{newPasswordConfirmField && (
-					<PasswordField
-						id="new-pass-confirm"
-						label="New password again"
-						placeholder="Enter new password"
-					/>
-				)}
+				{codeField && <DigitField name="code" />}
 				<div className="flex flex-col items-center gap-4 w-full mt-[10px]">
 					{terms && <TermsField>{terms.label}</TermsField>}
 					<Button type="submit" className="min-w-[240px]">

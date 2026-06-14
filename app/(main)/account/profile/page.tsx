@@ -1,18 +1,33 @@
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
-import Form from "@/components/widgets/form/form";
 
-export default function Profile() {
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+
+export default async function Profile() {
+	const session = await auth();
+
+	if (!session) {
+		redirect("/auth");
+	}
+
 	return (
 		<DashboardWrapper pageTitle="Profile">
-			<Form
-				options={{
-					title: "PERSONAL DATA",
-					nameField: true,
-					lastNameField: true,
-					emailField: true,
-					buttonText: "Save",
-				}}
-			/>
+			<div>
+				<span>ID:</span>
+				<span>{session?.user?.id}</span>
+			</div>
+			<div>
+				<span>Email:</span>
+				<span>{session?.user?.email}</span>
+			</div>
+			<div>
+				<span>Username:</span>
+				<span>{session?.user?.name}</span>
+			</div>
+			<div>
+				<span>Image:</span>
+				<span>{session?.user?.image}</span>
+			</div>
 		</DashboardWrapper>
 	);
 }

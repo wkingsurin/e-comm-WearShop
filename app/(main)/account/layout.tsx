@@ -4,6 +4,7 @@ import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
+import { Button } from "@/components/ui/button";
 import LastSeenSection from "@/components/widgets/last-seen-section";
 import { IAccountProps } from "@/types/account.types";
 import {
@@ -16,7 +17,8 @@ import {
 	User,
 } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 export default function AccountLayout({ children }: IAccountProps) {
 	const path = usePathname();
@@ -35,6 +37,8 @@ export default function AccountLayout({ children }: IAccountProps) {
 		{ id: "6", label: "Log out", ref: "/", icon: LogOut },
 	];
 
+	const router = useRouter();
+
 	return (
 		<Main>
 			<Section>
@@ -49,6 +53,26 @@ export default function AccountLayout({ children }: IAccountProps) {
 									const Icon = item.icon;
 									const href = `/account/${item.ref}`;
 									const isActive = href === path;
+
+									if (item.label.includes("Log out")) {
+										return (
+											<Button
+												key={item.id}
+												variant="link"
+												className="flex justify-start gap-3 w-full h-10 px-3 rounded-xl hover:bg-[#F51E1E]/10 transition duration-100 no-underline! cursor-pointer"
+												onClick={async () => {
+													await signOut({ redirect: false });
+													router.refresh();
+													redirect("/auth");
+												}}
+											>
+												<Icon className="size-5 stroke-[1.5px] stroke-[#F51E1E]" />
+												<p className="font-mono tracking-wide text-[#F51E1E]/75">
+													{item.label}
+												</p>
+											</Button>
+										);
+									}
 
 									return (
 										<Link
