@@ -3,17 +3,17 @@ export const products = [
 	{
 		id: "1",
 		title: "Blackskies Cap",
-		slug: "Blackskies Cap",
+		slug: "blackskies-cap",
 		description: "Blackskies Cap",
 		currency: "$",
 
 		brand: {
 			id: "1",
 			name: "Blackskies",
-			slug: "Blackskies",
+			slug: "blackskies",
 		},
 
-		category: { id: "1", name: "Caps", slug: "Caps" },
+		category: { id: "1", name: "Caps", slug: "caps" },
 
 		isAvailable: true,
 		isNew: false,
@@ -222,17 +222,17 @@ export const products = [
 	{
 		id: "2",
 		title: "Boss Cap",
-		slug: "Boss Cap",
+		slug: "boss-cap",
 		description: "Boss Cap",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "2",
 			name: "Boss",
-			slug: "Boss",
+			slug: "boss",
 		},
 
-		category: { id: "1", name: "Caps", slug: "Caps" },
+		category: { id: "1", name: "Caps", slug: "caps" },
 
 		isAvailable: true,
 		isNew: false,
@@ -281,17 +281,17 @@ export const products = [
 	{
 		id: "3",
 		title: "Coastal Cap",
-		slug: "Coastal Cap",
+		slug: "coastal-cap-blue",
 		description: "Coastal Cap",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "3",
 			name: "Coastal",
-			slug: "Coastal",
+			slug: "coastal",
 		},
 
-		category: { id: "1", name: "Caps", slug: "Caps" },
+		category: { id: "1", name: "Caps", slug: "caps" },
 
 		isAvailable: true,
 		isNew: false,
@@ -340,17 +340,17 @@ export const products = [
 	{
 		id: "4",
 		title: "Coastal Cap",
-		slug: "Coastal Cap",
+		slug: "coastal-cap-orange",
 		description: "Coastal Cap",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "3",
 			name: "Coastal",
-			slug: "Coastal",
+			slug: "coastal",
 		},
 
-		category: { id: "1", name: "Caps", slug: "Caps" },
+		category: { id: "1", name: "Caps", slug: "caps" },
 
 		isAvailable: true,
 		isNew: false,
@@ -399,17 +399,17 @@ export const products = [
 	{
 		id: "5",
 		title: "Phillip Plein Cap",
-		slug: "Phillip Plein Cap",
+		slug: "phillip-plein-cap",
 		description: "Phillip Plein Cap",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "4",
 			name: "Phillip Plein",
-			slug: "Phillip Plein",
+			slug: "phillip-plein",
 		},
 
-		category: { id: "1", name: "Caps", slug: "Caps" },
+		category: { id: "1", name: "Caps", slug: "caps" },
 
 		isAvailable: true,
 		isNew: false,
@@ -460,17 +460,17 @@ export const products = [
 	{
 		id: "6",
 		title: "Adidas Originals Hoodie",
-		slug: "Adidas Originals Hoodie",
+		slug: "adidas-originals-hoodie",
 		description: "Adidas Originals Hoodie",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "5",
 			name: "Adidas Originals",
-			slug: "Adidas Originals",
+			slug: "adidas-originals",
 		},
 
-		category: { id: "1", name: "Hoodies", slug: "Hoodies" },
+		category: { id: "2", name: "Hoodies", slug: "hoodies" },
 
 		isAvailable: true,
 		isNew: false,
@@ -618,17 +618,17 @@ export const products = [
 	{
 		id: "7",
 		title: "Burocs Hoodie",
-		slug: "Burocs Hoodie",
+		slug: "burocs-hoodie",
 		description: "Burocs Hoodie",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "6",
 			name: "Burocs",
-			slug: "Burocs",
+			slug: "burocs",
 		},
 
-		category: { id: "1", name: "Hoodies", slug: "Hoodies" },
+		category: { id: "2", name: "Hoodies", slug: "hoodies" },
 
 		isAvailable: true,
 		isNew: false,
@@ -733,17 +733,17 @@ export const products = [
 	{
 		id: "8",
 		title: "Neverless Hoodie",
-		slug: "Neverless Hoodie",
+		slug: "neverless-hoodie",
 		description: "Neverless Hoodie",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "7",
 			name: "Neverless",
-			slug: "Neverless",
+			slug: "neverless",
 		},
 
-		category: { id: "1", name: "Hoodies", slug: "Hoodies" },
+		category: { id: "2", name: "Hoodies", slug: "hoodies" },
 
 		isAvailable: true,
 		isNew: false,
@@ -828,17 +828,17 @@ export const products = [
 	{
 		id: "9",
 		title: "Nike Hoodie",
-		slug: "Nike Hoodie",
+		slug: "nike-hoodie",
 		description: "Nike Hoodie",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "8",
 			name: "Nike",
-			slug: "Nike",
+			slug: "nike",
 		},
 
-		category: { id: "1", name: "Hoodies", slug: "Hoodies" },
+		category: { id: "2", name: "Hoodies", slug: "hoodies" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1007,17 +1007,17 @@ export const products = [
 	{
 		id: "10",
 		title: "Tommy Hilfiger Hoodie",
-		slug: "Tommy Hilfiger Hoodie",
+		slug: "tommy-hilfiger-hoodie",
 		description: "Tommy Hilfiger Hoodie",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "9",
 			name: "Tommy Hilfiger",
-			slug: "Tommy Hilfiger",
+			slug: "tommy-hilfiger",
 		},
 
-		category: { id: "1", name: "Hoodies", slug: "Hoodies" },
+		category: { id: "2", name: "Hoodies", slug: "hoodies" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1145,17 +1145,17 @@ export const products = [
 	{
 		id: "11",
 		title: "Under Armour Hoodie",
-		slug: "Under Armour Hoodie",
+		slug: "under-armour-hoodie",
 		description: "Under Armour Hoodie",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "10",
 			name: "Under Armour",
-			slug: "Under Armour",
+			slug: "under-armour",
 		},
 
-		category: { id: "1", name: "Hoodies", slug: "Hoodies" },
+		category: { id: "2", name: "Hoodies", slug: "hoodies" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1250,17 +1250,17 @@ export const products = [
 	{
 		id: "12",
 		title: "Jack & Jones Jeans",
-		slug: "Jack & Jones Jeans",
+		slug: "jack-&-jones1-jeans",
 		description: "Jack & Jones Jeans",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "11",
 			name: "Jack & Jones",
-			slug: "Jack & Jones",
+			slug: "jack-&-jones",
 		},
 
-		category: { id: "1", name: "Jeans", slug: "Jeans" },
+		category: { id: "3", name: "Jeans", slug: "jeans" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1330,17 +1330,17 @@ export const products = [
 	{
 		id: "13",
 		title: "Jack & Jones Jeans",
-		slug: "Jack & Jones Jeans",
+		slug: "jack-&-jones2-jeans",
 		description: "Jack & Jones Jeans",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "11",
 			name: "Jack & Jones",
-			slug: "Jack & Jones",
+			slug: "jack-&-jones",
 		},
 
-		category: { id: "1", name: "Jeans", slug: "Jeans" },
+		category: { id: "3", name: "Jeans", slug: "jeans" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1358,7 +1358,7 @@ export const products = [
 		variants: [
 			{
 				id: "var-1",
-				sku: "JENS-OS-BRHT-S",
+				sku: "JENS-JJ-BRHT-S",
 				price: 7790,
 				oldPrice: 9790,
 				stock: 1,
@@ -1409,17 +1409,17 @@ export const products = [
 	{
 		id: "14",
 		title: "Only & Sons Jeans",
-		slug: "Only & Sons Jeans",
+		slug: "only-&-sons-jeans",
 		description: "Only & Sons Jeans",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "12",
 			name: "Only & Sons",
-			slug: "Only & Sons",
+			slug: "only-&-sons",
 		},
 
-		category: { id: "1", name: "Jeans", slug: "Jeans" },
+		category: { id: "3", name: "Jeans", slug: "jeans" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1476,17 +1476,17 @@ export const products = [
 	{
 		id: "15",
 		title: "Only & Sons Jeans",
-		slug: "Only & Sons Jeans",
+		slug: "only-&-sons1-jeans",
 		description: "Only & Sons Jeans",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "12",
 			name: "Only & Sons",
-			slug: "Only & Sons",
+			slug: "only-&-sons",
 		},
 
-		category: { id: "1", name: "Jeans", slug: "Jeans" },
+		category: { id: "3", name: "Jeans", slug: "jeans" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1548,7 +1548,7 @@ export const products = [
 			},
 			{
 				id: "var-2",
-				sku: "JENS-OS-BRHT-S",
+				sku: "JENS-OS1-BRHT-S",
 				price: 7790,
 				oldPrice: 9790,
 				stock: 4,
@@ -1595,17 +1595,17 @@ export const products = [
 	{
 		id: "16",
 		title: "Only & Sons Jeans",
-		slug: "Only & Sons Jeans",
+		slug: "only-&-sons2-jeans",
 		description: "Only & Sons Jeans",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "12",
 			name: "Only & Sons",
-			slug: "Only & Sons",
+			slug: "only-&-sons",
 		},
 
-		category: { id: "1", name: "Jeans", slug: "Jeans" },
+		category: { id: "3", name: "Jeans", slug: "jeans" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1787,17 +1787,17 @@ export const products = [
 	{
 		id: "17",
 		title: "Tom Taylor Jeans",
-		slug: "Tom Taylor Jeans",
+		slug: "tom-taylor-jeans",
 		description: "Tom Taylor Jeans",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "13",
 			name: "Tom Taylor",
-			slug: "Tom Taylor",
+			slug: "tom-taylor",
 		},
 
-		category: { id: "1", name: "Jeans", slug: "Jeans" },
+		category: { id: "3", name: "Jeans", slug: "jeans" },
 
 		isAvailable: true,
 		isNew: false,
@@ -1940,17 +1940,17 @@ export const products = [
 	{
 		id: "18",
 		title: "Adidas Sneakers",
-		slug: "Adidas Sneakers",
+		slug: "adidas-sneakers",
 		description: "Adidas Sneakers",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "5",
 			name: "Adidas",
-			slug: "Adidas",
+			slug: "adidas",
 		},
 
-		category: { id: "1", name: "Sneakers", slug: "Sneakers" },
+		category: { id: "4", name: "Sneakers", slug: "sneakers" },
 
 		isAvailable: true,
 		isNew: false,
@@ -2239,17 +2239,17 @@ export const products = [
 	{
 		id: "19",
 		title: "Guess Sport Sneakers",
-		slug: "Guess Sport Sneakers",
+		slug: "guess-sport-sneakers",
 		description: "Guess Sport Sneakers",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "14",
 			name: "Guess",
-			slug: "Guess",
+			slug: "guess",
 		},
 
-		category: { id: "1", name: "Sneakers", slug: "Sneakers" },
+		category: { id: "4", name: "Sneakers", slug: "sneakers" },
 
 		isAvailable: true,
 		isNew: false,
@@ -2330,17 +2330,17 @@ export const products = [
 	{
 		id: "20",
 		title: "Nike Sneakers",
-		slug: "Nike Sneakers",
+		slug: "nike-sneakers",
 		description: "Nike Sneakers",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "8",
 			name: "Nike",
-			slug: "Nike",
+			slug: "nike",
 		},
 
-		category: { id: "1", name: "Sneakers", slug: "Sneakers" },
+		category: { id: "4", name: "Sneakers", slug: "sneakers" },
 
 		isAvailable: true,
 		isNew: false,
@@ -2409,17 +2409,17 @@ export const products = [
 	{
 		id: "21",
 		title: "Tommy Hilfiger Sneakers",
-		slug: "Tommy Hilfiger Sneakers",
+		slug: "tommy-hilfiger-sneakers",
 		description: "Tommy Hilfiger Sneakers",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "9",
 			name: "Tommy Hilfiger",
-			slug: "Tommy Hilfiger",
+			slug: "tommy-hilfiger",
 		},
 
-		category: { id: "1", name: "Sneakers", slug: "Sneakers" },
+		category: { id: "4", name: "Sneakers", slug: "sneakers" },
 
 		isAvailable: true,
 		isNew: false,
@@ -2612,17 +2612,17 @@ export const products = [
 	{
 		id: "22",
 		title: "Adidas Sports Sneakers",
-		slug: "Adidas Sports Sneakers",
+		slug: "adidas-sports-sneakers",
 		description: "Adidas Sports Sneakers",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "5",
 			name: "Adidas",
-			slug: "Adidas",
+			slug: "adidas",
 		},
 
-		category: { id: "1", name: "Sneakers", slug: "Sneakers" },
+		category: { id: "4", name: "Sneakers", slug: "sneakers" },
 
 		isAvailable: true,
 		isNew: false,
@@ -2797,17 +2797,17 @@ export const products = [
 	{
 		id: "23",
 		title: "Adidas Originals FB T-Shirt",
-		slug: "Adidas Originals FB T-Shirt",
+		slug: "adidas-originals-fb-t-shirt",
 		description: "Adidas Originals FB T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "5",
 			name: "Adidas",
-			slug: "Adidas",
+			slug: "adidas",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,
@@ -2869,17 +2869,17 @@ export const products = [
 	{
 		id: "24",
 		title: "Adidas Originals Sport T-Shirt",
-		slug: "Adidas Originals Sport T-Shirt",
+		slug: "adidas-originals-sport-t-shirt",
 		description: "Adidas Originals Sport T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "5",
 			name: "Adidas",
-			slug: "Adidas",
+			slug: "adidas",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,
@@ -3028,17 +3028,17 @@ export const products = [
 	{
 		id: "25",
 		title: "Ellesse T-Shirt",
-		slug: "Ellesse T-Shirt",
+		slug: "ellesse-t-shirt",
 		description: "Ellesse T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "15",
 			name: "Ellesse",
-			slug: "Ellesse",
+			slug: "ellesse",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,
@@ -3279,17 +3279,17 @@ export const products = [
 	{
 		id: "26",
 		title: "Neverless Always T-Shirt",
-		slug: "Neverless Always T-Shirt",
+		slug: "neverless-always-t-shirt",
 		description: "Neverless Always T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "7",
 			name: "Neverless",
-			slug: "Neverless",
+			slug: "neverless",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,
@@ -3351,17 +3351,17 @@ export const products = [
 	{
 		id: "27",
 		title: "Neverless T-Shirt",
-		slug: "Neverless T-Shirt",
+		slug: "neverless-t-shirt",
 		description: "Neverless T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "7",
 			name: "Neverless",
-			slug: "Neverless",
+			slug: "neverless",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,
@@ -3414,17 +3414,17 @@ export const products = [
 	{
 		id: "28",
 		title: "Neverless Paradise T-Shirt",
-		slug: "Neverless Paradise T-Shirt",
+		slug: "neverless-paradise-t-shirt",
 		description: "Neverless Paradise T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "7",
 			name: "Neverless",
-			slug: "Neverless",
+			slug: "neverless",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,
@@ -3511,17 +3511,17 @@ export const products = [
 	{
 		id: "29",
 		title: "Tommy Hilfiger T-Shirt",
-		slug: "Tommy Hilfiger T-Shirt",
+		slug: "tommy-hilfiger-t-shirt",
 		description: "Tommy Hilfiger T-Shirt",
 		currency: "$",
 
 		brand: {
-			id: "1",
+			id: "9",
 			name: "Tommy Hilfiger",
-			slug: "Tommy Hilfiger",
+			slug: "tommy-hilfiger",
 		},
 
-		category: { id: "1", name: "T-Shirts", slug: "T-Shirts" },
+		category: { id: "5", name: "T-Shirts", slug: "t-shirts" },
 
 		isAvailable: true,
 		isNew: false,

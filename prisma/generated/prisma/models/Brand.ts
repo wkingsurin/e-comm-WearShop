@@ -178,13 +178,13 @@ export type BrandOrderByWithRelationInput = {
 
 export type BrandWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  name?: string
   slug?: string
   AND?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
   OR?: Prisma.BrandWhereInput[]
   NOT?: Prisma.BrandWhereInput | Prisma.BrandWhereInput[]
-  name?: Prisma.StringFilter<"Brand"> | string
   products?: Prisma.ProductListRelationFilter
-}, "id" | "slug">
+}, "id" | "name" | "slug">
 
 export type BrandOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

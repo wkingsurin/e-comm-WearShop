@@ -232,7 +232,7 @@ export type UserWhereInput = {
   password?: Prisma.StringNullableFilter<"User"> | string | null
   createAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  image?: Prisma.ImageListRelationFilter
+  image?: Prisma.ProductImageListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
@@ -246,7 +246,7 @@ export type UserOrderByWithRelationInput = {
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   createAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  image?: Prisma.ImageOrderByRelationAggregateInput
+  image?: Prisma.ProductImageOrderByRelationAggregateInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   cart?: Prisma.CartOrderByWithRelationInput
@@ -263,7 +263,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   password?: Prisma.StringNullableFilter<"User"> | string | null
   createAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  image?: Prisma.ImageListRelationFilter
+  image?: Prisma.ProductImageListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
@@ -305,7 +305,7 @@ export type UserCreateInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -319,7 +319,7 @@ export type UserUncheckedCreateInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageUncheckedCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -333,7 +333,7 @@ export type UserUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -347,7 +347,7 @@ export type UserUncheckedUpdateInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUncheckedUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -511,7 +511,7 @@ export type UserCreateWithoutFavoritesInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
 }
@@ -524,7 +524,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageUncheckedCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
 }
@@ -553,7 +553,7 @@ export type UserUpdateWithoutFavoritesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
 }
@@ -566,7 +566,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUncheckedUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
 }
@@ -647,7 +647,7 @@ export type UserCreateWithoutOrdersInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
 }
@@ -660,7 +660,7 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageUncheckedCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
 }
@@ -689,7 +689,7 @@ export type UserUpdateWithoutOrdersInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
 }
@@ -702,7 +702,7 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUncheckedUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
 }
@@ -715,7 +715,7 @@ export type UserCreateWithoutCartInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
 }
@@ -728,7 +728,7 @@ export type UserUncheckedCreateWithoutCartInput = {
   password?: string | null
   createAt?: Date | string
   updatedAt?: Date | string
-  image?: Prisma.ImageUncheckedCreateNestedManyWithoutUserInput
+  image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
 }
@@ -757,7 +757,7 @@ export type UserUpdateWithoutCartInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
 }
@@ -770,7 +770,7 @@ export type UserUncheckedUpdateWithoutCartInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  image?: Prisma.ImageUncheckedUpdateManyWithoutUserNestedInput
+  image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
 }
@@ -806,7 +806,7 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  * UserCountOutputType without action
  */
 export type UserCountOutputTypeCountImageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ImageWhereInput
+  where?: Prisma.ProductImageWhereInput
 }
 
 /**
@@ -883,7 +883,7 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    image: Prisma.$ImagePayload<ExtArgs>[]
+    image: Prisma.$ProductImagePayload<ExtArgs>[]
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     cart: Prisma.$CartPayload<ExtArgs> | null
@@ -1290,7 +1290,7 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  image<T extends Prisma.User$imageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$imageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  image<T extends Prisma.User$imageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$imageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.Prisma__CartClient<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1727,23 +1727,23 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
  */
 export type User$imageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Image
+   * Select specific fields to fetch from the ProductImage
    */
-  select?: Prisma.ImageSelect<ExtArgs> | null
+  select?: Prisma.ProductImageSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Image
+   * Omit specific fields from the ProductImage
    */
-  omit?: Prisma.ImageOmit<ExtArgs> | null
+  omit?: Prisma.ProductImageOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ImageInclude<ExtArgs> | null
-  where?: Prisma.ImageWhereInput
-  orderBy?: Prisma.ImageOrderByWithRelationInput | Prisma.ImageOrderByWithRelationInput[]
-  cursor?: Prisma.ImageWhereUniqueInput
+  include?: Prisma.ProductImageInclude<ExtArgs> | null
+  where?: Prisma.ProductImageWhereInput
+  orderBy?: Prisma.ProductImageOrderByWithRelationInput | Prisma.ProductImageOrderByWithRelationInput[]
+  cursor?: Prisma.ProductImageWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ImageScalarFieldEnum | Prisma.ImageScalarFieldEnum[]
+  distinct?: Prisma.ProductImageScalarFieldEnum | Prisma.ProductImageScalarFieldEnum[]
 }
 
 /**

@@ -43,10 +43,10 @@ export type Favorite = Prisma.FavoriteModel
  */
 export type User = Prisma.UserModel
 /**
- * Model Image
+ * Model ProductImage
  * 
  */
-export type Image = Prisma.ImageModel
+export type ProductImage = Prisma.ProductImageModel
 /**
  * Model Order
  * 

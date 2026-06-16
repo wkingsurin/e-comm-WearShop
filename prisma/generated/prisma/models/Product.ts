@@ -258,11 +258,11 @@ export type ProductOrderByWithRelationInput = {
 
 export type ProductWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   OR?: Prisma.ProductWhereInput[]
   NOT?: Prisma.ProductWhereInput | Prisma.ProductWhereInput[]
   title?: Prisma.StringFilter<"Product"> | string
-  slug?: Prisma.StringFilter<"Product"> | string
   description?: Prisma.StringFilter<"Product"> | string
   currency?: Prisma.StringFilter<"Product"> | string
   isAvailable?: Prisma.BoolFilter<"Product"> | boolean
@@ -276,7 +276,7 @@ export type ProductWhereUniqueInput = Prisma.AtLeast<{
   variants?: Prisma.VariantListRelationFilter
   favorites?: Prisma.FavoriteListRelationFilter
   cartItems?: Prisma.CartItemListRelationFilter
-}, "id">
+}, "id" | "slug">
 
 export type ProductOrderByWithAggregationInput = {
   id?: Prisma.SortOrder

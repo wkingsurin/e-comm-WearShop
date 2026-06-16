@@ -15,7 +15,7 @@ datasource db {
 model Brand {
   id String @id @default(cuid())
 
-  name String
+  name String @unique
   slug String @unique
 
   products Product[]
@@ -25,7 +25,7 @@ model Product {
   id String @id @default(cuid())
 
   title String
-  slug  String
+  slug  String @unique
 
   description String
 
@@ -53,7 +53,7 @@ model Category {
   id String @id @default(cuid())
 
   name String
-  slug String
+  slug String @unique
 
   products Product[]
 }
@@ -81,7 +81,7 @@ model User {
   email    String  @unique
   password String?
 
-  image Image[]
+  image ProductImage[]
 
   createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -112,7 +112,7 @@ enum DeliveryMethod {
   POST
 }
 
-model Image {
+model ProductImage {
   id String @id @default(cuid())
 
   variantId String
@@ -195,7 +195,7 @@ model Variant {
 
   product Product @relation(fields: [productId], references: [id])
 
-  images Image[]
+  images ProductImage[]
 }
 
 model VerificationToken {
