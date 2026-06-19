@@ -5,23 +5,23 @@ export const mapProductToCartItem = (
 	data: IProduct,
 	currentVariant: IVariant,
 	quantity: ICartItem["quantity"]
-) => {
+): ICartItem => {
 	return {
 		id: data.id,
 		title: data.title,
 		slug: data.slug,
 		currency: data.currency,
 
-		cartItemId: `${data.id}-${currentVariant.id}-${currentVariant.attributes.color}-${currentVariant.attributes.size}`,
+		cartItemId: `${data.id}-${currentVariant.id}-${currentVariant.attributes.colorId}-${currentVariant.attributes.size}`,
 
 		variantId: currentVariant.id,
 		sku: currentVariant.sku,
 
 		price: currentVariant.price,
 		oldPrice: currentVariant.oldPrice,
-		image: currentVariant.href.small,
+		image: data.options.color[0].images[0].src,
 
-		selectedColor: currentVariant.attributes.color,
+		selectedColor: currentVariant.attributes.colorId,
 		selectedSize: currentVariant.attributes.size,
 
 		quantity,
