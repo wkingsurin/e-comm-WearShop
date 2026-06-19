@@ -4,6 +4,7 @@ import { PrismaClient } from "./generated/prisma/client";
 import { seedBrands } from "./seeds/brands.seed";
 import { seedCategories } from "./seeds/categories.seed";
 import { seedProducts } from "./seeds/products.seed";
+import seedColors from "./seeds/colors.seed";
 
 const connectionString = `${process.env.DATABASE_URL}`;
 const adapter = new PrismaPg({ connectionString });
@@ -17,6 +18,8 @@ async function clearDatabase() {
 	await prisma.productImage.deleteMany();
 
 	await prisma.variant.deleteMany();
+
+	await prisma.productColor.deleteMany();
 
 	await prisma.product.deleteMany();
 
@@ -33,6 +36,8 @@ export async function main() {
 	await seedCategories();
 
 	await seedProducts();
+
+	await seedColors();
 
 	console.log(`Seed completed...`);
 }

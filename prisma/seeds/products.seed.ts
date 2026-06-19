@@ -16,14 +16,14 @@ export async function seedProducts() {
 	// Check slug duplicates
 	// const slugMap = new Map<string, number>();
 
-	// for (const product of products) {
+	// for (const product of productsNew) {
 	// 	slugMap.set(product.slug, (slugMap.get(product.slug) ?? 0) + 1);
 	// }
 
 	// console.log([...slugMap.entries()].filter(([_, count]) => count > 1));
 
 	// Check sku dupliactes
-	// const skus = products.flatMap((product) =>
+	// const skus = productsNew.flatMap((product) =>
 	// 	product.variants.map((variant) => variant.sku)
 	// );
 
@@ -32,47 +32,118 @@ export async function seedProducts() {
 
 	await prisma.$transaction(async (tx) => {
 		for (const product of products) {
-			await tx.product.create({
+			const createdProduct = await tx.product.create({
 				data: {
 					title: product.title,
-
 					slug: product.slug,
-
-					description: product.description,
-
+					description: product.title,
 					currency: product.currency,
 
-					isAvailable: product.isAvailable,
-
-					isNew: product.isNew,
-
 					brandId: brandMap[product.brand.slug],
-
 					categoryId: categoriesMap[product.category.slug],
 
-					variants: {
-						create: product.variants.map((variant) => ({
-							sku: variant.sku,
+					isAvailable: product.isAvailable,
+					isNew: product.isNew,
+				},
+			});
 
-							price: variant.price,
+			const uniqueColors = [
+				...new Map(
+					product.variants.map((variant) => [variant.attributes.color, variant])
+				).values(),
+			];
 
-							oldPrice: variant.oldPrice,
-
-							stock: variant.stock,
-
-							color: variant.attributes.color,
-
-							size: variant.attributes.size,
-
+			const createdColors = await Promise.all(
+				uniqueColors.map((variant) =>
+					tx.productColor.create({
+						data: {
+							productId: createdProduct.id,
+							name: variant.attributes.color,
+							slug: slugify(variant.attributes.color),
 							images: {
 								create: variant.images.map((image) => ({
 									src: image.src,
 								})),
 							},
-						})),
-					},
-				},
+						},
+					})
+				)
+			);
+
+			const colorMap = Object.fromEntries(
+				createdColors.map((color) => [color.name, color.id])
+			);
+
+			await tx.variant.createMany({
+				data: product.variants.map((variant) => ({
+					sku: variant.sku,
+
+					price: variant.price,
+					oldPrice: variant.oldPrice,
+
+					stock: variant.stock,
+
+					size: variant.attributes.size,
+
+					colorId: colorMap[variant.attributes.color],
+
+					productId: createdProduct.id,
+				})),
 			});
+
+			// await tx.product.create({
+			// 	data: {
+			// 		title: product.title,
+
+			// 		slug: product.slug,
+
+			// 		description: product.title,
+
+			// 		currency: product.currency,
+
+			// 		isAvailable: product.isAvailable,
+
+			// 		isNew: product.isNew,
+
+			// 		brandId: brandMap[product.brand.slug],
+
+			// 		categoryId: categoriesMap[product.category.slug],
+
+			// 		variants: {
+			// 			create: product.variants.map((variant) => ({
+			// 				sku: variant.sku,
+
+			// 				price: variant.price,
+
+			// 				oldPrice: variant.oldPrice,
+
+			// 				stock: variant.stock,
+
+			// 				color: {
+			// 					connect: {
+			// 						id:
+			// 					}
+			// 				},
+
+			// 				size: variant.attributes.size,
+
+			// 				images: {
+			// 					create: variant.images.map((image) => ({
+			// 						src: image.src,
+			// 					})),
+			// 				},
+			// 			})),
+			// 		},
+			// 	},
+			// });
 		}
 	});
 }
+
+const slugify = (value: string) => {
+	return value
+		.toLowerCase()
+		.replaceAll("/", "-")
+		.replaceAll("&", "and")
+		.replace(/\s+/g, "-");
+};

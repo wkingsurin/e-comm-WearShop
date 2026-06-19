@@ -45,8 +45,9 @@ model Product {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  favorites Favorite[]
-  cartItems CartItem[]
+  favorites     Favorite[]
+  cartItems     CartItem[]
+  productColors ProductColor[]
 }
 
 model Category {
@@ -115,13 +116,14 @@ enum DeliveryMethod {
 model ProductImage {
   id String @id @default(cuid())
 
-  variantId String
+  colorId String
 
   src String
 
-  variant Variant @relation(fields: [variantId], references: [id])
-  user    User?   @relation(fields: [userId], references: [id])
-  userId  String?
+  color ProductColor @relation(fields: [colorId], references: [id])
+
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
 }
 
 model Order {
@@ -182,20 +184,30 @@ model Variant {
   id String @id @default(cuid())
 
   productId String
+  colorId   String
 
   sku String @unique
 
   price    Int
   oldPrice Int?
 
-  stock Int
+  stock Int @default(0)
 
-  color String
-  size  String
+  size String
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  color ProductColor @relation(fields: [colorId], references: [id])
 
   product Product @relation(fields: [productId], references: [id])
 
-  images ProductImage[]
+  cartItems CartItem[]
+
+  @@index([productId])
+  @@index([size])
 }
 
 model VerificationToken {
@@ -227,9 +239,30 @@ model CartItem {
   productId String
   product   Product @relation(fields: [productId], references: [id])
 
+  variantId String
+  variant   Variant @relation(fields: [variantId], references: [id])
+
   quantity Int @default(1)
 
   createdAt DateTime @default(now())
 
   @@unique([cartId, productId])
+}
+
+model ProductColor {
+  id String @id @default(cuid())
+
+  productId String
+
+  name String
+
+  slug String
+
+  product Product @relation(fields: [productId], references: [id])
+
+  images   ProductImage[]
+  variants Variant[]
+
+  @@unique([productId, name])
+  @@index([productId])
 }
