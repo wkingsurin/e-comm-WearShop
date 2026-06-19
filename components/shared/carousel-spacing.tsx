@@ -13,7 +13,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ICarouselProps } from "@/types/components/shared/shared.types";
 
 export default function CarouselSpacing({
-	data,
+	images,
 	activeIndex,
 	onSelect,
 }: ICarouselProps) {
@@ -50,7 +50,7 @@ export default function CarouselSpacing({
 			}}
 		>
 			<CarouselContent className="-ml-2">
-				{data.images.map((image, index) => {
+				{images.map((image, index) => {
 					return (
 						<CarouselItem
 							key={image.id}
@@ -79,7 +79,7 @@ export default function CarouselSpacing({
 			</CarouselContent>
 			<Button
 				className={`absolute top-[calc(50%-16px)] -left-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 ${
-					canScrollPrev && data.images.length > 4
+					canScrollPrev && images.length > 4
 						? "group-hover/product:opacity-100 scale-100"
 						: "opacity-0 pointer-events-none scale-90"
 				}`}
@@ -90,7 +90,7 @@ export default function CarouselSpacing({
 			<Button
 				className={`absolute top-[calc(50%-16px)] -right-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50
 					${
-						canScrollNext && data.images.length > 4
+						canScrollNext && images.length > 4
 							? "group-hover/product:opacity-100 scale-100"
 							: "opacity-0 pointer-events-none scale-90"
 					}`}

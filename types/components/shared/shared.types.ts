@@ -1,6 +1,6 @@
 import { LucideIcon } from "lucide-react";
 import { IFavorite } from "../../store/favorites.types";
-import { IVariant } from "../../store/ui.types";
+import { IColorOption } from "../../store/ui.types";
 
 export interface IDummyProps {
 	icon: LucideIcon;
@@ -39,7 +39,7 @@ export interface ISortProps {
 }
 
 export interface ICarouselProps {
-	data: IVariant;
+	images: IColorOption["images"];
 	activeIndex: number;
 	onSelect: (index: number) => void;
 }
