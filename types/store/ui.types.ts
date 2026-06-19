@@ -5,19 +5,30 @@ export interface IOverlay {
 	open: boolean;
 }
 export interface IModal {
-	target: IProduct | IOrder | null;
-	contentType: "FastWatch" | "CancelOrder" | "ConfirmModal" | null;
+	target: {
+		product: IProduct | IOrder | null;
+		variantId: string | null;
+	};
+	contentType: "QuickView" | "CancelOrder" | "ConfirmModal" | null;
 }
 
+export interface IColorOption {
+	id: string;
+	name: string;
+	slug: string;
+
+	images: {
+		id: string;
+		src: string;
+	}[];
+}
 export interface IVariant {
 	id: string;
 	sku: string;
 	price: number;
-	oldPrice?: number;
+	oldPrice: number | null;
 	stock: number;
-	attributes: { color: string; size: string };
-	href: { small: string; medium: string; large: string; original: string };
-	images: { id: string; src: string }[];
+	attributes: { colorId: string; size: string };
 }
 export interface IProduct {
 	id: string;
@@ -41,7 +52,7 @@ export interface IProduct {
 	isAvailable: boolean;
 	isNew?: boolean;
 
-	options: { color: string[]; size: { label: string; value: string }[] };
+	options: { color: IColorOption[]; size: { label: string; value: string }[] };
 
 	variants: IVariant[];
 }
@@ -57,15 +68,16 @@ export interface ConfirmData {
 export type UIState = {
 	overlay: IOverlay;
 	modal: IModal;
-	selectedProduct: IProduct;
 	sortOption: "higher" | "lower";
 	confirmData: ConfirmData | null;
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
 	changeModalType: (type: IModal["contentType"]) => void;
-	updateModalTarget: (target: IProduct | IOrder | null) => void;
-	updateSelectedProduct: (product: IProduct) => void;
+	updateModalTarget: (target: {
+		product: IProduct | IOrder | null;
+		variantId: string | null;
+	}) => void;
 	updateSortOption: (option: "higher" | "lower") => void;
 	openConfirm: (data: ConfirmData) => void;
 	clearConfirm: () => void;

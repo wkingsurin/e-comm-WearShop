@@ -8,7 +8,7 @@ export interface ICartItem
 	sku: string;
 
 	price: number;
-	oldPrice?: number;
+	oldPrice: number | null;
 	image: string;
 
 	selectedColor: string;
