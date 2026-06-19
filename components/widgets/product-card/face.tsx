@@ -10,20 +10,30 @@ import Link from "next/link";
 import FastViewButton from "./fast-view-button";
 import { IProductFaceProps } from "@/types/components/widgets/product-card.types";
 
-export default function Face({ data, type = "Default" }: IProductFaceProps) {
+export default function Face({
+	data,
+	defaultVariant,
+	type = "Default",
+}: IProductFaceProps) {
 	const { addLastSeen } = useLastSeen();
 
 	const favData = mapProductToFavorite(data);
 
+	const defaultColorId = defaultVariant.attributes.colorId;
+	const defaultColor = data.options.color.find((c) => c.id === defaultColorId);
+	const defaultSize = defaultVariant.attributes.size;
+
+	if (!defaultColor) return;
+
 	return (
 		<Link
-			href={`/product/${data.id}/${data.variants[0].id}`}
+			href={`/products/${data.slug}?color=${defaultColor.slug}&size=${defaultSize}`}
 			className="relative flex items-center justify-center w-full h-[340px] bg-[#F4F4F6] rounded-xl overflow-hidden trnasition-all duration-300 cursor-pointer"
 			onClick={() => {
 				addLastSeen(data);
 			}}
 		>
-			<FastViewButton data={data} />
+			<FastViewButton data={data} variantId={defaultVariant.id} />
 			{type === "Favourite" ? (
 				<RemoveButton data={favData} />
 			) : (
@@ -32,7 +42,7 @@ export default function Face({ data, type = "Default" }: IProductFaceProps) {
 			<Discount value="-35%" />
 			<div className="absolute z-1 w-full h-full bg-transparent group-hover/card:bg-black/10 transition-brand"></div>
 			<Image
-				src={data.variants[0].images[0].src}
+				src={defaultColor.images[0].src}
 				alt={data.title}
 				width={332}
 				height={480}

@@ -1,11 +1,14 @@
 import Face from "./face";
 import Description from "./description";
 import { IProductCardProps } from "@/types/components/widgets/product-card.types";
+import { getDefaultVariant } from "@/lib/selectors/product.selectors";
 
 export default function ProductCard({
 	data,
 	type = "Default",
 }: IProductCardProps) {
+	const defaultVariant = getDefaultVariant(data);
+
 	return (
 		<div
 			className={`group/card relative rounded-xl w-full ${
@@ -16,8 +19,8 @@ export default function ProductCard({
 				{/* <span className="absolute top-3 left-3 z-10002 flex items-center justify-center w-[30px] h-[30px] rounded-[50%] bg-white text-base">
 				{data.id}
 			</span> */}
-				<Face data={data} type={type} />
-				<Description data={data} />
+				<Face data={data} defaultVariant={defaultVariant} type={type} />
+				<Description data={data} defaultVariant={defaultVariant} />
 			</div>
 		</div>
 	);
