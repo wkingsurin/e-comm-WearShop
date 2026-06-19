@@ -1,7 +1,5 @@
-import { IProduct } from "@/types/store/ui.types";
-
 export interface ISizesProps {
-	product: IProduct;
-	onChangeSize: (value: string) => void;
+	sizes: { label: string; value: string }[];
 	initialSize: string;
+	onChangeSize?: (size: string) => void;
 }

@@ -1,30 +1,35 @@
-import { IProduct, IVariant } from "@/types/store/ui.types";
+import { IColorOption } from "@/types/store/ui.types";
 
 export interface IColorsProps {
-	product: IProduct;
-	variantIndex?: number;
-	changeVariant?: (index: number) => void;
-	resetQuantity?: () => void;
+	colors: IColorOption[];
+	defaultSize?: string;
+	activeColorId?: string;
+	changeActiveColorId?: (color: string) => void;
 	type: "Modal" | "Page";
 }
 
 export interface IColorsLinkProps {
-	variant: IVariant;
-	active: boolean;
+	id: string;
+	name: string;
+	slug: string;
+	previewImage: string;
+	isActive: boolean;
+	defaultSize: string;
 }
 
 export interface IColorsOptionProps {
-	variant: IVariant;
-	active: boolean;
-	index: number;
-	changeVariant?: (index: number) => void;
-	resetQuantity?: () => void;
+	id: string;
+	name: string;
+	slug: string;
+	previewImage: string;
+	isActive: boolean;
+	changeActiveColorId: (color: string) => void;
 }
 
 export interface IColorsWrapperProps {
-	product: IProduct;
-	variantIndex?: number;
-	changeVariant?: (index: number) => void;
-	resetQuantity?: () => void;
+	colors: IColorOption[];
+	defaultSize?: string;
+	activeColorId?: string;
+	changeActiveColorId?: (color: string) => void;
 	type: "Modal" | "Page";
 }
