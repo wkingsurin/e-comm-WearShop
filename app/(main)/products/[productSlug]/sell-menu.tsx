@@ -7,28 +7,40 @@ import FavoriteButton from "@/components/shared/favorite-button";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag, Truck } from "lucide-react";
 import { IProduct, IVariant } from "@/types/store/ui.types";
+import { useState } from "react";
 
 interface IProps {
 	product: IProduct;
-	productVariant: IVariant;
+	currentVariant: IVariant;
 	dynamicVariant: IVariant;
-	quantity: number;
-	size: string;
-	decrementItem: () => void;
-	incrementItem: () => void;
 }
 
 export default function SellMenu({
 	product,
-	productVariant,
+	currentVariant,
 	dynamicVariant,
-	quantity,
-	decrementItem,
-	incrementItem,
-	size,
 }: IProps) {
 	const { addItem } = useCart();
 	const favData = mapProductToFavorite(product);
+
+	const [quantityByVariant, setQuantityByVariant] = useState<
+		Record<string, number>
+	>({});
+	const setQuantity = (value: number) => {
+		setQuantityByVariant((prev) => ({
+			...prev,
+			[currentVariant.id]: value,
+		}));
+	};
+	const incrementItem = () => {
+		setQuantity(Math.min(quantity + 1, currentVariant.stock));
+	};
+	const decrementItem = () => {
+		setQuantity(quantity > 1 ? quantity - 1 : quantity);
+	};
+
+	const quantity = quantityByVariant[currentVariant.id] ?? 1;
+
 	const itemToCart = mapProductToCartItem(product, dynamicVariant, quantity);
 
 	return (
@@ -38,13 +50,13 @@ export default function SellMenu({
 					<div className="flex justify-between font-medium tracking-wider leading-lg">
 						<div>
 							<span className="text-xl font-medium tracking-wider">
-								$ {productVariant.price / 100 + "0"}
+								$ {currentVariant.price / 100 + "0"}
 							</span>
 							<p>1 pcs</p>
 						</div>
 						<div className="flex flex-col items-end">
 							<span className="text-xl font-medium tracking-wider">
-								$ {((productVariant.price / 100) * quantity).toFixed(1) + "0"}
+								$ {((currentVariant.price / 100) * quantity).toFixed(1) + "0"}
 							</span>
 							<p>{quantity} pcs </p>
 						</div>
@@ -81,9 +93,10 @@ export default function SellMenu({
 						<div className="relative flex gap-3">
 							<Button
 								className="flex-1"
-								disabled={size === ""}
+								disabled={currentVariant.attributes.size === ""}
 								onClick={() => {
-									if (!size) return console.log(`Select size!!!`);
+									if (!currentVariant.attributes.size)
+										return console.log(`Select size!!!`);
 
 									addItem(itemToCart);
 								}}

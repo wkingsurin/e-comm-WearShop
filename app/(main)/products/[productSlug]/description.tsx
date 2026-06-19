@@ -1,22 +1,24 @@
 import { IDetails } from "./product-client";
 import { IProduct, IVariant } from "@/types/store/ui.types";
-import Colors from "@/components/widgets/colors/colors";
-import Sizes from "@/components/widgets/sizes/sizes";
+import Colors from "@/components/widgets/color-selector/color-selector";
+import Sizes from "@/components/widgets/size-selector/size-selector";
 
 interface IProps {
 	product: IProduct;
-	productVariant: IVariant;
-	size: string;
-	onChangeSize: (value: string) => void;
+	currentVariant: IVariant;
 	detailsData: IDetails[];
 }
 
 export default function Description({
 	product,
-	size,
-	onChangeSize,
+	currentVariant,
 	detailsData,
 }: IProps) {
+	const colors = product.options.color;
+
+	const sizes = product.options.size;
+	const defaultSize = currentVariant.attributes.size;
+
 	return (
 		<div className="flex flex-col py-4 gap-6 min-w-[352px]">
 			<div className="flex flex-col gap-2 justify-between">
@@ -28,9 +30,9 @@ export default function Description({
 				</span>
 			</div>
 
-			<Colors product={product} type="Page" />
+			<Colors colors={colors} type="Page" defaultSize={defaultSize} />
 
-			<Sizes product={product} onChangeSize={onChangeSize} initialSize={size} />
+			<Sizes sizes={sizes} initialSize={currentVariant.attributes.size} />
 			<div className="flex flex-col gap-[6px]">
 				<span className="text-lg font-medium leading-lg tracking-wider">
 					Details

@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
@@ -8,7 +8,7 @@ interface IProps {
 	children: React.ReactNode;
 }
 
-export default function CategoryLayout({ children }: IProps) {
+export default async function CategoryLayout({ children }: IProps) {
 	return (
 		<Main>
 			<Section>
