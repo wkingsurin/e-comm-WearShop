@@ -5,11 +5,18 @@ import { Heart } from "lucide-react";
 import { useFavorites } from "../../hooks/useFavorites";
 import { IFavoriteButtonProps } from "@/types/components/shared/shared.types";
 import { useUIStore } from "@/lib/store/ui.store";
+import {
+	addFavorite,
+	deleteFavorite,
+} from "@/app/(main)/account/favorites/actions";
+import { useRouter } from "next/navigation";
 
 export default function FavoriteButton({
 	data,
 	inline = false,
 }: IFavoriteButtonProps) {
+	const router = useRouter();
+
 	const openConfirm = useUIStore((s) => s.openConfirm);
 	const { isFavorite, toggleFavorite } = useFavorites();
 	const isFav = isFavorite(data.productId);
@@ -24,8 +31,10 @@ export default function FavoriteButton({
 			),
 			confirmText: "Delete",
 			cancelText: "Cancel",
-			onConfirm: () => {
+			onConfirm: async () => {
+				await deleteFavorite(data.productId);
 				toggleFavorite(data);
+				router.refresh();
 			},
 		});
 	};
@@ -36,7 +45,7 @@ export default function FavoriteButton({
 			className={`group/tag w-[30px] h-[30px] ${
 				inline ? "w-10 h-10" : "absolute z-2 top-[6px] right-[6px]"
 			} bg-transparent hover:bg-transparent backdrop-blur-[12px]`}
-			onClick={(e) => {
+			onClick={async (e) => {
 				e.preventDefault();
 				e.stopPropagation();
 
@@ -44,7 +53,10 @@ export default function FavoriteButton({
 					handleDelete();
 					return;
 				}
+
+				await addFavorite(data.productId);
 				toggleFavorite(data);
+				router.refresh();
 			}}
 		>
 			<Heart

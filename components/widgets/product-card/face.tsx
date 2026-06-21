@@ -34,7 +34,7 @@ export default function Face({
 			}}
 		>
 			<FastViewButton data={data} variantId={defaultVariant.id} />
-			{type === "Favourite" ? (
+			{type === "Favorite" ? (
 				<RemoveButton data={favData} />
 			) : (
 				<FavoriteButton data={favData} />

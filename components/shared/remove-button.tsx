@@ -5,8 +5,12 @@ import { Trash2 } from "lucide-react";
 import { useFavorites } from "../../hooks/useFavorites";
 import { useUIStore } from "@/lib/store/ui.store";
 import { IRemoveButtonProps } from "@/types/components/shared/shared.types";
+import { deleteFavorite } from "@/app/(main)/account/favorites/actions";
+import { useRouter } from "next/navigation";
 
 export default function RemoveButton({ data }: IRemoveButtonProps) {
+	const router = useRouter();
+
 	const { toggleFavorite } = useFavorites();
 	const openConfirm = useUIStore((s) => s.openConfirm);
 
@@ -20,8 +24,10 @@ export default function RemoveButton({ data }: IRemoveButtonProps) {
 			),
 			confirmText: "Delete",
 			cancelText: "Cancel",
-			onConfirm: () => {
+			onConfirm: async () => {
+				await deleteFavorite(data.productId);
 				toggleFavorite(data);
+				router.refresh();
 			},
 		});
 	};

@@ -8,11 +8,15 @@ export default function ProductCard({
 	type = "Default",
 }: IProductCardProps) {
 	const defaultVariant = getDefaultVariant(data);
+	console.log(`=================`);
+	console.log(`[title]:`, data.title);
+	console.log(`[defaultVariant.id]:`, defaultVariant.id);
+	console.log(`[color.id]:`, defaultVariant.attributes.colorId);
 
 	return (
 		<div
 			className={`group/card relative rounded-xl w-full ${
-				type === "Favourite" ? "md:w-1/3" : "md:w-1/4"
+				type === "Favorite" ? "md:w-1/3" : "md:w-1/4"
 			} md:max-w-[305px] transition-brand hover:shadow-[0_4px_4px_-3px_rgba(0,0,0,.10)] transition-brand`}
 		>
 			<div className="flex flex-col gap-4 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.10)] rounded-xl transition-brand">

@@ -31,7 +31,7 @@ export async function getProducts(params?: getProductsParams) {
 				where: {
 					isActive: true,
 				},
-				orderBy: { size: "asc" },
+				orderBy: [{ colorId: "asc" }, { size: "asc" }],
 			},
 			productColors: { include: { images: true }, orderBy: { name: "asc" } },
 		},
