@@ -1,27 +1,25 @@
-import {
-	mapProductToCartItem,
-	mapProductToFavorite,
-} from "@/app/mappers/mapper";
+import { mapProductToCartItem } from "@/app/mappers/mapper";
 import useCart from "@/hooks/useCart";
-import FavoriteButton from "@/components/shared/favorite-button";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag, Truck } from "lucide-react";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 import { useState } from "react";
+import HeartButton from "@/components/shared/heart-button";
 
 interface IProps {
 	product: IProduct;
 	currentVariant: IVariant;
 	dynamicVariant: IVariant;
+	isFavorite: boolean;
 }
 
 export default function SellMenu({
 	product,
 	currentVariant,
 	dynamicVariant,
+	isFavorite,
 }: IProps) {
 	const { addItem } = useCart();
-	const favData = mapProductToFavorite(product);
 
 	const [quantityByVariant, setQuantityByVariant] = useState<
 		Record<string, number>
@@ -104,7 +102,11 @@ export default function SellMenu({
 								<ShoppingBag className="size-4 stroke-[1px]" />
 								Pack
 							</Button>
-							<FavoriteButton data={favData} inline />
+							<HeartButton
+								productId={product.id}
+								isFavorite={isFavorite}
+								inline
+							/>
 						</div>
 						<div className="flex items-center justify-center gap-3 opacity-50">
 							<Truck className="size-4 stroke-[1.5px]" />

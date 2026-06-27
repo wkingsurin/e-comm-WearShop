@@ -1,19 +1,21 @@
-import { mapProductToFavorite } from "@/app/mappers/mapper";
-import { useFavorites } from "@/hooks/useFavorites";
 import { Button } from "@/components/ui/button";
 import { Heart, RefreshCcw } from "lucide-react";
 import Image from "next/image";
 import { ICartItem } from "@/types/store/cart.types";
+import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 
-export default function OrderItem({ data }: { data: ICartItem }) {
-	const { isFavorite, toggleFavorite } = useFavorites();
+export default function OrderItem({
+	data,
+	isFavorite,
+}: {
+	data: ICartItem;
+	isFavorite: boolean;
+}) {
+	const { mutate: toggle } = useToggleFavorite();
 
 	const orderAgain = (id: string) => {
 		console.log(`Order again [Item ID]: ${id}`);
 	};
-
-	const isFav = isFavorite(data.id);
-	const favData = mapProductToFavorite(data);
 
 	return (
 		<div
@@ -31,13 +33,13 @@ export default function OrderItem({ data }: { data: ICartItem }) {
 				<Button
 					size="icon-lg"
 					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						isFav && "bg-[#EC0404]/10"
+						isFavorite && "bg-[#EC0404]/10"
 					}`}
-					onClick={() => toggleFavorite(favData)}
+					onClick={() => toggle(data.id)}
 				>
 					<Heart
 						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							isFav && "fill-[#EC0404] stroke-[#EC0404]!"
+							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
 						}`}
 					/>
 				</Button>

@@ -5,6 +5,7 @@ import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import Filters from "@/components/widgets/filters";
 import ProductCard from "@/components/widgets/product-card/product-card";
+import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 import { IProduct } from "@/types/store/ui.types";
 import { useState } from "react";
 
@@ -13,6 +14,8 @@ export default function CategoriesClient({
 }: {
 	products: IProduct[];
 }) {
+	const { data: favorites = {} } = useFavorites();
+
 	const [openFilters, setOpenFilters] = useState<boolean>(false);
 
 	const onOpenFilters = () => {
@@ -36,7 +39,13 @@ export default function CategoriesClient({
 			{openFilters && <Filters />}
 			<div className="flex flex-wrap gap-5">
 				{products.map((item) => {
-					return <ProductCard key={item.id} data={item} />;
+					return (
+						<ProductCard
+							key={item.id}
+							data={item}
+							isFavorite={!!favorites[item.id]}
+						/>
+					);
 				})}
 			</div>
 		</div>

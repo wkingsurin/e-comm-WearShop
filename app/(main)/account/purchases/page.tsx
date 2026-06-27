@@ -1,30 +1,8 @@
-"use client";
+import { getFavorites } from "../favorites/actions";
+import PurchasesClient from "./client";
 
-import DashboardWrapper from "@/components/shared/dashboard-wrapper";
-import Dummy from "@/components/shared/dummy";
-import SortSelect from "@/components/shared/sort-select";
-import ProductCard from "@/components/widgets/product-card/product-card";
-import { Boxes } from "lucide-react";
-import { IProduct } from "@/types/store/ui.types";
+export default async function Purchases() {
+	const products = await getFavorites();
 
-export default function Purchases() {
-	const favoriteProducts: IProduct[] = [];
-
-	return (
-		<DashboardWrapper pageTitle="Purchases">
-			<div className="flex items-center gap-4 h-full">
-				{favoriteProducts.length !== 0 && (
-					<>
-						<SortSelect className="absolute -top-[56px] right-0" />
-						{favoriteProducts.map((item) => {
-							return <ProductCard key={item.id} data={item} type="Favourite" />;
-						})}
-					</>
-				)}
-				{favoriteProducts.length === 0 && (
-					<Dummy icon={Boxes} text="You haven`t purchases" />
-				)}
-			</div>
-		</DashboardWrapper>
-	);
+	return <PurchasesClient products={products} />;
 }

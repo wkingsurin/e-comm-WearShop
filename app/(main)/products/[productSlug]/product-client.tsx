@@ -17,6 +17,7 @@ import {
 	getColorBySlug,
 	getCurrentVariant,
 } from "@/lib/selectors/product.selectors";
+import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 
 interface IProps {
 	product: IProduct;
@@ -29,6 +30,8 @@ export interface IDetails {
 }
 
 export default function ProductClient({ product }: IProps) {
+	const { data: favorites = {} } = useFavorites();
+
 	const searchParams = useSearchParams();
 	const selectedColorSlug = searchParams.get("color");
 	const selectedSize = searchParams.get("size");
@@ -104,6 +107,7 @@ export default function ProductClient({ product }: IProps) {
 									product={product}
 									currentVariant={currentVariant}
 									dynamicVariant={dynamicVariant}
+									isFavorite={!!favorites[product.id]}
 								/>
 							</div>
 						</div>
