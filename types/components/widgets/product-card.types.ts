@@ -11,6 +11,7 @@ export interface IFastViewButtonProps {
 
 export interface IProductCardProps {
 	data: IProduct;
+	isFavorite: boolean;
 	type?: "Default" | "Favorite";
 }
 
@@ -21,6 +22,7 @@ export interface IProductDescriptionProps {
 
 export interface IProductFaceProps {
 	data: IProduct;
+	isFavorite: boolean;
 	defaultVariant: IVariant;
 	disablePicking?: boolean;
 	type?: "Default" | "Favorite";

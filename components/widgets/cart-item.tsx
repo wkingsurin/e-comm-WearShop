@@ -3,20 +3,16 @@
 import { Heart, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import { useFavorites } from "../../hooks/useFavorites";
 import useCart from "../../hooks/useCart";
-import { mapProductToFavorite } from "@/app/mappers/mapper";
 import { useUIStore } from "@/lib/store/ui.store";
 import { ICartItemProps } from "@/types/components/widgets/cart-item.types";
+import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 
-export default function CartItem({ data }: ICartItemProps) {
+export default function CartItem({ data, isFavorite }: ICartItemProps) {
 	const openConfirm = useUIStore((s) => s.openConfirm);
 
-	const { isFavorite, toggleFavorite } = useFavorites();
+	const { mutate: toggle } = useToggleFavorite();
 	const { removeItem, incrementItem, decrementItem } = useCart();
-	const isFav = isFavorite(data.id);
-
-	const favData = mapProductToFavorite(data);
 
 	const handleDelete = () => {
 		openConfirm({
@@ -41,13 +37,13 @@ export default function CartItem({ data }: ICartItemProps) {
 				<Button
 					size="icon-lg"
 					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						isFav && "bg-[#EC0404]/10"
+						isFavorite && "bg-[#EC0404]/10"
 					}`}
-					onClick={() => toggleFavorite(favData)}
+					onClick={() => toggle(data.id)}
 				>
 					<Heart
 						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							isFav && "fill-[#EC0404] stroke-[#EC0404]!"
+							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
 						}`}
 					/>
 				</Button>

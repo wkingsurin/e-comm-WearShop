@@ -7,8 +7,11 @@ import SectionTitle from "../shared/section-title";
 import SortSelect from "../shared/sort-select";
 import ProductCard from "./product-card/product-card";
 import SectionSubtitle from "../shared/section-subtitle";
+import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 
 export default function SimilarSection() {
+	const { data: favorites = {} } = useFavorites();
+
 	const similarProducts = useSimilarStore((s) => s.similarProducts);
 
 	if (similarProducts.length === 0) return null;
@@ -26,7 +29,11 @@ export default function SimilarSection() {
 					</div>
 					<div className="flex flex-wrap gap-5">
 						{similarProducts.map((item) => (
-							<ProductCard key={item.id} data={item} />
+							<ProductCard
+								key={item.id}
+								data={item}
+								isFavorite={!!favorites[item.id]}
+							/>
 						))}
 					</div>
 				</div>

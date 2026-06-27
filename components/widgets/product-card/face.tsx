@@ -1,6 +1,5 @@
 "use client";
 
-import FavoriteButton from "@/components/shared/favorite-button";
 import RemoveButton from "@/components/shared/remove-button";
 import Image from "next/image";
 import Discount from "./discount";
@@ -9,10 +8,12 @@ import { mapProductToFavorite } from "@/app/mappers/mapper";
 import Link from "next/link";
 import FastViewButton from "./fast-view-button";
 import { IProductFaceProps } from "@/types/components/widgets/product-card.types";
+import HeartButton from "@/components/shared/heart-button";
 
 export default function Face({
 	data,
 	defaultVariant,
+	isFavorite,
 	type = "Default",
 }: IProductFaceProps) {
 	const { addLastSeen } = useLastSeen();
@@ -37,7 +38,7 @@ export default function Face({
 			{type === "Favorite" ? (
 				<RemoveButton data={favData} />
 			) : (
-				<FavoriteButton data={favData} />
+				<HeartButton productId={data.id} isFavorite={isFavorite} />
 			)}
 			<Discount value="-35%" />
 			<div className="absolute z-1 w-full h-full bg-transparent group-hover/card:bg-black/10 transition-brand"></div>

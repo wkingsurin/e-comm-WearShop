@@ -2,16 +2,12 @@
 
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
-import { useFavorites } from "../../hooks/useFavorites";
 import { useUIStore } from "@/lib/store/ui.store";
 import { IRemoveButtonProps } from "@/types/components/shared/shared.types";
-import { deleteFavorite } from "@/app/(main)/account/favorites/actions";
-import { useRouter } from "next/navigation";
+import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 
 export default function RemoveButton({ data }: IRemoveButtonProps) {
-	const router = useRouter();
-
-	const { toggleFavorite } = useFavorites();
+	const { mutate: toggle } = useToggleFavorite();
 	const openConfirm = useUIStore((s) => s.openConfirm);
 
 	const handleDelete = () => {
@@ -25,9 +21,7 @@ export default function RemoveButton({ data }: IRemoveButtonProps) {
 			confirmText: "Delete",
 			cancelText: "Cancel",
 			onConfirm: async () => {
-				await deleteFavorite(data.productId);
-				toggleFavorite(data);
-				router.refresh();
+				toggle(data.productId);
 			},
 		});
 	};

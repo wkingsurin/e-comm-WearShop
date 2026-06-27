@@ -1,5 +1,4 @@
 import { LucideIcon } from "lucide-react";
-import { IFavorite } from "../../store/favorites.types";
 import { IColorOption } from "../../store/ui.types";
 
 export interface IDummyProps {
@@ -7,8 +6,9 @@ export interface IDummyProps {
 	text: string;
 }
 
-export interface IFavoriteButtonProps {
-	data: IFavorite;
+export interface IHeartButtonProps {
+	isFavorite: boolean;
+	productId: string;
 	inline?: boolean;
 }
 
@@ -48,4 +48,11 @@ export interface IDashboardWrapperProps {
 	className?: string;
 	children: React.ReactNode;
 	pageTitle: string;
+}
+
+export interface IFavorite {
+	id: string;
+	userId: string;
+	productId: string;
+	createdAt: string;
 }

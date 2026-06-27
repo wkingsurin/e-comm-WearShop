@@ -1,5 +1,6 @@
 "use client";
 
+import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 import useLastSeen from "../../hooks/useLastSeen";
 import Container from "../shared/container";
 import Section from "../shared/section";
@@ -9,6 +10,7 @@ import SortSelect from "../shared/sort-select";
 import ProductCard from "./product-card/product-card";
 
 export default function LastSeenSection() {
+	const { data: favorites = {} } = useFavorites();
 	const { lastSeenIds, lastSeenItems } = useLastSeen();
 
 	const orderedProducts = [...lastSeenIds]
@@ -30,7 +32,13 @@ export default function LastSeenSection() {
 					</div>
 					<div className="flex flex-wrap gap-5">
 						{orderedProducts.map((product) => {
-							return <ProductCard key={product.id} data={product} />;
+							return (
+								<ProductCard
+									key={product.id}
+									data={product}
+									isFavorite={!!favorites[product.id]}
+								/>
+							);
 						})}
 					</div>
 				</div>

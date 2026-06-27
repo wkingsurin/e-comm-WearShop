@@ -2,24 +2,18 @@
 
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
-import { useFavorites } from "../../hooks/useFavorites";
-import { IFavoriteButtonProps } from "@/types/components/shared/shared.types";
+import { IHeartButtonProps } from "@/types/components/shared/shared.types";
 import { useUIStore } from "@/lib/store/ui.store";
-import {
-	addFavorite,
-	deleteFavorite,
-} from "@/app/(main)/account/favorites/actions";
-import { useRouter } from "next/navigation";
+import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 
-export default function FavoriteButton({
-	data,
+export default function HeartButton({
+	productId,
+	isFavorite,
 	inline = false,
-}: IFavoriteButtonProps) {
-	const router = useRouter();
+}: IHeartButtonProps) {
+	const { mutate: toggle, isPending } = useToggleFavorite();
 
 	const openConfirm = useUIStore((s) => s.openConfirm);
-	const { isFavorite, toggleFavorite } = useFavorites();
-	const isFav = isFavorite(data.productId);
 
 	const handleDelete = () => {
 		openConfirm({
@@ -32,9 +26,7 @@ export default function FavoriteButton({
 			confirmText: "Delete",
 			cancelText: "Cancel",
 			onConfirm: async () => {
-				await deleteFavorite(data.productId);
-				toggleFavorite(data);
-				router.refresh();
+				toggle(productId);
 			},
 		});
 	};
@@ -45,23 +37,21 @@ export default function FavoriteButton({
 			className={`group/tag w-[30px] h-[30px] ${
 				inline ? "w-10 h-10" : "absolute z-2 top-[6px] right-[6px]"
 			} bg-transparent hover:bg-transparent backdrop-blur-[12px]`}
-			onClick={async (e) => {
+			disabled={isPending}
+			onClick={(e) => {
 				e.preventDefault();
 				e.stopPropagation();
 
-				if (isFav) {
+				if (isFavorite) {
 					handleDelete();
-					return;
+				} else {
+					toggle(productId);
 				}
-
-				await addFavorite(data.productId);
-				toggleFavorite(data);
-				router.refresh();
 			}}
 		>
 			<Heart
 				className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#F51E1E] group-hover/tag:fill-[#F51E1E] ${
-					isFav && "fill-[#F51E1E] stroke-[#F51E1E]!"
+					isFavorite && "fill-[#F51E1E] stroke-[#F51E1E]!"
 				}`}
 			/>
 		</Button>
