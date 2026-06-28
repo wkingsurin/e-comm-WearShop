@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { mapCartItem } from "../mappers/map-cart-item";
-import { ICart, ICartItem } from "../types";
+import { ICart } from "../types";
 import { EMPTY_CART } from "../constants";
+import { calculateCart } from "../utils/calculate-cart";
 
 async function getCart(userId: string) {
 	let cart = await prisma.cart.findUnique({ where: { userId } });
@@ -74,13 +75,37 @@ export async function getCartItems(userId: string): Promise<ICart> {
 	return { items, ...calculateCart(items) };
 }
 
-function calculateCart(items: ICartItem[]) {
-	const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+export async function updateQuantity(
+	userId: string,
+	cartItemId: string,
+	quantity: number
+) {
+	const cart = await getCart(userId);
 
-	const subtotal = items.reduce(
-		(sum, item) => sum + item.price * item.quantity,
-		0
-	);
+	const item = await prisma.cartItem.findFirst({
+		where: { id: cartItemId, cartId: cart.id },
+	});
 
-	return { totalItems, subtotal, total: subtotal };
+	if (!item) {
+		throw new Error("Cart item not found");
+	}
+
+	return prisma.cartItem.update({
+		where: { id: cartItemId },
+		data: { quantity },
+	});
+}
+
+export async function removeItem(userId: string, cartItemId: string) {
+	const cart = await getCart(userId);
+
+	const item = await prisma.cartItem.findFirst({
+		where: { id: cartItemId, cartId: cart.id },
+	});
+
+	if (!item) {
+		throw new Error("Cart item not found");
+	}
+
+	return prisma.cartItem.delete({ where: { id: cartItemId } });
 }

@@ -6,11 +6,15 @@ import Image from "next/image";
 import { useUIStore } from "@/lib/store/ui.store";
 import { ICartItemProps } from "@/types/components/widgets/cart-item.types";
 import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
+import { useUpdateQunatity } from "@/features/cart/hooks/use-update-quantity";
+import useRemoveItem from "@/features/cart/hooks/use-remove-item";
 
 export default function CartItem({ data, isFavorite }: ICartItemProps) {
 	const openConfirm = useUIStore((s) => s.openConfirm);
 
 	const { mutate: toggle } = useToggleFavorite();
+	const { mutate: updateQuantity } = useUpdateQunatity();
+	const { mutate: removeItem } = useRemoveItem();
 
 	const handleDelete = () => {
 		openConfirm({
@@ -18,7 +22,7 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 			content: "You`re sure? Undo this isn`t possible!",
 			confirmText: "Confirm",
 			cancelText: "Cancel",
-			onConfirm: () => console.log(`remove item`),
+			onConfirm: () => removeItem(data.cartItemId),
 		});
 	};
 
@@ -61,6 +65,12 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
 							// onClick={() => decrementItem(data)}
+							onClick={() =>
+								updateQuantity({
+									cartItemId: data.cartItemId,
+									quantity: data.quantity - 1,
+								})
+							}
 							disabled={data.quantity <= 1}
 						>
 							<Minus className="size-4 stroke-[1.5px] stroke-black" />
@@ -71,6 +81,12 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
 							// onClick={() => incrementItem(data)}
+							onClick={() =>
+								updateQuantity({
+									cartItemId: data.cartItemId,
+									quantity: data.quantity + 1,
+								})
+							}
 							disabled={data.quantity === data.maxStock}
 						>
 							<Plus className="size-4 stroke-[1.5px] stroke-black" />

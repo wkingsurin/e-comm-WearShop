@@ -23,3 +23,31 @@ export async function addToCart(data: { variantId: string; quantity: number }) {
 		throw new Error("Failed to add item");
 	}
 }
+
+export async function updateQuantity(cartItemId: string, quantity: number) {
+	const response = await fetch("/api/cart", {
+		method: "PATCH",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ cartItemId, quantity }),
+	});
+
+	if (!response.ok) {
+		throw new Error("Failed to update qunatity");
+	}
+}
+
+export async function removeItem(cartItemId: string) {
+	const response = await fetch("/api/cart", {
+		method: "DELETE",
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({ cartItemId }),
+	});
+
+	if (!response.ok) {
+		throw new Error("Failed to remove item");
+	}
+}
