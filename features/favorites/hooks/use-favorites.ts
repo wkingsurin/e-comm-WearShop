@@ -1,6 +1,6 @@
 "use client";
 
-import { favoriteQueries } from "@/lib/react-query/query-options";
+import { favoriteQueries } from "@/features/favorites/query-options";
 import { useQuery } from "@tanstack/react-query";
 
 export function useFavorites() {

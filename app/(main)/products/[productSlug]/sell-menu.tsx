@@ -1,25 +1,23 @@
-import { mapProductToCartItem } from "@/app/mappers/mapper";
-import useCart from "@/hooks/useCart";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag, Truck } from "lucide-react";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 import { useState } from "react";
 import HeartButton from "@/components/shared/heart-button";
+import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
+import { mapProductToCartItem } from "@/app/mappers/mapper";
 
 interface IProps {
 	product: IProduct;
 	currentVariant: IVariant;
-	dynamicVariant: IVariant;
 	isFavorite: boolean;
 }
 
 export default function SellMenu({
 	product,
 	currentVariant,
-	dynamicVariant,
 	isFavorite,
 }: IProps) {
-	const { addItem } = useCart();
+	const { mutate: addItem } = useAddToCart();
 
 	const [quantityByVariant, setQuantityByVariant] = useState<
 		Record<string, number>
@@ -39,7 +37,7 @@ export default function SellMenu({
 
 	const quantity = quantityByVariant[currentVariant.id] ?? 1;
 
-	const itemToCart = mapProductToCartItem(product, dynamicVariant, quantity);
+	const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
 	return (
 		<div className="sticky top-[154px] flex flex-col gap-5 w-[280px]">
@@ -96,7 +94,11 @@ export default function SellMenu({
 									if (!currentVariant.attributes.size)
 										return console.log(`Select size!!!`);
 
-									addItem(itemToCart);
+									addItem({
+										variantId: currentVariant.id,
+										quantity,
+										item: itemToCart,
+									});
 								}}
 							>
 								<ShoppingBag className="size-4 stroke-[1px]" />

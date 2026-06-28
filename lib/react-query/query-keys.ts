@@ -1,3 +1,4 @@
 export const queryKeys = {
-	favorites: ["favorites"] as const,
+	favorites: ["favorites"],
+	cart: ["cart"],
 };

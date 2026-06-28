@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import { useUIStore } from "@/lib/store/ui.store";
 import { IColorOption, IProduct, IVariant } from "@/types/store/ui.types";
-import { mapProductToCartItem } from "@/app/mappers/mapper";
-import useCart from "@/hooks/useCart";
 import PageLink from "./page-link";
+import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
+import { mapProductToCartItem } from "@/app/mappers/mapper";
 
 export default function Description({
 	product,
@@ -31,19 +31,15 @@ export default function Description({
 	decrementQuantity: () => void;
 	incrementQuantity: () => void;
 }) {
-	const { addItem } = useCart();
+	const { mutate: addToCart } = useAddToCart();
 
-	const dynamicVariant = {
-		...currentVariant,
-		attributes: { colorId: activeColorId, size: selectedSize },
-	};
 	const selectedColorSlug = product.options.color.find(
 		(c) => c.id === activeColorId
 	)?.slug;
 
 	if (!selectedColorSlug) return;
 
-	const itemToCart = mapProductToCartItem(product, dynamicVariant, quantity);
+	const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
 	return (
 		<div className="flex flex-col items-center gap-6 w-full">
@@ -100,7 +96,13 @@ export default function Description({
 					<Button
 						className="flex-1"
 						disabled={selectedSize === "" ? true : false}
-						onClick={() => addItem(itemToCart)}
+						onClick={() =>
+							addToCart({
+								variantId: currentVariant.id,
+								quantity,
+								item: itemToCart,
+							})
+						}
 					>
 						<ShoppingBag className="size-4 stroke-[1px]" />
 						Pack

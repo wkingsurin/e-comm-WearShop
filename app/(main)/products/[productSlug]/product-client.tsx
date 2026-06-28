@@ -11,7 +11,7 @@ import LastSeenSection from "@/components/widgets/last-seen-section";
 import Gallery from "./gallery";
 import Description from "./description";
 import SellMenu from "./sell-menu";
-import { IProduct, IVariant } from "@/types/store/ui.types";
+import { IProduct } from "@/types/store/ui.types";
 import { useSearchParams } from "next/navigation";
 import {
 	getColorBySlug,
@@ -75,14 +75,6 @@ export default function ProductClient({ product }: IProps) {
 
 	if (!currentVariant || !images) return;
 
-	const dynamicVariant: IVariant = {
-		...currentVariant,
-		attributes: {
-			colorId: selectedColorId,
-			size: selectedSize ?? "",
-		},
-	};
-
 	return (
 		<Main>
 			<Section>
@@ -106,7 +98,6 @@ export default function ProductClient({ product }: IProps) {
 								<SellMenu
 									product={product}
 									currentVariant={currentVariant}
-									dynamicVariant={dynamicVariant}
 									isFavorite={!!favorites[product.id]}
 								/>
 							</div>

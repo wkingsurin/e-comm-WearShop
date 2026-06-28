@@ -1,7 +1,7 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Heart, RefreshCcw } from "lucide-react";
-import Image from "next/image";
-import { ICartItem } from "@/types/store/cart.types";
+import { ICartItem } from "@/features/cart/types";
 import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 
 export default function OrderItem({

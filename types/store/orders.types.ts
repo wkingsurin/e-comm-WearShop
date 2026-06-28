@@ -1,4 +1,4 @@
-import { ICartItem } from "./cart.types";
+import { ICartItem } from "@/features/cart/types";
 
 export type OrderStatus =
 	| "pending_payment"

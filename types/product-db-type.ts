@@ -10,3 +10,19 @@ export type ProductWithRelations = Prisma.ProductGetPayload<{
 		variants: true;
 	};
 }>;
+
+export type CartItemWithRelations = Prisma.CartItemGetPayload<{
+	include: {
+		variant: {
+			include: {
+				product: {
+					include: {
+						brand: true;
+						category: true;
+						productColors: { include: { images: true } };
+					};
+				};
+			};
+		};
+	};
+}>;

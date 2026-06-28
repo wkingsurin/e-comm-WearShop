@@ -3,7 +3,6 @@
 import { Heart, Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
-import useCart from "../../hooks/useCart";
 import { useUIStore } from "@/lib/store/ui.store";
 import { ICartItemProps } from "@/types/components/widgets/cart-item.types";
 import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
@@ -12,7 +11,6 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 	const openConfirm = useUIStore((s) => s.openConfirm);
 
 	const { mutate: toggle } = useToggleFavorite();
-	const { removeItem, incrementItem, decrementItem } = useCart();
 
 	const handleDelete = () => {
 		openConfirm({
@@ -20,7 +18,7 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 			content: "You`re sure? Undo this isn`t possible!",
 			confirmText: "Confirm",
 			cancelText: "Cancel",
-			onConfirm: () => removeItem(data),
+			onConfirm: () => console.log(`remove item`),
 		});
 	};
 
@@ -62,7 +60,7 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 					<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-							onClick={() => decrementItem(data)}
+							// onClick={() => decrementItem(data)}
 							disabled={data.quantity <= 1}
 						>
 							<Minus className="size-4 stroke-[1.5px] stroke-black" />
@@ -72,7 +70,7 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 						</span>
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-							onClick={() => incrementItem(data)}
+							// onClick={() => incrementItem(data)}
 							disabled={data.quantity === data.maxStock}
 						>
 							<Plus className="size-4 stroke-[1.5px] stroke-black" />

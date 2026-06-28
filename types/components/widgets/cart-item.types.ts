@@ -1,4 +1,4 @@
-import { ICartItem } from "../../store/cart.types";
+import { ICartItem } from "@/features/cart/types";
 
 export interface ICartItemProps {
 	data: ICartItem;
