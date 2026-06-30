@@ -94,6 +94,7 @@ export default function ProductClient({ product }: IProps) {
 									product={product}
 									currentVariant={currentVariant}
 									detailsData={detailsData}
+									activeColorId={selectedColorId}
 								/>
 								<SellMenu
 									product={product}

@@ -19,7 +19,7 @@ export const mapCartItem = (cartItem: CartItemWithRelations) => {
 		oldPrice: cartItem.variant.oldPrice,
 		image: color?.images[0].src ?? "",
 
-		selectedColor: cartItem.variant.colorId,
+		selectedColor: { id: cartItem.variant.colorId, value: color?.name ?? "" },
 		selectedSize: cartItem.variant.size,
 
 		quantity: cartItem.quantity,
@@ -27,6 +27,6 @@ export const mapCartItem = (cartItem: CartItemWithRelations) => {
 		maxStock: cartItem.variant.stock,
 
 		brandName: cartItem.variant.product.brand.name,
-		categorySlug: cartItem.variant.product.category.slug,
+		category: { ...cartItem.variant.product.category },
 	};
 };

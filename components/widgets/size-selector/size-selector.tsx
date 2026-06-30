@@ -31,7 +31,7 @@ export default function SizeSelector({
 				Size
 			</span>
 			<Select
-				items={sizes}
+				// items={sizes}
 				onValueChange={(value) => {
 					if (!value) return;
 
@@ -50,7 +50,11 @@ export default function SizeSelector({
 				<SelectContent>
 					<SelectGroup>
 						{sizes.map((s) => (
-							<SelectItem key={s.label} value={s.value}>
+							<SelectItem
+								key={s.value}
+								value={s.value}
+								disabled={!s.isAvailable}
+							>
 								{s.value}
 							</SelectItem>
 						))}

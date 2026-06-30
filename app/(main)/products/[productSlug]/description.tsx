@@ -1,22 +1,35 @@
 import { IDetails } from "./product-client";
 import { IProduct, IVariant } from "@/types/store/ui.types";
-import Colors from "@/components/widgets/color-selector/color-selector";
-import Sizes from "@/components/widgets/size-selector/size-selector";
+import { useMemo } from "react";
+import ColorSelector from "@/components/widgets/color-selector/color-selector";
+import SizeSelector from "@/components/widgets/size-selector/size-selector";
 
 interface IProps {
 	product: IProduct;
 	currentVariant: IVariant;
 	detailsData: IDetails[];
+	activeColorId: string;
 }
 
 export default function Description({
 	product,
 	currentVariant,
 	detailsData,
+	activeColorId,
 }: IProps) {
 	const colors = product.options.color;
 
-	const sizes = product.options.size;
+	const availableSizes = useMemo(() => {
+		return product.options.size.map((size) => ({
+			value: size.value,
+			isAvailable: product.variants.some(
+				(variant) =>
+					variant.attributes.colorId === activeColorId &&
+					variant.attributes.size === size.value &&
+					variant.stock > 0
+			),
+		}));
+	}, [product, activeColorId]);
 	const defaultSize = currentVariant.attributes.size;
 
 	return (
@@ -30,9 +43,12 @@ export default function Description({
 				</span>
 			</div>
 
-			<Colors colors={colors} type="Page" defaultSize={defaultSize} />
+			<ColorSelector colors={colors} type="Page" defaultSize={defaultSize} />
 
-			<Sizes sizes={sizes} initialSize={currentVariant.attributes.size} />
+			<SizeSelector
+				sizes={availableSizes}
+				initialSize={currentVariant.attributes.size}
+			/>
 			<div className="flex flex-col gap-[6px]">
 				<span className="text-lg font-medium leading-lg tracking-wider">
 					Details

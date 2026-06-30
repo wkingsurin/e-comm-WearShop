@@ -1,5 +1,5 @@
 export interface ISizesProps {
-	sizes: { label: string; value: string }[];
+	sizes: { value: string; isAvailable: boolean }[];
 	initialSize: string;
 	onChangeSize?: (size: string) => void;
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ColorSelector from "../../color-selector/color-selector";
-import Sizes from "../../size-selector/size-selector";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag } from "lucide-react";
 import { useUIStore } from "@/lib/store/ui.store";
@@ -8,6 +7,8 @@ import { IColorOption, IProduct, IVariant } from "@/types/store/ui.types";
 import PageLink from "./page-link";
 import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
 import { mapProductToCartItem } from "@/app/mappers/mapper";
+import { useMemo } from "react";
+import SizeSelector from "../../size-selector/size-selector";
 
 export default function Description({
 	product,
@@ -36,6 +37,18 @@ export default function Description({
 	const selectedColorSlug = product.options.color.find(
 		(c) => c.id === activeColorId
 	)?.slug;
+
+	const availableSizes = useMemo(() => {
+		return product.options.size.map((size) => ({
+			value: size.value,
+			isAvailable: product.variants.some(
+				(variant) =>
+					variant.attributes.colorId === activeColorId &&
+					variant.attributes.size === size.value &&
+					variant.stock > 0
+			),
+		}));
+	}, [product, activeColorId]);
 
 	if (!selectedColorSlug) return;
 
@@ -68,8 +81,8 @@ export default function Description({
 				type="Modal"
 			/>
 			<div className="flex flex-col items-center gap-2 w-full">
-				<Sizes
-					sizes={product.options.size}
+				<SizeSelector
+					sizes={availableSizes}
 					initialSize={selectedSize}
 					onChangeSize={selectSize}
 				/>

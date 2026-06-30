@@ -52,7 +52,10 @@ export interface IProduct {
 	isAvailable: boolean;
 	isNew?: boolean;
 
-	options: { color: IColorOption[]; size: { label: string; value: string }[] };
+	options: {
+		color: IColorOption[];
+		size: { value: string }[];
+	};
 
 	variants: IVariant[];
 }

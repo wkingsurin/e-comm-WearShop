@@ -11,7 +11,7 @@ export const mapProduct = (product: ProductWithRelations): IProduct => {
 	const colorsMap = new Map(colors.map((color) => [color.id, color]));
 	const sizes = [...new Set(product.variants.map((variant) => variant.size))]
 		.sort()
-		.map((size) => ({ label: size, value: size }));
+		.map((size) => ({ value: size }));
 
 	const mappedProduct: IProduct = {
 		id: product.id,

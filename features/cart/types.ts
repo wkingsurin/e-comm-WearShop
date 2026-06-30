@@ -13,14 +13,14 @@ export interface ICartItem {
 
 	image: string;
 
-	selectedColor: string;
+	selectedColor: { id: string; value: string };
 	selectedSize: string;
 
 	quantity: number;
 	maxStock: number;
 
 	brandName: string;
-	categorySlug: string;
+	category: { id: string; name: string; slug: string };
 
 	currency: string;
 }

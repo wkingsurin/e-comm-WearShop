@@ -56,9 +56,11 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 						<span className="font-medium text-lg leading-lg tracking-wider">
 							{data.brandName}
 						</span>
-						<p className="tracking-wider leading-lg">{data.categorySlug}</p>
+						<p className="tracking-wider leading-lg">{data.category.name}</p>
 						<p className="tracking-wider leading-lg">{data.selectedSize}</p>
-						<p className="tracking-wider leading-lg">{data.selectedColor}</p>
+						<p className="tracking-wider leading-lg">
+							{data.selectedColor.value}
+						</p>
 					</div>
 
 					<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
