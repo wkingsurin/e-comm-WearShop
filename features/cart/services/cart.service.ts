@@ -57,6 +57,7 @@ export async function getCartItems(userId: string): Promise<ICart> {
 		where: { userId },
 		include: {
 			items: {
+				orderBy: { createdAt: "desc" },
 				include: {
 					variant: {
 						include: {

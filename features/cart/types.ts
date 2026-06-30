@@ -23,6 +23,8 @@ export interface ICartItem {
 	category: { id: string; name: string; slug: string };
 
 	currency: string;
+
+	createdAt: Date;
 }
 
 export interface ICart {

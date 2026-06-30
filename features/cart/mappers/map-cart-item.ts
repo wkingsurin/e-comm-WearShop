@@ -28,5 +28,7 @@ export const mapCartItem = (cartItem: CartItemWithRelations) => {
 
 		brandName: cartItem.variant.product.brand.name,
 		category: { ...cartItem.variant.product.category },
+
+		createdAt: cartItem.createdAt,
 	};
 };
