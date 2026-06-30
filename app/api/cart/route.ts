@@ -42,9 +42,9 @@ export async function PATCH(request: Request) {
 
 	const { cartItemId, quantity } = await request.json();
 
-	await updateQuantity(session.user.id, cartItemId, quantity);
+	const cart = await updateQuantity(session.user.id, cartItemId, quantity);
 
-	return NextResponse.json({ success: true });
+	return NextResponse.json(cart);
 }
 
 export async function DELETE(request: Request) {

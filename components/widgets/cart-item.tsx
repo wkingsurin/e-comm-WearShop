@@ -1,18 +1,16 @@
 "use client";
 
-import { Heart, Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { useUIStore } from "@/lib/store/ui.store";
 import { ICartItemProps } from "@/types/components/widgets/cart-item.types";
-import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
-import { useUpdateQunatity } from "@/features/cart/hooks/use-update-quantity";
 import useRemoveItem from "@/features/cart/hooks/use-remove-item";
+import { useUpdateQunatity } from "@/features/cart/hooks/use-update-quantity";
 
-export default function CartItem({ data, isFavorite }: ICartItemProps) {
+export default function CartItem({ data }: ICartItemProps) {
 	const openConfirm = useUIStore((s) => s.openConfirm);
 
-	const { mutate: toggle } = useToggleFavorite();
 	const { mutate: updateQuantity } = useUpdateQunatity();
 	const { mutate: removeItem } = useRemoveItem();
 
@@ -36,19 +34,6 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 					height={240}
 					className="rounded-md w-full h-full object-contain cursor-zoom-in"
 				/>
-				<Button
-					size="icon-lg"
-					className={`group/tag absolute top-[6px] right-[6px] bg-black/10 backdrop-blur-[12px] hover:bg-[#EC0404]/10 ${
-						isFavorite && "bg-[#EC0404]/10"
-					}`}
-					onClick={() => toggle(data.id)}
-				>
-					<Heart
-						className={`size-5 stroke-black stroke-[1.5px] group-hover/tag:stroke-[#EC0404] group-hover/tag:fill-[#EC0404] ${
-							isFavorite && "fill-[#EC0404] stroke-[#EC0404]!"
-						}`}
-					/>
-				</Button>
 			</div>
 			<div className="flex gap-[60px] justify-between flex-1 py-3">
 				<div className="flex flex-col items-start justify-between">
@@ -66,7 +51,6 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 					<div className="group/amount flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-							// onClick={() => decrementItem(data)}
 							onClick={() =>
 								updateQuantity({
 									cartItemId: data.cartItemId,
@@ -82,7 +66,6 @@ export default function CartItem({ data, isFavorite }: ICartItemProps) {
 						</span>
 						<Button
 							className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-							// onClick={() => incrementItem(data)}
 							onClick={() =>
 								updateQuantity({
 									cartItemId: data.cartItemId,
