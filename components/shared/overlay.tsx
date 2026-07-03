@@ -4,10 +4,12 @@ import { useUIStore } from "@/lib/store/ui.store";
 import { useEffect, useRef } from "react";
 import ConfirmModal from "../widgets/modal/confirm/confirm";
 import QuickView from "../widgets/modal/quick-view/quick-view";
+import DialogModal from "../widgets/modal/dialog/dialog";
 
 const MODAL_COMPONENTS = {
 	QuickView: QuickView,
 	ConfirmModal: ConfirmModal,
+	DialogModal: DialogModal,
 } as const;
 
 type ModalType = keyof typeof MODAL_COMPONENTS;

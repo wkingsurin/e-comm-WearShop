@@ -9,7 +9,12 @@ export interface IModal {
 		product: IProduct | IOrder | null;
 		variantId: string | null;
 	};
-	contentType: "QuickView" | "CancelOrder" | "ConfirmModal" | null;
+	contentType:
+		| "QuickView"
+		| "CancelOrder"
+		| "ConfirmModal"
+		| "DialogModal"
+		| null;
 }
 
 export interface IColorOption {
@@ -68,11 +73,17 @@ export interface ConfirmData {
 	onConfirm: () => void;
 }
 
+export interface DialogData {
+	title: string;
+	content: ReactNode;
+}
+
 export type UIState = {
 	overlay: IOverlay;
 	modal: IModal;
 	sortOption: "higher" | "lower";
 	confirmData: ConfirmData | null;
+	dialogData: DialogData | null;
 
 	updateOverlay: (updatedOverlay: IOverlay) => void;
 	updateModal: (updatedModal: IModal) => void;
@@ -84,4 +95,6 @@ export type UIState = {
 	updateSortOption: (option: "higher" | "lower") => void;
 	openConfirm: (data: ConfirmData) => void;
 	clearConfirm: () => void;
+	openDialog: (data: DialogData) => void;
+	clearDialog: () => void;
 };

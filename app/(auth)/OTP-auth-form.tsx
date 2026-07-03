@@ -1,6 +1,5 @@
 "use client";
 
-import Form from "@/components/widgets/form/form";
 import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -8,7 +7,11 @@ import { signIn } from "next-auth/react";
 import { useForm, FormProvider } from "react-hook-form";
 import { stepOneSchema } from "@/lib/validation/step-one.schema";
 import { stepTwoSchema } from "@/lib/validation/step-two.schema";
-import TelegramButton from "@/components/widgets/form/telegram-button";
+import TelegramButton from "@/components/shared/form/telegram-button";
+import Form from "@/components/shared/form/form";
+import DigitField from "@/components/shared/form/digit-field";
+import { Button } from "@/components/ui/button";
+import FormInput from "@/components/shared/form/form-input";
 
 interface IEmail {
 	email: string;
@@ -123,28 +126,57 @@ export default function OTPAuthForm() {
 				</p>
 			)}
 			<FormProvider {...methods}>
-				<Form
-					options={{
-						title: step === 1 ? "SIGN IN / REGISTRATION" : "CONFIRMATION",
-						subtitle:
-							step === 2
-								? {
-										value: `Code sent to ${userEmail}`,
-										linkText: "Change email",
-										linkRef: "#",
-								  }
-								: undefined,
-						emailField: step === 1,
-						codeField: step === 2,
-						buttonText: methods.formState.isSubmitting
-							? "Processing..."
-							: step === 1
-							? "Send code"
-							: "Verify & Sign In",
-					}}
-					onSubmit={methods.handleSubmit(onSubmit)}
-					onPrevStep={handleBackToStepOne}
-				></Form>
+				<Form onSubmit={methods.handleSubmit(onSubmit)}>
+					<div className="flex flex-col items-center gap-10 max-w-[480px] w-full p-6 rounded-xl bg-[#E5E7EB]/25 border border-[#E5E7EB]">
+						<div className="flex flex-col items-center gap-4 w-full">
+							<span className="text-lg text-center font-medium leading-md tracking-wider">
+								{step === 1 ? "SIGN IN / REGISTRATION" : "CONFIRMATION"}
+							</span>
+							<hr className="w-full bg-[#E5E7EB]" />
+							{step === 2 && (
+								<div className="flex items-center gap-4">
+									<p className="text-md tracking-wider leading-md text-black/50">
+										Code sent to {userEmail}
+									</p>
+									<Button
+										onClick={handleBackToStepOne}
+										variant="link"
+										className="hover:no-underline text-md text-black/75 hover:text-black h-auto w-auto p-0"
+									>
+										Change email
+									</Button>
+								</div>
+							)}
+						</div>
+
+						<div className="flex flex-col items-center w-full gap-5">
+							{step === 1 && (
+								<FormInput
+									name="email"
+									label="Email"
+									props={{ id: "email", type: " email" }}
+								/>
+							)}
+
+							{step === 2 && (
+								<div className="flex flex-col items-center gap-3">
+									<p className="text-md tracking-wider leading-md text-black/75">
+										Enter verification code
+									</p>
+									<DigitField name="code" />
+								</div>
+							)}
+
+							<Button type="submit" className="w-[240px]">
+								{methods.formState.isSubmitting
+									? "Processing..."
+									: step === 1
+									? "Send code"
+									: "Verify & Sign In"}
+							</Button>
+						</div>
+					</div>
+				</Form>
 			</FormProvider>
 			{step === 1 && <TelegramButton />}
 		</div>

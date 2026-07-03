@@ -9,6 +9,7 @@ export const useUIStore = create<UIState>()((set) => ({
 	},
 	sortOption: "lower",
 	confirmData: null,
+	dialogData: null,
 
 	updateOverlay: (updatedOverlay) => set({ overlay: { ...updatedOverlay } }),
 	updateModal: (updatedModal) => set({ modal: { ...updatedModal } }),
@@ -33,5 +34,17 @@ export const useUIStore = create<UIState>()((set) => ({
 			overlay: { open: false },
 			modal: { ...state.modal, contentType: null },
 			confirmData: null,
+		})),
+	openDialog: (data) =>
+		set((state) => ({
+			overlay: { open: true },
+			modal: { ...state.modal, contentType: "DialogModal" },
+			dialogData: data,
+		})),
+	clearDialog: () =>
+		set((state) => ({
+			overlay: { open: false },
+			modal: { ...state.modal, contentType: null },
+			dialogData: null,
 		})),
 }));
