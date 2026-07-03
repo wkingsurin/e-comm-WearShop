@@ -106,3 +106,8 @@ export type CartItem = Prisma.CartItemModel
  * 
  */
 export type ProductColor = Prisma.ProductColorModel
+/**
+ * Model Checkout
+ * 
+ */
+export type Checkout = Prisma.CheckoutModel

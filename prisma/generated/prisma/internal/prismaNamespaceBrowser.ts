@@ -63,7 +63,8 @@ export const ModelName = {
   VerificationToken: 'VerificationToken',
   Cart: 'Cart',
   CartItem: 'CartItem',
-  ProductColor: 'ProductColor'
+  ProductColor: 'ProductColor',
+  Checkout: 'Checkout'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -155,6 +156,12 @@ export const OrderScalarFieldEnum = {
   orderNumber: 'orderNumber',
   userId: 'userId',
   status: 'status',
+  customerName: 'customerName',
+  customerEmail: 'customerEmail',
+  shippingAddress: 'shippingAddress',
+  shippingCity: 'shippingCity',
+  shippingCountry: 'shippingCountry',
+  shippingPostalCode: 'shippingPostalCode',
   paymentMethod: 'paymentMethod',
   deliveryMethod: 'deliveryMethod',
   currency: 'currency',
@@ -242,6 +249,22 @@ export const ProductColorScalarFieldEnum = {
 } as const
 
 export type ProductColorScalarFieldEnum = (typeof ProductColorScalarFieldEnum)[keyof typeof ProductColorScalarFieldEnum]
+
+
+export const CheckoutScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  address: 'address',
+  city: 'city',
+  country: 'country',
+  postalCode: 'postalCode',
+  paymentMethod: 'paymentMethod',
+  deliveryMethod: 'deliveryMethod',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CheckoutScalarFieldEnum = (typeof CheckoutScalarFieldEnum)[keyof typeof CheckoutScalarFieldEnum]
 
 
 export const SortOrder = {

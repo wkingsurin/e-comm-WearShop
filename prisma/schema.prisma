@@ -89,7 +89,8 @@ model User {
   favorites Favorite[]
   orders    Order[]
 
-  cart Cart?
+  cart     Cart?
+  checkout Checkout?
 }
 
 enum OrderStatus {
@@ -134,7 +135,15 @@ model Order {
 
   user User? @relation(fields: [userId], references: [id])
 
-  status OrderStatus
+  status OrderStatus @default(PENDING)
+
+  customerName  String
+  customerEmail String
+
+  shippingAddress    String
+  shippingCity       String
+  shippingCountry    String
+  shippingPostalCode String
 
   paymentMethod  PaymentMethod
   deliveryMethod DeliveryMethod
@@ -142,9 +151,9 @@ model Order {
   currency String
 
   totalItemsPrice Int
-  discountAmount  Int
+  discountAmount  Int @default(0)
 
-  deliveryPrice Int
+  deliveryPrice Int @default(0)
   totalPrice    Int
 
   isPaid Boolean @default(false)
@@ -261,4 +270,22 @@ model ProductColor {
 
   @@unique([productId, name])
   @@index([productId])
+}
+
+model Checkout {
+  id String @id @default(cuid())
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  address    String?
+  city       String?
+  country    String?
+  postalCode String?
+
+  paymentMethod  PaymentMethod?
+  deliveryMethod DeliveryMethod?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
