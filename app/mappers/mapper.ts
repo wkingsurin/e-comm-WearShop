@@ -1,4 +1,4 @@
-import { ICartItem } from "@/types/store/cart.types";
+import { ICartItem } from "@/features/cart/types";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 
 export const mapProductToCartItem = (
@@ -6,6 +6,10 @@ export const mapProductToCartItem = (
 	currentVariant: IVariant,
 	quantity: ICartItem["quantity"]
 ): ICartItem => {
+	const color = data.options.color.find(
+		(color) => color.id === currentVariant.attributes.colorId
+	);
+
 	return {
 		id: data.id,
 		title: data.title,
@@ -21,7 +25,10 @@ export const mapProductToCartItem = (
 		oldPrice: currentVariant.oldPrice,
 		image: data.options.color[0].images[0].src,
 
-		selectedColor: currentVariant.attributes.colorId,
+		selectedColor: {
+			id: currentVariant.attributes.colorId,
+			value: color?.name ?? "",
+		},
 		selectedSize: currentVariant.attributes.size,
 
 		quantity,
@@ -29,7 +36,9 @@ export const mapProductToCartItem = (
 		maxStock: currentVariant.stock,
 
 		brandName: data.brand.name,
-		categorySlug: data.category.slug,
+		category: data.category,
+
+		createdAt: new Date(),
 	};
 };
 

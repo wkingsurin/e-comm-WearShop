@@ -5,8 +5,8 @@ import Credentials from "next-auth/providers/credentials";
 import { ZodError } from "zod";
 import { otpAuthSchema } from "./lib/validation/otp-auth.schems";
 import crypto from "crypto";
-import { ICartItem } from "./types/store/cart.types";
-import { IFavorite } from "./types/store/favorites.types";
+import { ICartItem } from "./features/cart/types";
+import { IFavorite } from "./types/components/shared/shared.types";
 
 function verifyTelegramAuth(data: any, botToken: string) {
 	const { hash, ...checkData } = data;

@@ -50,9 +50,11 @@ export default function OrderItem({
 						<span className="font-medium text-lg leading-lg tracking-wider">
 							{data.title}
 						</span>
-						<p className="tracking-wider leading-lg">{data.categorySlug}</p>
+						<p className="tracking-wider leading-lg">{data.category.name}</p>
 						<p className="tracking-wider leading-lg">{data.selectedSize}</p>
-						<p className="tracking-wider leading-lg">{data.selectedColor}</p>
+						<p className="tracking-wider leading-lg">
+							{data.selectedColor.value}
+						</p>
 					</div>
 
 					<Button className="flex gap-3" onClick={() => orderAgain(data.id)}>
