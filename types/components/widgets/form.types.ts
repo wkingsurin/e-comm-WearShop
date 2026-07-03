@@ -10,21 +10,24 @@ interface IFormOptions {
 }
 
 export interface IFormProps {
-	options: IFormOptions;
 	onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
-	onPrevStep: (e: React.MouseEvent) => void;
+	children: React.ReactNode;
+	className?: string;
 }
+// export interface IFormProps {
+// 	options: IFormOptions;
+// 	onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
+// 	onPrevStep: (e: React.MouseEvent) => void;
+// }
 
 export interface IDigitFieldProps {
 	name: string;
 }
 
-export interface IInputFieldProps {
-	id: string;
-	label: string;
+export interface IFormInputProps {
 	name: string;
-	placeholder: string;
-	type: HTMLInputTypeAttribute;
+	label: string;
+	props: React.InputHTMLAttributes<HTMLInputElement>;
 }
 
 export interface IPasswordFieldProps {
