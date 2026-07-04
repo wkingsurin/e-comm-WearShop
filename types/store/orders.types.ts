@@ -1,33 +1,49 @@
-export type OrderStatus =
-	| "pending_payment"
-	| "paid"
-	| "processing"
-	| "shipped"
-	| "delivered"
-	| "completed"
-	| "CANCELLED"
-	| "refunded";
+import {
+	DeliveryMethod,
+	OrderStatus,
+	PaymentMethod,
+} from "@/prisma/generated/prisma/enums";
 
-export type PaymentMethod = "card_online" | "sbp" | "cash_on_delivery";
-
-export type DeliveryMethod = "pickup_point" | "courier" | "post";
-
-export interface IOrderAddress {
-	country: string;
-	city: string;
-	street: string;
-	house: string;
-	apartment?: string;
-	postalCode?: string;
-	pickupPointId?: string;
+export interface IOrderCustomer {
+	name: string;
+	email: string;
 }
 
-export interface IOrderUser {
-	userId?: string;
-	firstName: string;
-	lastName: string;
-	email: string;
-	phone: string;
+export interface IOrderShipping {
+	address: string;
+	city: string;
+	country: string;
+	postalCode: string;
+}
+
+export interface IOrderDelivery {
+	method: DeliveryMethod;
+}
+
+export interface IOrderPayment {
+	method: PaymentMethod;
+	isPaid: boolean;
+}
+
+export interface IOrderItem {
+	id: string;
+	orderId: string;
+	productId: string;
+	variantId: string;
+	title: string;
+	sku: string;
+	price: number;
+	quantity: number;
+	selectedColor: string;
+	selectedSize: string;
+	image: string;
+}
+
+export interface IOrderTotals {
+	items: number;
+	discount: number;
+	delivery: number;
+	total: number;
 }
 
 export interface IOrder {
@@ -36,51 +52,20 @@ export interface IOrder {
 	createdAt: string;
 	updatedAt: string;
 
-	user: IOrderUser;
+	customer: IOrderCustomer;
 
-	customerName: string;
-	customerEmail: string;
+	shipping: IOrderShipping;
 
-	shippingAddress: string;
-	shippingCity: string;
-	shippingCountry: string;
-	shippingPostalCode: string;
-
-	deliveryMethod: DeliveryMethod;
-	deliveryAddress: IOrderAddress;
-
-	items: {
-		id: string;
-
-		orderId: string;
-
-		productId: string;
-		variantId: string;
-
-		title: string;
-
-		sku: string;
-
-		price: number;
-
-		quantity: number;
-
-		selectedColor: string;
-		selectedSize: string;
-
-		image: string;
-	}[];
+	items: IOrderItem[];
 
 	currency: string;
-	totalItemsPrice: number;
-	discountAmount: number;
-	deliveryPrice: number;
-	totalPrice: number;
+
+	totals: IOrderTotals;
 
 	status: OrderStatus;
-	paymentMethod: PaymentMethod;
-	isPaid: boolean;
-	paymentId?: string;
+
+	payment: IOrderPayment;
+	delivery: IOrderDelivery;
 }
 
 export interface OrdersState {

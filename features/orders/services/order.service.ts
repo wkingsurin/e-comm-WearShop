@@ -9,6 +9,7 @@ import { createOrderEntity, createOrderItems } from "./order.factory";
 import { decreaseStock } from "./stock.service";
 import { clearCart } from "./cart.service";
 import { Prisma } from "@/prisma/generated/prisma/client";
+import { mapOrder } from "../mappers/map-order";
 
 export async function createOrder(userId: string) {
 	return prisma.$transaction(async (tx) => {
@@ -57,11 +58,13 @@ export async function createOrder(userId: string) {
 }
 
 export async function getOrders(userId: string) {
-	return prisma.order.findMany({
+	const orders = await prisma.order.findMany({
 		where: { userId },
 		orderBy: { createdAt: "desc" },
 		include: { items: true },
 	});
+
+	return orders.map(mapOrder);
 }
 
 export async function getOrder(tx: Prisma.TransactionClient, orderId: string) {
