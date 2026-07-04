@@ -34,7 +34,9 @@ export async function cancelOrder(orderId: string) {
 	});
 
 	if (!response.ok) {
-		throw new Error("Failed to cancel order");
+		const error = await response.json();
+
+		throw new Error(error.message);
 	}
 
 	return response.json();

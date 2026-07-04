@@ -8,7 +8,7 @@ export async function decreaseStock(
 	await Promise.all(
 		items.map((item) =>
 			tx.variant.update({
-				where: { id: item.id },
+				where: { id: item.variantId },
 				data: { stock: { decrement: item.quantity } },
 			})
 		)

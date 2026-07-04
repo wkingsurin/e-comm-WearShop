@@ -1,5 +1,6 @@
 import { CartItemWithVariant, CartWithRelations } from "@/features/cart/types";
 import { Checkout } from "@/prisma/generated/prisma/client";
+import { ValidCheckout } from "../types";
 
 export function validateCart(
 	cart: CartWithRelations | null
@@ -15,7 +16,7 @@ export function validateCart(
 
 export function validateCheckout(
 	checkout: Checkout | null
-): asserts checkout is Checkout {
+): asserts checkout is ValidCheckout {
 	if (!checkout) {
 		throw new Error("Checkout not found");
 	}

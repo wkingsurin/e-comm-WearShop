@@ -1,6 +1,7 @@
-import { Checkout, Prisma, User } from "@/prisma/generated/prisma/client";
+import { Prisma, User } from "@/prisma/generated/prisma/client";
 import { generateOrderNumber } from "./generate-order-number";
 import { CartItemWithVariant } from "@/features/cart/types";
+import { ValidCheckout } from "../types";
 
 interface Totals {
 	totalItemsPrice: number;
@@ -12,7 +13,7 @@ interface Totals {
 export function createOrderEntity(
 	tx: Prisma.TransactionClient,
 	user: User,
-	checkout: Checkout,
+	checkout: ValidCheckout,
 	totals: Totals,
 	userId: string
 ) {
@@ -27,13 +28,13 @@ export function createOrderEntity(
 			customerName: user.name ?? userId,
 			customerEmail: user.email,
 
-			shippingAddress: checkout.address!,
-			shippingCity: checkout.city!,
-			shippingCountry: checkout.country!,
-			shippingPostalCode: checkout.postalCode!,
+			shippingAddress: checkout.address,
+			shippingCity: checkout.city,
+			shippingCountry: checkout.country,
+			shippingPostalCode: checkout.postalCode,
 
-			paymentMethod: checkout.paymentMethod!,
-			deliveryMethod: checkout.deliveryMethod!,
+			paymentMethod: checkout.paymentMethod,
+			deliveryMethod: checkout.deliveryMethod,
 
 			currency: "USD",
 

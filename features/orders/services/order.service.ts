@@ -12,10 +12,8 @@ import { Prisma } from "@/prisma/generated/prisma/client";
 
 export async function createOrder(userId: string) {
 	return prisma.$transaction(async (tx) => {
-		// const user = await tx.user.findUnique({ where: { id: userId } });
 		const user = await tx.user.findUniqueOrThrow({ where: { id: userId } });
 
-		// 1. get cart
 		const cart = await tx.cart.findUnique({
 			where: { userId },
 			include: {
@@ -32,7 +30,6 @@ export async function createOrder(userId: string) {
 			},
 		});
 
-		// 2. get checkout
 		const checkout = await tx.checkout.findUnique({ where: { userId } });
 
 		validateCart(cart);
@@ -49,7 +46,13 @@ export async function createOrder(userId: string) {
 
 		await clearCart(tx, cart.id);
 
-		return getOrder(tx, order.id);
+		const createdOrder = await getOrder(tx, order.id);
+
+		if (!createdOrder) {
+			throw new Error("Order not created");
+		}
+
+		return createdOrder;
 	});
 }
 
@@ -70,14 +73,12 @@ export async function getOrder(tx: Prisma.TransactionClient, orderId: string) {
 
 export async function cancelOrder(userId: string, orderId: string) {
 	return prisma.$transaction(async (tx) => {
-		// get order
-		const order = await tx.order.findUnique({
+		const order = await tx.order.findUniqueOrThrow({
 			where: { id: orderId },
 			include: { items: true },
 		});
 
-		// validate order
-		if (order?.userId !== userId) {
+		if (order.userId !== userId) {
 			throw new Error("Forbidden");
 		}
 
@@ -85,7 +86,6 @@ export async function cancelOrder(userId: string, orderId: string) {
 			throw new Error("Order already cancelled");
 		}
 
-		// return product stock
 		await Promise.all(
 			order.items.map((item) =>
 				tx.variant.update({
@@ -97,8 +97,7 @@ export async function cancelOrder(userId: string, orderId: string) {
 			)
 		);
 
-		// clear order
-		await tx.order.update({
+		return tx.order.update({
 			where: { id: orderId },
 			data: { status: "CANCELLED" },
 		});

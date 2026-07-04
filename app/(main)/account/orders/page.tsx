@@ -1,26 +1,25 @@
-"use client";
+import OrdersClient from "./client";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { auth } from "@/auth";
+import { EMPTY_ORDERS } from "@/features/orders/constants";
+import { getQueryClient } from "@/lib/react-query/get-query-client";
+import { queryKeys } from "@/lib/react-query/query-keys";
+import { getOrders } from "@/features/orders/services/order.service";
 
-import Order from "./order";
-import Dummy from "@/components/shared/dummy";
-import { Package } from "lucide-react";
-import DashboardWrapper from "@/components/shared/dashboard-wrapper";
-import { IOrder } from "@/types/store/orders.types";
+export default async function Orders() {
+	const session = await auth();
 
-export default function Orders() {
-	const ordersList: IOrder[] = [];
+	const orders = session?.user?.id
+		? await getOrders(session.user.id)
+		: EMPTY_ORDERS;
+
+	const queryClient = getQueryClient();
+
+	queryClient.setQueryData(queryKeys.orders, orders);
 
 	return (
-		<DashboardWrapper pageTitle="Orders">
-			{ordersList.length > 0 && (
-				<>
-					{ordersList.map((order) => {
-						return <Order key={order.id} data={order} />;
-					})}
-				</>
-			)}
-			{ordersList.length === 0 && (
-				<Dummy icon={Package} text="You haven`t orders" />
-			)}
-		</DashboardWrapper>
+		<HydrationBoundary state={dehydrate(queryClient)}>
+			<OrdersClient />
+		</HydrationBoundary>
 	);
 }
