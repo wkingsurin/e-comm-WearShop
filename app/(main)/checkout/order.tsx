@@ -5,6 +5,7 @@ import { ICartItem } from "@/features/cart/types";
 import PaymentSelector from "./payment-selector";
 import { useCheckout } from "@/features/checkout/hooks/use-checkout";
 import { EMPTY_CHECKOUT } from "@/features/checkout/constants";
+import DeliverySelector from "./delivery-selector";
 
 export default function Order({
 	items,
@@ -24,6 +25,7 @@ export default function Order({
 				<OrderItems items={items} isEmpty={totalItems === 0} />
 			</DashboardWrapper>
 			<PaymentSelector method={checkout.paymentMethod} />
+			<DeliverySelector method={checkout.deliveryMethod} />
 			<Shipping shippingData={checkout} />
 		</div>
 	);

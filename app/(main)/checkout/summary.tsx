@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useCreateOrder } from "@/features/orders/hooks/use-create-order";
 
 interface ISummary {
 	options: { totalItems: number; subtotal: number; total: number };
@@ -6,6 +7,8 @@ interface ISummary {
 
 export default function Summary({ options }: ISummary) {
 	const { totalItems, subtotal, total } = options;
+
+	const { mutate, isPending } = useCreateOrder();
 
 	return (
 		<div className="sticky top-[154px] flex flex-col gap-5 min-w-[35%]">
@@ -36,10 +39,7 @@ export default function Summary({ options }: ISummary) {
 					<p>$ {total / 100 + 12 - 5.1 + "0"}</p>
 				</div>
 				<div className="flex flex-col gap-2">
-					<Button
-						// onClick={onPurchase}
-						disabled={totalItems === 0}
-					>
+					<Button onClick={() => mutate()} disabled={isPending}>
 						Place order
 					</Button>
 					<p className="text-center font-mono text-sm leading-md text-black/50">
