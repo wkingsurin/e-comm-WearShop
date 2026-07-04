@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import {
 	createOrder,
 	getOrders,
-} from "@/features/order/services/order.service";
+} from "@/features/orders/services/order.service";
 import { NextResponse } from "next/server";
 
 export async function GET() {

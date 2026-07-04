@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { cancelOrder } from "@/features/order/services/order.service";
+import { cancelOrder } from "@/features/orders/services/order.service";
 import { NextResponse } from "next/server";
 
 export async function PATCH(request: Request) {

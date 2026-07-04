@@ -1,5 +1,3 @@
-import { ICartItem } from "@/features/cart/types";
-
 export type OrderStatus =
 	| "pending_payment"
 	| "paid"
@@ -7,7 +5,7 @@ export type OrderStatus =
 	| "shipped"
 	| "delivered"
 	| "completed"
-	| "cancelled"
+	| "CANCELLED"
 	| "refunded";
 
 export type PaymentMethod = "card_online" | "sbp" | "cash_on_delivery";
@@ -39,10 +37,39 @@ export interface IOrder {
 	updatedAt: string;
 
 	user: IOrderUser;
+
+	customerName: string;
+	customerEmail: string;
+
+	shippingAddress: string;
+	shippingCity: string;
+	shippingCountry: string;
+	shippingPostalCode: string;
+
 	deliveryMethod: DeliveryMethod;
 	deliveryAddress: IOrderAddress;
 
-	items: ICartItem[];
+	items: {
+		id: string;
+
+		orderId: string;
+
+		productId: string;
+		variantId: string;
+
+		title: string;
+
+		sku: string;
+
+		price: number;
+
+		quantity: number;
+
+		selectedColor: string;
+		selectedSize: string;
+
+		image: string;
+	}[];
 
 	currency: string;
 	totalItemsPrice: number;

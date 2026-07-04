@@ -1,3 +1,5 @@
+import { Prisma } from "@/prisma/generated/prisma/client";
+
 export interface ICartItem {
 	id: string;
 	cartItemId: string;
@@ -41,3 +43,17 @@ export interface AddToCartInput {
 
 	item: ICartItem;
 }
+
+export type CartItemWithVariant = CartWithRelations["items"][number];
+
+export type CartWithRelations = Prisma.CartGetPayload<{
+	include: {
+		items: {
+			include: {
+				variant: {
+					include: { product: true; color: { include: { images: true } } };
+				};
+			};
+		};
+	};
+}>;
