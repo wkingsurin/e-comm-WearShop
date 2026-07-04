@@ -169,8 +169,8 @@ model OrderItem {
 
   orderId String
 
-  productId String?
-  variantId String?
+  productId String
+  variantId String
 
   title String
 
