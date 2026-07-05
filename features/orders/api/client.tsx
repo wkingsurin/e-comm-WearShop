@@ -26,6 +26,18 @@ export async function getOrders(): Promise<IOrder[]> {
 	return response.json();
 }
 
+export async function getOrder(orderId: string): Promise<IOrder> {
+	const response = await fetch(`/api/orders/${orderId}`, {
+		credentials: "include",
+	});
+
+	if (!response.ok) {
+		throw new Error("Failed to fetch orders");
+	}
+
+	return response.json();
+}
+
 export async function cancelOrder(orderId: string) {
 	const response = await fetch("/api/orders/cancel", {
 		method: "PATCH",

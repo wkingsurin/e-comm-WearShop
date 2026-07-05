@@ -8,12 +8,14 @@ export default function OrderContent({ data }: { data: IOrder }) {
 				<span className="font-normal tracking-wider leading-lg">
 					Delivery method:
 				</span>
-				<p className="font-mono capitalize leading-lg">{data.deliveryMethod}</p>
+				<p className="font-mono capitalize leading-lg">
+					{data.delivery.method}
+				</p>
 			</div>
 			<div className="flex justify-between">
 				<span className="font-normal tracking-wider leading-lg">Goods:</span>
 				<span className="font-medium tracking-wider leading-lg">
-					$ {data.totalItemsPrice / 100 + "0"}
+					$ {data.totals.total / 100 + "0"}
 				</span>
 			</div>
 			<OrderItems data={data.items} currency={data.currency} />

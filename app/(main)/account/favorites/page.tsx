@@ -4,12 +4,13 @@ import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
 import { Heart } from "lucide-react";
 import { getFavorites } from "./actions";
+import DashboardWrapperTitle from "@/components/shared/dashboard-wrapper-title";
 
 export default async function Favorites() {
 	const favorites = await getFavorites();
 
 	return (
-		<DashboardWrapper pageTitle="Favorites">
+		<DashboardWrapper pageTitle={<DashboardWrapperTitle title="Favorites" />}>
 			<div className="flex items-center gap-4 h-full">
 				{favorites.length !== 0 && (
 					<>

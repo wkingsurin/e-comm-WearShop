@@ -2,5 +2,6 @@ export const queryKeys = {
 	favorites: ["favorites"],
 	cart: ["cart"],
 	checkout: ["checkout"],
-	orders: ["orders"],
+	orders: () => ["orders"],
+	order: (id: string) => ["orders", id],
 };

@@ -19,7 +19,7 @@ export default function OrderConfirmModal({ data }: IOrderProps) {
 				<div className="flex justify-between">
 					<span className="tracking-wider leading-base">Goods:</span>
 					<p className="font-medium tracking-wider leading-base">
-						$ {data.totalItemsPrice / 100 + "0"}
+						$ {data.totals.total / 100 + "0"}
 					</p>
 				</div>
 				<div className="flex gap-2">

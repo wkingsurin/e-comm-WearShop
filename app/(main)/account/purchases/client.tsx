@@ -1,6 +1,7 @@
 "use client";
 
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
+import DashboardWrapperTitle from "@/components/shared/dashboard-wrapper-title";
 import Dummy from "@/components/shared/dummy";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
@@ -16,7 +17,7 @@ export default function PurchasesClient({
 	const { data: favorites = {} } = useFavorites();
 
 	return (
-		<DashboardWrapper pageTitle="Purchases">
+		<DashboardWrapper pageTitle={<DashboardWrapperTitle title="Purchases" />}>
 			<div className="flex items-center gap-4 h-full">
 				{products.length !== 0 && (
 					<>

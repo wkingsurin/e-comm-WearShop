@@ -3,10 +3,10 @@ import OrderNumber from "./order-number";
 import OrderStatus from "./order-status";
 import { ChevronDown, Undo } from "lucide-react";
 import OrderConfirmModal from "./order-confirm-modal";
-import useOrders from "@/hooks/useOrders";
 import { useUIStore } from "@/lib/store/ui.store";
 import { IOrder } from "@/types/store/orders.types";
 import { useCancelOrder } from "@/features/orders/hooks/use-cancel-order";
+import Link from "next/link";
 
 export default function OrderMenu({
 	data,
@@ -17,7 +17,6 @@ export default function OrderMenu({
 }) {
 	const { mutate: cancel } = useCancelOrder();
 	const openConfirm = useUIStore((s) => s.openConfirm);
-	const { removeOrder } = useOrders();
 
 	const cancelOrder = () => {
 		openConfirm({
@@ -26,7 +25,6 @@ export default function OrderMenu({
 			confirmText: "Confirm",
 			cancelText: "Cancel",
 			onConfirm: () => cancel({ orderId: data.id }),
-			// onConfirm: () => removeOrder(data),
 		});
 	};
 
@@ -39,7 +37,8 @@ export default function OrderMenu({
 				<OrderNumber orderNumber={data.orderNumber} />
 				<OrderStatus status={data.status as string} />
 			</div>
-			<div className="flex gap-3">
+			<div className="flex items-center gap-3">
+				<Link href={`./orders/${data.id}`}>Details</Link>
 				<div className="flex items-center rounded-xl font-medium px-3 py-[3px] bg-black/5 leading-lg">
 					Tue, 5/26 - Sat, 5/30
 				</div>

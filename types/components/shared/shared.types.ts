@@ -47,7 +47,7 @@ export interface ICarouselProps {
 export interface IDashboardWrapperProps {
 	className?: string;
 	children: React.ReactNode;
-	pageTitle: string;
+	pageTitle: React.ReactNode;
 }
 
 export interface IFavorite {

@@ -47,7 +47,7 @@ export async function createOrder(userId: string) {
 
 		await clearCart(tx, cart.id);
 
-		const createdOrder = await getOrder(tx, order.id);
+		const createdOrder = await getOrderTx(tx, order.id);
 
 		if (!createdOrder) {
 			throw new Error("Order not created");
@@ -67,7 +67,19 @@ export async function getOrders(userId: string) {
 	return orders.map(mapOrder);
 }
 
-export async function getOrder(tx: Prisma.TransactionClient, orderId: string) {
+export async function getOrder(userId: string, orderId: string) {
+	const order = await prisma.order.findUniqueOrThrow({
+		where: { userId, id: orderId },
+		include: { items: true },
+	});
+
+	return mapOrder(order);
+}
+
+export async function getOrderTx(
+	tx: Prisma.TransactionClient,
+	orderId: string
+) {
 	return tx.order.findUnique({
 		where: { id: orderId },
 		include: { items: true },

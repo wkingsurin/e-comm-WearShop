@@ -15,13 +15,13 @@ export function useCancelOrder() {
 		mutationFn: ({ orderId }: CancelOrderInput) => cancelOrder(orderId),
 
 		onMutate: async ({ orderId }) => {
-			await queryClient.cancelQueries({ queryKey: queryKeys.orders });
+			await queryClient.cancelQueries({ queryKey: queryKeys.orders() });
 
 			const previousOrders = queryClient.getQueryData<IOrder[]>(
-				queryKeys.orders
+				queryKeys.orders()
 			);
 
-			queryClient.setQueryData<IOrder[]>(queryKeys.orders, (old) => {
+			queryClient.setQueryData<IOrder[]>(queryKeys.orders(), (old) => {
 				if (!old) return old;
 
 				return old.map((order) =>
@@ -35,11 +35,11 @@ export function useCancelOrder() {
 		},
 
 		onError: (_, __, context) => {
-			queryClient.setQueryData(queryKeys.orders, context?.previousOrders);
+			queryClient.setQueryData(queryKeys.orders(), context?.previousOrders);
 		},
 
 		onSuccess: (order) => {
-			queryClient.setQueryData<IOrder[]>(queryKeys.orders, (old) => {
+			queryClient.setQueryData<IOrder[]>(queryKeys.orders(), (old) => {
 				if (!old) return old;
 
 				return old.map((item) => (item.id === order.id ? order : item));
@@ -47,7 +47,7 @@ export function useCancelOrder() {
 		},
 
 		onSettled: () => {
-			queryClient.invalidateQueries({ queryKey: queryKeys.orders });
+			queryClient.invalidateQueries({ queryKey: queryKeys.orders() });
 		},
 	});
 }

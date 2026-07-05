@@ -15,7 +15,7 @@ export default async function Orders() {
 
 	const queryClient = getQueryClient();
 
-	queryClient.setQueryData(queryKeys.orders, orders);
+	queryClient.setQueryData(queryKeys.orders(), orders);
 
 	return (
 		<HydrationBoundary state={dehydrate(queryClient)}>
