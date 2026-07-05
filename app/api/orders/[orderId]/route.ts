@@ -1,12 +1,15 @@
 import { auth } from "@/auth";
 import { getOrder } from "@/features/orders/services/order.service";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET({
-	params,
-}: {
-	params: Promise<{ orderId: string }>;
-}) {
+export async function GET(
+	_: NextRequest,
+	{
+		params,
+	}: {
+		params: Promise<{ orderId: string }>;
+	}
+) {
 	const session = await auth();
 
 	if (!session?.user?.id) {

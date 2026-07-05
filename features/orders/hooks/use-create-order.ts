@@ -11,7 +11,7 @@ export function useCreateOrder() {
 		onSuccess: (order) => {
 			queryClient.setQueryData(queryKeys.cart, EMPTY_CART);
 
-			queryClient.invalidateQueries({ queryKey: queryKeys.orders });
+			queryClient.invalidateQueries({ queryKey: queryKeys.orders() });
 
 			queryClient.invalidateQueries({ queryKey: queryKeys.checkout });
 		},
