@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client";
 
@@ -5,48 +6,49 @@ import { seedBrands } from "./seeds/brands.seed";
 import { seedCategories } from "./seeds/categories.seed";
 import { seedProducts } from "./seeds/products.seed";
 import seedColors from "./seeds/colors.seed";
+import { Pool } from "pg";
 
-const connectionString = `${process.env.DATABASE_URL}`;
-const adapter = new PrismaPg({ connectionString });
+const pool = new Pool({ connectionString: process.env.DIRECT_URL });
+const adapter = new PrismaPg(pool);
 
 const prisma = new PrismaClient({ adapter });
 
 async function clearDatabase() {
-	await prisma.favorite.deleteMany();
-	await prisma.cartItem.deleteMany();
+  await prisma.favorite.deleteMany();
+  await prisma.cartItem.deleteMany();
 
-	await prisma.productImage.deleteMany();
+  await prisma.productImage.deleteMany();
 
-	await prisma.variant.deleteMany();
+  await prisma.variant.deleteMany();
 
-	await prisma.productColor.deleteMany();
+  await prisma.productColor.deleteMany();
 
-	await prisma.product.deleteMany();
+  await prisma.product.deleteMany();
 
-	await prisma.brand.deleteMany();
+  await prisma.brand.deleteMany();
 
-	await prisma.category.deleteMany();
+  await prisma.category.deleteMany();
 }
 
 export async function main() {
-	await clearDatabase();
+  await clearDatabase();
 
-	await seedBrands();
+  await seedBrands();
 
-	await seedCategories();
+  await seedCategories();
 
-	await seedProducts();
+  await seedProducts();
 
-	await seedColors();
+  await seedColors();
 
-	console.log(`Seed completed...`);
+  console.log(`Seed completed...`);
 }
 
 main()
-	.catch((err) => {
-		console.error(err);
-		process.exit(1);
-	})
-	.finally(async () => {
-		await prisma.$disconnect();
-	});
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

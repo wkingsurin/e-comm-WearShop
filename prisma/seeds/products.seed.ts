@@ -2,148 +2,148 @@ import { prisma } from "@/lib/prisma";
 import { products } from "@/products";
 
 export async function seedProducts() {
-	const brands = await prisma.brand.findMany();
-	const categories = await prisma.category.findMany();
+  const brands = await prisma.brand.findMany();
+  const categories = await prisma.category.findMany();
 
-	const brandMap = Object.fromEntries(
-		brands.map((brand) => [brand.slug, brand.id])
-	);
+  const brandMap = Object.fromEntries(
+    brands.map((brand) => [brand.slug, brand.id]),
+  );
 
-	const categoriesMap = Object.fromEntries(
-		categories.map((category) => [category.slug, category.id])
-	);
+  const categoriesMap = Object.fromEntries(
+    categories.map((category) => [category.slug, category.id]),
+  );
 
-	// Check slug duplicates
-	// const slugMap = new Map<string, number>();
+  // Check slug duplicates
+  // const slugMap = new Map<string, number>();
 
-	// for (const product of productsNew) {
-	// 	slugMap.set(product.slug, (slugMap.get(product.slug) ?? 0) + 1);
-	// }
+  // for (const product of productsNew) {
+  // 	slugMap.set(product.slug, (slugMap.get(product.slug) ?? 0) + 1);
+  // }
 
-	// console.log([...slugMap.entries()].filter(([_, count]) => count > 1));
+  // console.log([...slugMap.entries()].filter(([_, count]) => count > 1));
 
-	// Check sku dupliactes
-	// const skus = productsNew.flatMap((product) =>
-	// 	product.variants.map((variant) => variant.sku)
-	// );
+  // Check sku dupliactes
+  // const skus = productsNew.flatMap((product) =>
+  // 	product.variants.map((variant) => variant.sku)
+  // );
 
-	// const dupliactes = skus.filter((sku, index) => skus.indexOf(sku) !== index);
-	// console.log(`[Duplicates SKUs]:`, dupliactes);
+  // const dupliactes = skus.filter((sku, index) => skus.indexOf(sku) !== index);
+  // console.log(`[Duplicates SKUs]:`, dupliactes);
 
-	await prisma.$transaction(async (tx) => {
-		for (const product of products) {
-			const createdProduct = await tx.product.create({
-				data: {
-					title: product.title,
-					slug: product.slug,
-					description: product.title,
-					currency: product.currency,
+  for (const product of products) {
+    const createdProduct = await prisma.product.create({
+      data: {
+        title: product.title,
+        slug: product.slug,
+        description: product.title,
+        currency: product.currency,
 
-					brandId: brandMap[product.brand.slug],
-					categoryId: categoriesMap[product.category.slug],
+        brandId: brandMap[product.brand.slug],
+        categoryId: categoriesMap[product.category.slug],
 
-					isAvailable: product.isAvailable,
-					isNew: product.isNew,
-				},
-			});
+        isAvailable: product.isAvailable,
+        isNew: product.isNew,
+      },
+    });
 
-			const uniqueColors = [
-				...new Map(
-					product.variants.map((variant) => [variant.attributes.color, variant])
-				).values(),
-			];
+    const uniqueColors = [
+      ...new Map(
+        product.variants.map((variant) => [variant.attributes.color, variant]),
+      ).values(),
+    ];
 
-			const createdColors = await Promise.all(
-				uniqueColors.map((variant) =>
-					tx.productColor.create({
-						data: {
-							productId: createdProduct.id,
-							name: variant.attributes.color,
-							slug: slugify(variant.attributes.color),
-							images: {
-								create: variant.images.map((image) => ({
-									src: image.src,
-								})),
-							},
-						},
-					})
-				)
-			);
+    const createdColors = [];
 
-			const colorMap = Object.fromEntries(
-				createdColors.map((color) => [color.name, color.id])
-			);
+    for (const variant of uniqueColors) {
+      const color = await prisma.productColor.create({
+        data: {
+          productId: createdProduct.id,
+          name: variant.attributes.color,
+          slug: slugify(variant.attributes.color),
+          images: {
+            create: variant.images.map((image) => ({
+              src: image.src,
+            })),
+          },
+        },
+      });
 
-			await tx.variant.createMany({
-				data: product.variants.map((variant) => ({
-					sku: variant.sku,
+      createdColors.push(color);
+    }
 
-					price: variant.price,
-					oldPrice: variant.oldPrice,
+    const colorMap = Object.fromEntries(
+      createdColors.map((color) => [color.name, color.id]),
+    );
 
-					stock: variant.stock,
+    await prisma.variant.createMany({
+      data: product.variants.map((variant) => ({
+        sku: variant.sku,
 
-					size: variant.attributes.size,
+        price: variant.price,
+        oldPrice: variant.oldPrice,
 
-					colorId: colorMap[variant.attributes.color],
+        stock: variant.stock,
 
-					productId: createdProduct.id,
-				})),
-			});
+        size: variant.attributes.size,
 
-			// await tx.product.create({
-			// 	data: {
-			// 		title: product.title,
+        colorId: colorMap[variant.attributes.color],
 
-			// 		slug: product.slug,
+        productId: createdProduct.id,
+      })),
+    });
 
-			// 		description: product.title,
+    // await tx.product.create({
+    // 	data: {
+    // 		title: product.title,
 
-			// 		currency: product.currency,
+    // 		slug: product.slug,
 
-			// 		isAvailable: product.isAvailable,
+    // 		description: product.title,
 
-			// 		isNew: product.isNew,
+    // 		currency: product.currency,
 
-			// 		brandId: brandMap[product.brand.slug],
+    // 		isAvailable: product.isAvailable,
 
-			// 		categoryId: categoriesMap[product.category.slug],
+    // 		isNew: product.isNew,
 
-			// 		variants: {
-			// 			create: product.variants.map((variant) => ({
-			// 				sku: variant.sku,
+    // 		brandId: brandMap[product.brand.slug],
 
-			// 				price: variant.price,
+    // 		categoryId: categoriesMap[product.category.slug],
 
-			// 				oldPrice: variant.oldPrice,
+    // 		variants: {
+    // 			create: product.variants.map((variant) => ({
+    // 				sku: variant.sku,
 
-			// 				stock: variant.stock,
+    // 				price: variant.price,
 
-			// 				color: {
-			// 					connect: {
-			// 						id:
-			// 					}
-			// 				},
+    // 				oldPrice: variant.oldPrice,
 
-			// 				size: variant.attributes.size,
+    // 				stock: variant.stock,
 
-			// 				images: {
-			// 					create: variant.images.map((image) => ({
-			// 						src: image.src,
-			// 					})),
-			// 				},
-			// 			})),
-			// 		},
-			// 	},
-			// });
-		}
-	});
+    // 				color: {
+    // 					connect: {
+    // 						id:
+    // 					}
+    // 				},
+
+    // 				size: variant.attributes.size,
+
+    // 				images: {
+    // 					create: variant.images.map((image) => ({
+    // 						src: image.src,
+    // 					})),
+    // 				},
+    // 			})),
+    // 		},
+    // 	},
+    // });
+  }
 }
 
 const slugify = (value: string) => {
-	return value
-		.toLowerCase()
-		.replaceAll("/", "-")
-		.replaceAll("&", "and")
-		.replace(/\s+/g, "-");
+  return value
+    .toLowerCase()
+    .replaceAll("/", "-")
+    .replaceAll("&", "and")
+    .replace(/\s+/g, "-");
 };
