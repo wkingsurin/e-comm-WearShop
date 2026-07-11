@@ -27,7 +27,7 @@ export const mapCartItem = (cartItem: CartItemWithRelations) => {
 		maxStock: cartItem.variant.stock,
 
 		brandName: cartItem.variant.product.brand.name,
-		category: { ...cartItem.variant.product.category },
+		categoryName: cartItem.variant.product.category.name,
 
 		createdAt: cartItem.createdAt,
 	};

@@ -22,7 +22,7 @@ export interface ICartItem {
 	maxStock: number;
 
 	brandName: string;
-	category: { id: string; name: string; slug: string };
+	categoryName: string;
 
 	currency: string;
 

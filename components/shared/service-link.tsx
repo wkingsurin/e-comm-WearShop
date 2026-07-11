@@ -48,6 +48,7 @@ export default function ServiceLink({ href, children }: IServiceLinkProps) {
 									<Link
 										href={`/account/${item.ref}`}
 										className="flex items-center w-full h-full gap-[6px] px-3 py-[6px]"
+										prefetch={false}
 									>
 										<Icon className="size-5 stroke-[1px] stroke-black" />
 										{item.label}
@@ -64,6 +65,7 @@ export default function ServiceLink({ href, children }: IServiceLinkProps) {
 		<Link
 			href={href.includes("cart") ? `/${href}` : `/account/${href}`}
 			className="flex gap-[6px] items-center"
+			prefetch={false}
 		>
 			{children}
 		</Link>

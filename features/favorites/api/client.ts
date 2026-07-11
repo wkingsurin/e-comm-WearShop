@@ -1,7 +1,7 @@
 import { FavoriteMap } from "../types";
 
 export async function getFavorites(): Promise<FavoriteMap> {
-	const res = await fetch("/api/favorites").then((res) => res.json());
+	const res = await fetch("/api/favorites", { credentials: "include" });
 
 	if (!res.ok) {
 		throw new Error("Failed to fetch favorites");

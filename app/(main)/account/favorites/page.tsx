@@ -5,32 +5,33 @@ import ProductCard from "@/components/widgets/product-card/product-card";
 import { Heart } from "lucide-react";
 import { getFavorites } from "./actions";
 import DashboardWrapperTitle from "@/components/shared/dashboard-wrapper-title";
+import { auth } from "@/auth";
+import { getFavoriteMap } from "@/features/favorites/services/favorites.service";
+import { getQueryClient } from "@/lib/react-query/get-query-client";
+import { queryKeys } from "@/lib/react-query/query-keys";
+import { getProducts } from "@/lib/get-products";
+import { FavoritesClient } from "./client";
 
 export default async function Favorites() {
-	const favorites = await getFavorites();
+    // const session = await auth();
 
-	return (
-		<DashboardWrapper pageTitle={<DashboardWrapperTitle title="Favorites" />}>
-			<div className="flex items-center gap-4 h-full">
-				{favorites.length !== 0 && (
-					<>
-						<SortSelect className="absolute -top-[56px] right-0" />
-						{favorites.map((item) => {
-							return (
-								<ProductCard
-									key={item.id}
-									data={item}
-									isFavorite={true}
-									type="Favorite"
-								/>
-							);
-						})}
-					</>
-				)}
-				{favorites.length === 0 && (
-					<Dummy icon={Heart} text="You haven`t favorites" />
-				)}
-			</div>
-		</DashboardWrapper>
-	);
+    // const favoriteMap = session?.user?.id
+    //     ? await getFavoriteMap(session.user.id)
+    //     : {};
+
+    // const queryClient = getQueryClient();
+
+    // queryClient.setQueryData(queryKeys.favorites, favoriteMap);
+
+    const products = await getProducts();
+
+	// const favorites = products.filter((product) => favoriteMap[product.id]);
+
+    return (
+        <DashboardWrapper
+            pageTitle={<DashboardWrapperTitle title="Favorites" />}
+        >
+            <FavoritesClient products={products} />
+        </DashboardWrapper>
+    );
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import Container from "../shared/container";
 import Logo from "../shared/logo";
 import UtilityNav from "../shared/utility-nav";

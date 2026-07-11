@@ -10,34 +10,39 @@ import { IProduct } from "@/types/store/ui.types";
 import { Boxes } from "lucide-react";
 
 export default function PurchasesClient({
-	products,
+    products,
 }: {
-	products: IProduct[];
+    products: IProduct[];
 }) {
-	const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavorites();
+    const favoriteProducts = products.filter(
+        (product) => favorites[product.id],
+    );
 
-	return (
-		<DashboardWrapper pageTitle={<DashboardWrapperTitle title="Purchases" />}>
-			<div className="flex items-center gap-4 h-full">
-				{products.length !== 0 && (
-					<>
-						<SortSelect className="absolute -top-[56px] right-0" />
-						{products.map((item) => {
-							return (
-								<ProductCard
-									key={item.id}
-									data={item}
-									isFavorite={!!favorites[item.id]}
-									type="Favorite"
-								/>
-							);
-						})}
-					</>
-				)}
-				{products.length === 0 && (
-					<Dummy icon={Boxes} text="You haven`t purchases" />
-				)}
-			</div>
-		</DashboardWrapper>
-	);
+    return (
+        <DashboardWrapper
+            pageTitle={<DashboardWrapperTitle title="Purchases" />}
+        >
+            <div className="flex items-center gap-4 h-full">
+                {favoriteProducts.length !== 0 && (
+                    <>
+                        <SortSelect className="absolute -top-[56px] right-0" />
+                        {favoriteProducts.map((item) => {
+                            return (
+                                <ProductCard
+                                    key={item.id}
+                                    data={item}
+                                    isFavorite={true}
+                                    type="Favorite"
+                                />
+                            );
+                        })}
+                    </>
+                )}
+                {favoriteProducts.length === 0 && (
+                    <Dummy icon={Boxes} text="You haven`t purchases" />
+                )}
+            </div>
+        </DashboardWrapper>
+    );
 }

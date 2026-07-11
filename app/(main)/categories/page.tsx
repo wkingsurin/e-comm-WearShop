@@ -7,21 +7,7 @@ import { getFavoriteMap } from "@/features/favorites/services/favorites.service"
 import { queryKeys } from "@/lib/react-query/query-keys";
 
 export default async function Categories() {
-	const session = await auth();
+    const products = await getProducts();
 
-	const favoriteMap = session?.user?.id
-		? await getFavoriteMap(session.user.id)
-		: {};
-
-	const queryClient = getQueryClient();
-
-	await queryClient.setQueryData(queryKeys.favorites, favoriteMap);
-
-	const products = await getProducts();
-
-	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<CategoriesClient products={products} />
-		</HydrationBoundary>
-	);
+    return <CategoriesClient products={products} />;
 }

@@ -36,7 +36,7 @@ export const mapProductToCartItem = (
 		maxStock: currentVariant.stock,
 
 		brandName: data.brand.name,
-		category: data.category,
+		categoryName: data.category.name,
 
 		createdAt: new Date(),
 	};

@@ -83,6 +83,7 @@ export default function AccountLayout({ children }: IAccountProps) {
 													? "bg-black/10 hover:bg-black/10"
 													: "bg-transparent"
 											}`}
+											prefetch={false}
 										>
 											<Icon className="size-5 stroke-[1.5px] stroke-black" />
 											<p className="font-mono tracking-wide">{item.label}</p>
@@ -95,7 +96,7 @@ export default function AccountLayout({ children }: IAccountProps) {
 					</div>
 				</Container>
 			</Section>
-			<LastSeenSection />
+			{/* <LastSeenSection /> */}
 		</Main>
 	);
 }

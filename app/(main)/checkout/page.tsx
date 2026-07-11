@@ -15,17 +15,12 @@ import { EMPTY_CHECKOUT } from "@/features/checkout/constants";
 export default async function Checkout() {
 	const session = await auth();
 
-	const cart = session?.user?.id
-		? await getCartItems(session.user.id)
-		: EMPTY_CART;
-
 	const checkout = session?.user?.id
-		? (await getCheckout(session?.user?.id)) ?? EMPTY_CHECKOUT
+		? (getCheckout(session?.user?.id)) ?? EMPTY_CHECKOUT
 		: EMPTY_CHECKOUT;
 
 	const queryClient = getQueryClient();
 
-	queryClient.setQueryData(queryKeys.cart, cart);
 	queryClient.setQueryData(queryKeys.checkout, checkout);
 
 	return (

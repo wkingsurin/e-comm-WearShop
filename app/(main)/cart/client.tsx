@@ -10,32 +10,31 @@ import { EMPTY_CART } from "@/features/cart/constants";
 import SellMenu from "./sell-menu";
 
 export default function CartClient({
-	payments,
+    payments,
 }: {
-	payments: { id: string; label: string; image: string }[];
+    payments: { id: string; label: string; image: string }[];
 }) {
-	const { data: favorites = {} } = useFavorites();
-	const { data: cart = EMPTY_CART } = useCart();
+    const { data: cart = EMPTY_CART } = useCart();
 
-	return (
-		<div className="relative flex items-start gap-5">
-			<DashboardWrapper pageTitle="Delivery">
-				{cart.totalItems > 0 && (
-					<div className="flex flex-col gap-3 flex-1">
-						{cart.items.map((item) => (
-							<CartItem
-								key={item.cartItemId}
-								data={item}
-								isFavorite={!!favorites[item.id]}
-							/>
-						))}
-					</div>
-				)}
-				{cart.items.length === 0 && (
-					<Dummy icon={ShoppingBag} text="Your cart is empty" />
-				)}
-			</DashboardWrapper>
-			<SellMenu cart={cart} payments={payments} />
-		</div>
-	);
+    return (
+        <div className="relative flex items-start gap-5">
+            <DashboardWrapper pageTitle="Delivery">
+                {cart.totalItems > 0 && (
+                    <div className="flex flex-col gap-3 flex-1">
+                        {cart.items.map((item) => (
+                            <CartItem
+                                key={item.cartItemId}
+                                data={item}
+                                isFavorite={false}
+                            />
+                        ))}
+                    </div>
+                )}
+                {cart.items.length === 0 && (
+                    <Dummy icon={ShoppingBag} text="Your cart is empty" />
+                )}
+            </DashboardWrapper>
+            <SellMenu cart={cart} payments={payments} />
+        </div>
+    );
 }

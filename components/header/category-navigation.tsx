@@ -29,6 +29,7 @@ export default function CategoryNavigation() {
 						item.id === activeId ? "text-black" : "text-black/50"
 					}`}
 					onClick={() => changeCategory(item.id)}
+					prefetch={false}
 				>
 					{item.text}
 				</Link>

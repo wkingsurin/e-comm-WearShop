@@ -41,7 +41,7 @@ export default function CartItem({ data }: ICartItemProps) {
 						<span className="font-medium text-lg leading-lg tracking-wider">
 							{data.brandName}
 						</span>
-						<p className="tracking-wider leading-lg">{data.category.name}</p>
+						<p className="tracking-wider leading-lg">{data.categoryName}</p>
 						<p className="tracking-wider leading-lg">{data.selectedSize}</p>
 						<p className="tracking-wider leading-lg">
 							{data.selectedColor.value}
