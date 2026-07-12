@@ -93,6 +93,13 @@ model User {
   checkout Checkout?
 }
 
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
 enum OrderStatus {
   PENDING
   PAID
