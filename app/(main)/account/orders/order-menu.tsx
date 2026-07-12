@@ -7,60 +7,64 @@ import { useUIStore } from "@/lib/store/ui.store";
 import { IOrder } from "@/types/store/orders.types";
 import { useCancelOrder } from "@/features/orders/hooks/use-cancel-order";
 import Link from "next/link";
+import { canCancelOrder } from "@/features/orders/services/order-status.service";
+import { changeOrderStatus } from "@/features/orders/services/order.service";
 
 export default function OrderMenu({
-	data,
-	toggleOrder,
+    data,
+    toggleOrder,
 }: {
-	data: IOrder;
-	toggleOrder: () => void;
+    data: IOrder;
+    toggleOrder: () => void;
 }) {
-	const { mutate: cancel } = useCancelOrder();
-	const openConfirm = useUIStore((s) => s.openConfirm);
+    const { mutate: cancel } = useCancelOrder();
+    const openConfirm = useUIStore((s) => s.openConfirm);
 
-	const cancelOrder = () => {
-		openConfirm({
-			title: "Cancel this order?",
-			content: <OrderConfirmModal data={data} />,
-			confirmText: "Confirm",
-			cancelText: "Cancel",
-			onConfirm: () => cancel({ orderId: data.id }),
-		});
-	};
+    const cancelOrder = () => {
+        openConfirm({
+            title: "Cancel this order?",
+            content: <OrderConfirmModal data={data} />,
+            confirmText: "Confirm",
+            cancelText: "Cancel",
+            onConfirm: () => cancel({ orderId: data.id }),
+        });
+    };
 
-	return (
-		<div className="flex justify-between">
-			<div className="flex items-center gap-4">
-				<span className="flex items-center font-sans font-medium text-xl tracking-wider">
-					Order
-				</span>
-				<OrderNumber orderNumber={data.orderNumber} />
-				<OrderStatus status={data.status as string} />
-			</div>
-			<div className="flex items-center gap-3">
-				<Link href={`./orders/${data.id}`}>Details</Link>
-				<div className="flex items-center rounded-xl font-medium px-3 py-[3px] bg-black/5 leading-lg">
-					Tue, 5/26 - Sat, 5/30
-				</div>
-				{data.status !== "CANCELLED" && (
-					<Button
-						className="group/cancel flex gap-3 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75"
-						onClick={(e) => {
-							e.stopPropagation();
-							cancelOrder();
-						}}
-					>
-						Cancel
-						<Undo className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
-					</Button>
-				)}
-				<Button
-					className="w-10 h-10 bg-black/15 hover:bg-black/25"
-					onClick={toggleOrder}
-				>
-					<ChevronDown className={`size-4 stroke-[1.5px] stroke-black`} />
-				</Button>
-			</div>
-		</div>
-	);
+    return (
+        <div className="flex justify-between">
+            <div className="flex items-center gap-4">
+                <span className="flex items-center font-sans font-medium text-xl tracking-wider">
+                    Order
+                </span>
+                <OrderNumber orderNumber={data.orderNumber} />
+                <OrderStatus status={data.status} />
+            </div>
+            <div className="flex items-center gap-3">
+                <Link href={`./orders/${data.id}`}>Details</Link>
+                <div className="flex items-center rounded-xl font-medium px-3 py-[3px] bg-black/5 leading-lg">
+                    Tue, 5/26 - Sat, 5/30
+                </div>
+                {canCancelOrder(data.status) && (
+                    <Button
+                        className="group/cancel flex gap-3 bg-black/10 hover:bg-[#EC0404]/10 text-black hover:text-[#EC0404]/75"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            cancelOrder();
+                        }}
+                    >
+                        Cancel
+                        <Undo className="size-4 stroke-[1.5px] stroke-black group-hover/cancel:stroke-[#EC0404]/75 transition-brand" />
+                    </Button>
+                )}
+                <Button
+                    className="w-10 h-10 bg-black/15 hover:bg-black/25"
+                    onClick={toggleOrder}
+                >
+                    <ChevronDown
+                        className={`size-4 stroke-[1.5px] stroke-black`}
+                    />
+                </Button>
+            </div>
+        </div>
+    );
 }
