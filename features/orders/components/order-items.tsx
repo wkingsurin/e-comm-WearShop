@@ -11,8 +11,6 @@ export default function OrderItems({
 }) {
 	const { data: favorites = {} } = useFavorites();
 
-	console.log(`[OrderItems]:`, data);
-
 	return (
 		<div className="flex gap-3">
 			{data.map((item) => {

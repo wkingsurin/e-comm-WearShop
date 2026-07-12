@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import OrderContent from "./order-content";
 import OrderMenu from "./order-menu";
