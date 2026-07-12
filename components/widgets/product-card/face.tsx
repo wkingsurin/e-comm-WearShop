@@ -29,7 +29,7 @@ export default function Face({
 	return (
 		<Link
 			href={`/products/${data.slug}?color=${defaultColor.slug}&size=${defaultSize}`}
-			className="relative flex items-center justify-center w-full h-[340px] bg-[#F4F4F6] rounded-xl overflow-hidden trnasition-all duration-300 cursor-pointer"
+			className="relative flex items-center justify-center w-full h-[280px] bg-[#F4F4F6] rounded-xl overflow-hidden trnasition-all duration-300 cursor-pointer"
 			onClick={() => {
 				addLastSeen(data);
 			}}
@@ -48,7 +48,7 @@ export default function Face({
 				width={332}
 				height={480}
 				priority
-				className="rounded-xl w-[220px] h-[318px] object-contain scale-99 group-hover/card:scale-101 transition-brand"
+				className="rounded-xl w-[180px] h-[260px] object-contain scale-99 group-hover/card:scale-101 transition-brand"
 			/>
 		</Link>
 	);
