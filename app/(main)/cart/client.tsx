@@ -6,7 +6,7 @@ import CartItem from "@/components/widgets/cart-item";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { EMPTY_CART } from "@/features/cart/constants";
-import SellMenu from "./sell-menu";
+import SellMenu from "@/features/cart/components/sell-menu";
 
 export default function CartClient({
     payments,

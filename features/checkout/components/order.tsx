@@ -1,11 +1,11 @@
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import OrderItems from "./order-items";
-import Shipping from "./shipping";
+import Shipping from "../../../features/checkout/components/shipping";
 import { ICartItem } from "@/features/cart/types";
-import PaymentSelector from "./payment-selector";
+import PaymentSelector from "./payment/payment-selector";
 import { useCheckout } from "@/features/checkout/hooks/use-checkout";
 import { EMPTY_CHECKOUT } from "@/features/checkout/constants";
-import DeliverySelector from "./delivery-selector";
+import DeliverySelector from "./delivery/delivery-selector";
 
 export default function Order({
 	items,
