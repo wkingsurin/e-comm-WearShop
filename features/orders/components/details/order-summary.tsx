@@ -1,4 +1,4 @@
-import { IOrderTotals } from "@/types/store/orders.types";
+import { IOrderTotals } from "@/types/account/orders/orders.types";
 
 export default function OrderSummary({ totals }: { totals: IOrderTotals }) {
     return (

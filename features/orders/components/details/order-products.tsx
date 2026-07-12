@@ -1,4 +1,4 @@
-import { IOrder, IOrderItem } from "@/types/store/orders.types";
+import { IOrder, IOrderItem } from "@/types/account/orders/orders.types";
 import Image from "next/image";
 
 interface IProps {

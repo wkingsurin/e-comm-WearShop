@@ -2,7 +2,7 @@ import {
     IOrderCustomer,
     IOrderDelivery,
     IOrderShipping,
-} from "@/types/store/orders.types";
+} from "@/types/account/orders/orders.types";
 
 interface IProps {
     customer: IOrderCustomer;

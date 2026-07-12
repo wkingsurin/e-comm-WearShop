@@ -4,11 +4,11 @@ import OrderStatus from "./order-status";
 import { ChevronDown, Undo } from "lucide-react";
 import OrderConfirmModal from "./order-confirm-modal";
 import { useUIStore } from "@/lib/store/ui.store";
-import { IOrder } from "@/types/store/orders.types";
 import { useCancelOrder } from "@/features/orders/hooks/use-cancel-order";
 import Link from "next/link";
 import { canCancelOrder } from "@/features/orders/services/order-status.service";
 import { changeOrderStatus } from "@/features/orders/services/order.service";
+import { IOrder } from "@/types/account/orders/orders.types";
 
 export default function OrderMenu({
     data,

@@ -1,4 +1,4 @@
-import { IOrder } from "@/types/store/orders.types";
+import { IOrder } from "@/types/account/orders/orders.types";
 
 export default function OrderNumber({
 	orderNumber,

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import OrderContent from "./order-content";
 import OrderMenu from "./order-menu";
-import { IOrderProps } from "@/types/orders.types";
+import { IOrderProps } from "@/types/account/orders/orders.types";
 
 export default function Order({ data }: IOrderProps) {
 	const [open, setOpen] = useState<boolean>(false);

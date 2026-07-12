@@ -1,5 +1,5 @@
 import { OrderStatus } from "@/prisma/generated/prisma/browser";
-import { IOrder } from "@/types/store/orders.types";
+import { IOrder } from "@/types/account/orders/orders.types";
 
 export const EMPTY_ORDERS: IOrder[] = [];
 export const EMPTY_ORDER: IOrder = {

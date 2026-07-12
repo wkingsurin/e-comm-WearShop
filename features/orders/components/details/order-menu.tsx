@@ -1,5 +1,5 @@
 import DashboardWrapperTitle from "@/components/shared/dashboard-wrapper-title";
-import { IOrder } from "@/types/store/orders.types";
+import { IOrder } from "@/types/account/orders/orders.types";
 
 export default function OrderMenu({ order }: { order: IOrder }) {
     return (

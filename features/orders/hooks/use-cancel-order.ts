@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cancelOrder } from "../api/client";
 import { queryKeys } from "@/lib/react-query/query-keys";
-import { IOrder } from "@/types/store/orders.types";
 import { OrderStatus } from "@/prisma/generated/prisma/enums";
+import { IOrder } from "@/types/account/orders/orders.types";
 
 interface CancelOrderInput {
 	orderId: string;

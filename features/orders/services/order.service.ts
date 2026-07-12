@@ -10,7 +10,7 @@ import { decreaseStock, restoreStock } from "./stock.service";
 import { clearCart } from "./cart.service";
 import { OrderStatus, Prisma } from "@/prisma/generated/prisma/client";
 import { mapOrder } from "../mappers/map-order";
-import { canCancelOrder, updateOrderStatus } from "./order-status.service";
+import { updateOrderStatus } from "./order-status.service";
 import { canChangeOrderStatus } from "../constants";
 
 export async function createOrder(userId: string) {

@@ -1,4 +1,4 @@
-import { IOrder } from "@/types/store/orders.types";
+import { IOrder } from "@/types/account/orders/orders.types";
 import OrderDelivery from "./order-delivery";
 import OrderPayment from "./order-payment";
 import OrderProducts from "./order-products";

@@ -1,5 +1,5 @@
 import { ORDER_STATUS } from "@/features/orders/constants";
-import { IOrderProps } from "@/types/orders.types";
+import { IOrderProps } from "@/types/account/orders/orders.types";
 import Image from "next/image";
 
 export default function OrderConfirmModal({ data }: IOrderProps) {

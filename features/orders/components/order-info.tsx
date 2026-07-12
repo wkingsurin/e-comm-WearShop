@@ -1,4 +1,4 @@
-import { IOrderDelivery, IOrderTotals } from "@/types/store/orders.types";
+import { IOrderDelivery, IOrderTotals } from "@/types/account/orders/orders.types";
 
 interface IProps {
     data: { delivery: IOrderDelivery; totals: IOrderTotals };

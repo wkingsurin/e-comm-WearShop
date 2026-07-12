@@ -1,4 +1,4 @@
-import { IOrderPayment } from "@/types/store/orders.types";
+import { IOrderPayment } from "@/types/account/orders/orders.types";
 
 interface IProps {
     payment: IOrderPayment;

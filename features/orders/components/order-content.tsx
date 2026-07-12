@@ -1,6 +1,6 @@
-import { IOrder } from "@/types/store/orders.types";
 import OrderItems from "./order-items";
 import OrderInfo from "./order-info";
+import { IOrder } from "@/types/account/orders/orders.types";
 
 export default function OrderContent({ data }: { data: IOrder }) {
     return (

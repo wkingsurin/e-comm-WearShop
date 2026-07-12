@@ -4,7 +4,6 @@ import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Dummy from "@/components/shared/dummy";
 import CartItem from "@/components/widgets/cart-item";
 import { ShoppingBag } from "lucide-react";
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { EMPTY_CART } from "@/features/cart/constants";
 import SellMenu from "./sell-menu";

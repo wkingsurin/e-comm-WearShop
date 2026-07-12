@@ -1,4 +1,4 @@
-import { IOrderItem } from "@/types/store/orders.types";
+import { IOrderItem } from "@/types/account/orders/orders.types";
 import Image from "next/image";
 
 export default function OrderItem({
