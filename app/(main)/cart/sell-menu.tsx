@@ -36,7 +36,7 @@ export default function SellMenu({
 					onClick={() => {
 						router.push("/checkout");
 					}}
-					disabled={isPending}
+					disabled={isPending || cart.items.length < 1}
 				>
 					Proceed to checkout
 				</Button>
@@ -50,7 +50,7 @@ export default function SellMenu({
 							className="flex items-center justify-center rounded-md bg-black/5 border-[0.5px] border-black/10 w-1/3 h-7"
 						>
 							<Image
-								src={`/${item.image}`}
+								src={`/payments/${item.image}`}
 								alt={item.label}
 								width={62}
 								height={16}
