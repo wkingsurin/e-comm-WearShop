@@ -16,10 +16,9 @@ export function FavoritesClient({ products }: ClientProps) {
     const favoriteProducts = products.filter((product) => favorites[product.id]);
 
     return (
-        <div className="flex items-center gap-4 h-full">
+        <div className="grid grid-cols-4 gap-4 h-full">
             {favoriteProducts.length !== 0 && (
                 <>
-                    <SortSelect className="absolute -top-[56px] right-0" />
                     {favoriteProducts.map((item) => {
                         return (
                             <ProductCard

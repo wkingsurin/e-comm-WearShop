@@ -30,7 +30,7 @@ export default function LastSeenSection() {
 							<SortSelect />
 						</div>
 					</div>
-					<div className="flex flex-wrap gap-5">
+					<div className="grid grid-cols-5 gap-5">
 						{orderedProducts.map((product) => {
 							return (
 								<ProductCard

@@ -37,7 +37,7 @@ export default function CategoriesClient({
 				</div>
 			</div>
 			{openFilters && <Filters />}
-			<div className="flex flex-wrap gap-5">
+			<div className="grid grid-cols-5 gap-5">
 				{products.map((item) => {
 					return (
 						<ProductCard

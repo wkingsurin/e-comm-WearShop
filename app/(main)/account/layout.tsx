@@ -1,43 +1,30 @@
-"use client";
-
 import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
-import { Button } from "@/components/ui/button";
 import LastSeenSection from "@/components/widgets/last-seen-section";
-import {
-    Boxes,
-    Heart,
-    Lock,
-    LogOut,
-    LucideIcon,
-    Package,
-    User,
-} from "lucide-react";
-import Link from "next/link";
-import { redirect, usePathname, useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import { IAccountProps } from "@/types/account/account.types";
+import AccountNavigation from "./account-navigation";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { queryKeys } from "@/lib/react-query/query-keys";
+import { getQueryClient } from "@/lib/react-query/get-query-client";
+import { auth } from "@/auth";
+import { getOrders } from "@/features/orders/services/order.service";
+import { EMPTY_ORDERS } from "@/features/orders/constants";
 
-export default function AccountLayout({ children }: IAccountProps) {
-    const path = usePathname();
+export default async function AccountLayout({ children }: IAccountProps) {
+    const session = await auth();
+    console.log(`[session]:`, session);
 
-    const navigationData: {
-        id: string;
-        label: string;
-        ref: string;
-        icon: LucideIcon;
-    }[] = [
-        { id: "1", label: "Profile", ref: "profile", icon: User },
-        { id: "2", label: "Orders", ref: "orders", icon: Package },
-        { id: "3", label: "Favorites", ref: "favorites", icon: Heart },
-        { id: "4", label: "Purchases", ref: "purchases", icon: Boxes },
-        { id: "5", label: "Security", ref: "security", icon: Lock },
-        { id: "6", label: "Log out", ref: "/", icon: LogOut },
-    ];
+    const [orders] = await Promise.all([
+        session?.user?.id
+            ? getOrders(session.user.id)
+            : Promise.resolve({ EMPTY_ORDERS }),
+    ]);
 
-    const router = useRouter();
+    const queryClient = getQueryClient();
+
+    queryClient.setQueryData(queryKeys.orders(), orders);
 
     return (
         <Main>
@@ -48,59 +35,15 @@ export default function AccountLayout({ children }: IAccountProps) {
                             <SectionTitle>Account</SectionTitle>
                         </div>
                         <div className="flex items-start gap-4">
-                            <nav className="max-w-[265px] w-full p-[6px] rounded-xl border-[1px] border-[#E5E7EB] hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
-                                {navigationData.map((item) => {
-                                    const Icon = item.icon;
-                                    const href = `/account/${item.ref}`;
-                                    const isActive = href === path;
-
-                                    if (item.label.includes("Log out")) {
-                                        return (
-                                            <Button
-                                                key={item.id}
-                                                variant="link"
-                                                className="flex justify-start gap-3 w-full h-10 px-3 rounded-xl hover:bg-[#F51E1E]/10 transition duration-100 no-underline! cursor-pointer"
-                                                onClick={async () => {
-                                                    await signOut({
-                                                        redirect: false,
-                                                    });
-                                                    router.refresh();
-                                                    redirect("/auth");
-                                                }}
-                                            >
-                                                <Icon className="size-5 stroke-[1.5px] stroke-[#F51E1E]" />
-                                                <p className="font-mono tracking-wide text-[#F51E1E]/75">
-                                                    {item.label}
-                                                </p>
-                                            </Button>
-                                        );
-                                    }
-
-                                    return (
-                                        <Link
-                                            href={href}
-                                            key={item.id}
-                                            className={`flex items-center gap-3 h-10 px-3 rounded-xl hover:bg-black/5 transition duration-100 ${
-                                                isActive
-                                                    ? "bg-black/10 hover:bg-black/10"
-                                                    : "bg-transparent"
-                                            }`}
-                                            prefetch={false}
-                                        >
-                                            <Icon className="size-5 stroke-[1.5px] stroke-black" />
-                                            <p className="font-mono tracking-wide">
-                                                {item.label}
-                                            </p>
-                                        </Link>
-                                    );
-                                })}
-                            </nav>
-                            <div className="flex w-full">{children}</div>
+                            <HydrationBoundary state={dehydrate(queryClient)}>
+                                <AccountNavigation />
+                                <div className="flex w-full">{children}</div>
+                            </HydrationBoundary>
                         </div>
                     </div>
                 </Container>
             </Section>
-            {/* <LastSeenSection /> */}
+            <LastSeenSection />
         </Main>
     );
 }

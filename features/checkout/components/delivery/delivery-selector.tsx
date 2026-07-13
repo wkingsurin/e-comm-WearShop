@@ -34,7 +34,7 @@ export default function DeliverySelector({
 	];
 
 	return (
-		<div className="flex flex-col gap-3 min-h-[94px] rounded-xl border-[0.5px] border-[#E5E7EB] p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+		<div className="flex flex-col gap-3 min-h-[94px] bg-white rounded-xl p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
 			<span className="tracking-wide font-medium text-black/75 uppercase pb-4 border-b border-[#E5E7EB]">
 				Delivery method
 			</span>

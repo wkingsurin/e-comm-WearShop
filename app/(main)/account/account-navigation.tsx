@@ -27,13 +27,12 @@ export default function AccountNavigation() {
         { id: "1", label: "Profile", ref: "profile", icon: User },
         { id: "2", label: "Orders", ref: "orders", icon: Package },
         { id: "3", label: "Favorites", ref: "favorites", icon: Heart },
-        { id: "4", label: "Purchases", ref: "purchases", icon: Boxes },
-        { id: "5", label: "Security", ref: "security", icon: Lock },
-        { id: "6", label: "Log out", ref: "/", icon: LogOut },
+        { id: "4", label: "Security", ref: "security", icon: Lock },
+        { id: "5", label: "Log out", ref: "/", icon: LogOut },
     ];
 
     return (
-        <nav className="max-w-[265px] w-full p-[6px] rounded-xl border-[1px] border-[#E5E7EB] hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <nav className="max-w-[265px] w-full p-[6px] bg-white rounded-xl hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
             {navigationData.map((item) => {
                 const Icon = item.icon;
                 const href = `/account/${item.ref}`;

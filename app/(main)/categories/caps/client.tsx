@@ -20,7 +20,7 @@ export default function CapsClient({ products }: { products: IProduct[] }) {
 				</div>
 				<SortSelect className="absolute -top-[12px] right-0" />
 			</div>
-			<div className="flex flex-wrap gap-5">
+			<div className="grid grid-cols-5 gap-5">
 				{products.map((item) => (
 					<ProductCard
 						key={item.id}

@@ -17,7 +17,7 @@ export default function CartClient({
 
     return (
         <div className="relative flex items-start gap-5">
-            <DashboardWrapper pageTitle="Delivery">
+            <DashboardWrapper>
                 {cart.totalItems > 0 && (
                     <div className="flex flex-col gap-3 flex-1">
                         {cart.items.map((item) => (

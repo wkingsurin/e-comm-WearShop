@@ -18,7 +18,7 @@ export default function SellMenu({
 
     return (
         <div className="sticky top-[154px] flex flex-col gap-5 min-w-[320px]">
-            <div className="flex flex-col gap-4 min-h-[188px] rounded-xl border-[0.5px] border-[#E5E7EB] p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+            <div className="flex flex-col gap-4 min-h-[188px] bg-white rounded-xl  p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
                 <Totals total={cart.total} subtotal={cart.subtotal} />
                 <Button
                     onClick={() => {

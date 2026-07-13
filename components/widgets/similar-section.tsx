@@ -27,7 +27,7 @@ export default function SimilarSection() {
 							<SortSelect />
 						</div>
 					</div>
-					<div className="flex flex-wrap gap-5">
+					<div className="grid grid-cols-5 gap-5">
 						{similarProducts.map((item) => (
 							<ProductCard
 								key={item.id}
