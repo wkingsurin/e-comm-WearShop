@@ -15,7 +15,7 @@ export default function ColorsLink({
 	const productSlug = splittedPathname[splittedPathname.length - 1];
 
 	return (
-		<div className="flex flex-col gap-1 items-center">
+		<div className="flex flex-col gap-1 flex-1-0 items-center">
 			<Link
 				key={id}
 				data-id={slug}
@@ -25,7 +25,7 @@ export default function ColorsLink({
 				}`}
 			>
 				<div
-					className={`relative flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black bg-[#F4F4F6] rounded-md overflow-hidden transition-brand ${
+					className={`relative flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black/50 bg-[#F4F4F6] rounded-md overflow-hidden transition-brand ${
 						isActive && "border-black!"
 					}`}
 				>
@@ -43,7 +43,7 @@ export default function ColorsLink({
 					/>
 				</div>
 			</Link>
-			<p className="text-md font-mono tracking-wide">{name}</p>
+			<p className="text-sm font-mono tracking-wide">{name}</p>
 		</div>
 	);
 }

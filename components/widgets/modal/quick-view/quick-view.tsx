@@ -33,7 +33,7 @@ export default function QuickView() {
 
 	return (
 		<Modal className="w-full">
-			<div className="relative flex items-start gap-[60px] max-w-[720px] w-full">
+			<div className="relative flex items-start gap-5 max-w-[720px] w-full">
 				<Carousel
 					key={currentColor.id}
 					productTitle={product.title}
