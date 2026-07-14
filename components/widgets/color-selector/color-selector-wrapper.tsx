@@ -19,7 +19,7 @@ export default function ColorSelectorWrapper({
                 Colors
             </span>
             <div
-                className={`grid grid-cols-4 gap-[6px]`}
+                className={`grid ${type === "Page" ? "grid-cols-5" : "grid-cols-4"} gap-[6px]`}
             >
                 {colors.map((color) => {
                     if (type === "Modal" && changeActiveColorId !== undefined) {

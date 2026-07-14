@@ -57,10 +57,14 @@ export default function Description({
     return (
         <div className="flex flex-col items-center gap-6 max-w-[262px] w-full">
             <div className="flex flex-col gap-2 w-full">
-                <div className="flex items-start justify-between w-full">
+                <div className="flex flex-col gap-3 items-start justify-start">
+                    <span className="text-lg font-bold tracking-wide leading-md">
+                        {product.currency === "USD" ? "$" : product.currency}
+                        {currentVariant.price / 100 + "0"}
+                    </span>
                     <Link
                         href={`/product/${product.id}/${product.variants[0].id}`}
-                        className="text-lg font-mono font-medium uppercase tracking-wider leading-md hover:underline"
+                        className="text-lg font-medium uppercase tracking-wider leading-md hover:underline"
                         onClick={() => {
                             useUIStore
                                 .getState()
@@ -70,10 +74,6 @@ export default function Description({
                     >
                         {product.title}
                     </Link>
-                    <span className="text-lg font-bold tracking-wide leading-md">
-                        {product.currency === "USD" ? "$" : product.currency}
-                        {currentVariant.price / 100 + "0"}
-                    </span>
                 </div>
                 <span className="text-md text-black/50 uppercase font-medium tracking-wider">
                     {product.brand.name}
@@ -131,7 +131,11 @@ export default function Description({
                         </Button>
                     </div>
                 )}
-				{currentVariant.stock === 0 && <span className="flex items-center justify-center w-full h-10 rounded-xl bg-black/10 tracking-wide">Out of stock</span>}
+                {currentVariant.stock === 0 && (
+                    <span className="flex items-center justify-center w-full h-10 rounded-xl bg-black/10 tracking-wide">
+                        Out of stock
+                    </span>
+                )}
                 <PageLink
                     productSlug={product.slug}
                     selectedColor={selectedColorSlug}
