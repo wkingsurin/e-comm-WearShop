@@ -2,57 +2,58 @@ import { LucideIcon } from "lucide-react";
 import { IColorOption } from "../../store/ui.types";
 
 export interface IDummyProps {
-	icon: LucideIcon;
-	text: string;
+    icon: LucideIcon;
+    text: string;
 }
 
 export interface IHeartButtonProps {
-	isFavorite: boolean;
-	productId: string;
-	inline?: boolean;
+    isFavorite: boolean;
+    productId: string;
+    inline?: boolean;
 }
 
 export interface IRemoveButtonProps {
-	data: IFavorite;
+    data: IFavorite;
 }
 
 export interface ISectionSubtitleProps {
-	children: string | React.ReactNode;
+    children: string | React.ReactNode;
 }
 
 export interface ISectionTitleProps {
-	children: string | React.ReactNode;
+    children: string | React.ReactNode;
 }
 
 export interface ISectionProps {
-	className?: string;
-	children: React.ReactNode;
+    className?: string;
+    children: React.ReactNode;
 }
 
 export interface IServiceLinkProps {
-	href: string;
-	children: string | React.ReactNode;
+    href: string;
+    children: string | React.ReactNode;
 }
 
 export interface ISortProps {
-	className?: string;
+    className?: string;
 }
 
 export interface ICarouselProps {
-	images: IColorOption["images"];
-	activeIndex: number;
-	onSelect: (index: number) => void;
+    images: IColorOption["images"];
+    activeIndex: number;
+    type?: "Modal" | "Page";
+    onSelect: (index: number) => void;
 }
 
 export interface IDashboardWrapperProps {
-	className?: string;
-	children: React.ReactNode;
-	pageTitle?: React.ReactNode;
+    className?: string;
+    children: React.ReactNode;
+    pageTitle?: React.ReactNode;
 }
 
 export interface IFavorite {
-	id: string;
-	userId: string;
-	productId: string;
-	createdAt: string;
+    id: string;
+    userId: string;
+    productId: string;
+    createdAt: string;
 }

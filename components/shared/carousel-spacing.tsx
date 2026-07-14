@@ -16,6 +16,7 @@ export default function CarouselSpacing({
     images,
     activeIndex,
     onSelect,
+    type = "Modal",
 }: ICarouselProps) {
     const [api, setApi] = useState<CarouselApi>();
 
@@ -27,6 +28,8 @@ export default function CarouselSpacing({
         setCanScrollPrev(emblaApi.canScrollPrev());
         setCanScrollNext(emblaApi.canScrollNext());
     }, []);
+
+    const visibleItemsCount = type === "Modal" ? 4 : 6;
 
     useEffect(() => {
         if (!api) return;
@@ -52,9 +55,9 @@ export default function CarouselSpacing({
                 watchDrag: (emblaApi) => emblaApi.scrollSnapList().length > 1,
             }}
             orientation="vertical"
-            className="flex flex-col w-[74px] h-[calc((99px+8px)*4)]"
+            className={`flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((99px+8px)*4)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"} `}
         >
-            <CarouselContent className="flex flex-col -mt-2 w-full h-full">
+            <CarouselContent className="flex flex-col w-full h-full -mt-2">
                 {images.map((image, index) => {
                     return (
                         <CarouselItem
@@ -64,7 +67,7 @@ export default function CarouselSpacing({
                         >
                             <div
                                 key={image.id}
-                                className={`flex h-[99px] bg-[#F4F4F6] rounded-sm border border-transparent transition-brand ${
+                                className={`flex ${type === "Modal" ? "h-[99px]" : "h-[100px]"} bg-[#F4F4F6] rounded-sm border border-transparent transition-brand ${
                                     activeIndex === index
                                         ? "border-black!"
                                         : "hover:border-black/50"
@@ -84,7 +87,7 @@ export default function CarouselSpacing({
             </CarouselContent>
             <Button
                 className={`absolute z-10 left-[calc(50%-16px)] -top-3 flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 ${
-                    canScrollPrev && images.length > 4
+                    canScrollPrev && images.length > visibleItemsCount
                         ? "group-hover/product:opacity-100 scale-100"
                         : "opacity-0 pointer-events-none scale-90"
                 }`}
@@ -95,17 +98,11 @@ export default function CarouselSpacing({
             <Button
                 className={`absolute z-10 -bottom-3 left-[calc(50%-16px)] flex w-8 h-8 rounded-[50%] bg-white hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50
 					${
-                        canScrollNext && images.length > 4
+                        canScrollNext && images.length > visibleItemsCount
                             ? "group-hover/product:opacity-100 scale-100"
                             : "opacity-0 pointer-events-none scale-90"
                     }`}
-                onClick={() => {
-                    api?.scrollNext();
-                    console.log(`next`);
-                    console.log(`api.canScrollPrev():`, api?.canScrollPrev());
-                    console.log(`api.canScrollNext():`, api?.canScrollNext());
-                    console.log(`[api]:`, api);
-                }}
+                onClick={() => api?.scrollNext()}
             >
                 <ArrowDown className="size-4 stroke-[1.5px] stroke-black" />
             </Button>
