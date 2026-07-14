@@ -2,11 +2,11 @@
 
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import Dummy from "@/components/shared/dummy";
-import CartItem from "@/components/widgets/cart-item";
 import { ShoppingBag } from "lucide-react";
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { EMPTY_CART } from "@/features/cart/constants";
 import SellMenu from "@/features/cart/components/sell-menu";
+import CartItem from "@/features/cart/components/cart-item";
 
 export default function CartClient({
     payments,
@@ -19,7 +19,7 @@ export default function CartClient({
         <div className="relative flex items-start gap-5">
             <DashboardWrapper>
                 {cart.totalItems > 0 && (
-                    <div className="flex flex-col gap-3 flex-1">
+                    <div className="flex flex-col gap-4 flex-1 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:pb-4">
                         {cart.items.map((item) => (
                             <CartItem
                                 key={item.cartItemId}

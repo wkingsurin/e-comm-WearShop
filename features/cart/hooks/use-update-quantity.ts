@@ -38,10 +38,6 @@ export function useUpdateQunatity() {
 			queryClient.setQueryData(queryKeys.cart, context?.previousCart);
 		},
 
-		onSettled: () => {
-			queryClient.invalidateQueries({
-				queryKey: queryKeys.cart,
-			});
-		},
+		onSuccess: (cart) => {queryClient.setQueryData(queryKeys.cart, cart)}
 	});
 }

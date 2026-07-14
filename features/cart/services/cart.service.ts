@@ -4,43 +4,31 @@ import { ICart } from "../types";
 import { EMPTY_CART } from "../constants";
 import { calculateCart } from "../utils/calculate-cart";
 
-async function getCart(userId: string) {
-    let cart = await prisma.cart.findUnique({ where: { userId } });
-
-    if (!cart) {
-        cart = await prisma.cart.create({ data: { userId } });
-    }
-
-    return cart;
-}
-
 export async function addToCart(
-    userId: string,
+    cartId: string,
     variantId: string,
     quantity: number,
 ) {
-    const cart = await getCart(userId);
-
-    const cartItem = await prisma.cartItem.findUnique({
+    let cartItem = await prisma.cartItem.findUnique({
         where: {
             cartId_variantId: {
-                cartId: cart.id,
+                cartId: cartId,
                 variantId,
             },
         },
     });
 
     if (!cartItem) {
-        await prisma.cartItem.create({
-            data: { cartId: cart.id, variantId, quantity },
+        cartItem = await prisma.cartItem.create({
+            data: { cartId: cartId, variantId, quantity },
         });
 
-        return getCartItems(userId);
+        return { cartItem };
     }
 
     await ensureEnoughStock(variantId, cartItem.quantity + 1);
 
-    await prisma.cartItem.update({
+    return prisma.cartItem.update({
         where: { id: cartItem.id },
         data: {
             quantity: {
@@ -48,8 +36,6 @@ export async function addToCart(
             },
         },
     });
-
-    return getCartItems(userId);
 }
 
 export async function getCartItems(userId: string): Promise<ICart> {
@@ -62,7 +48,7 @@ export async function getCartItems(userId: string): Promise<ICart> {
                     variant: {
                         include: {
                             product: {
-                                include: {
+                                select: {
                                     brand: {
                                         select: { name: true, slug: true },
                                     },
@@ -80,6 +66,7 @@ export async function getCartItems(userId: string): Promise<ICart> {
                                             },
                                         },
                                     },
+                                    title: true,
                                 },
                             },
                         },
@@ -96,15 +83,9 @@ export async function getCartItems(userId: string): Promise<ICart> {
     return { items, ...calculateCart(items) };
 }
 
-export async function updateQuantity(
-    userId: string,
-    cartItemId: string,
-    quantity: number,
-) {
-    const cart = await getCart(userId);
-
+export async function updateQuantity(cartItemId: string, quantity: number) {
     const item = await prisma.cartItem.findFirst({
-        where: { id: cartItemId, cartId: cart.id },
+        where: { id: cartItemId },
     });
 
     if (!item) {
@@ -118,14 +99,12 @@ export async function updateQuantity(
         data: { quantity },
     });
 
-    return getCartItems(userId);
+    return { cartItemId, quantity };
 }
 
 export async function removeItem(userId: string, cartItemId: string) {
-    const cart = await getCart(userId);
-
     const item = await prisma.cartItem.findFirst({
-        where: { id: cartItemId, cartId: cart.id },
+        where: { id: cartItemId },
     });
 
     if (!item) {
@@ -133,8 +112,6 @@ export async function removeItem(userId: string, cartItemId: string) {
     }
 
     await prisma.cartItem.delete({ where: { id: cartItemId } });
-
-    return getCartItems(userId);
 }
 
 async function ensureEnoughStock(variantId: string, requestedQunatity: number) {

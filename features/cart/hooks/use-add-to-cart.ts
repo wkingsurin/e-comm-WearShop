@@ -37,7 +37,7 @@ export function useAddToCart() {
 						quantity: items[index].quantity + input.quantity,
 					};
 				} else {
-					items.push(input.item);
+					items.unshift(input.item);
 				}
 
 				const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
@@ -62,11 +62,8 @@ export function useAddToCart() {
 			queryClient.setQueryData(queryKeys.cart, context?.previousCart);
 		},
 
-		onSettled: () => {
+		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: queryKeys.cart });
 		},
-		// onSuccess: () => {
-		// 	queryClient.invalidateQueries({ queryKey: queryKeys.cart });
-		// },
 	});
 }
