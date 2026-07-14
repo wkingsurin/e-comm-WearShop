@@ -17,14 +17,15 @@ export default function SellMenu({
     const router = useRouter();
 
     return (
-        <div className="sticky top-[154px] flex flex-col gap-5 min-w-[320px]">
+        <div className="sticky top-[154px] flex flex-col gap-5 min-w-[35%]">
             <div className="flex flex-col gap-4 min-h-[188px] bg-white rounded-xl  p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
-                <Totals total={cart.total} subtotal={cart.subtotal} />
+                <Totals itemsAmonut={cart.items.length} total={cart.total} subtotal={cart.subtotal} />
                 <Button
                     onClick={() => {
                         router.push("/checkout");
                     }}
                     disabled={isPending || cart.items.length < 1}
+                    className='bg-black h-[50px]'
                 >
                     Proceed to checkout
                 </Button>
