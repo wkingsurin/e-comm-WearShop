@@ -6,13 +6,13 @@ export default function Dummy({ icon, text }: IDummyProps) {
 
 	return (
 		<div className="flex flex-col gap-2 items-center justify-center w-full h-full flex-1 rounded-xl">
-			<div className="flex flex-col items-center gap-3 text-sans text-center text-black text-lg tracking-wider">
+			<div className="flex flex-col items-center gap-3 font-medium text-sans text-center text-black/50 tracking-wider">
 				<Icon className="size-6 stroke-[1px] stroke-black/50" />
 				{text}
 			</div>
 			<Link
 				href="/"
-				className="flex items-center justify-center min-w-[240px] h-10 bg-black/75 font-mono tracking-wide text-white rounded-xl hover:bg-black transition-brand"
+				className="flex items-center justify-center min-w-[240px] h-10 font-mono tracking-wide text-white rounded-xl bg-black transition-brand"
 			>
 				Continue shopping
 			</Link>
