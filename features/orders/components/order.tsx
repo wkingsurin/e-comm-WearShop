@@ -10,12 +10,12 @@ export default function Order({ data }: IOrderProps) {
 
 	return (
 		<div
-			className={`flex flex-col gap-3 w-full ${
+			className={`flex gap-3 w-full ${
 				open ? "min-h-[363px]" : "min-h-[72px]"
-			} p-4 rounded-lg border border-black/10 bg-[#D9D9D9]/10 transition-brand`}
+			} p-4 rounded-lg bg-[#F8F9FA] transition-brand`}
 		>
 			<OrderMenu data={data} toggleOrder={toggleOrder} />
-			{open && <OrderContent data={data} />}
+			<OrderContent data={data} />
 		</div>
 	);
 }

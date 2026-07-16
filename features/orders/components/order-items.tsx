@@ -1,28 +1,37 @@
 import { IOrder } from "@/types/account/orders/orders.types";
 import OrderItem from "./order-item";
 import { useFavorites } from "@/features/favorites/hooks/use-favorites";
+import DummyItem from "./dummy-item";
 
 export default function OrderItems({
-	data,
-	currency,
+    data,
+    currency,
 }: {
-	data: IOrder["items"];
-	currency: string;
+    data: IOrder["items"];
+    currency: string;
 }) {
-	const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavorites();
 
-	return (
-		<div className="flex gap-3">
-			{data.map((item) => {
-				return (
-					<OrderItem
-						key={item.id}
-						data={item}
-						isFavorite={!!favorites[item.id]}
-						currency={currency}
-					/>
-				);
-			})}
-		</div>
-	);
+    const LIMIT_AMOUNT = 4;
+
+    const shortData =
+        data.length > LIMIT_AMOUNT ? [...data].splice(0, LIMIT_AMOUNT) : data;
+
+    return (
+        <div className="grid grid-cols-4 gap-3">
+            {shortData.map((item) => {
+                return (
+                    <OrderItem
+                        key={item.id}
+                        data={item}
+                        isFavorite={!!favorites[item.id]}
+                        currency={currency}
+                    />
+                );
+            })}
+            {data.length > LIMIT_AMOUNT && (
+                <DummyItem restItemsAmout={data.length - shortData.length} />
+            )}
+        </div>
+    );
 }

@@ -1,13 +1,13 @@
 import { IOrder } from "@/types/account/orders/orders.types";
 
 export default function OrderNumber({
-	orderNumber,
+    orderNumber,
 }: {
-	orderNumber: IOrder["orderNumber"];
+    orderNumber: IOrder["orderNumber"];
 }) {
-	return (
-		<span className="flex items-center font-mono font-medium italic">
-			{orderNumber}
-		</span>
-	);
+    return (
+        <span className="flex items-center font-mono font-medium text-sm text-black/25">
+            {orderNumber.split('-')[1]}
+        </span>
+    );
 }

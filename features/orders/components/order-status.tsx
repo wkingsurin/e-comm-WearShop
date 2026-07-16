@@ -6,7 +6,7 @@ export default function OrderStatus({ status }: { status: Status }) {
 
     return (
         <span
-            className={`flex items-center h-[30px] px-3 rounded-[50px] ${item.color} text-white tracking-wide leading-base`}
+            className={`flex items-center h-[20px] px-3 rounded-[50px] border-[0.5px] border-black/5 ${item.color} text-white text-sm tracking-wide leading-base`}
         >
             {item.label}
         </span>
