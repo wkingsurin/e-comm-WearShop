@@ -67,6 +67,7 @@ export async function getCartItems(userId: string): Promise<ICart> {
                                         },
                                     },
                                     title: true,
+                                    currency: true,
                                 },
                             },
                         },
@@ -75,6 +76,8 @@ export async function getCartItems(userId: string): Promise<ICart> {
             },
         },
     });
+
+    console.log(`[getCartitems] cart:`, cart);
 
     if (!cart) return EMPTY_CART;
 
