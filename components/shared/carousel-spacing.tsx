@@ -7,7 +7,7 @@ import {
     CarouselItem,
 } from "../ui/carousel";
 import { Button } from "../ui/button";
-import { ArrowDown, ArrowLeft, ArrowRight, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import { ICarouselProps } from "@/types/components/shared/shared.types";
@@ -38,8 +38,6 @@ export default function CarouselSpacing({
         api.on("reInit", () => updateScollStatus(api));
 
         return () => {
-            console.log(`remove listeners`);
-
             api.off("select", () => updateScollStatus(api));
             api.off("reInit", () => updateScollStatus(api));
         };

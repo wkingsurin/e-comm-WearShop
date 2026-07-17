@@ -18,8 +18,6 @@ export default function Order({
 }) {
     const { data: checkout = EMPTY_CHECKOUT } = useCheckout();
 
-    console.log(`[CHECKOUT] items:`, items);
-
     return (
         <div className="flex flex-col gap-5 w-full">
             <DashboardWrapper

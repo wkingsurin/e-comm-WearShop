@@ -1,7 +1,6 @@
 "use client";
 
 import Dummy from "@/components/shared/dummy";
-import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
 import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 import { IProduct } from "@/types/store/ui.types";

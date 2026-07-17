@@ -27,8 +27,6 @@ export default async function SuccessPage({ params }: IProps) {
 
     queryClient.setQueryData(queryKeys.order(orderId), order);
 
-    console.log(queryClient.getQueryData(queryKeys.order(orderId)));
-
     return (
         <>
             <Section>

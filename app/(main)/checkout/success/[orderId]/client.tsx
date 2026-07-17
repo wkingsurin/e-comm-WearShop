@@ -13,8 +13,6 @@ interface IProps {
 export default function SuccessClient({ orderId }: IProps) {
     const { data: order = EMPTY_ORDER } = useOrder(orderId);
 
-    console.log(`[SUCCESS] order:`, order);
-
     return (
         <div className="flex items-center justify-center">
             <div className="flex flex-col items-center gap-5">

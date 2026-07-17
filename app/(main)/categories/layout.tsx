@@ -5,7 +5,6 @@ import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import { getFavoriteMap } from "@/features/favorites/services/favorites.service";
-import { getProducts } from "@/lib/get-products";
 import { getQueryClient } from "@/lib/react-query/get-query-client";
 import { queryKeys } from "@/lib/react-query/query-keys";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
@@ -34,7 +33,6 @@ export default async function CategoryLayout({ children }: IProps) {
                     </HydrationBoundary>
                 </Container>
             </Section>
-            {/* <LastSeenSection /> */}
         </Main>
     );
 }
