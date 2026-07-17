@@ -21,7 +21,7 @@ export default function CheckoutClinet() {
                         totalItems: cart.totalItems,
                         subtotal: cart.subtotal,
                         total: cart.total,
-                        currency: cart.items[0].currency,
+                        currency: '$',
                     }}
                 />
                 <OrderReturn
