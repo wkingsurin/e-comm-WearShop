@@ -1,13 +1,16 @@
 import { Button } from "@/components/ui/button";
+import { OrderStatus } from "@/prisma/generated/prisma/enums";
 import { IOrderTotals } from "@/types/account/orders/orders.types";
 
 interface IProps {
+    status: OrderStatus;
     currency: string;
     totals: IOrderTotals;
     itemsAmount: number;
 }
 
 export default function OrderSummary({
+    status,
     currency,
     itemsAmount,
     totals,
@@ -57,7 +60,10 @@ export default function OrderSummary({
                     </p>
                 </div>
             </div>
-            <Button className="h-[50px] bg-black">Reorder</Button>
+            {(status === OrderStatus.CANCELLED ||
+                status === OrderStatus.DELIVERED) && (
+                <Button className="h-[50px] bg-black">Reorder</Button>
+            )}
         </div>
     );
 }

@@ -47,7 +47,7 @@ export default function CartItem({ data }: ICartItemProps) {
                     </div>
 
                     <div
-                        className={`group/amount relative flex rounded-xl bg-white border-[0.5px] border-black/10 ${data.maxStock > data.quantity && "hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25"} transition-brand`}
+                        className={`group/amount relative flex rounded-md bg-white border-[0.5px] border-black/10 ${data.maxStock > data.quantity && "hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25"} transition-brand`}
                     >
                         <Button
                             className="flex gap-3 w-10 h-10 bg-white hover:bg-white"

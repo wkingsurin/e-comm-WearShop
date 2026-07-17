@@ -15,7 +15,7 @@ export default function OrderItems({
     const LIMIT_AMOUNT = 4;
 
     const shortData =
-        data.length > LIMIT_AMOUNT ? [...data].splice(0, LIMIT_AMOUNT) : data;
+        data.length > LIMIT_AMOUNT ? [...data].splice(0, LIMIT_AMOUNT - 1) : data;
 
     return (
         <div className="grid grid-cols-4 gap-3">
@@ -30,7 +30,7 @@ export default function OrderItems({
                 );
             })}
             {data.length > LIMIT_AMOUNT && (
-                <DummyItem restItemsAmout={data.length - shortData.length} />
+                <DummyItem restItemsAmount={data.length - shortData.length} />
             )}
         </div>
     );

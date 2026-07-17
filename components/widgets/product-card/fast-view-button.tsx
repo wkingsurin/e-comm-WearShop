@@ -26,7 +26,7 @@ export default function FastViewButton({
 				addLastSeen(data);
 			}}
 		>
-			Fast view
+			Quick view
 		</Button>
 	);
 }

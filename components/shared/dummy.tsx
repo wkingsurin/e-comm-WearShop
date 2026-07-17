@@ -12,7 +12,7 @@ export default function Dummy({ icon, text }: IDummyProps) {
             </div>
             <Link
                 href="/"
-                className="flex items-center justify-center min-w-[240px] h-10 font-mono tracking-wide text-white rounded-xl bg-black transition-brand"
+                className="flex items-center justify-center min-w-[240px] h-10 font-mono tracking-wide text-white rounded-md bg-black transition-brand"
             >
                 Continue shopping
             </Link>

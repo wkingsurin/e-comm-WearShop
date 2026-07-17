@@ -14,7 +14,7 @@ export default function OrderItem({
     return (
         <div
             key={data.id}
-            className="flex flex-col items-center gap-3 p-3 rounded-xl bg-[#E5E7EB]/50 overflow-hidden"
+            className="flex flex-col items-center gap-3 p-3 rounded-md bg-[#E5E7EB]/50 overflow-hidden"
         >
             <div className="flex flex-col gap-3 items-center justify-center h-[100px]">
                 <Image

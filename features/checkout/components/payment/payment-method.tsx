@@ -19,7 +19,7 @@ export default function PaymentMethod({
 		<Label
 			htmlFor={item.label}
 			key={item.id}
-			className={`flex items-center gap-3 rounded-[8px] border-[0.5px] px-3 border-black/10 w-full h-10 ${
+			className={`flex items-center gap-3 rounded-md border-[0.5px] px-3 border-black/10 w-full h-10 ${
 				checked ? "border-black" : "hover:border-black/25"
 			} transition-brand`}
 		>

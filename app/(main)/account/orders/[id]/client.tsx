@@ -50,6 +50,7 @@ export default function OrderPageClient({ orderId }: { orderId: string }) {
             </DashboardWrapper>
             <div className="sticky top-[154px] flex flex-col gap-4 w-[35%]">
                 <OrderSummary
+                    status={order.status}
                     currency={order.currency}
                     itemsAmount={order.items.length}
                     totals={order.totals}

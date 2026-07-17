@@ -12,7 +12,7 @@ export default function OrdersClient() {
     const { data: orders = EMPTY_ORDERS } = useOrders();
 
     return (
-        <DashboardWrapper pageTitle={<DashboardWrapperTitle title="Orders" />}>
+        <DashboardWrapper className="min-h-[534px]" pageTitle={<DashboardWrapperTitle title="Orders" />}>
             {orders.length > 0 && (
                 <>
                     {orders.map((order) => {

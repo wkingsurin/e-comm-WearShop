@@ -11,7 +11,7 @@ export default function MenuLayout({ children }: IProps) {
             <div className="flex items-center justify-between">
                 <SectionTitle>Account</SectionTitle>
             </div>
-            <div className="flex items-start gap-4">
+            <div className="relative flex items-start gap-4">
                 <AccountNavigation />
                 <div className="flex w-full">{children}</div>
             </div>

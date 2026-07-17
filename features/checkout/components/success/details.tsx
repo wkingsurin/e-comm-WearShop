@@ -30,13 +30,13 @@ export default function Details({ order }: IProps) {
             <div className="grid grid-cols-2 gap-4">
                 <Link
                     href={`/account/orders/${order.id}`}
-                    className="flex items-center justify-center basis-1/2 h-10 bg-black font-mono text-white rounded-xl transition-brand"
+                    className="flex items-center justify-center basis-1/2 h-10 bg-black font-mono text-white rounded-md transition-brand"
                 >
                     View order
                 </Link>
                 <Link
                     href="/categories"
-                    className="flex items-center justify-center basis-1/2 h-10 bg-transparent font-mono text-black rounded-xl border border-black hover:bg-black hover:text-white transition-brand"
+                    className="flex items-center justify-center basis-1/2 h-10 bg-transparent font-mono text-black rounded-md border border-black hover:bg-black hover:text-white transition-brand"
                 >
                     Continue shopping
                 </Link>

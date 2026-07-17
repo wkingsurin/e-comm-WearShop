@@ -33,7 +33,7 @@ export default function Description({
                 >
                     {data.title}
                 </Link>
-                <span className="text-sm text-black/50">{data.brand.name}</span>
+                <span className="text-sm text-black/50 leading-base">{data.brand.name}</span>
             </div>
         </div>
     );

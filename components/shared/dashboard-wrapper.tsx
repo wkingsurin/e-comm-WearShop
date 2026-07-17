@@ -9,10 +9,10 @@ export default function DashboardWrapper({
 
     return (
         <div
-            className={`flex flex-col gap-4 w-full min-h-[529px] p-6 rounded-lg bg-white hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand ${style}`}
+            className={`flex flex-col gap-4 w-full min-h-[453px] p-6 rounded-lg bg-white hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand ${style}`}
         >
             {pageTitle && (
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between leading-md text-lg">
                     {pageTitle}
                 </div>
             )}
