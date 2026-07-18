@@ -39,8 +39,7 @@ export type UserMinAggregateOutputType = {
   telegramId: bigint | null
   name: string | null
   email: string | null
-  password: string | null
-  createAt: Date | null
+  createdAt: Date | null
   updatedAt: Date | null
 }
 
@@ -49,8 +48,7 @@ export type UserMaxAggregateOutputType = {
   telegramId: bigint | null
   name: string | null
   email: string | null
-  password: string | null
-  createAt: Date | null
+  createdAt: Date | null
   updatedAt: Date | null
 }
 
@@ -59,8 +57,7 @@ export type UserCountAggregateOutputType = {
   telegramId: number
   name: number
   email: number
-  password: number
-  createAt: number
+  createdAt: number
   updatedAt: number
   _all: number
 }
@@ -79,8 +76,7 @@ export type UserMinAggregateInputType = {
   telegramId?: true
   name?: true
   email?: true
-  password?: true
-  createAt?: true
+  createdAt?: true
   updatedAt?: true
 }
 
@@ -89,8 +85,7 @@ export type UserMaxAggregateInputType = {
   telegramId?: true
   name?: true
   email?: true
-  password?: true
-  createAt?: true
+  createdAt?: true
   updatedAt?: true
 }
 
@@ -99,8 +94,7 @@ export type UserCountAggregateInputType = {
   telegramId?: true
   name?: true
   email?: true
-  password?: true
-  createAt?: true
+  createdAt?: true
   updatedAt?: true
   _all?: true
 }
@@ -196,8 +190,7 @@ export type UserGroupByOutputType = {
   telegramId: bigint | null
   name: string | null
   email: string
-  password: string | null
-  createAt: Date
+  createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
@@ -229,10 +222,10 @@ export type UserWhereInput = {
   telegramId?: Prisma.BigIntNullableFilter<"User"> | bigint | number | null
   name?: Prisma.StringNullableFilter<"User"> | string | null
   email?: Prisma.StringFilter<"User"> | string
-  password?: Prisma.StringNullableFilter<"User"> | string | null
-  createAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   image?: Prisma.ProductImageListRelationFilter
+  address?: Prisma.XOR<Prisma.UserAddressNullableScalarRelationFilter, Prisma.UserAddressWhereInput> | null
   favorites?: Prisma.FavoriteListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
@@ -244,10 +237,10 @@ export type UserOrderByWithRelationInput = {
   telegramId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrderInput | Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   image?: Prisma.ProductImageOrderByRelationAggregateInput
+  address?: Prisma.UserAddressOrderByWithRelationInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   orders?: Prisma.OrderOrderByRelationAggregateInput
   cart?: Prisma.CartOrderByWithRelationInput
@@ -262,10 +255,10 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringNullableFilter<"User"> | string | null
-  password?: Prisma.StringNullableFilter<"User"> | string | null
-  createAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   image?: Prisma.ProductImageListRelationFilter
+  address?: Prisma.XOR<Prisma.UserAddressNullableScalarRelationFilter, Prisma.UserAddressWhereInput> | null
   favorites?: Prisma.FavoriteListRelationFilter
   orders?: Prisma.OrderListRelationFilter
   cart?: Prisma.XOR<Prisma.CartNullableScalarRelationFilter, Prisma.CartWhereInput> | null
@@ -277,8 +270,7 @@ export type UserOrderByWithAggregationInput = {
   telegramId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrderInput | Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
@@ -295,8 +287,7 @@ export type UserScalarWhereWithAggregatesInput = {
   telegramId?: Prisma.BigIntNullableWithAggregatesFilter<"User"> | bigint | number | null
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
-  password?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  createAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
@@ -305,10 +296,10 @@ export type UserCreateInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -320,10 +311,10 @@ export type UserUncheckedCreateInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -335,10 +326,10 @@ export type UserUpdateInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -350,10 +341,10 @@ export type UserUncheckedUpdateInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -365,8 +356,7 @@ export type UserCreateManyInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
 }
 
@@ -375,8 +365,7 @@ export type UserUpdateManyMutationInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -385,8 +374,7 @@ export type UserUncheckedUpdateManyInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -400,8 +388,7 @@ export type UserCountOrderByAggregateInput = {
   telegramId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -414,8 +401,7 @@ export type UserMaxOrderByAggregateInput = {
   telegramId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -424,8 +410,7 @@ export type UserMinOrderByAggregateInput = {
   telegramId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  password?: Prisma.SortOrder
-  createAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
@@ -462,6 +447,20 @@ export type NullableBigIntFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
+}
+
+export type UserCreateNestedOneWithoutAddressInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAddressInput, Prisma.UserUncheckedCreateWithoutAddressInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAddressInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAddressNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAddressInput, Prisma.UserUncheckedCreateWithoutAddressInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAddressInput
+  upsert?: Prisma.UserUpsertWithoutAddressInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAddressInput, Prisma.UserUpdateWithoutAddressInput>, Prisma.UserUncheckedUpdateWithoutAddressInput>
 }
 
 export type UserCreateNestedOneWithoutImageInput = {
@@ -529,10 +528,10 @@ export type UserCreateWithoutFavoritesInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
   checkout?: Prisma.CheckoutCreateNestedOneWithoutUserInput
@@ -543,10 +542,10 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressUncheckedCreateNestedOneWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
   checkout?: Prisma.CheckoutUncheckedCreateNestedOneWithoutUserInput
@@ -573,10 +572,10 @@ export type UserUpdateWithoutFavoritesInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUpdateOneWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
   checkout?: Prisma.CheckoutUpdateOneWithoutUserNestedInput
@@ -587,10 +586,82 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUncheckedUpdateOneWithoutUserNestedInput
+  orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
+  checkout?: Prisma.CheckoutUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAddressInput = {
+  id?: string
+  telegramId?: bigint | number | null
+  name?: string | null
+  email: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartCreateNestedOneWithoutUserInput
+  checkout?: Prisma.CheckoutCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAddressInput = {
+  id?: string
+  telegramId?: bigint | number | null
+  name?: string | null
+  email: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
+  cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
+  checkout?: Prisma.CheckoutUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAddressInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAddressInput, Prisma.UserUncheckedCreateWithoutAddressInput>
+}
+
+export type UserUpsertWithoutAddressInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAddressInput, Prisma.UserUncheckedUpdateWithoutAddressInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAddressInput, Prisma.UserUncheckedCreateWithoutAddressInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAddressInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAddressInput, Prisma.UserUncheckedUpdateWithoutAddressInput>
+}
+
+export type UserUpdateWithoutAddressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
+  cart?: Prisma.CartUpdateOneWithoutUserNestedInput
+  checkout?: Prisma.CheckoutUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAddressInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
   checkout?: Prisma.CheckoutUncheckedUpdateOneWithoutUserNestedInput
@@ -601,9 +672,9 @@ export type UserCreateWithoutImageInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
+  address?: Prisma.UserAddressCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -615,9 +686,9 @@ export type UserUncheckedCreateWithoutImageInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
+  address?: Prisma.UserAddressUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -645,9 +716,9 @@ export type UserUpdateWithoutImageInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.UserAddressUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -659,9 +730,9 @@ export type UserUncheckedUpdateWithoutImageInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.UserAddressUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -673,10 +744,10 @@ export type UserCreateWithoutOrdersInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
   checkout?: Prisma.CheckoutCreateNestedOneWithoutUserInput
@@ -687,10 +758,10 @@ export type UserUncheckedCreateWithoutOrdersInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
   checkout?: Prisma.CheckoutUncheckedCreateNestedOneWithoutUserInput
@@ -717,10 +788,10 @@ export type UserUpdateWithoutOrdersInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
   checkout?: Prisma.CheckoutUpdateOneWithoutUserNestedInput
@@ -731,10 +802,10 @@ export type UserUncheckedUpdateWithoutOrdersInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
   checkout?: Prisma.CheckoutUncheckedUpdateOneWithoutUserNestedInput
@@ -745,10 +816,10 @@ export type UserCreateWithoutCartInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   checkout?: Prisma.CheckoutCreateNestedOneWithoutUserInput
@@ -759,10 +830,10 @@ export type UserUncheckedCreateWithoutCartInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   checkout?: Prisma.CheckoutUncheckedCreateNestedOneWithoutUserInput
@@ -789,10 +860,10 @@ export type UserUpdateWithoutCartInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   checkout?: Prisma.CheckoutUpdateOneWithoutUserNestedInput
@@ -803,10 +874,10 @@ export type UserUncheckedUpdateWithoutCartInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   checkout?: Prisma.CheckoutUncheckedUpdateOneWithoutUserNestedInput
@@ -817,10 +888,10 @@ export type UserCreateWithoutCheckoutInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderCreateNestedManyWithoutUserInput
   cart?: Prisma.CartCreateNestedOneWithoutUserInput
@@ -831,10 +902,10 @@ export type UserUncheckedCreateWithoutCheckoutInput = {
   telegramId?: bigint | number | null
   name?: string | null
   email: string
-  password?: string | null
-  createAt?: Date | string
+  createdAt?: Date | string
   updatedAt?: Date | string
   image?: Prisma.ProductImageUncheckedCreateNestedManyWithoutUserInput
+  address?: Prisma.UserAddressUncheckedCreateNestedOneWithoutUserInput
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
   orders?: Prisma.OrderUncheckedCreateNestedManyWithoutUserInput
   cart?: Prisma.CartUncheckedCreateNestedOneWithoutUserInput
@@ -861,10 +932,10 @@ export type UserUpdateWithoutCheckoutInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUpdateOneWithoutUserNestedInput
@@ -875,10 +946,10 @@ export type UserUncheckedUpdateWithoutCheckoutInput = {
   telegramId?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   image?: Prisma.ProductImageUncheckedUpdateManyWithoutUserNestedInput
+  address?: Prisma.UserAddressUncheckedUpdateOneWithoutUserNestedInput
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
   orders?: Prisma.OrderUncheckedUpdateManyWithoutUserNestedInput
   cart?: Prisma.CartUncheckedUpdateOneWithoutUserNestedInput
@@ -938,10 +1009,10 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   telegramId?: boolean
   name?: boolean
   email?: boolean
-  password?: boolean
-  createAt?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
   image?: boolean | Prisma.User$imageArgs<ExtArgs>
+  address?: boolean | Prisma.User$addressArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
@@ -954,8 +1025,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   telegramId?: boolean
   name?: boolean
   email?: boolean
-  password?: boolean
-  createAt?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -964,8 +1034,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   telegramId?: boolean
   name?: boolean
   email?: boolean
-  password?: boolean
-  createAt?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -974,14 +1043,14 @@ export type UserSelectScalar = {
   telegramId?: boolean
   name?: boolean
   email?: boolean
-  password?: boolean
-  createAt?: boolean
+  createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "telegramId" | "name" | "email" | "password" | "createAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "telegramId" | "name" | "email" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   image?: boolean | Prisma.User$imageArgs<ExtArgs>
+  address?: boolean | Prisma.User$addressArgs<ExtArgs>
   favorites?: boolean | Prisma.User$favoritesArgs<ExtArgs>
   orders?: boolean | Prisma.User$ordersArgs<ExtArgs>
   cart?: boolean | Prisma.User$cartArgs<ExtArgs>
@@ -995,6 +1064,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     image: Prisma.$ProductImagePayload<ExtArgs>[]
+    address: Prisma.$UserAddressPayload<ExtArgs> | null
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     orders: Prisma.$OrderPayload<ExtArgs>[]
     cart: Prisma.$CartPayload<ExtArgs> | null
@@ -1005,8 +1075,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     telegramId: bigint | null
     name: string | null
     email: string
-    password: string | null
-    createAt: Date
+    createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -1403,6 +1472,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   image<T extends Prisma.User$imageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$imageArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProductImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  address<T extends Prisma.User$addressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$addressArgs<ExtArgs>>): Prisma.Prisma__UserAddressClient<runtime.Types.Result.GetResult<Prisma.$UserAddressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   favorites<T extends Prisma.User$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   orders<T extends Prisma.User$ordersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ordersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   cart<T extends Prisma.User$cartArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$cartArgs<ExtArgs>>): Prisma.Prisma__CartClient<runtime.Types.Result.GetResult<Prisma.$CartPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -1440,8 +1510,7 @@ export interface UserFieldRefs {
   readonly telegramId: Prisma.FieldRef<"User", 'BigInt'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
-  readonly password: Prisma.FieldRef<"User", 'String'>
-  readonly createAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
@@ -1857,6 +1926,25 @@ export type User$imageArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   distinct?: Prisma.ProductImageScalarFieldEnum | Prisma.ProductImageScalarFieldEnum[]
+}
+
+/**
+ * User.address
+ */
+export type User$addressArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UserAddress
+   */
+  select?: Prisma.UserAddressSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UserAddress
+   */
+  omit?: Prisma.UserAddressOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserAddressInclude<ExtArgs> | null
+  where?: Prisma.UserAddressWhereInput
 }
 
 /**
