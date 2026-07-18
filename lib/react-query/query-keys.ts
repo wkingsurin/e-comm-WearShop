@@ -1,7 +1,8 @@
 export const queryKeys = {
-	favorites: ["favorites"],
-	cart: ["cart"],
-	checkout: ["checkout"],
-	orders: () => ["orders"],
-	order: (id: string) => ["orders", id],
+    favorites: ["favorites"],
+    cart: ["cart"],
+    checkout: ["checkout"],
+    orders: () => ["orders"],
+    order: (id: string) => ["orders", id],
+    profile: ["profile"],
 };

@@ -9,12 +9,17 @@ import { getQueryClient } from "@/lib/react-query/get-query-client";
 import { auth } from "@/auth";
 import { getOrders } from "@/features/orders/services/order.service";
 import { EMPTY_ORDERS } from "@/features/orders/constants";
+import { getUserProfile } from "@/features/profile/services/profile.service";
+import { EMPTY_USER_PROFILE } from "@/features/profile/constants";
 
 export default async function AccountLayout({ children }: IAccountProps) {
     const session = await auth();
     console.log(`[session]:`, session);
 
-    const [orders] = await Promise.all([
+    const [profile, orders] = await Promise.all([
+        session?.user?.id
+            ? getUserProfile(session.user.id)
+            : Promise.resolve({ EMPTY_USER_PROFILE }),
         session?.user?.id
             ? getOrders(session.user.id)
             : Promise.resolve({ EMPTY_ORDERS }),
@@ -22,6 +27,7 @@ export default async function AccountLayout({ children }: IAccountProps) {
 
     const queryClient = getQueryClient();
 
+    queryClient.setQueryData(queryKeys.profile, profile);
     queryClient.setQueryData(queryKeys.orders(), orders);
 
     return (

@@ -8,6 +8,7 @@ export default async function Favorites() {
 
     return (
         <DashboardWrapper
+            className="min-h-[534px]"
             pageTitle={<DashboardWrapperTitle title="Favorites" />}
         >
             <FavoritesClient products={products} />

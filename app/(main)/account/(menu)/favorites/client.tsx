@@ -12,10 +12,14 @@ interface ClientProps {
 
 export function FavoritesClient({ products }: ClientProps) {
     const { data: favorites = {} } = useFavorites();
-    const favoriteProducts = products.filter((product) => favorites[product.id]);
+    const favoriteProducts = products.filter(
+        (product) => favorites[product.id],
+    );
 
     return (
-        <div className="grid grid-cols-4 gap-4">
+        <div
+            className={`grid grid-cols-4 gap-4 ${favoriteProducts.length > 0 ? "h-auto" : "h-full"}`}
+        >
             {favoriteProducts.length !== 0 && (
                 <>
                     {favoriteProducts.map((item) => {

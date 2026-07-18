@@ -102,6 +102,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                                     email,
                                     name: email.split("@")[0],
                                     cart: { create: {} },
+                                    address: { create: {} },
                                 },
                                 select: {
                                     id: true,
