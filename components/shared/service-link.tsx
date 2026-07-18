@@ -33,7 +33,7 @@ export default function ServiceLink({ href, children }: IServiceLinkProps) {
 							variant="link"
 							className="flex items-center gap-[6px] p-0 font-sans hover:no-underline cursor-pointer"
 						>
-							<UserCircle className="size-5 stroke-[1px]" />
+							<UserCircle className="size-4 stroke-[1.5px]" />
 							Account
 						</Button>
 					}
