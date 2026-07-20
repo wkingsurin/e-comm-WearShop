@@ -10,7 +10,7 @@ export default function UtilityNav() {
     ];
 
     return (
-        <nav className="hidden md:flex gap-4">
+        <nav className="hidden md:flex justify-center md:justify-normal gap-4">
             {list.map((item) => {
                 const Icon =
                     item.id === "1"

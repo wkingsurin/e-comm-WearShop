@@ -7,7 +7,7 @@ import LinkedIn from "./shared/icons/linkedin";
 export default function Footer() {
 	const navigationData: { id: string; label: string; ref: string }[] = [
 		{ id: "1", label: "Terms of service", ref: "/" },
-		{ id: "2", label: "Terms of service", ref: "/" },
+		{ id: "2", label: "Privacy policy", ref: "/" },
 	];
 	const socialData: { id: string; icon: React.ReactNode }[] = [
 		{ id: "1", icon: <Github /> },
@@ -16,20 +16,20 @@ export default function Footer() {
 	];
 
 	return (
-		<footer className="py-[30px] bg-black/5">
+		<footer className="py-[30px] bg-black/5 mb-[50px] md:mb-auto">
 			<Container>
-				<div className="flex items-start justify-between">
-					<p className="font-medium tracking-wider leading-md text-black/50">
+				<div className="flex flex-col gap-5 items-center lg:gap-auto lg:flex-row lg:gap-auto lg:items-start justify-between">
+					<p className="order-3 lg:order-1 font-medium tracking-wider leading-md text-black/50">
 						© Copyright 2026
 					</p>
-					<nav className="flex gap-5">
+					<nav className="order-1 lg:order-2 flex gap-5">
 						{navigationData.map((item) => (
 							<Link key={item.id} href={item.ref} className="leading-md opacity-75 hover:opacity-100 transition-brand">
 								{item.label}
 							</Link>
 						))}
 					</nav>
-					<div className="flex gap-3">
+					<div className="order-2 lg:order-3 flex gap-3">
 						{socialData.map((item) => {
 							const Icon = item.icon;
 

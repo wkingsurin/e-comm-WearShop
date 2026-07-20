@@ -4,6 +4,7 @@ import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import LastSeenSection from "@/components/widgets/last-seen-section";
 import CartClient from "./client";
+import BackButton from "@/components/shared/back-button";
 
 export default async function Cart() {
     const payments: { id: string; label: string; image: string }[] = [
@@ -15,9 +16,12 @@ export default async function Cart() {
     return (
         <Main>
             <Section>
-                <Container>
+                <Container className="px-0! md:px-4!">
                     <div className="flex flex-col gap-5">
-                        <SectionTitle>Cart</SectionTitle>
+                        <div className="flex gap-3 lg:flex-row items-center lg:gap-4 px-3 md:px-0!">
+                            <BackButton />
+                            <SectionTitle>Cart</SectionTitle>
+                        </div>
                         <CartClient payments={payments} />
                     </div>
                 </Container>

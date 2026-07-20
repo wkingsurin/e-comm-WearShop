@@ -24,20 +24,20 @@ export default function CategoriesClient({
 
 	return (
 		<div className="flex flex-col gap-5">
-			<div className="relative flex items-center justify-between">
-				<div className="flex items-start gap-[6px]">
+			<div className="relative flex flex-col gap-4 lg:flex-row items-start lg:items-center lg:gap-auto justify-between px-2 md:px-0!">
+				<div className="flex order-2 lg:order-1 items-start gap-[6px]">
 					<SectionTitle>All Products</SectionTitle>
 					<span className="text-base font-normal tracking-wider leading-base">
 						({products.length})
 					</span>
 				</div>
-				<div className="flex gap-3 absolute -top-[12px] right-0">
+				<div className="flex order-1 lg:order-2 gap-3 w-full md:w-auto lg:absolute lg:-top-[12px] right-0">
 					<SortSelect />
 					<FiltersButton onOpenFilters={onOpenFilters} />
 				</div>
 			</div>
 			{openFilters && <Filters />}
-			<div className="grid grid-cols-5 gap-5">
+			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 lg:gap-5">
 				{products.map((item) => {
 					return (
 						<ProductCard

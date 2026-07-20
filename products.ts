@@ -2214,7 +2214,7 @@ export const products = [
 	// JEANS
 	{
 		title: "Jack & Jones Jeans",
-		slug: "jack-&-jones1-jeans",
+		slug: "jack-and-jones1-jeans",
 		brand: {
 			name: "Jack & Jones",
 			slug: "jack-&-jones",
@@ -2367,7 +2367,7 @@ export const products = [
 	},
 	{
 		title: "Jack & Jones Jeans",
-		slug: "jack-&-jones2-jeans",
+		slug: "jack-and-jones2-jeans",
 		brand: {
 			name: "Jack & Jones",
 			slug: "jack-&-jones",
@@ -2565,7 +2565,7 @@ export const products = [
 	},
 	{
 		title: "Only & Sons Jeans",
-		slug: "only-&-sons-jeans",
+		slug: "only-and-sons-jeans",
 		brand: {
 			name: "Only & Sons",
 			slug: "only-&-sons",
@@ -2718,7 +2718,7 @@ export const products = [
 	},
 	{
 		title: "Only & Sons Jeans",
-		slug: "only-&-sons1-jeans",
+		slug: "only-and-sons1-jeans",
 		brand: {
 			name: "Only & Sons",
 			slug: "only-&-sons",
@@ -3066,7 +3066,7 @@ export const products = [
 	},
 	{
 		title: "Only & Sons Jeans",
-		slug: "only-&-sons2-jeans",
+		slug: "only-and-sons2-jeans",
 		brand: {
 			name: "Only & Sons",
 			slug: "only-&-sons",

@@ -10,10 +10,18 @@ export default function HeartButton({
     productId,
     isFavorite,
     inline = false,
+    size = "md",
 }: IHeartButtonProps) {
     const { mutate: toggle, isPending } = useToggleFavorite();
 
     const openConfirm = useUIStore((s) => s.openConfirm);
+
+    const sizeStyle =
+        size === "md"
+            ? "w-10 h-10"
+            : size === "lg"
+              ? "w-[50px] h-[50px]"
+              : "w-[30px] h-[30px]";
 
     const handleDelete = () => {
         openConfirm({
@@ -34,11 +42,11 @@ export default function HeartButton({
     return (
         <Button
             size="icon-lg"
-            className={`group/tag w-[30px] h-[30px] ${
+            className={`group/tag ${
                 inline
                     ? "w-10 h-10 border-[1px] border-black/75 rounded-md hover:bg-[#F51E1E]/10! hover:border-transparent! duration-0"
                     : "absolute z-2 top-[6px] right-[6px]"
-            } ${isFavorite && inline && "bg-[#F51E1E]/10! border-transparent!"} bg-transparent hover:bg-transparent backdrop-blur-[12px]`}
+            } ${sizeStyle} ${isFavorite && inline && "bg-[#F51E1E]/10! border-transparent!"} bg-transparent hover:bg-transparent`}
             disabled={isPending}
             onClick={(e) => {
                 e.preventDefault();

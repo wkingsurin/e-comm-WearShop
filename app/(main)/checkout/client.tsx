@@ -13,9 +13,9 @@ export default function CheckoutClinet() {
     const { data: checkout = EMPTY_CHECKOUT } = useCheckout();
 
     return (
-        <div className="relative flex items-start gap-5">
+        <div className="relative flex flex-col md:flex-row items-start gap-5">
             <Order items={cart.items} totalItems={cart.totalItems} />
-            <div className="sticky top-[154px] flex flex-col gap-4 min-w-[35%]">
+            <div className="relative md:sticky md:top-[154px] flex flex-col gap-4 w-full md:w-auto min-w-[35%]">
                 <Summary
                     options={{
                         totalItems: cart.totalItems,

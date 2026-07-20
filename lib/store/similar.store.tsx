@@ -12,7 +12,7 @@ export const useSimilarStore = create<SimilarState>()(
 				const priceMargin = currentVariant.price * 0.2;
 				const minPrice = currentVariant.price - priceMargin;
 				const maxPrice = currentVariant.price + priceMargin;
-				const LIMIT = 4;
+				const LIMIT = 5;
 
 				const filtered = allProducts.filter(
 					(product) =>

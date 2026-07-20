@@ -32,7 +32,7 @@ export default function AccountNavigation() {
     ];
 
     return (
-        <nav className="sticky top-[154px] max-w-[265px] w-full p-[6px] bg-white rounded-xl hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <nav className="hidden md:block md:sticky md:top-[154px] max-w-[265px] w-full p-[6px] bg-white rounded-xl hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
             {navigationData.map((item) => {
                 const Icon = item.icon;
                 const href = `/account/${item.ref}`;

@@ -24,7 +24,6 @@ export default function ProductCard({
                     data={data}
                     defaultVariant={defaultVariant}
                     isFavorite={isFavorite}
-                    type={type}
                 />
                 <Description data={data} defaultVariant={defaultVariant} />
             </div>

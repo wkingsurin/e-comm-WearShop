@@ -16,8 +16,8 @@ export default function CartClient({
     const { data: cart = EMPTY_CART } = useCart();
 
     return (
-        <div className="relative flex items-start gap-5">
-            <DashboardWrapper className="min-h-[598px]">
+        <div className="relative flex flex-col md:flex-row items-start gap-5">
+            <DashboardWrapper className="min-h-[598px] md:w-[65%]">
                 {cart.totalItems > 0 && (
                     <div className="flex flex-col gap-4 flex-1 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:pb-4">
                         {cart.items.map((item) => (

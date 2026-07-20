@@ -30,7 +30,7 @@ export default async function SuccessPage({ params }: IProps) {
     return (
         <>
             <Section>
-                <Container>
+                <Container className="px-0! md:px-4!">
                     <HydrationBoundary state={dehydrate(queryClient)}>
                         <SuccessClient orderId={orderId} />
                     </HydrationBoundary>

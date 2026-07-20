@@ -5,7 +5,7 @@ export default function OrderItem({ item }: { item: ICartItem }) {
     return (
         <div
             key={item.id}
-            className="flex flex-col gap-3 basis-1/5 max-w-[143.2px] p-3 rounded-md bg-[#E5E7EB]/50 overflow-hidden"
+            className="basis-[calc(33.333%-8px)] flex flex-col gap-3 lg:basis-1/5 max-w-[143.2px] p-3 rounded-md bg-[#E5E7EB]/50 overflow-hidden"
         >
             <div className="flex flex-col gap-3 items-center justify-center h-[100px]">
                 <Image

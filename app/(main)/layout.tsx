@@ -7,6 +7,7 @@ import { getFavoriteMap } from "@/features/favorites/services/favorites.service"
 import { getCartItems } from "@/features/cart/services/cart.service";
 import { EMPTY_CART } from "@/features/cart/constants";
 import { auth } from "@/auth";
+import Menu from "@/features/menu/components/menu";
 
 interface IProps {
     children: React.ReactNode;
@@ -35,6 +36,7 @@ export default async function MainLayout({ children }: IProps) {
             <Header />
             <HydrationBoundary state={dehydrate(queryClient)}>
                 {children}
+                <Menu />
             </HydrationBoundary>
             <Footer />
         </>

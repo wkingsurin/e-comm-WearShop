@@ -25,5 +25,4 @@ export interface IProductFaceProps {
 	isFavorite: boolean;
 	defaultVariant: IVariant;
 	disablePicking?: boolean;
-	type?: "Default" | "Favorite";
 }

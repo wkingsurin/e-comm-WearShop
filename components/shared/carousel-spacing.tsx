@@ -53,7 +53,7 @@ export default function CarouselSpacing({
                 watchDrag: (emblaApi) => emblaApi.scrollSnapList().length > 1,
             }}
             orientation="vertical"
-            className={`flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((99px+8px)*4)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"} `}
+            className={`hidden lg:flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((99px+8px)*4)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"} `}
         >
             <CarouselContent className="flex flex-col w-full h-full -mt-2">
                 {images.map((image, index) => {

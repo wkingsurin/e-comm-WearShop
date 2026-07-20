@@ -35,24 +35,10 @@ export default function Order({
 
     return (
         <div className="flex flex-col gap-5 w-full">
-            <DashboardWrapper
-                pageTitle={
-                    <div className="flex items-center gap-3">
-                        <Link
-                            href="/cart"
-                            className="group/page-back flex items-center gap-3 font-bold text-md leading-base tracking-wider text-black/50 hover:no-underline cursor-pointer h-auto px-0 hover:text-black transition-brand"
-                        >
-                            <MoveLeft className="size-4 stroke-black/50 group-hover/page-back:stroke-black transition-brand" />{" "}
-                            Back to Cart
-                        </Link>
-                        <p>x{items.length} Items </p>
-                    </div>
-                }
-                className="min-h-[auto]"
-            >
+            <DashboardWrapper className="min-h-[auto]">
                 <OrderItems items={items} isEmpty={totalItems === 0} />
             </DashboardWrapper>
-            <div className="flex gap-3 w-full">
+            <div className="flex flex-col gap-5 md:flex-row md:gap-3 w-full">
                 <PaymentSelector method={checkout.paymentMethod} />
                 <DeliverySelector method={checkout.deliveryMethod} />
             </div>

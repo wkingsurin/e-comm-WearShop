@@ -42,7 +42,7 @@ export default function CartItem({ data }: ICartItemProps) {
                             {data.title}
                         </span>
                         <p className="text-md text-black/50 tracking-wider leading-lg">
-                            {data.selectedColor.value} · {data.selectedSize}
+                            {`${data.selectedColor.value}`}{data.selectedSize.toLowerCase() !== 'one-size' && ` · ${data.selectedSize}`}
                         </p>
                     </div>
 

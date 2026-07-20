@@ -11,7 +11,7 @@ export const useLastSeenStore = create<LastSeenState>()(
 
 			addLastSeen: (product) => {
 				const id = product.id;
-				const LIMIT = 4;
+				const LIMIT = 5;
 
 				set((state) => {
 					const nextIds = [...state.lastSeenIds];

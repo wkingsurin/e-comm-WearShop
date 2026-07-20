@@ -31,7 +31,7 @@ export default function ShippingForm({
 		<FormProvider
 			form={form}
 			onSubmit={onSubmit}
-			className="flex flex-col gap-5 items-end"
+			className="flex flex-col gap-5 items-end w-full"
 		>
 			<div className="flex flex-col gap-3 w-full">
 				<FormInput
@@ -58,7 +58,7 @@ export default function ShippingForm({
 					}}
 				/>
 			</div>
-			<Button type="submit" className="w-1/2">
+			<Button type="submit" className="w-full md:w-1/2">
 				Save address
 			</Button>
 		</FormProvider>

@@ -17,10 +17,10 @@ export default function ProfileClient() {
     const openDialog = useUIStore((s) => s.openDialog);
 
     const shippingData = {
-        country: profile.address.country,
-        city: profile.address.city,
-        street: profile.address.street,
-        postalCode: profile.address.postalCode,
+        country: profile.address.country ?? "",
+        city: profile.address.city ?? "",
+        street: profile.address.street ?? "",
+        postalCode: profile.address.postalCode ?? "",
     };
 
     const handleChangeAddress = () =>
@@ -48,13 +48,17 @@ export default function ProfileClient() {
             <ProfileCard title="Personal information">
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-3 items-center">
-                        <UserRound className="size-4 stroke-[1.5px]" />
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <UserRound className="size-4 stroke-[1.5px] stroke-white" />
+                        </div>
                         <span className="tracking-wider leading-base">
                             {profile.name}
                         </span>
                     </div>
                     <div className="flex gap-3 items-center">
-                        <Mail className="size-4 stroke-[1.5px]" />
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <Mail className="size-4 stroke-[1.5px] stroke-white" />
+                        </div>
                         <span className="tracking-wider leading-base">
                             {profile.email}
                         </span>
@@ -71,10 +75,10 @@ export default function ProfileClient() {
             <ProfileCard title="Default delivery information">
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-3 items-center">
-                        <MapPinHouse
-                            className={`size-4 stroke-[1.5px] ${profile.address.street ? "stroke-black" : "stroke-black/50"}`}
-                        />
-                        <span className="tracking-wider leading-base">
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <MapPinHouse className="size-4 stroke-[1.5px] stroke-white" />
+                        </div>
+                        <span className="tracking-wider leading-base w-[calc(100%-28px-12px)]">
                             {profile.address.street ? (
                                 `${profile.address.street}, ${profile.address.city}, ${profile.address.postalCode}`
                             ) : (
@@ -86,10 +90,12 @@ export default function ProfileClient() {
                     </div>
 
                     <div className="flex gap-3 items-center">
-                        <Globe
-                            className={`size-4 stroke-[1.5px] ${profile.address.country ? "stroke-black" : "stroke-black/50"}`}
-                        />
-                        <span className="tracking-wider leading-base">
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <Globe
+                                className={`size-4 stroke-[1.5px] stroke-white`}
+                            />
+                        </div>
+                        <span className="tracking-wider leading-base w-[calc(100%-28px-12px)]">
                             {profile.address.country || (
                                 <span className="text-black/50 tracking-wider leading-base">
                                     No country

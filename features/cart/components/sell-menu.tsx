@@ -17,8 +17,8 @@ export default function SellMenu({
     const router = useRouter();
 
     return (
-        <div className="sticky top-[154px] flex flex-col gap-5 min-w-[35%]">
-            <div className="flex flex-col gap-4 min-h-[188px] bg-white rounded-xl  p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <div className={`${cart.items.length === 0 && 'hidden md:flex'} relative lg:sticky lg:top-[154px] flex flex-col gap-5 w-full md:w-[35%]`}>
+            <div className="flex flex-col gap-4 min-h-[188px] bg-white rounded-xl px-3 py-6 lg:p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
                 <Totals itemsAmonut={cart.items.length} total={cart.total} subtotal={cart.subtotal} />
                 <Button
                     onClick={() => {

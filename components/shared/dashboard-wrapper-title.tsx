@@ -1,3 +1,13 @@
-export default function DashboardWrapperTitle({ title }: { title: string }) {
-	return <span className="font-medium tracking-wider">{title}</span>;
+export default function DashboardWrapperTitle({
+    className,
+    title,
+}: {
+    className?: string;
+    title: string;
+}) {
+    const style = className ? className : "default";
+
+    return (
+        <span className={`font-medium tracking-wider ${style}`}>{title}</span>
+    );
 }

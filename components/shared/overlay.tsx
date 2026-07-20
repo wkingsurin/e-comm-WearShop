@@ -57,7 +57,7 @@ export default function Overlay() {
 
 	return (
 		<div
-			className="fixed bottom-0 z-10005 flex items-center justify-center w-full h-[100dvh] bg-black/25"
+			className="fixed bottom-0 z-10005 flex items-center justify-center w-full h-[100dvh] px-2 md:px-0 bg-black/25"
 			onMouseDown={handleMouseDown}
 			onMouseUp={handleMouseUp}
 			ref={overlayRef}

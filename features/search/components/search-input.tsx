@@ -10,7 +10,7 @@ interface IProps {
 
 export default function SearchInput({ query, changeQuery, setOpened }: IProps) {
     return (
-        <div className="hidden md:flex gap-4 flex-1">
+        <div className="flex gap-4 flex-1">
             <Input
                 type="text"
                 placeholder="Search..."

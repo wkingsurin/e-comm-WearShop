@@ -20,7 +20,7 @@ export default function CategoryNavigation() {
 	};
 
 	return (
-		<nav className="hidden md:flex gap-3 text-black/50">
+		<nav className="hidden md:flex flex-wrap justify-between md:flex-nowrap md:justify-normal gap-3 text-black/50">
 			{list.map((item) => (
 				<Link
 					key={item.id}

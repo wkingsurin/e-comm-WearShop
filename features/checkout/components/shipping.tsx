@@ -41,7 +41,7 @@ export default function Shipping({
         shippingData.postalCode;
 
     return (
-        <div className="flex flex-col gap-3 min-h-[94px] bg-white rounded-xl p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <div className="flex flex-col gap-3 min-h-[94px] bg-white rounded-xl px-3 py-6 md:p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
             <div className="flex items-center gap-3">
                 <span className="tracking-wide font-medium text-black/75 uppercase">
                     Shipping
@@ -58,7 +58,7 @@ export default function Shipping({
                         <div className="flex items-center justify-center w-10 h-10 bg-[#F8F9FA] rounded-xl">
                             <User className="size-5 stroke-black/50" />
                         </div>
-                        <p className="leading-base tracking-wider">
+                        <p className="leading-base tracking-wider w-[calc(100%-40px-12px)]">
                             {customerName}
                         </p>
                     </div>
@@ -66,7 +66,7 @@ export default function Shipping({
                         <div className="flex items-center justify-center w-10 h-10 bg-[#F8F9FA] rounded-xl">
                             <MapPin className="size-5 stroke-black/50" />
                         </div>
-                        <p className="leading-base tracking-wider">
+                        <p className="leading-base tracking-wider w-[calc(100%-40px-12px)]">
                             {shippingData.address}, {shippingData.city},{" "}
                             {shippingData.postalCode}
                         </p>
@@ -75,7 +75,7 @@ export default function Shipping({
                         <div className="flex items-center justify-center w-10 h-10 bg-[#F8F9FA] rounded-xl">
                             <Truck className="size-5 stroke-black/50" />
                         </div>
-                        <p className="leading-base tracking-wider">
+                        <p className="leading-base tracking-wider w-[calc(100%-40px-12px)]">
                             26 - 30 May
                         </p>
                     </div>

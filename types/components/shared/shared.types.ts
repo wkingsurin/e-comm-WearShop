@@ -10,6 +10,7 @@ export interface IHeartButtonProps {
     isFavorite: boolean;
     productId: string;
     inline?: boolean;
+    size?: 'sm' | 'md' | 'lg'
 }
 
 export interface IRemoveButtonProps {

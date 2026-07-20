@@ -29,7 +29,7 @@ export default function Search() {
     }, []);
 
     return (
-        <div className="relative flex-1" ref={searchRef}>
+        <div className="relative flex-1 w-full md:w-auto" ref={searchRef}>
             <SearchInput
                 query={query}
                 changeQuery={setQuery}

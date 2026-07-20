@@ -18,7 +18,7 @@ export default function OrderItems({
         data.length > LIMIT_AMOUNT ? [...data].splice(0, LIMIT_AMOUNT - 1) : data;
 
     return (
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-3 lg:grid-cols-4 gap-3">
             {shortData.map((item) => {
                 return (
                     <OrderItem

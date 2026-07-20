@@ -11,7 +11,7 @@ export default function OrderProducts({ items, currency }: IProps) {
     const { data: favorites = {} } = useFavorites();
 
     return (
-        <div className="flex flex-col gap-4 w-full rounded-xl bg-[#F8F9FA] p-4">
+        <div className="flex flex-col gap-4 w-full rounded-xl bg-[#F8F9FA] px-3 py-6 md:p-6">
             <span className="uppercase font-medium text-black/75">
                 Products
             </span>
@@ -20,7 +20,7 @@ export default function OrderProducts({ items, currency }: IProps) {
                     const colorSize =
                         item.selectedSize.toLowerCase() === "one-size"
                             ? item.selectedColor
-                            : `${item.selectedColor} · ${item.selectedSize}`;
+                            : `${item.selectedColor} · ${item.selectedSize} · x${item.quantity}`;
 
                     return (
                         <OrderItem

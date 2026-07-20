@@ -25,7 +25,7 @@ export default function OrderItem({
                     className="w-[70px] h-[80px] object-contain"
                 />
             </div>
-            <div className="flex flex-col items-center gap-[6px] text-center leading-lg tracking-wider text-black/50">
+            <div className="hidden md:flex flex-col items-center gap-[6px] text-center leading-lg tracking-wider text-black/50">
                 <p className="text-md">{colorSize}</p>
                 <div className="flex items-center gap-1">
                     <p className="text-black font-bold tracking-wide">

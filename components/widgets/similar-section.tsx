@@ -20,14 +20,14 @@ export default function SimilarSection() {
 		<Section>
 			<Container>
 				<div className="flex flex-col gap-5">
-					<div className="flex flex-col gap-[6px]">
+					<div className="flex flex-col gap-[6px] px-2 md:px-0!">
 						<SectionSubtitle>You might also like</SectionSubtitle>
 						<div className="flex items-center justify-between">
 							<SectionTitle>Similar products</SectionTitle>
 							<SortSelect />
 						</div>
 					</div>
-					<div className="grid grid-cols-5 gap-5">
+					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 lg:gap-5">
 						{similarProducts.map((item) => (
 							<ProductCard
 								key={item.id}

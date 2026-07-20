@@ -7,8 +7,8 @@ interface IProps {
 export default function TotalsRow({ label, value, type = "row" }: IProps) {
     const style =
         type === "heading"
-            ? "flex justify-between font-medium tracking-wider leading-lg font-medium text-wider pt-4 border-t-[1px] border-[#E5E7EB]"
-            : "flex justify-between font-medium tracking-wider leading-lg";
+            ? "flex justify-between font-medium tracking-wider leading-lg text-wider pt-4 border-t-[1px] border-[#E5E7EB]"
+            : "flex justify-between tracking-wider leading-lg";
 
     return (
         <div className={`${style}`}>

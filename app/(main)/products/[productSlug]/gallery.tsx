@@ -19,7 +19,7 @@ export default function Gallery({ images, productName }: IProps) {
     if (!selectedImage) return null;
 
     return (
-        <div className="sticky top-[154px] flex gap-3 w-full max-w-[572px] h-[640px]">
+        <div className="relative lg:sticky lg:top-[154px] flex gap-3 w-full max-w-[572px] h-[545px] md:h-[640px]">
             <CarouselSpacing
                 images={images}
                 activeIndex={activeImageIdx}

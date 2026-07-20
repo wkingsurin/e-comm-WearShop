@@ -20,6 +20,8 @@ import {
 import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 import { MoveLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import ProductMenu from "./product-menu";
 
 interface IProps {
     product: IProduct;
@@ -55,7 +57,7 @@ export default function ProductClient({ product }: IProps) {
             description: "Imported",
         },
     ];
-
+    
     const router = useRouter();
 
     // const computeSimilarProducts = useSimilarStore(
@@ -79,12 +81,38 @@ export default function ProductClient({ product }: IProps) {
 
     if (!currentVariant || !images) return;
 
+    const [quantityByVariant, setQuantityByVariant] = useState<
+        Record<string, number>
+    >({ [currentVariant.id]: 1 });
+    const setQuantity = (value: number) => {
+        setQuantityByVariant((prev) => ({
+            ...prev,
+            [currentVariant.id]: value,
+        }));
+    };
+
+    const incrementItem = () => {
+        setQuantity(
+            Math.min(
+                quantityByVariant[currentVariant.id] + 1,
+                currentVariant.stock,
+            ),
+        );
+    };
+    const decrementItem = () => {
+        setQuantity(
+            quantityByVariant[currentVariant.id] > 1
+                ? quantityByVariant[currentVariant.id] - 1
+                : quantityByVariant[currentVariant.id],
+        );
+    };
+
     return (
         <Main>
             <Section>
-                <Container>
+                <Container className="px-2 md:px-4!">
                     <div className="flex flex-col gap-5">
-                        <div className="flex gap-4">
+                        <div className="flex flex-col items-start gap-3 lg:flex-row lg:items-center lg:gap-4">
                             <Button
                                 className="group/page-back flex items-center gap-3 font-bold text-md leading-base tracking-wider text-black/50 hover:no-underline cursor-pointer h-auto px-0 hover:text-black"
                                 onClick={() => router.back()}
@@ -97,21 +125,26 @@ export default function ProductClient({ product }: IProps) {
                                 {product.category.name} {product.title}
                             </SectionTitle>
                         </div>
-                        <div className="flex gap-5 min-h-[640px]">
+                        <div className="flex flex-col lg:flex-row gap-5 min-h-[545px] md:min-h-[640px]">
                             <Gallery
                                 key={currentVariant.id}
                                 productName={product.title}
                                 images={images}
                             />
-                            <div className="flex gap-4 items-start justify-between w-full">
+                            <div className="flex flex-col lg:flex-row gap-4 items-start justify-between w-full">
                                 <Description
                                     product={product}
                                     currentVariant={currentVariant}
                                     detailsData={detailsData}
                                     activeColorId={selectedColorId}
+                                    incrementItem={incrementItem}
+                                    decrementItem={decrementItem}
+                                    quantity={
+                                        quantityByVariant[currentVariant.id]
+                                    }
                                 />
                                 {currentVariant.stock === 0 && (
-                                    <span className="flex items-center justify-center w-full h-10 rounded-xl bg-black/10 tracking-wide">
+                                    <span className="hidden md:flex items-center justify-center w-full h-10 rounded-xl bg-black/10 tracking-wide">
                                         Out of stock
                                     </span>
                                 )}
@@ -120,6 +153,9 @@ export default function ProductClient({ product }: IProps) {
                                         product={product}
                                         currentVariant={currentVariant}
                                         isFavorite={!!favorites[product.id]}
+                                        quantityByVariant={quantityByVariant}
+                                        incrementItem={incrementItem}
+                                        decrementItem={decrementItem}
                                     />
                                 )}
                             </div>
@@ -129,6 +165,12 @@ export default function ProductClient({ product }: IProps) {
             </Section>
             <SimilarSection />
             <LastSeenSection />
+            <ProductMenu
+                product={product}
+                currentVariant={currentVariant}
+                quantity={quantityByVariant[currentVariant.id]}
+                isFavorite={!!favorites[product.id]}
+            />
         </Main>
     );
 }

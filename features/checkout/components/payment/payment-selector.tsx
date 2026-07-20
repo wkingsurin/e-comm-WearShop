@@ -34,7 +34,7 @@ export default function PaymentSelector({
     ];
 
     return (
-        <div className="flex flex-col gap-4 w-1/2 min-h-[94px] bg-white rounded-xl p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <div className="flex flex-col gap-4 w-full md:w-1/2 min-h-[94px] bg-white rounded-xl px-3 py-6 md:p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
             <span className="tracking-wide font-medium text-black/75 uppercase">
                 Payment method
             </span>

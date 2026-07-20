@@ -18,7 +18,7 @@ export function FavoritesClient({ products }: ClientProps) {
 
     return (
         <div
-            className={`grid grid-cols-4 gap-4 ${favoriteProducts.length > 0 ? "h-auto" : "h-full"}`}
+            className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 lg:gap-5 ${favoriteProducts.length > 0 ? "h-auto" : "h-full"}`}
         >
             {favoriteProducts.length !== 0 && (
                 <>

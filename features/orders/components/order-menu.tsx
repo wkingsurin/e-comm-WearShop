@@ -4,14 +4,9 @@ import { MoveRight } from "lucide-react";
 import Link from "next/link";
 import { IOrder } from "@/types/account/orders/orders.types";
 
-export default function OrderMenu({
-    data,
-}: {
-    data: IOrder;
-    toggleOrder: () => void;
-}) {
+export default function OrderMenu({ data }: { data: IOrder }) {
     return (
-        <div className="flex flex-col justify-between w-1/4">
+        <div className="flex flex-row md:flex-col justify-between w-full md:w-1/4">
             <div className="flex items-center gap-3">
                 <OrderStatus status={data.status} />
                 <OrderNumber orderNumber={data.orderNumber} />

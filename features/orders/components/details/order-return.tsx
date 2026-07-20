@@ -24,7 +24,7 @@ export default function OrderReturn({ initialValues, onCancel }: IProps) {
     };
 
     return (
-        <div className="flex flex-col gap-4 bg-white rounded-xl p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <div className="flex flex-col gap-4 bg-white rounded-xl px-3 py-6 md:p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
             <Button
                 variant="link"
                 className="flex gap-3 justify-start w-full h-10 px-0 hover:no-underline hover:bg-[#F8F9FA]"
@@ -37,7 +37,7 @@ export default function OrderReturn({ initialValues, onCancel }: IProps) {
             </Button>
             {onCancel !== undefined && (
                 <Button
-                    className="h-[50px] bg-black/15 hover:bg-[#F51E1E]/10 hover:text-[#F51E1E]/75"
+                    className="h-[50px] bg-[#F51E1E]/10 text-[#F51E1E]/75 md:bg-black/15 hover:bg-[#F51E1E]/10 md:text-black hover:text-[#F51E1E]/75"
                     onClick={() => onCancel()}
                 >
                     Cancel order

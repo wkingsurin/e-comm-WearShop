@@ -15,9 +15,9 @@ export default function SuccessClient({ orderId }: IProps) {
 
     return (
         <div className="flex items-center justify-center">
-            <div className="flex flex-col items-center gap-5">
+            <div className="flex flex-col items-center gap-5 w-full md:w-auto">
                 <SectionTitle>Thank you for purchase</SectionTitle>
-                <div className="flex flex-col gap-10 w-[420px] bg-white rounded-xl p-6">
+                <div className="flex flex-col gap-10 w-full md:w-[420px] bg-white rounded-xl px-3 py-6 md:p-6">
                     <Status />
                     <Details order={order} />
                 </div>

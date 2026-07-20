@@ -10,37 +10,27 @@ interface IProps {
     product: IProduct;
     currentVariant: IVariant;
     isFavorite: boolean;
+    quantityByVariant: Record<string, number>;
+    incrementItem: () => void;
+    decrementItem: () => void;
 }
 
 export default function SellMenu({
     product,
     currentVariant,
     isFavorite,
+    quantityByVariant,
+    incrementItem,
+    decrementItem,
 }: IProps) {
     const { mutate: addItem } = useAddToCart();
-
-    const [quantityByVariant, setQuantityByVariant] = useState<
-        Record<string, number>
-    >({});
-    const setQuantity = (value: number) => {
-        setQuantityByVariant((prev) => ({
-            ...prev,
-            [currentVariant.id]: value,
-        }));
-    };
-    const incrementItem = () => {
-        setQuantity(Math.min(quantity + 1, currentVariant.stock));
-    };
-    const decrementItem = () => {
-        setQuantity(quantity > 1 ? quantity - 1 : quantity);
-    };
 
     const quantity = quantityByVariant[currentVariant.id] ?? 1;
 
     const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
     return (
-        <div className="sticky top-[154px] flex flex-col gap-5 w-full">
+        <div className="hidden md:flex relative lg:sticky lg:top-[154px] flex-col gap-5 w-full">
             <div className="flex flex-col gap-4 min-h-[188px] bg-[#D9D9D9]/10 bg-white rounded-xl p-6">
                 <div className="flex flex-col gap-3">
                     <span className="text-lg font-bold tracking-wider leading-base">
@@ -57,7 +47,7 @@ export default function SellMenu({
                                 <Button
                                     className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
                                     onClick={decrementItem}
-									disabled={quantity === 1}
+                                    disabled={quantity === 1}
                                 >
                                     <Minus className="size-4 stroke-[1.5px] stroke-black" />
                                 </Button>
@@ -67,7 +57,7 @@ export default function SellMenu({
                                 <Button
                                     className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
                                     onClick={incrementItem}
-									disabled={quantity === currentVariant.stock}
+                                    disabled={quantity === currentVariant.stock}
                                 >
                                     <Plus className="size-4 stroke-[1.5px] stroke-black" />
                                 </Button>
