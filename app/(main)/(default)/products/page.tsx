@@ -1,8 +1,11 @@
-import { getProducts } from "../../../../lib/get-products";
+import { getProducts } from "@/lib/get-products";
 import ProductsClient from "./products-client";
+import { shuffle } from "@/lib/shuffle";
 
-export default async function Categories() {
+export default async function Products() {
     const products = await getProducts();
 
-    return <ProductsClient products={products} />;
+    const shuffledProducts = shuffle(products);
+
+    return <ProductsClient products={shuffledProducts} />;
 }

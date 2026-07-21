@@ -93,7 +93,7 @@ export default function OTPAuthForm() {
 		if (result.ok) {
 			localStorage.removeItem("user-cart");
 			localStorage.removeItem("user-favorites");
-			router.push("/");
+			router.push("/products");
 			router.refresh();
 		}
 	};
