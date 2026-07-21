@@ -29,13 +29,13 @@ export default function Carousel({
     };
 
     return (
-        <div className="flex gap-3 max-w-[406px] w-full">
+        <div className="flex gap-3 max-w-[566px] w-full">
             <CarouselSpacing
                 images={images}
                 activeIndex={activeImageIndex}
                 onSelect={selectImage}
             />
-            <div className="group/product relative flex items-center justify-center w-[320px] h-[420px] bg-[#F4F4F6] rounded-xl">
+            <div className="group/product relative flex items-center justify-center w-[480px] h-[640px] bg-[#F4F4F6] rounded-xl">
                 <Image
                     src={images[activeImageIndex].src}
                     alt={productTitle}

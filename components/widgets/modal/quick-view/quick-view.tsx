@@ -32,8 +32,8 @@ export default function QuickView() {
 	if (!product || !currentColor || !currentVariant) return null;
 
 	return (
-		<Modal className="w-full">
-			<div className="relative flex items-start gap-5 max-w-[720px] w-full">
+		<Modal className="md:max-w-[876px] w-full">
+			<div className="relative flex items-start gap-5 w-full">
 				<Carousel
 					key={currentColor.id}
 					productTitle={product.title}

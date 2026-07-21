@@ -29,7 +29,7 @@ export default function CarouselSpacing({
         setCanScrollNext(emblaApi.canScrollNext());
     }, []);
 
-    const visibleItemsCount = type === "Modal" ? 4 : 6;
+    const visibleItemsCount = type === "Modal" ? 6 : 6;
 
     useEffect(() => {
         if (!api) return;
@@ -50,10 +50,10 @@ export default function CarouselSpacing({
             opts={{
                 align: "start",
                 containScroll: "trimSnaps",
-                watchDrag: (emblaApi) => emblaApi.scrollSnapList().length > 1,
+                watchDrag: images.length > visibleItemsCount,
             }}
             orientation="vertical"
-            className={`hidden lg:flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((99px+8px)*4)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"} `}
+            className={`hidden lg:flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((100px+8px)*6)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"} `}
         >
             <CarouselContent className="flex flex-col w-full h-full -mt-2">
                 {images.map((image, index) => {
@@ -65,7 +65,7 @@ export default function CarouselSpacing({
                         >
                             <div
                                 key={image.id}
-                                className={`flex ${type === "Modal" ? "h-[99px]" : "h-[100px]"} bg-[#F4F4F6] rounded-sm border border-transparent transition-brand ${
+                                className={`flex ${type === "Modal" ? "h-[100px]" : "h-[100px]"} bg-[#F4F4F6] rounded-sm border border-transparent transition-brand ${
                                     activeIndex === index
                                         ? "border-black!"
                                         : "hover:border-black/50"

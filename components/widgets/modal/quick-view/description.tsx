@@ -55,7 +55,7 @@ export default function Description({
     const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
     return (
-        <div className="flex flex-col items-center gap-6 max-w-[262px] w-full">
+        <div className="flex flex-col items-center gap-6 max-w-[258px] w-full">
             <div className="flex flex-col gap-2 w-full">
                 <div className="flex flex-col gap-3 items-start justify-start">
                     <span className="text-lg font-bold tracking-wide leading-md">

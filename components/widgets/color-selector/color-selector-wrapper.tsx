@@ -14,7 +14,7 @@ export default function ColorSelectorWrapper({
     const urlSlug = searchParams.get("color");
 
     return (
-        <div className="flex flex-col gap-2 w-full overflow-hidden">
+        <div className="flex flex-col gap-2 w-full">
             <span className="font-medium tracking-wider leading-lg">
                 Colors
             </span>
