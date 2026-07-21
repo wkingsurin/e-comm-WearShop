@@ -34,7 +34,7 @@ export default function Order({
     };
 
     return (
-        <div className="flex flex-col gap-5 w-full">
+        <div className="flex flex-col gap-5 w-full md:w-[65%]">
             <DashboardWrapper className="min-h-[auto]">
                 <OrderItems items={items} isEmpty={totalItems === 0} />
             </DashboardWrapper>
