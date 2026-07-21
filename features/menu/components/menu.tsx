@@ -13,8 +13,8 @@ import Link from "next/link";
 
 export default function Menu() {
     const list: { id: string; src: string; icon: LucideIcon }[] = [
-        { id: "1", src: "/categories", icon: House },
-        { id: "2", src: "/catalog", icon: LayoutGrid },
+        { id: "1", src: "/products", icon: House },
+        { id: "2", src: "/categories", icon: LayoutGrid },
         { id: "3", src: "/account/orders", icon: Package },
         { id: "4", src: "/cart", icon: Handbag },
         { id: "5", src: "/account/favorites", icon: Heart },
@@ -22,7 +22,7 @@ export default function Menu() {
     ];
 
     return (
-        <div className="md:hidden fixed bottom-0 z-50 grid grid-cols-6 w-full h-[50px] bg-white">
+        <div className="md:hidden fixed bottom-0 z-50 grid grid-cols-6 w-full h-[50px] bg-white py-0!">
             {list.map((link) => {
                 const Icon = link.icon;
 

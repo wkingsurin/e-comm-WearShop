@@ -24,7 +24,7 @@ export default function CategoryNavigation() {
 			{list.map((item) => (
 				<Link
 					key={item.id}
-					href={`/categories/${item.label}`}
+					href={`/products/${item.label}`}
 					className={`hover:text-black transition-brand ${
 						item.id === activeId ? "text-black" : "text-black/50"
 					}`}
