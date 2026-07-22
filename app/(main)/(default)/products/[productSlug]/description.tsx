@@ -44,8 +44,8 @@ export default function Description({
         <div className="flex flex-col py-4 gap-6 w-full md:w-auto min-w-[332px]">
             <div className="flex flex-col gap-2 justify-between">
                 <span className="lg:hidden text-lg font-bold leading-base tracking-wider">
-                    {product.currency === "USD" ? "$" : product.currency}
-                    {currentVariant.price / 100 + "0"}
+                    {product.currency}
+                    {currentVariant.price}
                 </span>
                 <h3 className="text-lg font-medium uppercase tracking-wider leading-md">
                     {product.title}

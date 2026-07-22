@@ -26,7 +26,6 @@ export default function Summary({
                 <TotalPrice
                     label="Total price"
                     value={totalPrice}
-                    currency={currency}
                 />
                 {children}
             </div>

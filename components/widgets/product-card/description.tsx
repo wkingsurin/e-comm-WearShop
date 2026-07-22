@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IProductDescriptionProps } from "@/types/components/widgets/product-card.types";
 import { getColorById } from "@/lib/selectors/product.selectors";
 import Discount from "./discount";
+import { getItemPrices } from "@/lib/money/get-item-price";
 
 export default function Description({
     data,
@@ -11,17 +12,20 @@ export default function Description({
     const defaultColor = getColorById(data, defaultColorId)?.slug;
     const defaultSize = defaultVariant.attributes.size;
 
+    const { formattedPrice, formattedOldPrice } = getItemPrices(
+        defaultVariant.price,
+        defaultVariant.oldPrice!,
+    );
+
     return (
         <div className="flex flex-col justify-between gap-3 px-3 pb-3">
             <div className="flex justify-between items-end">
                 <div className="flex items-end gap-1">
                     <span className="font-bold tracking-wide leading-md">
-                        {data.currency === "USD" ? "$" : data.currency}
-                        {defaultVariant.price / 100 + "0"}
+                        {formattedPrice}
                     </span>
                     <span className="font-medium text-sm text-black/35 line-through tracking-wide leading-md">
-                        {data.currency === "USD" ? "$" : data.currency}
-                        {defaultVariant.oldPrice! / 100 + "0"}
+                        {formattedOldPrice}
                     </span>
                 </div>
                 <Discount value="-35%" />
@@ -33,7 +37,9 @@ export default function Description({
                 >
                     {data.title}
                 </Link>
-                <span className="text-sm text-black/50 leading-base">{data.brand.name}</span>
+                <span className="text-sm text-black/50 leading-base">
+                    {data.brand.name}
+                </span>
             </div>
         </div>
     );

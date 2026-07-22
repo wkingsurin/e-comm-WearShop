@@ -7,8 +7,11 @@ import { ICartItemProps } from "@/types/components/widgets/cart-item.types";
 import useRemoveItem from "@/features/cart/hooks/use-remove-item";
 import { useUpdateQunatity } from "@/features/cart/hooks/use-update-quantity";
 import { Button } from "@/components/ui/button";
+import { formatMoney } from "@/lib/money";
 
 export default function CartItem({ data }: ICartItemProps) {
+    const formattedPrice = formatMoney(data.quantity * data.price);
+
     const openConfirm = useUIStore((s) => s.openConfirm);
 
     const { mutate: updateQuantity } = useUpdateQunatity();
@@ -42,7 +45,9 @@ export default function CartItem({ data }: ICartItemProps) {
                             {data.title}
                         </span>
                         <p className="text-md text-black/50 tracking-wider leading-lg">
-                            {`${data.selectedColor.value}`}{data.selectedSize.toLowerCase() !== 'one-size' && ` · ${data.selectedSize}`}
+                            {`${data.selectedColor.value}`}
+                            {data.selectedSize.toLowerCase() !== "one-size" &&
+                                ` · ${data.selectedSize}`}
                         </p>
                     </div>
 
@@ -84,8 +89,7 @@ export default function CartItem({ data }: ICartItemProps) {
                     </div>
 
                     <span className="font-bold tracking-wider leading-md">
-                        {data.currency === "USD" ? "$" : data.currency}
-                        {(data.price * data.quantity) / 100 + "0"}
+                        {formattedPrice}
                     </span>
                 </div>
                 <Button

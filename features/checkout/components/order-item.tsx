@@ -1,7 +1,10 @@
 import { ICartItem } from "@/features/cart/types";
+import { getItemPrices } from "@/lib/money/get-item-price";
 import Image from "next/image";
 
 export default function OrderItem({ item }: { item: ICartItem }) {
+    const { formattedPrice } = getItemPrices(item.price, item.oldPrice!);
+
     return (
         <div
             key={item.id}
@@ -22,8 +25,10 @@ export default function OrderItem({ item }: { item: ICartItem }) {
                     {item.categoryName !== "Caps" && ` · ${item.selectedSize}`}
                 </p>
                 <span className="flex gap-1 leading-md font-bold tracking-wider">
-                    {item.currency === "USD" ? "$" : item.currency}
-                    {item.price / 100 + "0"} <p className="font-normal text-black/50">x{item.quantity}</p>
+                    {formattedPrice}
+                    <p className="font-normal text-black/50">
+                        x{item.quantity}
+                    </p>
                 </span>
             </div>
         </div>

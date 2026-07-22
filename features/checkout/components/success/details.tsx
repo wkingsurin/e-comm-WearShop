@@ -23,7 +23,7 @@ export default function Details({ order }: IProps) {
                 </div>
                 <DetailRow
                     label="Total"
-                    value={`${order.currency === "USD" ? "$" : order.currency} ${order.totals.total / 100 + "0"}`}
+                    value={`${order.currency} ${order.totals.total / 100 + "0"}`}
                     price
                 />
             </div>

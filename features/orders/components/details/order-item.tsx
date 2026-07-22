@@ -1,4 +1,5 @@
 import HeartButton from "@/components/shared/heart-button";
+import { getItemPrices } from "@/lib/money/get-item-price";
 import { IOrderItem } from "@/types/account/orders/orders.types";
 import Image from "next/image";
 
@@ -12,6 +13,8 @@ interface IProps {
 }
 
 export default function OrderItem({ data }: IProps) {
+    const { formattedPrice } = getItemPrices(data.item.price, data.item.price);
+
     return (
         <div
             key={data.item.id}
@@ -33,8 +36,7 @@ export default function OrderItem({ data }: IProps) {
                     </span>
                     <p>{data.colorSize}</p>
                     <p className="text-black font-bold leading-md">
-                        {data.currency === "USD" ? "$" : data.currency}
-                        {data.item.price / 100 + "0"}
+                        {formattedPrice}
                     </p>
                 </div>
             </div>

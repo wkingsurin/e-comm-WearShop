@@ -1,3 +1,4 @@
+import { getItemPrices } from "@/lib/money/get-item-price";
 import { IOrderItem } from "@/types/account/orders/orders.types";
 import Image from "next/image";
 
@@ -9,7 +10,12 @@ export default function OrderItem({
     isFavorite: boolean;
     currency: string;
 }) {
-    const colorSize = data.selectedSize.toLowerCase() === 'one-size' ? data.selectedColor : `${data.selectedColor} · ${data.selectedSize}`
+    const { formattedPrice } = getItemPrices(data.price, data.price);
+
+    const colorSize =
+        data.selectedSize.toLowerCase() === "one-size"
+            ? data.selectedColor
+            : `${data.selectedColor} · ${data.selectedSize}`;
 
     return (
         <div
@@ -29,10 +35,11 @@ export default function OrderItem({
                 <p className="text-md">{colorSize}</p>
                 <div className="flex items-center gap-1">
                     <p className="text-black font-bold tracking-wide">
-                        {currency === "USD" ? "$" : currency}
-                        {data.price / 100 + "0"}
+                        {formattedPrice}
                     </p>
-                    <p className="text-md text-black/50 font-medium tracking-wider leading-md">x{data.quantity}</p>
+                    <p className="text-md text-black/50 font-medium tracking-wider leading-md">
+                        x{data.quantity}
+                    </p>
                 </div>
             </div>
         </div>

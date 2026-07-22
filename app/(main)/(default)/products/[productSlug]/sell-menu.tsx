@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingBag, Truck } from "lucide-react";
 import { IProduct, IVariant } from "@/types/store/ui.types";
-import { useState } from "react";
 import HeartButton from "@/components/shared/heart-button";
 import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
 import { mapProductToCartItem } from "@/app/mappers/mapper";
+import { getItemPrices } from "@/lib/money/get-item-price";
 
 interface IProps {
     product: IProduct;
@@ -23,6 +23,11 @@ export default function SellMenu({
     incrementItem,
     decrementItem,
 }: IProps) {
+    const { formattedPrice, formattedOldPrice } = getItemPrices(
+        currentVariant.price,
+        currentVariant.oldPrice!,
+    );
+
     const { mutate: addItem } = useAddToCart();
 
     const quantity = quantityByVariant[currentVariant.id] ?? 1;
@@ -30,13 +35,11 @@ export default function SellMenu({
     const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
     return (
-        <div className="hidden md:flex relative lg:sticky lg:top-[154px] flex-col gap-5 w-full">
+        <div className="hidden md:flex relative lg:sticky lg:top-[154px] flex-col gap-5 w-full hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
             <div className="flex flex-col gap-4 min-h-[188px] bg-[#D9D9D9]/10 bg-white rounded-xl p-6">
                 <div className="flex flex-col gap-3">
                     <span className="text-lg font-bold tracking-wider leading-base">
-                        $
-                        {((currentVariant.price / 100) * quantity).toFixed(1) +
-                            "0"}
+                        {formattedPrice}
                     </span>
                 </div>
                 <div className="flex flex-col gap-[10px]">

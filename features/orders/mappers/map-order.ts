@@ -2,65 +2,65 @@ import { IOrder } from "@/types/account/orders/orders.types";
 import { OrderWithRelations } from "../types";
 
 export function mapOrder(order: OrderWithRelations): IOrder {
-	return {
-		id: order.id,
-		orderNumber: order.orderNumber,
+    return {
+        id: order.id,
+        orderNumber: order.orderNumber,
 
-		createdAt: order.createdAt.toISOString(),
-		updatedAt: order.updatedAt.toISOString(),
+        createdAt: order.createdAt.toISOString(),
+        updatedAt: order.updatedAt.toISOString(),
 
-		customer: {
-			name: order.customerName,
-			email: order.customerEmail,
-		},
+        customer: {
+            name: order.customerName,
+            email: order.customerEmail,
+        },
 
-		shipping: {
-			address: order.shippingAddress,
-			city: order.shippingCity,
-			country: order.shippingCountry,
-			postalCode: order.shippingPostalCode,
-		},
+        shipping: {
+            address: order.shippingAddress,
+            city: order.shippingCity,
+            country: order.shippingCountry,
+            postalCode: order.shippingPostalCode,
+        },
 
-		payment: {
-			method: order.paymentMethod,
-			isPaid: order.isPaid,
-		},
+        payment: {
+            method: order.paymentMethod,
+            isPaid: order.isPaid,
+        },
 
-		delivery: {
-			method: order.deliveryMethod,
-		},
+        delivery: {
+            method: order.deliveryMethod,
+        },
 
-		totals: {
-			items: order.totalItemsPrice,
-			discount: order.discountAmount,
-			delivery: order.deliveryPrice,
-			total: order.totalPrice,
-		},
+        totals: {
+            items: order.totalItemsPrice,
+            discount: order.discountAmount,
+            delivery: order.deliveryPrice,
+            total: order.totalPrice,
+        },
 
-		status: order.status,
+        status: order.status,
 
-		currency: order.currency,
+        currency: order.currency,
 
-		items: order.items.map((item) => ({
-			id: item.id,
+        items: order.items.map((item) => ({
+            id: item.id,
 
-			orderId: item.orderId,
+            orderId: item.orderId,
 
-			productId: item.productId,
-			variantId: item.variantId,
+            productId: item.productId,
+            variantId: item.variantId,
 
-			title: item.title,
+            title: item.title,
 
-			sku: item.sku,
+            sku: item.sku,
 
-			price: item.price,
+            price: item.price,
 
-			quantity: item.quantity,
+            quantity: item.quantity,
 
-			selectedColor: item.selectedColor,
-			selectedSize: item.selectedSize,
+            selectedColor: item.selectedColor,
+            selectedSize: item.selectedSize,
 
-			image: item.image,
-		})),
-	};
+            image: item.image,
+        })),
+    };
 }

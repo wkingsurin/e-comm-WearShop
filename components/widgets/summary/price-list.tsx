@@ -1,4 +1,3 @@
-import { normalizePrice } from "@/lib/normalize-price";
 import PriceLabel from "./price-label";
 
 interface IProps {
@@ -6,7 +5,7 @@ interface IProps {
     currency: string;
 }
 
-export default function PriceList({ prices, currency }: IProps) {
+export default function PriceList({ prices }: IProps) {
     return (
         <div className="flex flex-col gap-3">
             {prices.map((price) => {
@@ -14,8 +13,7 @@ export default function PriceList({ prices, currency }: IProps) {
                     <PriceLabel
                         key={price.label}
                         label={price.label}
-                        value={normalizePrice(price.value)}
-                        currency={currency}
+                        value={price.value}
                     />
                 );
             })}

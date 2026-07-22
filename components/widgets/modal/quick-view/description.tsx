@@ -9,6 +9,7 @@ import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
 import { mapProductToCartItem } from "@/app/mappers/mapper";
 import { useMemo } from "react";
 import SizeSelector from "../../size-selector/size-selector";
+import { getItemPrices } from "@/lib/money/get-item-price";
 
 export default function Description({
     product,
@@ -32,6 +33,11 @@ export default function Description({
     decrementQuantity: () => void;
     incrementQuantity: () => void;
 }) {
+    const { formattedPrice } = getItemPrices(
+        currentVariant.price,
+        currentVariant.oldPrice!,
+    );
+
     const { mutate: addToCart } = useAddToCart();
 
     const selectedColorSlug = product.options.color.find(
@@ -59,8 +65,7 @@ export default function Description({
             <div className="flex flex-col gap-2 w-full">
                 <div className="flex flex-col gap-3 items-start justify-start">
                     <span className="text-lg font-bold tracking-wide leading-md">
-                        {product.currency === "USD" ? "$" : product.currency}
-                        {currentVariant.price / 100 + "0"}
+                        {formattedPrice}
                     </span>
                     <Link
                         href={`/product/${product.id}/${product.variants[0].id}`}
