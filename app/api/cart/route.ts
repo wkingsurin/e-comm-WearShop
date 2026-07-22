@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { EMPTY_CART } from "@/features/cart/constants";
 import {
     addToCart,
     getCartItems,
@@ -11,7 +12,7 @@ export async function GET() {
     const session = await auth();
 
     if (!session?.user.id) {
-        return NextResponse.json([]);
+        return NextResponse.json(EMPTY_CART);
     }
 
     const cart = await getCartItems(session.user.id);

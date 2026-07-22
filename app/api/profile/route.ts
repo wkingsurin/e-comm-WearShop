@@ -1,7 +1,7 @@
 import { auth } from "@/auth";
+import { EMPTY_USER_PROFILE } from "@/features/profile/constants";
 import {
     getUserProfile,
-    updateUserAddress,
     updateUserProfile,
 } from "@/features/profile/services/profile.service";
 import { NextResponse } from "next/server";
@@ -10,7 +10,7 @@ export async function GET() {
     const session = await auth();
 
     if (!session?.user.id) {
-        return NextResponse.json({});
+        return NextResponse.json(EMPTY_USER_PROFILE);
     }
 
     const user = await getUserProfile(session.user.id);

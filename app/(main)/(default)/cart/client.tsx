@@ -15,12 +15,14 @@ export default function CartClient({
 }) {
     const { data: cart = EMPTY_CART } = useCart();
 
+    const items = cart.items ?? [];
+
     return (
         <div className="relative flex flex-col md:flex-row items-start gap-5">
             <DashboardWrapper className="min-h-[598px] md:w-[65%]">
                 {cart.totalItems > 0 && (
                     <div className="flex flex-col gap-4 flex-1 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:pb-4">
-                        {cart.items.map((item) => (
+                        {items.map((item) => (
                             <CartItem
                                 key={item.cartItemId}
                                 data={item}
@@ -29,7 +31,7 @@ export default function CartClient({
                         ))}
                     </div>
                 )}
-                {cart.items.length === 0 && (
+                {items.length === 0 && (
                     <Dummy icon={ShoppingBag} text="Your cart is empty" />
                 )}
             </DashboardWrapper>
