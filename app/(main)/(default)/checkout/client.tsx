@@ -2,11 +2,11 @@
 
 import { useCart } from "@/features/cart/hooks/use-cart";
 import { EMPTY_CART } from "@/features/cart/constants";
-import Summary from "@/features/checkout/components/summary";
 import Order from "@/features/checkout/components/order";
 import OrderReturn from "@/features/orders/components/details/order-return";
 import { useCheckout } from "@/features/checkout/hooks/use-checkout";
 import { EMPTY_CHECKOUT } from "@/features/checkout/constants";
+import CheckoutSummary from "@/features/checkout/components/checkout-summary";
 
 export default function CheckoutClinet() {
     const { data: cart = EMPTY_CART } = useCart();
@@ -16,12 +16,12 @@ export default function CheckoutClinet() {
         <div className="relative flex flex-col md:flex-row items-start gap-5">
             <Order items={cart.items} totalItems={cart.totalItems} />
             <div className="relative md:sticky md:top-[154px] flex flex-col gap-4 w-full md:w-[35%]">
-                <Summary
+                <CheckoutSummary
                     options={{
                         totalItems: cart.totalItems,
                         subtotal: cart.subtotal,
                         total: cart.total,
-                        currency: '$',
+                        currency: "$",
                     }}
                 />
                 <OrderReturn

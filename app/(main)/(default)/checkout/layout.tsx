@@ -1,4 +1,3 @@
-import Main from "@/components/main";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { auth } from "@/auth";
 import { getCheckout } from "@/features/checkout/services/checkout.service";
