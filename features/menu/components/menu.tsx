@@ -22,7 +22,7 @@ export default function Menu() {
     ];
 
     return (
-        <div className="md:hidden fixed bottom-0 z-50 grid grid-cols-6 w-full h-[50px] bg-white py-0!">
+        <div className="md:hidden fixed bottom-0 z-50 grid grid-cols-6 w-full h-[50px] bg-white/25 py-0! backdrop-blur-[12px] border-t-[0.5px] border-black/5">
             {list.map((link) => {
                 const Icon = link.icon;
 

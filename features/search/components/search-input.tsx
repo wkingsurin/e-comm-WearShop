@@ -14,7 +14,7 @@ export default function SearchInput({ query, changeQuery, setOpened }: IProps) {
             <Input
                 type="text"
                 placeholder="Search..."
-                className="bg-black/5"
+                className="bg-black/20 md:bg-black/5"
                 value={query}
                 onChange={(e) => changeQuery(e.target.value)}
                 onFocus={() => setOpened(true)}
