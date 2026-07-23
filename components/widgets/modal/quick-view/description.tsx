@@ -77,6 +77,7 @@ export default function Description({
                                 .updateOverlay({ open: false });
                             useUIStore.getState().changeModalType(null);
                         }}
+                        draggable={false}
                     >
                         {product.title}
                     </Link>

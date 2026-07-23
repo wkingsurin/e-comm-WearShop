@@ -25,10 +25,11 @@ export default function Face({
     return (
         <Link
             href={`/products/${data.slug}?color=${defaultColor.slug}&size=${defaultSize}`}
-            className="relative flex items-center justify-center w-full h-[260px] bg-[#F4F4F6] rounded-xl overflow-hidden trnasition-all duration-300 cursor-pointer"
+            className="relative flex items-center justify-center w-full h-[260px] bg-[#F4F4F6] rounded-xl overflow-hidden trnasition-all duration-300 cursor-pointer select-none"
             onClick={() => {
                 addLastSeen(data);
             }}
+            draggable={false}
         >
             <FastViewButton data={data} variantId={defaultVariant.id} />
             <HeartButton

@@ -17,7 +17,7 @@ export default function ColorsOption({
             }`}
         >
             <div
-                className={`relative flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black/50 bg-[#F4F4F6] rounded-md overflow-hidden transtion duration-100 ${
+                className={`relative flex items-center justify-center w-[60px] h-[80px] border border-transparent group-hover/color:border-black/50 bg-[#F4F4F6] rounded-md overflow-hidden transtion duration-100 select-none ${
                     isActive && "border-black!"
                 }`}
                 onClick={() => {

@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { validateCart } from "@/features/orders/services/order.validation";
 import AddressForm from "@/features/profile/components/address-form/form";
 import ProfileCard from "@/features/profile/components/profile-card/card";
 import ProfileForm from "@/features/profile/components/profile-form/form";

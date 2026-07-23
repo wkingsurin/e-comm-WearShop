@@ -19,7 +19,10 @@ export default function Gallery({ images, productName }: IProps) {
     if (!selectedImage) return null;
 
     return (
-        <div className="relative lg:sticky lg:top-[154px] flex gap-3 w-full max-w-[572px] h-[545px] md:h-[640px]">
+        <div
+            className="relative lg:sticky lg:top-[154px] flex gap-3 w-full max-w-[572px] h-[545px] md:h-[640px]"
+            draggable={false}
+        >
             <CarouselSpacing
                 images={images}
                 activeIndex={activeImageIdx}
@@ -32,7 +35,8 @@ export default function Gallery({ images, productName }: IProps) {
                     alt={productName}
                     width={480}
                     height={640}
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-contain select-none"
+                    draggable={false}
                 />
             </div>
         </div>

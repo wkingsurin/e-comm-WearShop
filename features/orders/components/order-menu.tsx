@@ -14,6 +14,7 @@ export default function OrderMenu({ data }: { data: IOrder }) {
             <Link
                 href={`/account/orders/${data.id}`}
                 className="group/order-back flex gap-2 items-center text-black/50 text-md font-bold hover:text-black transition-brand"
+                draggable={false}
             >
                 View details{" "}
                 <MoveRight className="size-4 stroke-black/50 group-hover/order-back:stroke-black transition-brand" />

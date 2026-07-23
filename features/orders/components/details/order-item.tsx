@@ -21,13 +21,17 @@ export default function OrderItem({ data }: IProps) {
             className="relative flex flex-col w-full overflow-hidden"
         >
             <div className="flex gap-3 items-center mr-12">
-                <div className="flex flex-col gap-3 items-center justify-center w-[83px] h-[100px] bg-[#F5F5F5] rounded-md">
+                <div
+                    className="flex flex-col gap-3 items-center justify-center w-[83px] h-[100px] bg-[#F5F5F5] rounded-md"
+                    draggable={false}
+                >
                     <Image
                         src={data.item.image}
                         alt={data.item.title}
                         width={170}
                         height={240}
-                        className="w-[70px] h-[80px] object-contain"
+                        className="w-[70px] h-[80px] object-contain select-none"
+                        draggable={false}
                     />
                 </div>
                 <div className="flex flex-col gap-[6px] leading-lg tracking-wider text-black/50">

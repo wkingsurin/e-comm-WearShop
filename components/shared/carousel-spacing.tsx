@@ -53,14 +53,15 @@ export default function CarouselSpacing({
                 watchDrag: images.length > visibleItemsCount,
             }}
             orientation="vertical"
-            className={`hidden lg:flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((100px+8px)*6)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"} `}
+            className={`hidden lg:flex flex-col ${type === "Modal" ? "w-[74px] h-[calc((100px+8px)*6)]" : "min-w-20 w-[80px] h-[calc((100px+8px)*6)]"}`}
+            draggable={false}
         >
             <CarouselContent className="flex flex-col w-full h-full -mt-2">
                 {images.map((image, index) => {
                     return (
                         <CarouselItem
                             key={image.id}
-                            className="w-full basis-auto pt-2"
+                            className="w-full basis-auto pt-2 select-none"
                             onClick={() => onSelect(index)}
                         >
                             <div
@@ -76,7 +77,8 @@ export default function CarouselSpacing({
                                     alt={image.id}
                                     width={332}
                                     height={480}
-                                    className="rounded-sm object-contain"
+                                    className="rounded-sm object-contain select-none"
+                                    draggable={false}
                                 />
                             </div>
                         </CarouselItem>

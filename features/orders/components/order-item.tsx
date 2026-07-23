@@ -22,13 +22,14 @@ export default function OrderItem({
             key={data.id}
             className="flex flex-col items-center gap-3 p-3 rounded-md bg-[#E5E7EB]/50 overflow-hidden"
         >
-            <div className="flex flex-col gap-3 items-center justify-center h-[100px]">
+            <div className="flex flex-col gap-3 items-center justify-center h-[100px]" draggable={false}>
                 <Image
                     src={data.image}
                     alt={data.title}
                     width={170}
                     height={240}
-                    className="w-[70px] h-[80px] object-contain"
+                    className="w-[70px] h-[80px] object-contain select-none"
+                    draggable={false}
                 />
             </div>
             <div className="hidden md:flex flex-col items-center gap-[6px] text-center leading-lg tracking-wider text-black/50">

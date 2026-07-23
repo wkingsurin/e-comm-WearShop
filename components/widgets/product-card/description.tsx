@@ -34,6 +34,7 @@ export default function Description({
                 <Link
                     href={`/products/${data.slug}?color=${defaultColor}&size=${defaultSize}`}
                     className="font-medium text-md tracking-wider leading-md hover:underline"
+                    draggable={false}
                 >
                     {data.title}
                 </Link>

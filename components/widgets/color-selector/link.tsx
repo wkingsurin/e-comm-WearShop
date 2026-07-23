@@ -22,12 +22,13 @@ export default function ColorsLink({
                 key={id}
                 data-id={slug}
                 href={`./${productSlug}?color=${slug}&size=${defaultSize}`}
-                className={`w-full md:w-auto text-black/50! hover:text-black/75 ${
+                className={`w-full md:w-auto text-black/50! hover:text-black/75 select-none ${
                     isActive && "text-black!"
                 }`}
                 replace={true}
                 scroll={false}
-            >
+                draggable={false}
+>
                 <div
                     className={`relative flex items-center justify-center w-full md:w-[60px] h-[80px] border border-transparent group-hover/color:border-black/50 bg-[#F4F4F6] rounded-md overflow-hidden transition duration-100 ${
                         isActive && "border-black!"

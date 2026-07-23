@@ -1,15 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-    Boxes,
-    Heart,
-    Lock,
-    LogOut,
-    LucideIcon,
-    Package,
-    User,
-} from "lucide-react";
+import { Heart, Lock, LogOut, LucideIcon, Package, User } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { redirect, usePathname, useRouter } from "next/navigation";
@@ -27,8 +19,7 @@ export default function AccountNavigation() {
         { id: "1", label: "Profile", ref: "profile", icon: User },
         { id: "2", label: "Orders", ref: "orders", icon: Package },
         { id: "3", label: "Favorites", ref: "favorites", icon: Heart },
-        { id: "4", label: "Security", ref: "security", icon: Lock },
-        { id: "5", label: "Log out", ref: "/", icon: LogOut },
+        { id: "4", label: "Log out", ref: "/", icon: LogOut },
     ];
 
     return (
@@ -43,15 +34,15 @@ export default function AccountNavigation() {
                         <Button
                             key={item.id}
                             variant="link"
-                            className="flex justify-start gap-3 w-full h-10 px-3 rounded-xl hover:bg-[#F51E1E]/10 transition duration-100 no-underline! cursor-pointer"
+                            className="group/log-out flex justify-start gap-3 w-full h-10 px-3 rounded-xl hover:bg-[#F51E1E]/10 transition duration-100 no-underline! cursor-pointer"
                             onClick={async () => {
                                 await signOut({ redirect: false });
                                 router.refresh();
                                 redirect("/auth");
                             }}
                         >
-                            <Icon className="size-5 stroke-[1.5px] stroke-[#F51E1E]" />
-                            <p className="font-mono tracking-wide text-[#F51E1E]/75">
+                            <Icon className="size-5 stroke-[1.5px] group-hover/log-out:stroke-[#F51E1E]" />
+                            <p className="font-mono tracking-wide group-hover/log-out:text-[#F51E1E]/75">
                                 {item.label}
                             </p>
                         </Button>

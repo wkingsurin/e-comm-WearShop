@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Pen } from "lucide-react";
 import Marker from "./marker";
 
 interface IProps {
