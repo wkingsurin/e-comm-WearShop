@@ -41,7 +41,7 @@ export default function Carousel({
                     alt={productTitle}
                     width={332}
                     height={480}
-                    className={`rounded-xl cursor-zoom-in w-[calc(100%-40px)] h-full object-contain`}
+                    className={`rounded-xl w-[calc(100%-40px)] h-full object-contain`}
                 />
                 <Button
                     className={`absolute top-[calc(50%-16px)] left-3 flex w-8 h-8 rounded-[50%] bg-white opacity-0 hover:bg-white shadow-[0_0_9px_-3px_var(--black)]/50 ${

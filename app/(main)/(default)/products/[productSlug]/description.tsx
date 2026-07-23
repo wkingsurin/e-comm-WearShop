@@ -3,8 +3,8 @@ import { IProduct, IVariant } from "@/types/store/ui.types";
 import { useMemo } from "react";
 import ColorSelector from "@/components/widgets/color-selector/color-selector";
 import SizeSelector from "@/components/widgets/size-selector/size-selector";
-import { Button } from "@/components/ui/button";
-import { Minus, Plus } from "lucide-react";
+import { getItemPrices } from "@/lib/money/get-item-price";
+import Counter from "@/components/shared/counter";
 
 interface IProps {
     product: IProduct;
@@ -25,6 +25,11 @@ export default function Description({
     incrementItem,
     decrementItem,
 }: IProps) {
+    const { formattedPrice } = getItemPrices(
+        currentVariant.price,
+        currentVariant.oldPrice!,
+    );
+
     const colors = product.options.color;
 
     const availableSizes = useMemo(() => {
@@ -44,8 +49,7 @@ export default function Description({
         <div className="flex flex-col py-4 gap-6 w-full md:w-auto min-w-[332px]">
             <div className="flex flex-col gap-2 justify-between">
                 <span className="lg:hidden text-lg font-bold leading-base tracking-wider">
-                    {product.currency}
-                    {currentVariant.price}
+                    {formattedPrice}
                 </span>
                 <h3 className="text-lg font-medium uppercase tracking-wider leading-md">
                     {product.title}
@@ -72,25 +76,12 @@ export default function Description({
                 <span className="font-medium tracking-wider leading-lg">
                     Quantity
                 </span>
-                <div className="group/counter flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
-                    <Button
-                        className="flex gap-3 w-[50px] h-[50px] md:w-10 md:h-10 bg-white hover:bg-white"
-                        onClick={decrementItem}
-                        disabled={quantity === 1}
-                    >
-                        <Minus className="size-4 stroke-[1.5px] stroke-black" />
-                    </Button>
-                    <span className="flex items-center justify-center w-[50px] h-[50px] md:w-10 md:h-10 font-mono tracking-wider leading-lg">
-                        {quantity}
-                    </span>
-                    <Button
-                        className="flex gap-3 w-[50px] h-[50px] md:w-10 md:h-10 bg-white hover:bg-white"
-                        onClick={incrementItem}
-                        disabled={quantity === currentVariant.stock}
-                    >
-                        <Plus className="size-4 stroke-[1.5px] stroke-black" />
-                    </Button>
-                </div>
+                <Counter
+                    quantity={quantity}
+                    stock={currentVariant.stock}
+                    increment={incrementItem}
+                    decrement={decrementItem}
+                />
             </div>
 
             <div className="flex flex-col gap-[6px]">

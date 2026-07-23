@@ -81,30 +81,13 @@ export default function ProductClient({ product }: IProps) {
 
     if (!currentVariant || !images) return;
 
-    const [quantityByVariant, setQuantityByVariant] = useState<
-        Record<string, number>
-    >({ [currentVariant.id]: 1 });
-    const setQuantity = (value: number) => {
-        setQuantityByVariant((prev) => ({
-            ...prev,
-            [currentVariant.id]: value,
-        }));
-    };
+    const [quantity, setQuantity] = useState<number>(1);
 
     const incrementItem = () => {
-        setQuantity(
-            Math.min(
-                quantityByVariant[currentVariant.id] + 1,
-                currentVariant.stock,
-            ),
-        );
+        setQuantity(Math.min(quantity + 1, currentVariant.stock));
     };
     const decrementItem = () => {
-        setQuantity(
-            quantityByVariant[currentVariant.id] > 1
-                ? quantityByVariant[currentVariant.id] - 1
-                : quantityByVariant[currentVariant.id],
-        );
+        setQuantity(quantity > 1 ? quantity - 1 : quantity);
     };
 
     return (
@@ -139,9 +122,7 @@ export default function ProductClient({ product }: IProps) {
                                     activeColorId={selectedColorId}
                                     incrementItem={incrementItem}
                                     decrementItem={decrementItem}
-                                    quantity={
-                                        quantityByVariant[currentVariant.id]
-                                    }
+                                    quantity={quantity}
                                 />
                                 {currentVariant.stock === 0 && (
                                     <span className="hidden md:flex items-center justify-center w-full h-10 rounded-xl bg-black/10 tracking-wide">
@@ -153,7 +134,7 @@ export default function ProductClient({ product }: IProps) {
                                         product={product}
                                         currentVariant={currentVariant}
                                         isFavorite={!!favorites[product.id]}
-                                        quantityByVariant={quantityByVariant}
+                                        quantity={quantity}
                                         incrementItem={incrementItem}
                                         decrementItem={decrementItem}
                                     />
@@ -168,7 +149,7 @@ export default function ProductClient({ product }: IProps) {
             <ProductMenu
                 product={product}
                 currentVariant={currentVariant}
-                quantity={quantityByVariant[currentVariant.id]}
+                quantity={quantity}
                 isFavorite={!!favorites[product.id]}
             />
         </>

@@ -65,7 +65,6 @@ export async function getProducts(params?: getProductsParams) {
             params?.brandSlug ?? "all",
             params?.isNew ? "new" : "all",
         ],
-        { tags: ["products"], revalidate: 1 },
-        // { tags: ["products"], revalidate: 60 * 60 },
+        { tags: ["products"], revalidate: 60 * 60 },
     )();
 }

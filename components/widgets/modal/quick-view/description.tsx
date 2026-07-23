@@ -10,6 +10,7 @@ import { mapProductToCartItem } from "@/app/mappers/mapper";
 import { useMemo } from "react";
 import SizeSelector from "../../size-selector/size-selector";
 import { getItemPrices } from "@/lib/money/get-item-price";
+import Counter from "@/components/shared/counter";
 
 export default function Description({
     product,
@@ -101,25 +102,12 @@ export default function Description({
                 )}
                 {currentVariant.stock !== 0 && (
                     <div className="flex items-center gap-4 w-full">
-                        <div className="group/amount flex h-10 rounded-md bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 overflow-hidden transition-brand">
-                            <Button
-                                className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-                                onClick={decrementQuantity}
-                                disabled={quantity <= 1}
-                            >
-                                <Minus className="size-4 stroke-[1.5px] stroke-black" />
-                            </Button>
-                            <span className="flex items-center justify-center w-10 h-10 font-mono tracking-wider leading-lg">
-                                {quantity}
-                            </span>
-                            <Button
-                                className="flex gap-3 w-10 h-10 bg-white hover:bg-white"
-                                onClick={incrementQuantity}
-                                disabled={quantity === currentVariant.stock}
-                            >
-                                <Plus className="size-4 stroke-[1.5px] stroke-black" />
-                            </Button>
-                        </div>
+                        <Counter
+                            quantity={quantity}
+                            stock={currentVariant.stock}
+                            decrement={decrementQuantity}
+                            increment={incrementQuantity}
+                        />
                         <Button
                             className="flex-1 bg-black"
                             disabled={selectedSize === "" ? true : false}

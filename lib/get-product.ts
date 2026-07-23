@@ -36,7 +36,6 @@ export async function getProduct(params: getProductParams) {
             return mapProduct(product);
         },
         ["product", params.productSlug],
-        { tags: ["product"], revalidate: 1 },
-        // { tags: ["product"], revalidate: 60 * 60 },
+        { tags: ["product"], revalidate: 60 * 60 },
     )();
 }

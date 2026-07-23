@@ -32,7 +32,7 @@ export default function Gallery({ images, productName }: IProps) {
                     alt={productName}
                     width={480}
                     height={640}
-                    className="w-full h-full object-contain cursor-zoom-in"
+                    className="w-full h-full object-contain"
                 />
             </div>
         </div>
