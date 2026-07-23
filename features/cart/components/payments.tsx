@@ -10,16 +10,16 @@ export default function Payments({ payments }: IProps) {
             <span className="text-black/75 font-medium uppercase tracking-wide leading-lg">
                 Available payments
             </span>
-            <div className="flex gap-[6px]">
+            <div className="flex gap-2">
                 {payments.map((item) => (
                     <div
                         key={item.id}
-                        className="flex items-center justify-center rounded-md bg-black/5 border-[0.5px] border-black/10 w-1/3 h-7"
+                        className="flex items-center justify-center rounded-md bg-[#F8F9FA] w-1/3 h-10"
                     >
                         <Image
                             src={`/payments/${item.image}`}
                             alt={item.label}
-                            width={62}
+                            width={70}
                             height={16}
                             className="h-4 object-contain"
                         />
