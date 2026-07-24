@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
-import QueryProvider from "./providers/query-provider";
+import Providers from "./providers/providers";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat-sans",
@@ -36,7 +36,7 @@ export default function RootLayout({
             className={`${montserrat.variable} ${inter.variable} h-full antialiased scrollbar-gutter-stable`}
         >
             <body className="min-h-full flex flex-col">
-                <QueryProvider>{children}</QueryProvider>
+                <Providers>{children}</Providers>
             </body>
         </html>
     );
