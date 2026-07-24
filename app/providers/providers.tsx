@@ -2,10 +2,17 @@
 
 import { SessionProvider } from "next-auth/react";
 import QueryProvider from "./query-provider";
+import { Session } from "next-auth";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({
+    session,
+    children,
+}: {
+    session: Session | null;
+    children: React.ReactNode;
+}) {
     return (
-        <SessionProvider>
+        <SessionProvider session={session}>
             <QueryProvider>{children}</QueryProvider>
         </SessionProvider>
     );

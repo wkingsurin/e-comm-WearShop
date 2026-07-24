@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Montserrat, Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers/providers";
+import { auth } from "@/auth";
 
 const montserrat = Montserrat({
     variable: "--font-montserrat-sans",
@@ -25,18 +26,20 @@ export const viewport: Viewport = {
     userScalable: false,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const session = await auth()
+
     return (
         <html
             lang="en"
             className={`${montserrat.variable} ${inter.variable} h-full antialiased scrollbar-gutter-stable`}
         >
             <body className="min-h-full flex flex-col">
-                <Providers>{children}</Providers>
+                <Providers session={session}>{children}</Providers>
             </body>
         </html>
     );
