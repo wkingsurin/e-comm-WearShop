@@ -1,4 +1,3 @@
-import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import LastSeenSection from "@/components/widgets/last-seen-section";

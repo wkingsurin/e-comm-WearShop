@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import AddressForm from "@/features/profile/components/address-form/form";
 import ProfileCard from "@/features/profile/components/profile-card/card";
 import ProfileForm from "@/features/profile/components/profile-form/form";
+import ProfileSkeleton from "@/features/profile/components/skeleton/profile-skeleton";
 import { EMPTY_USER_PROFILE } from "@/features/profile/constants";
 import useUserProfile from "@/features/profile/hooks/use-user-profile";
 import ValidAddress from "@/features/profile/validate-address";
@@ -17,7 +18,7 @@ export default function ProfileClient() {
     const session = useSession();
     const authorized = session.status === "authenticated";
 
-    const { data: profile = EMPTY_USER_PROFILE } = useUserProfile();
+    const { data: profile = EMPTY_USER_PROFILE, isPending } = useUserProfile();
 
     const openDialog = useUIStore((s) => s.openDialog);
 
@@ -48,87 +49,94 @@ export default function ProfileClient() {
         });
     };
 
-    return (
-        <>
-            {!authorized ? (
-                <ProtectedState icon={Lock} description="Edit your personal data and address." />
-            ) : (
-                <DashboardWrapper className="min-h-auto px-1! md:px-6! min-h-[598px]!">
-                    <ProfileCard title="Personal information">
-                        <div className="flex flex-col items-start gap-4">
-                            <div className="flex gap-3 items-center">
-                                <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
-                                    <UserRound className="size-4 stroke-[1.5px] stroke-white" />
-                                </div>
-                                <span className="tracking-wider leading-base">
-                                    {profile.name}
-                                </span>
-                            </div>
-                            <div className="flex gap-3 items-center">
-                                <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
-                                    <Mail className="size-4 stroke-[1.5px] stroke-white" />
-                                </div>
-                                <span className="tracking-wider leading-base">
-                                    {profile.email}
-                                </span>
-                            </div>
-                            <Button
-                                variant="link"
-                                className="gap-2 hover:no-underline h-auto py-1 px-2 rounded-md text-md hover:bg-black hover:text-white transition-brand"
-                                onClick={handleChangeProfile}
-                            >
-                                Edit <Pen className="size-3" />
-                            </Button>
-                        </div>
-                    </ProfileCard>
-                    <ProfileCard title="Default delivery information">
-                        <div className="flex flex-col items-start gap-4">
-                            <div className="flex gap-3 items-center">
-                                <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
-                                    <MapPinHouse className="size-4 stroke-[1.5px] stroke-white" />
-                                </div>
-                                <span className="tracking-wider leading-base w-[calc(100%-28px-12px)]">
-                                    {profile.address.street ? (
-                                        `${profile.address.street}, ${profile.address.city}, ${profile.address.postalCode}`
-                                    ) : (
-                                        <span className="text-black/50 tracking-wider leading-base">
-                                            No address
-                                        </span>
-                                    )}
-                                </span>
-                            </div>
+    if (!authorized) {
+        return (
+            <ProtectedState
+                icon={Lock}
+                description="Edit your personal data and address."
+            />
+        );
+    }
 
-                            <div className="flex gap-3 items-center">
-                                <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
-                                    <Globe
-                                        className={`size-4 stroke-[1.5px] stroke-white`}
-                                    />
-                                </div>
-                                <span className="tracking-wider leading-base w-[calc(100%-28px-12px)]">
-                                    {profile.address.country || (
-                                        <span className="text-black/50 tracking-wider leading-base">
-                                            No country
-                                        </span>
-                                    )}
-                                </span>
-                            </div>
-                            <Button
-                                variant="link"
-                                className="gap-2 hover:no-underline h-auto py-1 px-2 rounded-md text-md hover:bg-black hover:text-white transition-brand"
-                                onClick={handleChangeAddress}
-                            >
-                                {ValidAddress(shippingData) ? (
-                                    <>
-                                        Edit <Pen className="size-3" />
-                                    </>
-                                ) : (
-                                    "Add address"
-                                )}
-                            </Button>
+    if (isPending) {
+        return <ProfileSkeleton />;
+    }
+
+    return (
+        <DashboardWrapper className="min-h-auto px-1! md:px-6! min-h-[598px]!">
+            <ProfileCard title="Personal information">
+                <div className="flex flex-col items-start gap-4">
+                    <div className="flex gap-3 items-center">
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <UserRound className="size-4 stroke-[1.5px] stroke-white" />
                         </div>
-                    </ProfileCard>
-                </DashboardWrapper>
-            )}
-        </>
+                        <span className="tracking-wider leading-base">
+                            {profile.name}
+                        </span>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <Mail className="size-4 stroke-[1.5px] stroke-white" />
+                        </div>
+                        <span className="tracking-wider leading-base">
+                            {profile.email}
+                        </span>
+                    </div>
+                    <Button
+                        variant="link"
+                        className="gap-2 hover:no-underline h-auto py-1 px-2 rounded-md text-md hover:bg-black hover:text-white transition-brand"
+                        onClick={handleChangeProfile}
+                    >
+                        Edit <Pen className="size-3" />
+                    </Button>
+                </div>
+            </ProfileCard>
+            <ProfileCard title="Default delivery information">
+                <div className="flex flex-col items-start gap-4">
+                    <div className="flex gap-3 items-center">
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <MapPinHouse className="size-4 stroke-[1.5px] stroke-white" />
+                        </div>
+                        <span className="tracking-wider leading-base w-[calc(100%-28px-12px)]">
+                            {profile.address.street ? (
+                                `${profile.address.street}, ${profile.address.city}, ${profile.address.postalCode}`
+                            ) : (
+                                <span className="text-black/50 tracking-wider leading-base">
+                                    No address
+                                </span>
+                            )}
+                        </span>
+                    </div>
+
+                    <div className="flex gap-3 items-center">
+                        <div className="flex items-center justify-center w-7 h-7 bg-black/15 rounded-md">
+                            <Globe
+                                className={`size-4 stroke-[1.5px] stroke-white`}
+                            />
+                        </div>
+                        <span className="tracking-wider leading-base w-[calc(100%-28px-12px)]">
+                            {profile.address.country || (
+                                <span className="text-black/50 tracking-wider leading-base">
+                                    No country
+                                </span>
+                            )}
+                        </span>
+                    </div>
+                    <Button
+                        variant="link"
+                        className="gap-2 hover:no-underline h-auto py-1 px-2 rounded-md text-md hover:bg-black hover:text-white transition-brand"
+                        onClick={handleChangeAddress}
+                    >
+                        {ValidAddress(shippingData) ? (
+                            <>
+                                Edit <Pen className="size-3" />
+                            </>
+                        ) : (
+                            "Add address"
+                        )}
+                    </Button>
+                </div>
+            </ProfileCard>
+        </DashboardWrapper>
     );
 }

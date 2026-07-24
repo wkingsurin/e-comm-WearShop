@@ -7,7 +7,7 @@ import BackButton from "@/components/shared/back-button";
 import getCurrentUser from "@/lib/auth/get-current-user";
 
 export default async function Cart() {
-    const user = await getCurrentUser()
+    const user = await getCurrentUser();
 
     const payments: { id: string; label: string; image: string }[] = [
         { id: "1", label: "PayPal", image: "image-pay-1.png" },

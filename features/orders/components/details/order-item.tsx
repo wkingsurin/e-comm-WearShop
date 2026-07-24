@@ -16,10 +16,7 @@ export default function OrderItem({ data }: IProps) {
     const { formattedPrice } = getItemPrices(data.item.price, data.item.price);
 
     return (
-        <div
-            key={data.item.id}
-            className="relative flex flex-col w-full overflow-hidden"
-        >
+        <div className="relative flex flex-col w-full overflow-hidden">
             <div className="flex gap-3 items-center mr-12">
                 <div
                     className="flex flex-col gap-3 items-center justify-center w-[83px] h-[100px] bg-[#F5F5F5] rounded-md"

@@ -33,12 +33,12 @@ export default function OrderItem({
                 />
             </div>
             <div className="hidden md:flex flex-col items-center gap-[6px] text-center leading-lg tracking-wider text-black/50">
-                <p className="text-md">{colorSize}</p>
+                <p className="text-md leading-5">{colorSize}</p>
                 <div className="flex items-center gap-1">
-                    <p className="text-black font-bold tracking-wide">
+                    <p className="text-black font-bold tracking-wide leading-5">
                         {formattedPrice}
                     </p>
-                    <p className="text-md text-black/50 font-medium tracking-wider leading-md">
+                    <p className="text-md text-black/50 font-medium tracking-wider leading-5">
                         x{data.quantity}
                     </p>
                 </div>

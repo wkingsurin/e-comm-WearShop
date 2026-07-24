@@ -8,6 +8,7 @@ import { EMPTY_CART } from "@/features/cart/constants";
 import SellMenu from "@/features/cart/components/sell-menu";
 import CartItem from "@/features/cart/components/cart-item";
 import ProtectedState from "@/components/shared/protected-state";
+import CartSkeleton from "@/features/cart/components/skeleton/cart-skeleton";
 
 export default function CartClient({
     payments,
@@ -16,43 +17,44 @@ export default function CartClient({
     payments: { id: string; label: string; image: string }[];
     authorized: boolean;
 }) {
-    const { data: cart = EMPTY_CART } = useCart();
+    const { data: cart = EMPTY_CART, isPending } = useCart({enabled: authorized});
 
     const items = cart.items ?? [];
+
+    if (!authorized) {
+        return (
+            <ProtectedState
+                icon={Lock}
+                description="Save your cart, track your orders and checkout faster."
+            />
+        );
+    }
+
+    if (isPending) {
+        return <CartSkeleton />;
+    }
 
     return (
         <div
             className={`relative flex flex-col md:flex-row items-start gap-5 ${!authorized && "items-center! justify-center"} min-h-[598px]`}
         >
-            {!authorized ? (
-                <ProtectedState
-                    icon={Lock}
-                    description="Save your cart, track your orders and checkout faster."
-                />
-            ) : (
-                <>
-                    <DashboardWrapper className="min-h-[598px] md:w-[65%]">
-                        {cart.totalItems > 0 && (
-                            <div className="flex flex-col gap-4 flex-1 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:pb-4">
-                                {items.map((item) => (
-                                    <CartItem
-                                        key={item.cartItemId}
-                                        data={item}
-                                        isFavorite={false}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                        {items.length === 0 && (
-                            <Dummy
-                                icon={ShoppingBag}
-                                text="Your cart is empty"
+            <DashboardWrapper className="min-h-[598px] md:w-[65%]">
+                {cart.totalItems > 0 && (
+                    <div className="flex flex-col gap-4 flex-1 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:pb-4">
+                        {items.map((item) => (
+                            <CartItem
+                                key={item.cartItemId}
+                                data={item}
+                                isFavorite={false}
                             />
-                        )}
-                    </DashboardWrapper>
-                    <SellMenu cart={cart} payments={payments} />
-                </>
-            )}
+                        ))}
+                    </div>
+                )}
+                {items.length === 0 && (
+                    <Dummy icon={ShoppingBag} text="Your cart is empty" />
+                )}
+            </DashboardWrapper>
+            <SellMenu cart={cart} payments={payments} />
         </div>
     );
 }

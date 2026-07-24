@@ -1,6 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { cartQueries } from "../query-options";
 
-export function useCart() {
-	return useQuery(cartQueries.all());
+interface IProps {
+    enabled?: boolean;
+}
+
+export function useCart({ enabled = true }: IProps = {}) {
+    return useQuery({ ...cartQueries.all(), enabled });
 }

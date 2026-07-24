@@ -4,17 +4,16 @@ import { useOrder } from "@/features/orders/hooks/use-order";
 import { EMPTY_ORDER } from "@/features/orders/constants";
 import { useUIStore } from "@/lib/store/ui.store";
 import DashboardWrapper from "@/components/shared/dashboard-wrapper";
-import { MoveLeft } from "lucide-react";
 import OrderContent from "@/features/orders/components/details/order-content";
 import OrderSummary from "@/features/orders/components/details/order-summary";
 import OrderReturn from "@/features/orders/components/details/order-return";
 import OrderConfirmModal from "@/features/orders/components/order-confirm-modal";
 import { useCancelOrder } from "@/features/orders/hooks/use-cancel-order";
 import { OrderStatus } from "@/prisma/generated/prisma/enums";
-import Link from "next/link";
+import OrderPageSkeleton from "@/features/orders/components/details/skeleton/order-page-skeleton";
 
 export default function OrderPageClient({ orderId }: { orderId: string }) {
-    const { data: order = EMPTY_ORDER } = useOrder(orderId);
+    const { data: order = EMPTY_ORDER, isPending } = useOrder(orderId);
     const { mutate: cancelOrder } = useCancelOrder();
 
     const openConfirm = useUIStore((s) => s.openConfirm);
@@ -26,6 +25,10 @@ export default function OrderPageClient({ orderId }: { orderId: string }) {
             onConfirm: () => cancelOrder({ orderId }),
         });
     };
+
+    if (isPending) {
+        return <OrderPageSkeleton />;
+    }
 
     return (
         <div className="relative flex flex-col md:flex-row items-start gap-5 w-full">
