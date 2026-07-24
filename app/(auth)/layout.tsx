@@ -1,7 +1,16 @@
+import getCurrentUser from "@/lib/auth/get-current-user";
+import { redirect } from "next/navigation";
+
 interface IProps {
-	children: React.ReactNode;
+    children: React.ReactNode;
 }
 
-export default function AuthLayout({ children }: IProps) {
-	return <div>{children}</div>;
+export default async function AuthLayout({ children }: IProps) {
+    const user = await getCurrentUser();
+
+    if (user) {
+        redirect("/products");
+    }
+
+    return <div>{children}</div>;
 }
