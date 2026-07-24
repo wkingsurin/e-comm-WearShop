@@ -1,12 +1,14 @@
-import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import LastSeenSection from "@/components/widgets/last-seen-section";
 import CartClient from "./client";
 import BackButton from "@/components/shared/back-button";
+import getCurrentUser from "@/lib/auth/get-current-user";
 
 export default async function Cart() {
+    const user = await getCurrentUser()
+
     const payments: { id: string; label: string; image: string }[] = [
         { id: "1", label: "PayPal", image: "image-pay-1.png" },
         { id: "2", label: "Visa", image: "image-pay-2.png" },
@@ -22,7 +24,7 @@ export default async function Cart() {
                             <BackButton />
                             <SectionTitle>Cart</SectionTitle>
                         </div>
-                        <CartClient payments={payments} />
+                        <CartClient payments={payments} authorized={!!user} />
                     </div>
                 </Container>
             </Section>

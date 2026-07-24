@@ -4,7 +4,7 @@ import Section from "@/components/shared/section";
 import Container from "@/components/shared/container";
 import BackButton from "@/components/shared/back-button";
 
-export default function Checkout() {
+export default async function Checkout() {
     return (
         <Section>
             <Container className="px-0! md:px-4!">

@@ -7,17 +7,15 @@ import { useCart } from "@/features/cart/hooks/use-cart";
 import { EMPTY_CART } from "@/features/cart/constants";
 import SellMenu from "@/features/cart/components/sell-menu";
 import CartItem from "@/features/cart/components/cart-item";
-import { useSession } from "next-auth/react";
 import ProtectedState from "@/components/shared/protected-state";
 
 export default function CartClient({
     payments,
+    authorized,
 }: {
     payments: { id: string; label: string; image: string }[];
+    authorized: boolean;
 }) {
-    const session = useSession();
-    const authorized = session.status === "authenticated";
-
     const { data: cart = EMPTY_CART } = useCart();
 
     const items = cart.items ?? [];
@@ -26,7 +24,7 @@ export default function CartClient({
         <div
             className={`relative flex flex-col md:flex-row items-start gap-5 ${!authorized && "items-center! justify-center"} min-h-[598px]`}
         >
-            {session.status === "unauthenticated" ? (
+            {!authorized ? (
                 <ProtectedState
                     icon={Lock}
                     description="Save your cart, track your orders and checkout faster."

@@ -33,6 +33,7 @@ export default function CheckoutSummary({ options }: ICheckoutSummary) {
             <SummaryButton
                 text="Place order"
                 disabled={isPending}
+                terms
                 onClick={() => mutate()}
             />
         </Summary>
