@@ -18,8 +18,8 @@ export default function CheckoutSummary({ options }: ICheckoutSummary) {
 
     const prices: { label: string; value: number }[] = [
         { label: `Items (${totalItems})`, value: subtotal },
-        { label: `Shipping & Service`, value: 510 },
-        { label: `Discount`, value: 12 },
+        { label: `Shipping & Service`, value: 0 },
+        { label: `Discount`, value: 0 },
         { label: `Tax`, value: 0 },
     ];
 
@@ -32,7 +32,7 @@ export default function CheckoutSummary({ options }: ICheckoutSummary) {
         >
             <SummaryButton
                 text="Place order"
-                status={isPending}
+                disabled={isPending}
                 onClick={() => mutate()}
             />
         </Summary>

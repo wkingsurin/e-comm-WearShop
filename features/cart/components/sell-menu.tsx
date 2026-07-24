@@ -20,8 +20,9 @@ export default function SellMenu({
                     total: cart.total,
                     currency: "$",
                 }}
+                isEmpty={cart.items.length === 0}
             />
-            <Payments payments={payments} />
+            {cart.items.length !== 0 && <Payments payments={payments} />}
         </div>
     );
 }

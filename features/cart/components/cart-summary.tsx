@@ -10,9 +10,10 @@ interface ICartSummary {
         total: number;
         currency: string;
     };
+    isEmpty: boolean;
 }
 
-export default function CartSummary({ options }: ICartSummary) {
+export default function CartSummary({ options, isEmpty }: ICartSummary) {
     const { totalItems, subtotal, total, currency } = options;
 
     const { isPending } = useUpdateCheckout();
@@ -21,8 +22,8 @@ export default function CartSummary({ options }: ICartSummary) {
 
     const prices: { label: string; value: number }[] = [
         { label: `Items (${totalItems})`, value: subtotal },
-        { label: `Shipping & Service`, value: 510 },
-        { label: `Discount`, value: 12 },
+        { label: `Shipping & Service`, value: 0 },
+        { label: `Discount`, value: 0 },
         { label: `Tax`, value: 0 },
     ];
 
@@ -32,10 +33,11 @@ export default function CartSummary({ options }: ICartSummary) {
             prices={prices}
             currency={currency}
             totalPrice={total}
+            isEmpty={isEmpty}
         >
             <SummaryButton
                 text="Procced to checkout"
-                status={isPending}
+                disabled={isPending || isEmpty}
                 onClick={() => router.push("/checkout")}
             />
         </Summary>
