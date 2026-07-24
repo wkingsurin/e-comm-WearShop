@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Heart, Lock, LogOut, LucideIcon, Package, User } from "lucide-react";
+import { Heart, LogOut, LucideIcon, Package, User } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { redirect, usePathname, useRouter } from "next/navigation";
