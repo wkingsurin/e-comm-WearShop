@@ -17,7 +17,7 @@ export default function DialogModal() {
 							{dialogData.title}
 						</span>
 					</div>
-					<div className="flex flex-col gap-4">{dialogData.content}</div>
+					<div className="flex flex-col gap-4 w-full">{dialogData.content}</div>
 				</div>
 			</div>
 		</Modal>

@@ -5,6 +5,8 @@ import { Heart } from "lucide-react";
 import { IHeartButtonProps } from "@/types/components/shared/shared.types";
 import { useUIStore } from "@/lib/store/ui.store";
 import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function HeartButton({
     productId,
@@ -12,6 +14,9 @@ export default function HeartButton({
     inline = false,
     size = "md",
 }: IHeartButtonProps) {
+    const session = useSession();
+    const unauthorized = session.status === "unauthenticated";
+
     const { mutate: toggle, isPending } = useToggleFavorite();
 
     const openConfirm = useUIStore((s) => s.openConfirm);
@@ -39,6 +44,8 @@ export default function HeartButton({
         });
     };
 
+    const openDialog = useUIStore((s) => s.openDialog);
+
     return (
         <Button
             size="icon-lg"
@@ -51,6 +58,26 @@ export default function HeartButton({
             onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
+
+                if (unauthorized) {
+                    openDialog({
+                        title: "Sing in to save favorite",
+                        content: (
+                            <div className="flex w-full h-full">
+                                <Link
+                                    href="/auth"
+                                    className="flex items-center justify-center w-full md:w-[240px]! h-10 bg-black rounded-md text-white"
+                                    onClick={() => {
+                                        useUIStore.getState().clearDialog();
+                                    }}
+                                >
+                                    Sign in
+                                </Link>
+                            </div>
+                        ),
+                    });
+                    return;
+                }
 
                 if (isFavorite) {
                     handleDelete();
