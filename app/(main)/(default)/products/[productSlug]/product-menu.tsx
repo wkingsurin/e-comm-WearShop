@@ -2,6 +2,7 @@ import { mapProductToCartItem } from "@/app/mappers/mapper";
 import HeartButton from "@/components/shared/heart-button";
 import { Button } from "@/components/ui/button";
 import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
+import { ICartItem } from "@/features/cart/types";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 import { ShoppingBag } from "lucide-react";
 
@@ -9,6 +10,7 @@ interface IProps {
     product: IProduct;
     currentVariant: IVariant;
     quantity: number;
+    itemToCart: ICartItem;
     isFavorite: boolean;
 }
 
@@ -16,11 +18,10 @@ export default function ProductMenu({
     product,
     currentVariant,
     quantity,
+    itemToCart,
     isFavorite,
 }: IProps) {
     const { mutate: addItem } = useAddToCart();
-
-    const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
     return (
         <div className="lg:hidden sticky bottom-[50px] z-100 flex gap-3 w-full p-3! bg-white">

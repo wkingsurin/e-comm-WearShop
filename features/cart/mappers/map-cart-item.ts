@@ -1,10 +1,6 @@
 import { CartItemWithRelations } from "@/types/product-db-type";
 
 export const mapCartItem = (cartItem: CartItemWithRelations) => {
-    const color = cartItem.variant.product.productColors.find(
-        (color) => color.id === cartItem.variant.colorId,
-    );
-
     return {
         id: cartItem.id,
         title: cartItem.variant.product.title,
@@ -17,11 +13,11 @@ export const mapCartItem = (cartItem: CartItemWithRelations) => {
 
         price: cartItem.variant.price,
         oldPrice: cartItem.variant.oldPrice,
-        image: color?.images[0].src ?? "",
+        image: cartItem.variant.color.images[0].src,
 
         selectedColor: {
             id: cartItem.variant.colorId,
-            value: color?.name ?? "",
+            value: cartItem.variant.color.name,
         },
         selectedSize: cartItem.variant.size,
 

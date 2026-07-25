@@ -47,6 +47,17 @@ export async function getCartItems(userId: string): Promise<ICart> {
                 include: {
                     variant: {
                         include: {
+                            color: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                    slug: true,
+                                    images: {
+                                        take: 1,
+                                        select: { id: true, src: true },
+                                    },
+                                },
+                            },
                             product: {
                                 select: {
                                     brand: {
@@ -55,19 +66,9 @@ export async function getCartItems(userId: string): Promise<ICart> {
                                     category: {
                                         select: { name: true, slug: true },
                                     },
-                                    productColors: {
-                                        orderBy: { name: "asc" },
-                                        select: {
-                                            id: true,
-                                            name: true,
-                                            slug: true,
-                                            images: {
-                                                select: { id: true, src: true },
-                                            },
-                                        },
-                                    },
                                     title: true,
                                     currency: true,
+                                    slug: true,
                                 },
                             },
                         },

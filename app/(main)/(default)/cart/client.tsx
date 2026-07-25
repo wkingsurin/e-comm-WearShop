@@ -17,7 +17,9 @@ export default function CartClient({
     payments: { id: string; label: string; image: string }[];
     authorized: boolean;
 }) {
-    const { data: cart = EMPTY_CART, isPending } = useCart({enabled: authorized});
+    const { data: cart = EMPTY_CART, isPending } = useCart({
+        enabled: authorized,
+    });
 
     const items = cart.items ?? [];
 

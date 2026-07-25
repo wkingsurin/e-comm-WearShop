@@ -2,94 +2,94 @@ import { ICartItem } from "@/features/cart/types";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 
 export const mapProductToCartItem = (
-	data: IProduct,
-	currentVariant: IVariant,
-	quantity: ICartItem["quantity"]
+    data: IProduct,
+    currentVariant: IVariant,
+    quantity: ICartItem["quantity"],
 ): ICartItem => {
-	const color = data.options.color.find(
-		(color) => color.id === currentVariant.attributes.colorId
-	);
+    const color = data.options.color.find(
+        (color) => color.id === currentVariant.attributes.colorId,
+    );
 
-	return {
-		id: data.id,
-		title: data.title,
-		slug: data.slug,
-		currency: data.currency,
+    return {
+        id: data.id,
+        title: data.title,
+        slug: data.slug,
+        currency: data.currency,
 
-		cartItemId: `${data.id}-${currentVariant.id}-${currentVariant.attributes.colorId}-${currentVariant.attributes.size}`,
+        cartItemId: `${data.id}-${currentVariant.id}-${currentVariant.attributes.colorId}-${currentVariant.attributes.size}`,
 
-		variantId: currentVariant.id,
-		sku: currentVariant.sku,
+        variantId: currentVariant.id,
+        sku: currentVariant.sku,
 
-		price: currentVariant.price,
-		oldPrice: currentVariant.oldPrice,
-		image: data.options.color[0].images[0].src,
+        price: currentVariant.price,
+        oldPrice: currentVariant.oldPrice,
+        image: color!.images[0].src,
 
-		selectedColor: {
-			id: currentVariant.attributes.colorId,
-			value: color?.name ?? "",
-		},
-		selectedSize: currentVariant.attributes.size,
+        selectedColor: {
+            id: currentVariant.attributes.colorId,
+            value: color?.name ?? "",
+        },
+        selectedSize: currentVariant.attributes.size,
 
-		quantity,
+        quantity,
 
-		maxStock: currentVariant.stock,
+        maxStock: currentVariant.stock,
 
-		brandName: data.brand.name,
-		categoryName: data.category.name,
+        brandName: data.brand.name,
+        categoryName: data.category.name,
 
-		createdAt: new Date(),
-	};
+        createdAt: new Date(),
+    };
 };
 
 export const mapCartItemsToOrder = (data: ICartItem[]) => {
-	const totalItemsPrice = data.reduce((acc, item) => {
-		return (acc += item.price);
-	}, 0);
-	const discountAmount = 35;
-	const deliveryPrice = 350;
-	const totalPrice = totalItemsPrice + discountAmount + deliveryPrice;
+    const totalItemsPrice = data.reduce((acc, item) => {
+        return (acc += item.price);
+    }, 0);
+    const discountAmount = 35;
+    const deliveryPrice = 350;
+    const totalPrice = totalItemsPrice + discountAmount + deliveryPrice;
 
-	return {
-		id: `order-${data.length - 1}`,
-		orderNumber: `№ UA-48910-2026`,
-		createdAt: Date.now().toLocaleString(),
-		updatedAt: Date.now().toLocaleString(),
+    return {
+        id: `order-${data.length - 1}`,
+        orderNumber: `№ UA-48910-2026`,
+        createdAt: Date.now().toLocaleString(),
+        updatedAt: Date.now().toLocaleString(),
 
-		user: {
-			id: "666",
-			firstName: "Jane",
-			lastName: "Doe",
-			email: "janedoe@example.com",
-			phone: "+1234567890",
-		},
-		deliveryMethod: "courier",
-		deliveryAddress: {
-			country: "United States",
-			city: "Los Angeles",
-			street: "15 Avenu",
-			house: "37",
-		},
+        user: {
+            id: "666",
+            firstName: "Jane",
+            lastName: "Doe",
+            email: "janedoe@example.com",
+            phone: "+1234567890",
+        },
+        deliveryMethod: "courier",
+        deliveryAddress: {
+            country: "United States",
+            city: "Los Angeles",
+            street: "15 Avenu",
+            house: "37",
+        },
 
-		items: data,
+        items: data,
 
-		currency: "USD",
-		totalItemsPrice,
-		discountAmount,
-		deliveryPrice,
-		totalPrice,
+        currency: "USD",
+        totalItemsPrice,
+        discountAmount,
+        deliveryPrice,
+        totalPrice,
 
-		status: "paid",
-		paymentMethod: "sbp",
-		isPaid: true,
-	};
+        status: "paid",
+        paymentMethod: "sbp",
+        isPaid: true,
+    };
 };
 
 export const mapProductToFavorite = (data: ICartItem | IProduct) => {
-	return {
-		id: data.id,
-		userId: "666",
-		productId: data.id,
-		createdAt: new Date().toISOString(),
-	};
+    return {
+        id: data.id,
+        userId: "666",
+        productId: data.id,
+        createdAt: new Date().toISOString(),
+    };
 };

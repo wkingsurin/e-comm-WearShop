@@ -35,20 +35,24 @@ export type CartItemWithRelations = Prisma.CartItemGetPayload<{
     include: {
         variant: {
             include: {
+                color: {
+                    select: {
+                        id: true;
+                        name: true;
+                        slug: true;
+                        images: {
+                            take: 1;
+                            select: { id: true; src: true };
+                        };
+                    };
+                };
                 product: {
-                    include: {
+                    select: {
                         brand: { select: { name: true; slug: true } };
                         category: { select: { name: true; slug: true } };
-                        productColors: {
-                            select: {
-                                id: true;
-                                name: true;
-                                slug: true;
-                                images: {
-                                    select: { id: true; src: true };
-                                };
-                            };
-                        };
+                        title: true;
+                        currency: true;
+                        slug: true;
                     };
                 };
             };

@@ -59,7 +59,17 @@ export default function Description({
 
     if (!selectedColorSlug) return;
 
-    const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
+    const itemToCart = mapProductToCartItem(
+        product,
+        {
+            ...currentVariant,
+            attributes: {
+                ...currentVariant.attributes,
+                colorId: activeColorId,
+            },
+        },
+        quantity,
+    );
 
     return (
         <div className="flex flex-col items-center gap-6 max-w-[258px] w-full">

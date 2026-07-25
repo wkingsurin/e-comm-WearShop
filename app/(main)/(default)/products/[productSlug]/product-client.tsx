@@ -22,6 +22,7 @@ import { MoveLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ProductMenu from "./product-menu";
+import { mapProductToCartItem } from "@/app/mappers/mapper";
 
 interface IProps {
     product: IProduct;
@@ -90,6 +91,18 @@ export default function ProductClient({ product }: IProps) {
         setQuantity(quantity > 1 ? quantity - 1 : quantity);
     };
 
+    const itemToCart = mapProductToCartItem(
+        product,
+        {
+            ...currentVariant,
+            attributes: {
+                ...currentVariant.attributes,
+                colorId: selectedColorId,
+            },
+        },
+        quantity,
+    );
+
     return (
         <>
             <Section>
@@ -135,6 +148,7 @@ export default function ProductClient({ product }: IProps) {
                                         currentVariant={currentVariant}
                                         isFavorite={!!favorites[product.id]}
                                         quantity={quantity}
+                                        itemToCart={itemToCart}
                                         incrementItem={incrementItem}
                                         decrementItem={decrementItem}
                                     />
@@ -151,6 +165,7 @@ export default function ProductClient({ product }: IProps) {
                 currentVariant={currentVariant}
                 quantity={quantity}
                 isFavorite={!!favorites[product.id]}
+                itemToCart={itemToCart}
             />
         </>
     );

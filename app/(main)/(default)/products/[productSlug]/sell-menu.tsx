@@ -6,12 +6,14 @@ import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
 import { mapProductToCartItem } from "@/app/mappers/mapper";
 import { getItemPrices } from "@/lib/money/get-item-price";
 import Counter from "@/components/shared/counter";
+import { ICartItem } from "@/features/cart/types";
 
 interface IProps {
     product: IProduct;
     currentVariant: IVariant;
     isFavorite: boolean;
     quantity: number;
+    itemToCart: ICartItem;
     incrementItem: () => void;
     decrementItem: () => void;
 }
@@ -21,6 +23,7 @@ export default function SellMenu({
     currentVariant,
     isFavorite,
     quantity,
+    itemToCart,
     incrementItem,
     decrementItem,
 }: IProps) {
@@ -30,8 +33,6 @@ export default function SellMenu({
     );
 
     const { mutate: addItem } = useAddToCart();
-
-    const itemToCart = mapProductToCartItem(product, currentVariant, quantity);
 
     return (
         <div className="hidden md:flex relative lg:sticky lg:top-[154px] flex-col gap-5 w-full hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
