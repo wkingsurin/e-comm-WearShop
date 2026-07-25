@@ -204,7 +204,9 @@ export const OrderItemScalarFieldEnum = {
   quantity: 'quantity',
   selectedColor: 'selectedColor',
   selectedSize: 'selectedSize',
-  image: 'image'
+  image: 'image',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]

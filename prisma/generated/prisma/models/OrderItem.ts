@@ -48,6 +48,8 @@ export type OrderItemMinAggregateOutputType = {
   selectedColor: string | null
   selectedSize: string | null
   image: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type OrderItemMaxAggregateOutputType = {
@@ -62,6 +64,8 @@ export type OrderItemMaxAggregateOutputType = {
   selectedColor: string | null
   selectedSize: string | null
   image: string | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type OrderItemCountAggregateOutputType = {
@@ -76,6 +80,8 @@ export type OrderItemCountAggregateOutputType = {
   selectedColor: number
   selectedSize: number
   image: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
@@ -102,6 +108,8 @@ export type OrderItemMinAggregateInputType = {
   selectedColor?: true
   selectedSize?: true
   image?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type OrderItemMaxAggregateInputType = {
@@ -116,6 +124,8 @@ export type OrderItemMaxAggregateInputType = {
   selectedColor?: true
   selectedSize?: true
   image?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type OrderItemCountAggregateInputType = {
@@ -130,6 +140,8 @@ export type OrderItemCountAggregateInputType = {
   selectedColor?: true
   selectedSize?: true
   image?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -231,6 +243,8 @@ export type OrderItemGroupByOutputType = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt: Date
+  updatedAt: Date
   _count: OrderItemCountAggregateOutputType | null
   _avg: OrderItemAvgAggregateOutputType | null
   _sum: OrderItemSumAggregateOutputType | null
@@ -268,6 +282,8 @@ export type OrderItemWhereInput = {
   selectedColor?: Prisma.StringFilter<"OrderItem"> | string
   selectedSize?: Prisma.StringFilter<"OrderItem"> | string
   image?: Prisma.StringFilter<"OrderItem"> | string
+  createdAt?: Prisma.DateTimeFilter<"OrderItem"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"OrderItem"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
 }
 
@@ -283,6 +299,8 @@ export type OrderItemOrderByWithRelationInput = {
   selectedColor?: Prisma.SortOrder
   selectedSize?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   order?: Prisma.OrderOrderByWithRelationInput
 }
 
@@ -301,6 +319,8 @@ export type OrderItemWhereUniqueInput = Prisma.AtLeast<{
   selectedColor?: Prisma.StringFilter<"OrderItem"> | string
   selectedSize?: Prisma.StringFilter<"OrderItem"> | string
   image?: Prisma.StringFilter<"OrderItem"> | string
+  createdAt?: Prisma.DateTimeFilter<"OrderItem"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"OrderItem"> | Date | string
   order?: Prisma.XOR<Prisma.OrderScalarRelationFilter, Prisma.OrderWhereInput>
 }, "id">
 
@@ -316,6 +336,8 @@ export type OrderItemOrderByWithAggregationInput = {
   selectedColor?: Prisma.SortOrder
   selectedSize?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrderItemCountOrderByAggregateInput
   _avg?: Prisma.OrderItemAvgOrderByAggregateInput
   _max?: Prisma.OrderItemMaxOrderByAggregateInput
@@ -338,6 +360,8 @@ export type OrderItemScalarWhereWithAggregatesInput = {
   selectedColor?: Prisma.StringWithAggregatesFilter<"OrderItem"> | string
   selectedSize?: Prisma.StringWithAggregatesFilter<"OrderItem"> | string
   image?: Prisma.StringWithAggregatesFilter<"OrderItem"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
 }
 
 export type OrderItemCreateInput = {
@@ -351,6 +375,8 @@ export type OrderItemCreateInput = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
   order: Prisma.OrderCreateNestedOneWithoutItemsInput
 }
 
@@ -366,6 +392,8 @@ export type OrderItemUncheckedCreateInput = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type OrderItemUpdateInput = {
@@ -379,6 +407,8 @@ export type OrderItemUpdateInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   order?: Prisma.OrderUpdateOneRequiredWithoutItemsNestedInput
 }
 
@@ -394,6 +424,8 @@ export type OrderItemUncheckedUpdateInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderItemCreateManyInput = {
@@ -408,6 +440,8 @@ export type OrderItemCreateManyInput = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type OrderItemUpdateManyMutationInput = {
@@ -421,6 +455,8 @@ export type OrderItemUpdateManyMutationInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderItemUncheckedUpdateManyInput = {
@@ -435,6 +471,8 @@ export type OrderItemUncheckedUpdateManyInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderItemListRelationFilter = {
@@ -459,6 +497,8 @@ export type OrderItemCountOrderByAggregateInput = {
   selectedColor?: Prisma.SortOrder
   selectedSize?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type OrderItemAvgOrderByAggregateInput = {
@@ -478,6 +518,8 @@ export type OrderItemMaxOrderByAggregateInput = {
   selectedColor?: Prisma.SortOrder
   selectedSize?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type OrderItemMinOrderByAggregateInput = {
@@ -492,6 +534,8 @@ export type OrderItemMinOrderByAggregateInput = {
   selectedColor?: Prisma.SortOrder
   selectedSize?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type OrderItemSumOrderByAggregateInput = {
@@ -552,6 +596,8 @@ export type OrderItemCreateWithoutOrderInput = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type OrderItemUncheckedCreateWithoutOrderInput = {
@@ -565,6 +611,8 @@ export type OrderItemUncheckedCreateWithoutOrderInput = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type OrderItemCreateOrConnectWithoutOrderInput = {
@@ -608,6 +656,8 @@ export type OrderItemScalarWhereInput = {
   selectedColor?: Prisma.StringFilter<"OrderItem"> | string
   selectedSize?: Prisma.StringFilter<"OrderItem"> | string
   image?: Prisma.StringFilter<"OrderItem"> | string
+  createdAt?: Prisma.DateTimeFilter<"OrderItem"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"OrderItem"> | Date | string
 }
 
 export type OrderItemCreateManyOrderInput = {
@@ -621,6 +671,8 @@ export type OrderItemCreateManyOrderInput = {
   selectedColor: string
   selectedSize: string
   image: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
 }
 
 export type OrderItemUpdateWithoutOrderInput = {
@@ -634,6 +686,8 @@ export type OrderItemUpdateWithoutOrderInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderItemUncheckedUpdateWithoutOrderInput = {
@@ -647,6 +701,8 @@ export type OrderItemUncheckedUpdateWithoutOrderInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
@@ -660,6 +716,8 @@ export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
   selectedColor?: Prisma.StringFieldUpdateOperationsInput | string
   selectedSize?: Prisma.StringFieldUpdateOperationsInput | string
   image?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -676,6 +734,8 @@ export type OrderItemSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   selectedColor?: boolean
   selectedSize?: boolean
   image?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderItem"]>
 
@@ -691,6 +751,8 @@ export type OrderItemSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   selectedColor?: boolean
   selectedSize?: boolean
   image?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderItem"]>
 
@@ -706,6 +768,8 @@ export type OrderItemSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   selectedColor?: boolean
   selectedSize?: boolean
   image?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["orderItem"]>
 
@@ -721,9 +785,11 @@ export type OrderItemSelectScalar = {
   selectedColor?: boolean
   selectedSize?: boolean
   image?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type OrderItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "productId" | "variantId" | "title" | "sku" | "price" | "quantity" | "selectedColor" | "selectedSize" | "image", ExtArgs["result"]["orderItem"]>
+export type OrderItemOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "orderId" | "productId" | "variantId" | "title" | "sku" | "price" | "quantity" | "selectedColor" | "selectedSize" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["orderItem"]>
 export type OrderItemInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   order?: boolean | Prisma.OrderDefaultArgs<ExtArgs>
 }
@@ -751,6 +817,8 @@ export type $OrderItemPayload<ExtArgs extends runtime.Types.Extensions.InternalA
     selectedColor: string
     selectedSize: string
     image: string
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["orderItem"]>
   composites: {}
 }
@@ -1186,6 +1254,8 @@ export interface OrderItemFieldRefs {
   readonly selectedColor: Prisma.FieldRef<"OrderItem", 'String'>
   readonly selectedSize: Prisma.FieldRef<"OrderItem", 'String'>
   readonly image: Prisma.FieldRef<"OrderItem", 'String'>
+  readonly createdAt: Prisma.FieldRef<"OrderItem", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"OrderItem", 'DateTime'>
 }
     
 
