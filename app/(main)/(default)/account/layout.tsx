@@ -15,9 +15,7 @@ export default async function AccountLayout({ children }: IAccountProps) {
     const user = await getCurrentUser();
 
     const [profile, orders] = await Promise.all([
-        user !== null
-            ? getUserProfile(user.id)
-            : Promise.resolve(EMPTY_USER_PROFILE),
+        user ? getUserProfile(user.id) : Promise.resolve(EMPTY_USER_PROFILE),
         user ? getOrders(user.id) : Promise.resolve(EMPTY_ORDERS),
     ]);
 

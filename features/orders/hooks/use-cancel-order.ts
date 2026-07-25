@@ -38,13 +38,13 @@ export function useCancelOrder() {
 			queryClient.setQueryData(queryKeys.orders(), context?.previousOrders);
 		},
 
-		onSuccess: (order) => {
-			queryClient.setQueryData<IOrder[]>(queryKeys.orders(), (old) => {
-				if (!old) return old;
+		// onSuccess: (order) => {
+		// 	queryClient.setQueryData<IOrder[]>(queryKeys.orders(), (old) => {
+		// 		if (!old) return old;
 
-				return old.map((item) => (item.id === order.id ? order : item));
-			});
-		},
+		// 		return old.map((item) => (item.id === order.id ? order : item));
+		// 	});
+		// },
 
 		onSettled: () => {
 			queryClient.invalidateQueries({ queryKey: queryKeys.orders() });

@@ -21,8 +21,6 @@ export default function Order({
     const { data: checkout = EMPTY_CHECKOUT } = useCheckout();
     const { data: profile = EMPTY_USER_PROFILE } = useUserProfile();
 
-    console.log(`[profile]:`, profile);
-
     const defaultAddress: {
         country: string;
         city: string;

@@ -70,7 +70,7 @@ export async function getOrders(userId: string) {
     const orders = await prisma.order.findMany({
         where: { userId },
         orderBy: { createdAt: "desc" },
-        include: { items: true },
+        include: { items: { orderBy: { createdAt: "desc" } } },
     });
 
     return orders.map(mapOrder);
@@ -79,7 +79,11 @@ export async function getOrders(userId: string) {
 export async function getOrder(userId: string, orderId: string) {
     const order = await prisma.order.findUniqueOrThrow({
         where: { userId, id: orderId },
-        include: { items: true },
+        include: {
+            items: {
+                orderBy: { createdAt: "desc" },
+            },
+        },
     });
 
     return mapOrder(order);
