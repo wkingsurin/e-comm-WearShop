@@ -29,6 +29,7 @@ export async function createOrder(userId: string) {
                             },
                         },
                     },
+                    orderBy: { createdAt: "desc" },
                 },
             },
         });

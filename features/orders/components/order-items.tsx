@@ -17,9 +17,11 @@ export default function OrderItems({
     const shortData =
         data.length > LIMIT_AMOUNT ? [...data].splice(0, LIMIT_AMOUNT - 1) : data;
 
+    const reversedData = shortData.reverse()
+
     return (
         <div className="grid grid-cols-3 lg:grid-cols-4 gap-3">
-            {shortData.map((item) => {
+            {reversedData.map((item) => {
                 return (
                     <OrderItem
                         key={item.id}
