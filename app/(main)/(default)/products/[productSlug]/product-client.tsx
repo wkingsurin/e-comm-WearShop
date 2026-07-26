@@ -1,13 +1,8 @@
 "use client";
 
-// import { useSimilarStore } from "@/lib/store/similar.store";
-
-import Main from "@/components/main";
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
-import SimilarSection from "@/components/widgets/similar-section";
-import LastSeenSection from "@/components/widgets/last-seen-section";
 import Gallery from "./gallery";
 import Description from "./description";
 import SellMenu from "./sell-menu";
@@ -60,10 +55,6 @@ export default function ProductClient({ product }: IProps) {
     ];
 
     const router = useRouter();
-
-    // const computeSimilarProducts = useSimilarStore(
-    // 	(s) => s.computeSimilarProducts
-    // );
 
     if (!selectedColorSlug) return null;
 
@@ -158,8 +149,6 @@ export default function ProductClient({ product }: IProps) {
                     </div>
                 </Container>
             </Section>
-            <SimilarSection />
-            <LastSeenSection />
             <ProductMenu
                 product={product}
                 currentVariant={currentVariant}

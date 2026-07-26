@@ -2,7 +2,7 @@ import Skeleton from "@/components/shared/skeleton";
 
 export default function DescriptionSkeleton() {
     return (
-        <div className="flex flex-col justify-between gap-3 px-3 pb-3">
+        <div className="flex flex-col justify-between gap-3 px-3 pb-3 h-[95px]">
             <div className="flex justify-between items-center">
                 <div className="flex items-end gap-1">
                     <Skeleton className="w-16 h-5" />

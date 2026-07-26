@@ -5,5 +5,6 @@ export const queryKeys = {
     checkout: ["checkout"],
     orders: () => ["orders"],
     order: (id: string) => ["orders", id],
+    lastSeen: ["lastSeen"],
     search: (query: string) => ["search", query],
 };

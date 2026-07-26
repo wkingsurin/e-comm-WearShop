@@ -1,18 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import useLastSeen from "@/hooks/useLastSeen";
 import Link from "next/link";
 import FastViewButton from "./fast-view-button";
 import { IProductFaceProps } from "@/types/components/widgets/product-card.types";
 import HeartButton from "@/components/shared/heart-button";
+import { useAddLastSeen } from "@/features/last-seen/hooks/use-add-last-seen";
 
 export default function Face({
     data,
     defaultVariant,
     isFavorite,
 }: IProductFaceProps) {
-    const { addLastSeen } = useLastSeen();
+    const { mutate: addLastSeen } = useAddLastSeen();
 
     const defaultColorId = defaultVariant.attributes.colorId;
     const defaultColor = data.options.color.find(
@@ -27,7 +27,7 @@ export default function Face({
             href={`/products/${data.slug}?color=${defaultColor.slug}&size=${defaultSize}`}
             className="relative flex items-center justify-center w-full h-[260px] bg-[#F4F4F6] rounded-xl overflow-hidden trnasition-all duration-300 cursor-pointer select-none"
             onClick={() => {
-                addLastSeen(data);
+                addLastSeen(data.id);
             }}
             draggable={false}
         >

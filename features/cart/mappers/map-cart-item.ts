@@ -1,4 +1,4 @@
-import { CartItemWithRelations } from "@/types/product-db-type";
+import { CartItemWithRelations } from "@/types/prisma/product-db-type";
 
 export const mapCartItem = (cartItem: CartItemWithRelations) => {
     return {

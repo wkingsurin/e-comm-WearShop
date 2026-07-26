@@ -1,6 +1,6 @@
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
-import LastSeenSection from "@/components/widgets/last-seen-section";
+import LastSeenSection from "@/features/last-seen/components/last-seen-section";
 import SuccessClient from "./client";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getOrder } from "@/features/orders/services/order.service";

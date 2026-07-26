@@ -1,7 +1,6 @@
 "use server";
 
 import { auth } from "@/auth";
-import Main from "@/components/main";
 import { getFavoriteMap } from "@/features/favorites/services/favorites.service";
 import { getQueryClient } from "@/lib/react-query/get-query-client";
 import { queryKeys } from "@/lib/react-query/query-keys";

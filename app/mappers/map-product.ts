@@ -1,5 +1,5 @@
 import { IProduct } from "@/types/store/ui.types";
-import { ProductWithRelations } from "../../types/product-db-type";
+import { ProductWithRelations } from "../../types/prisma/product-db-type";
 
 export const mapProduct = (product: ProductWithRelations): IProduct => {
     const colors = product.productColors.map((color) => ({

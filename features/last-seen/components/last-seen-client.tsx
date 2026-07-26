@@ -1,23 +1,24 @@
 "use client";
 
 import { useFavorites } from "@/features/favorites/hooks/use-favorites";
-import useLastSeen from "../../hooks/useLastSeen";
-import Container from "../shared/container";
-import Section from "../shared/section";
-import SectionSubtitle from "../shared/section-subtitle";
-import SectionTitle from "../shared/section-title";
-import SortSelect from "../shared/sort-select";
-import ProductCard from "./product-card/product-card";
+import LastSeenSkeleton from "./skeleton/last-seen-skeleton";
+import { useLastSeen } from "@/features/last-seen/hooks/use-last-seen";
+import Section from "@/components/shared/section";
+import Container from "@/components/shared/container";
+import SectionSubtitle from "@/components/shared/section-subtitle";
+import SectionTitle from "@/components/shared/section-title";
+import SortSelect from "@/components/shared/sort-select";
+import ProductCard from "@/components/widgets/product-card/product-card";
 
-export default function LastSeenSection() {
+export default function LastSeenClient() {
     const { data: favorites = {} } = useFavorites();
-    const { lastSeenIds, lastSeenItems } = useLastSeen();
+    const { data: products = [], isPending } = useLastSeen();
 
-    const orderedProducts = [...lastSeenIds]
-        .reverse()
-        .map((id) => lastSeenItems[id]);
+    if (isPending) {
+        return <LastSeenSkeleton />;
+    }
 
-    if (orderedProducts.length === 0) return null;
+    if (!products.length) return null;
 
     return (
         <Section>
@@ -31,7 +32,7 @@ export default function LastSeenSection() {
                         <SortSelect className="order-1 md:order-2" />
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 lg:gap-5">
-                        {orderedProducts.map((product) => {
+                        {products.map((product) => {
                             return (
                                 <ProductCard
                                     key={product.id}

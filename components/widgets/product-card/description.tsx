@@ -18,7 +18,7 @@ export default function Description({
     );
 
     return (
-        <div className="flex flex-col justify-between gap-3 px-3 pb-3">
+        <div className="flex flex-col gap-3 px-3 pb-3 h-[95px]">
             <div className="flex justify-between items-end">
                 <div className="flex items-end gap-1">
                     <span className="font-bold tracking-wide leading-md">

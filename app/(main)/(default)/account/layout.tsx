@@ -1,6 +1,6 @@
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
-import LastSeenSection from "@/components/widgets/last-seen-section";
+import LastSeenSection from "@/features/last-seen/components/last-seen-section";
 import { IAccountProps } from "@/types/account/account.types";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { queryKeys } from "@/lib/react-query/query-keys";
