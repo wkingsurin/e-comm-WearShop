@@ -1,50 +1,53 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toggleFavorite } from "../api/client";
-import { favoriteQueries } from "../api/queries";
+import { favoriteQueries } from "../query-options";
 
 export function useToggleFavorite() {
-	const queryClient = useQueryClient();
+    const queryClient = useQueryClient();
 
-	return useMutation({
-		mutationFn: toggleFavorite,
+    return useMutation({
+        mutationFn: toggleFavorite,
 
-		onMutate: async (prodictId: string) => {
-			await queryClient.cancelQueries({
-				queryKey: favoriteQueries.all().queryKey,
-			});
+        onMutate: async (prodictId: string) => {
+            await queryClient.cancelQueries({
+                queryKey: favoriteQueries.map().queryKey,
+            });
 
-			const previousFavorites =
-				queryClient.getQueryData<Record<string, boolean>>(
-					favoriteQueries.all().queryKey
-				) || {};
+            const previousFavorites =
+                queryClient.getQueryData<Record<string, boolean>>(
+                    favoriteQueries.map().queryKey,
+                ) || {};
 
-			const next = { ...previousFavorites };
+            const next = { ...previousFavorites };
 
-			if (next[prodictId]) {
-				delete next[prodictId];
-			} else {
-				next[prodictId] = true;
-			}
+            if (next[prodictId]) {
+                delete next[prodictId];
+            } else {
+                next[prodictId] = true;
+            }
 
-			queryClient.setQueryData(favoriteQueries.all().queryKey, next);
+            queryClient.setQueryData(favoriteQueries.map().queryKey, next);
 
-			return { previousFavorites };
-		},
+            return { previousFavorites };
+        },
 
-		onError: (err, productId, context) => {
-			if (context?.previousFavorites) {
-				queryClient.setQueryData(
-					favoriteQueries.all().queryKey,
-					context.previousFavorites
-				);
-			}
-		},
+        onError: (err, productId, context) => {
+            if (context?.previousFavorites) {
+                queryClient.setQueryData(
+                    favoriteQueries.map().queryKey,
+                    context.previousFavorites,
+                );
+            }
+        },
 
-		onSuccess: (data) => {
-			queryClient.setQueryData(favoriteQueries.all().queryKey, (prev = {}) => ({
-				...prev,
-				...data,
-			}));
-		},
-	});
+        onSuccess: (data) => {
+            queryClient.setQueryData(
+                favoriteQueries.map().queryKey,
+                (prev = {}) => ({
+                    ...prev,
+                    ...data,
+                }),
+            );
+        },
+    });
 }

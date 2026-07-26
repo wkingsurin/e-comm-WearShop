@@ -1,5 +1,6 @@
 export const queryKeys = {
     profile: ["profile"],
+    favoritesMap: ["favoritesMap"],
     favorites: ["favorites"],
     cart: ["cart"],
     checkout: ["checkout"],

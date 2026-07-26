@@ -1,15 +1,8 @@
 "use client";
 
-import { favoriteQueries } from "@/features/favorites/query-options";
 import { useQuery } from "@tanstack/react-query";
+import { favoriteQueries } from "../query-options";
 
 export function useFavorites() {
-	return useQuery(favoriteQueries.all());
-
-	// const query = useQuery(favoriteQueries.all());
-
-	// return {
-	// 	favoriteIds: query.data ?? {},
-	// 	...query,
-	// };
+    return useQuery(favoriteQueries.all());
 }
