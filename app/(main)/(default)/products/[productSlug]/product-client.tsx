@@ -12,7 +12,7 @@ import {
     getColorBySlug,
     getCurrentVariant,
 } from "@/lib/selectors/product.selectors";
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
+import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 import { MoveLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -30,7 +30,7 @@ export interface IDetails {
 }
 
 export default function ProductClient({ product }: IProps) {
-    const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavoritesMap();
 
     const searchParams = useSearchParams();
     const selectedColorSlug = searchParams.get("color");

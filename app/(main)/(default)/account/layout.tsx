@@ -12,25 +12,29 @@ import { EMPTY_USER_PROFILE } from "@/features/profile/constants";
 import getCurrentUser from "@/lib/auth/get-current-user";
 
 export default async function AccountLayout({ children }: IAccountProps) {
-    const user = await getCurrentUser();
+    // const user = await getCurrentUser();
 
-    const [profile, orders] = await Promise.all([
-        user ? getUserProfile(user.id) : Promise.resolve(EMPTY_USER_PROFILE),
-        user ? getOrders(user.id) : Promise.resolve(EMPTY_ORDERS),
-    ]);
+    // const [profile, orders] = await Promise.all([
+    //     user ? getUserProfile(user.id) : Promise.resolve(EMPTY_USER_PROFILE),
+    //     user ? getOrders(user.id) : Promise.resolve(EMPTY_ORDERS),
+    // ]);
 
-    const queryClient = getQueryClient();
+    // const queryClient = getQueryClient();
 
-    queryClient.setQueryData(queryKeys.profile, profile);
-    queryClient.setQueryData(queryKeys.orders(), orders);
+    // queryClient.invalidateQueries({ queryKey: queryKeys.favoritesMap });
+    // queryClient.invalidateQueries({ queryKey: queryKeys.favorites });
+    // queryClient.invalidateQueries({ queryKey: queryKeys.favoritesMap });
+    // queryClient.invalidateQueries({ queryKey: queryKeys.favoritesMap });
+    // queryClient.setQueryData(queryKeys.profile, profile);
+    // queryClient.setQueryData(queryKeys.orders(), orders);
 
     return (
         <>
             <Section>
                 <Container className="px-0! md:px-4!">
-                    <HydrationBoundary state={dehydrate(queryClient)}>
-                        {children}
-                    </HydrationBoundary>
+                    {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
+                    {children}
+                    {/* </HydrationBoundary> */}
                 </Container>
             </Section>
             <LastSeenSection />

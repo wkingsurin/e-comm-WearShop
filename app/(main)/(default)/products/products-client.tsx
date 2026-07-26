@@ -7,12 +7,12 @@ import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import Filters from "@/components/widgets/filters";
 import ProductCard from "@/components/widgets/product-card/product-card";
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
+import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 import { IProduct } from "@/types/store/ui.types";
 import { useState } from "react";
 
 export default function ProductsClient({ products }: { products: IProduct[] }) {
-    const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavoritesMap();
 
     const [openFilters, setOpenFilters] = useState<boolean>(false);
 

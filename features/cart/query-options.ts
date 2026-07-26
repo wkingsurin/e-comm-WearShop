@@ -3,9 +3,10 @@ import { queryOptions } from "@tanstack/react-query";
 import { getCart } from "./api/client";
 
 export const cartQueries = {
-	all: () =>
-		queryOptions({
-			queryKey: queryKeys.cart,
-			queryFn: getCart,
-		}),
+    all: () =>
+        queryOptions({
+            queryKey: queryKeys.cart,
+            queryFn: getCart,
+            staleTime: 5 * 60 * 1000,
+        }),
 };

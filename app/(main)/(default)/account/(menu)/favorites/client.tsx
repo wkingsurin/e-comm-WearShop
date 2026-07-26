@@ -6,22 +6,14 @@ import ProtectedState from "@/components/shared/protected-state";
 import ProductCard from "@/components/widgets/product-card/product-card";
 import FavoritesSkeleton from "@/features/favorites/components/skeleton/favorites-skeleton";
 import { useFavorites } from "@/features/favorites/hooks/use-favorites";
-import { IProduct } from "@/types/store/ui.types";
 import { Heart, Lock } from "lucide-react";
 import { useSession } from "next-auth/react";
 
-interface ClientProps {
-    products: IProduct[];
-}
-
-export function FavoritesClient({ products }: ClientProps) {
+export function FavoritesClient() {
     const session = useSession();
     const authorized = session.status === "authenticated";
 
-    const { data: favorites = {}, isPending } = useFavorites();
-    const favoriteProducts = products.filter(
-        (product) => favorites[product.id],
-    );
+    const { data: favorites = [], isPending } = useFavorites();
 
     if (!authorized) {
         return (
@@ -39,11 +31,11 @@ export function FavoritesClient({ products }: ClientProps) {
     return (
         <DashboardWrapper className="min-h-[534px] px-1! md:px-6!">
             <div
-                className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 lg:gap-5 ${favoriteProducts.length > 0 ? "h-auto" : "h-full"}`}
+                className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 lg:gap-5 ${favorites.length > 0 ? "h-auto" : "h-full"}`}
             >
-                {favoriteProducts.length !== 0 && (
+                {favorites.length !== 0 && (
                     <>
-                        {favoriteProducts.map((item) => {
+                        {favorites.map((item) => {
                             return (
                                 <ProductCard
                                     key={item.id}
@@ -55,7 +47,7 @@ export function FavoritesClient({ products }: ClientProps) {
                         })}
                     </>
                 )}
-                {favoriteProducts.length === 0 && (
+                {favorites.length === 0 && (
                     <Dummy icon={Heart} text="You haven`t favorites" />
                 )}
             </div>

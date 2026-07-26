@@ -1,6 +1,6 @@
 import { IOrder } from "@/types/account/orders/orders.types";
 import OrderItem from "./order-item";
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
+import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 import DummyItem from "./dummy-item";
 
 export default function OrderItems({
@@ -10,7 +10,7 @@ export default function OrderItems({
     data: IOrder["items"];
     currency: string;
 }) {
-    const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavoritesMap();
 
     const LIMIT_AMOUNT = 4;
 

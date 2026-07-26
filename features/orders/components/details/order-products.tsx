@@ -1,4 +1,4 @@
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
+import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 import { IOrder, IOrderItem } from "@/types/account/orders/orders.types";
 import OrderItem from "./order-item";
 
@@ -8,7 +8,7 @@ interface IProps {
 }
 
 export default function OrderProducts({ items, currency }: IProps) {
-    const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavoritesMap();
 
     return (
         <div className="flex flex-col gap-4 w-full rounded-xl bg-[#F8F9FA] px-3 py-6 md:p-6">

@@ -1,5 +1,5 @@
+import { getProduct } from "@/lib/get-product";
 import ProductClient from "./product-client";
-import { getProduct } from "../../../../../lib/get-product";
 import LastSeenSection from "@/features/last-seen/components/last-seen-section";
 
 interface IProps {

@@ -1,6 +1,5 @@
 "use client";
 
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
 import LastSeenSkeleton from "./skeleton/last-seen-skeleton";
 import { useLastSeen } from "@/features/last-seen/hooks/use-last-seen";
 import Section from "@/components/shared/section";
@@ -9,9 +8,10 @@ import SectionSubtitle from "@/components/shared/section-subtitle";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
+import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 
 export default function LastSeenClient() {
-    const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavoritesMap();
     const { data: products = [], isPending } = useLastSeen();
 
     if (isPending) {

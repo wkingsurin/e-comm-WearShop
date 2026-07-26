@@ -5,11 +5,11 @@ import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
-import { useFavorites } from "@/features/favorites/hooks/use-favorites";
+import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 import { IProduct } from "@/types/store/ui.types";
 
 export default function TShirtsClient({ products }: { products: IProduct[] }) {
-    const { data: favorites = {} } = useFavorites();
+    const { data: favorites = {} } = useFavoritesMap();
 
     return (
         <Section>
