@@ -65,7 +65,8 @@ export const ModelName = {
   Cart: 'Cart',
   CartItem: 'CartItem',
   ProductColor: 'ProductColor',
-  Checkout: 'Checkout'
+  Checkout: 'Checkout',
+  LastSeenProduct: 'LastSeenProduct'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -283,6 +284,16 @@ export const CheckoutScalarFieldEnum = {
 } as const
 
 export type CheckoutScalarFieldEnum = (typeof CheckoutScalarFieldEnum)[keyof typeof CheckoutScalarFieldEnum]
+
+
+export const LastSeenProductScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  viewedAt: 'viewedAt'
+} as const
+
+export type LastSeenProductScalarFieldEnum = (typeof LastSeenProductScalarFieldEnum)[keyof typeof LastSeenProductScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -398,7 +398,8 @@ export const ModelName = {
   Cart: 'Cart',
   CartItem: 'CartItem',
   ProductColor: 'ProductColor',
-  Checkout: 'Checkout'
+  Checkout: 'Checkout',
+  LastSeenProduct: 'LastSeenProduct'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "brand" | "product" | "category" | "favorite" | "user" | "userAddress" | "productImage" | "order" | "orderItem" | "variant" | "verificationToken" | "cart" | "cartItem" | "productColor" | "checkout"
+    modelProps: "brand" | "product" | "category" | "favorite" | "user" | "userAddress" | "productImage" | "order" | "orderItem" | "variant" | "verificationToken" | "cart" | "cartItem" | "productColor" | "checkout" | "lastSeenProduct"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1528,6 +1529,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LastSeenProduct: {
+      payload: Prisma.$LastSeenProductPayload<ExtArgs>
+      fields: Prisma.LastSeenProductFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LastSeenProductFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LastSeenProductFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>
+        }
+        findFirst: {
+          args: Prisma.LastSeenProductFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LastSeenProductFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>
+        }
+        findMany: {
+          args: Prisma.LastSeenProductFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>[]
+        }
+        create: {
+          args: Prisma.LastSeenProductCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>
+        }
+        createMany: {
+          args: Prisma.LastSeenProductCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LastSeenProductCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>[]
+        }
+        delete: {
+          args: Prisma.LastSeenProductDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>
+        }
+        update: {
+          args: Prisma.LastSeenProductUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>
+        }
+        deleteMany: {
+          args: Prisma.LastSeenProductDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LastSeenProductUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LastSeenProductUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>[]
+        }
+        upsert: {
+          args: Prisma.LastSeenProductUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LastSeenProductPayload>
+        }
+        aggregate: {
+          args: Prisma.LastSeenProductAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLastSeenProduct>
+        }
+        groupBy: {
+          args: Prisma.LastSeenProductGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LastSeenProductGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LastSeenProductCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LastSeenProductCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1766,6 +1841,16 @@ export const CheckoutScalarFieldEnum = {
 } as const
 
 export type CheckoutScalarFieldEnum = (typeof CheckoutScalarFieldEnum)[keyof typeof CheckoutScalarFieldEnum]
+
+
+export const LastSeenProductScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  productId: 'productId',
+  viewedAt: 'viewedAt'
+} as const
+
+export type LastSeenProductScalarFieldEnum = (typeof LastSeenProductScalarFieldEnum)[keyof typeof LastSeenProductScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2041,6 +2126,7 @@ export type GlobalOmitConfig = {
   cartItem?: Prisma.CartItemOmit
   productColor?: Prisma.ProductColorOmit
   checkout?: Prisma.CheckoutOmit
+  lastSeenProduct?: Prisma.LastSeenProductOmit
 }
 
 /* Types for Logging */

@@ -116,3 +116,8 @@ export type ProductColor = Prisma.ProductColorModel
  * 
  */
 export type Checkout = Prisma.CheckoutModel
+/**
+ * Model LastSeenProduct
+ * 
+ */
+export type LastSeenProduct = Prisma.LastSeenProductModel
