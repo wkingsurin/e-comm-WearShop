@@ -21,22 +21,11 @@ export default async function SuccessPage({ params }: IProps) {
 
     const { orderId } = await params;
 
-    const order = await getOrder(session.user.id, orderId);
-
-    const queryClient = getQueryClient();
-
-    queryClient.setQueryData(queryKeys.order(orderId), order);
-
     return (
-        <>
-            <Section>
-                <Container className="px-0! md:px-4!">
-                    <HydrationBoundary state={dehydrate(queryClient)}>
-                        <SuccessClient orderId={orderId} />
-                    </HydrationBoundary>
-                </Container>
-            </Section>
-            <LastSeenSection />
-        </>
+        <Section>
+            <Container className="px-0! md:px-4!">
+                <SuccessClient orderId={orderId} />
+            </Container>
+        </Section>
     );
 }

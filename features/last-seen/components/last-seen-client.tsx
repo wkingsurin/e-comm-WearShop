@@ -9,12 +9,21 @@ import SectionTitle from "@/components/shared/section-title";
 import SortSelect from "@/components/shared/sort-select";
 import ProductCard from "@/components/widgets/product-card/product-card";
 import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
+import { useSession } from "next-auth/react";
 
 export default function LastSeenClient() {
-    const { data: favorites = {} } = useFavoritesMap();
-    const { data: products = [], isPending } = useLastSeen();
+    const { status } = useSession();
 
-    if (isPending) {
+    if (status === "unauthenticated") {
+        return null;
+    }
+
+    const { data: favorites = {}, isPending: isPendingFavorties } =
+        useFavoritesMap();
+    const { data: products = [], isPending: isPenadingLastSeen } =
+        useLastSeen();
+
+    if (isPendingFavorties || isPenadingLastSeen) {
         return <LastSeenSkeleton />;
     }
 

@@ -10,12 +10,12 @@ export default function ProfileCardSkeleton() {
             <div className="flex flex-col items-start gap-4">
                 <div className="flex gap-3 items-center">
                     <Skeleton className="w-7 h-7" />
-                    <Skeleton className="w-[calc(100%-28px-12px)] h-5" />
+                    <Skeleton className="w-30 h-5" />
                 </div>
 
                 <div className="flex gap-3 items-center">
                     <Skeleton className="w-7 h-7" />
-                    <Skeleton className="w-[calc(100%-28px-12px)] h-5" />
+                    <Skeleton className="w-30 h-5" />
                 </div>
                 <Skeleton className="w-20 h-6" />
             </div>

@@ -8,8 +8,12 @@ export default function OrderPageSkeleton() {
     return (
         <div className="relative flex flex-col md:flex-row items-start gap-5 w-full">
             <DashboardWrapper
-                className="w-full md:w-[65%] px-1! md:px-6!"
-                pageTitle={<Skeleton className="w-[140px] h-4" />}
+                className="w-full md:w-[65%] px-1! md:px-6! hover:shadow-none"
+                pageTitle={
+                    <div className="px-2">
+                        <Skeleton className="w-[140px] h-4" />
+                    </div>
+                }
             >
                 <OrderContentSkeleton />
             </DashboardWrapper>

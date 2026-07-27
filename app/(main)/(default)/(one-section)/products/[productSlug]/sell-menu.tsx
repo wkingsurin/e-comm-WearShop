@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { Minus, Plus, ShoppingBag, Truck } from "lucide-react";
+import { ShoppingBag, Truck } from "lucide-react";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 import HeartButton from "@/components/shared/heart-button";
 import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
-import { mapProductToCartItem } from "@/app/mappers/mapper";
 import { getItemPrices } from "@/lib/money/get-item-price";
 import Counter from "@/components/shared/counter";
 import { ICartItem } from "@/features/cart/types";

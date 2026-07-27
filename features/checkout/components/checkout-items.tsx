@@ -1,7 +1,7 @@
 import { ICartItem } from "@/features/cart/types";
-import OrderItem from "./order-item";
+import CheckoutItem from "./checkout-item";
 
-export default function OrderItems({
+export default function CheckoutItems({
     items,
     isEmpty,
 }: {
@@ -10,11 +10,9 @@ export default function OrderItems({
 }) {
     return (
         !isEmpty && (
-            <div
-                className={`flex gap-3 ${items.length > 5 && "justify-center"}`}
-            >
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
                 {items.map((item) => (
-                    <OrderItem key={item.id} item={item} />
+                    <CheckoutItem key={item.id} item={item} />
                 ))}
             </div>
         )

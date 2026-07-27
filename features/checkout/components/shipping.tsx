@@ -3,7 +3,6 @@
 import { Button } from "@/components/ui/button";
 import ShippingForm from "@/features/checkout/components/shipping-form/form";
 import { useUIStore } from "@/lib/store/ui.store";
-import { IOrderCustomer } from "@/types/account/orders/orders.types";
 import { Clock4, MapPin, Truck, User } from "lucide-react";
 
 export default function Shipping({

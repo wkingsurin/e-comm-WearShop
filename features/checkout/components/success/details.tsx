@@ -35,7 +35,7 @@ export default function Details({ order }: IProps) {
                     View order
                 </Link>
                 <Link
-                    href="/categories"
+                    href="/products"
                     className="flex items-center justify-center basis-1/2 h-10 bg-transparent font-mono text-black rounded-md border border-black hover:bg-black hover:text-white transition-brand"
                 >
                     Continue shopping
