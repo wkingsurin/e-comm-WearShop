@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getFavorites, getFavoritesMap } from "./api/client";
-import { queryKeys } from "../../lib/react-query/query-keys";
+import { queryKeys } from "@/lib/react-query/query-keys";
 
 export const favoriteQueries = {
     map: () =>

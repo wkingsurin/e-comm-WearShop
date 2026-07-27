@@ -3,7 +3,7 @@ import PriceListSkeleton from "./price-list-skeleton";
 import TotalPriceSkeleton from "./total-price-skeleton";
 
 interface IProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 export default function SummarySkeleton({ children }: IProps) {

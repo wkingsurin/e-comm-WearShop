@@ -11,13 +11,14 @@ export function useCreateOrder() {
     return useMutation({
         mutationFn: createOrder,
         onSuccess: (order) => {
+            router.push(`/checkout/success/${order.id}`);
+
             queryClient.setQueryData(queryKeys.cart, EMPTY_CART);
 
             queryClient.invalidateQueries({ queryKey: queryKeys.orders() });
 
             queryClient.invalidateQueries({ queryKey: queryKeys.checkout });
 
-            router.push(`/checkout/success/${order.id}`);
         },
     });
 }

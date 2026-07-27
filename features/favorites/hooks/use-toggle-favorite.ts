@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toggleFavorite } from "../api/client";
 import { favoriteQueries } from "../query-options";
+import { queryKeys } from "@/lib/react-query/query-keys";
 
 export function useToggleFavorite() {
     const queryClient = useQueryClient();
@@ -41,13 +42,9 @@ export function useToggleFavorite() {
         },
 
         onSuccess: (data) => {
-            queryClient.setQueryData(
-                favoriteQueries.map().queryKey,
-                (prev = {}) => ({
-                    ...prev,
-                    ...data,
-                }),
-            );
+            queryClient.invalidateQueries({ queryKey: queryKeys.favoritesMap });
+
+            queryClient.invalidateQueries({ queryKey: queryKeys.favorites });
         },
     });
 }

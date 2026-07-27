@@ -3,7 +3,7 @@ import { prisma } from "../../../lib/prisma";
 import { FavoriteMap } from "../types";
 import { mapProduct } from "@/app/mappers/map-product";
 
-export async function getFavoriteMap(userId: string) {
+export async function getFavoritesMap(userId: string) {
     const favorites = await prisma.favorite.findMany({
         where: { userId },
         select: { productId: true },

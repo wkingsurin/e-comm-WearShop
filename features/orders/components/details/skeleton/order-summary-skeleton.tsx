@@ -4,7 +4,7 @@ import SummarySkeleton from "@/components/widgets/summary/skeleton/summary-skele
 export default function OrderSummarySkeleton() {
     return (
         <SummarySkeleton>
-            <Skeleton className="w-full h-[50px]" />
+            {/* <Skeleton className="w-full h-[50px]" /> */}
         </SummarySkeleton>
     );
 }

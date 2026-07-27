@@ -9,7 +9,7 @@ export default function PriceLabel({ label, value }: IProps) {
     const { formattedPrice } = getItemPrices(value, value);
 
     return (
-        <div className="flex justify-between tracking-wider leading-lg">
+        <div className="flex justify-between tracking-wider leading-5">
             <span>{label}</span>
             <p className="font-bold">
                 {formattedPrice}

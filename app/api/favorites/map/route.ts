@@ -1,5 +1,5 @@
 import { auth } from "@/auth";
-import { getFavoriteMap } from "@/features/favorites/services/favorites.service";
+import { getFavoritesMap } from "@/features/favorites/services/favorites.service";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -9,7 +9,7 @@ export async function GET() {
 		return NextResponse.json({});
 	}
 
-	const favorites = await getFavoriteMap(session.user.id);
+	const favorites = await getFavoritesMap(session.user.id);
 
 	return NextResponse.json(favorites);
 }

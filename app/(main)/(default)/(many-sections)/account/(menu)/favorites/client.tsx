@@ -28,8 +28,6 @@ export function FavoritesClient() {
         return <FavoritesSkeleton />;
     }
 
-    console.log(`[favorites]:`, favorites);
-
     return (
         <DashboardWrapper className="min-h-[534px] px-1! md:px-6!">
             <div

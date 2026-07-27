@@ -35,7 +35,7 @@ export default function OrderPageClient({ orderId }: { orderId: string }) {
             <DashboardWrapper
                 className="w-full md:w-[65%] px-1! md:px-6!"
                 pageTitle={
-                    <span className="text-sm font-medium leading-lg tracking-wider text-black/25 px-2">
+                    <span className="text-sm font-medium leading-4 tracking-wider text-black/25 px-2">
                         ID {order.orderNumber.split("-")[1]}
                     </span>
                 }
