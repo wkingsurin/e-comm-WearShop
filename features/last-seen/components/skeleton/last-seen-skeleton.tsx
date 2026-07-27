@@ -1,9 +1,16 @@
-import Container from "../../../../components/shared/container";
-import Section from "../../../../components/shared/section";
-import Skeleton from "../../../../components/shared/skeleton";
-import ProductCardSkeleton from "../../../../components/widgets/product-card/skeleton/product-card-skeleton";
+import Container from "@/components/shared/container";
+import Section from "@/components/shared/section";
+import Skeleton from "@/components/shared/skeleton";
+import ProductCardSkeleton from "@/components/widgets/product-card/skeleton/product-card-skeleton";
+import { useSession } from "next-auth/react";
 
 export default function LastSeenSkeleton() {
+    const { status } = useSession();
+
+    if (status === "unauthenticated") {
+        return null;
+    }
+
     return (
         <Section>
             <Container className="h-[441px]">

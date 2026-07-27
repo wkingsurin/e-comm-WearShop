@@ -14,14 +14,14 @@ import { useSession } from "next-auth/react";
 export default function LastSeenClient() {
     const { status } = useSession();
 
-    if (status === "unauthenticated") {
-        return null;
-    }
-
     const { data: favorites = {}, isPending: isPendingFavorties } =
         useFavoritesMap();
     const { data: products = [], isPending: isPenadingLastSeen } =
         useLastSeen();
+
+    if (status === "unauthenticated") {
+        return null;
+    }
 
     if (isPendingFavorties || isPenadingLastSeen) {
         return <LastSeenSkeleton />;

@@ -17,7 +17,7 @@ export default function ProtectedState({
     const Icon = icon;
 
     return (
-        <div className="col-span-full flex flex-col justify-center items-center gap-2 w-full md:w-[480px] h-[280px] bg-white rounded-xl p-6 hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
+        <div className="col-span-full flex flex-col justify-center items-center gap-2 w-full md:w-[480px] h-[280px] bg-white rounded-xl p-6">
             <div className="flex flex-col items-center gap-3 font-medium tracking-wider">
                 <Icon className="size-6 stroke-[1px]" />
                 {title ? title : "Sign in to view page"}

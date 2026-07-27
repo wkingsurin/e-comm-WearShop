@@ -25,10 +25,14 @@ export default function CartClient({
 
     if (!authorized) {
         return (
-            <ProtectedState
-                icon={Lock}
-                description="Save your cart, track your orders and checkout faster."
-            />
+            <div
+                className={`flex ${!authorized && "items-center justify-center min-h-[598px]"} w-full`}
+            >
+                <ProtectedState
+                    icon={Lock}
+                    description="Save your cart, track your orders and checkout faster."
+                />
+            </div>
         );
     }
 
@@ -38,9 +42,9 @@ export default function CartClient({
 
     return (
         <div
-            className={`relative flex flex-col md:flex-row items-start gap-5 ${!authorized && "items-center! justify-center"} min-h-[598px]`}
+            className={`relative flex flex-col md:flex-row items-start gap-5 ${!authorized && "items-center! justify-center"}`}
         >
-            <DashboardWrapper className="min-h-[598px] md:w-[65%]">
+            <DashboardWrapper className="md:w-[65%]">
                 {cart.totalItems > 0 && (
                     <div className="flex flex-col gap-4 flex-1 [&>*:not(:last-child)]:border-b [&>*:not(:last-child)]:pb-4">
                         {items.map((item) => (
