@@ -30,7 +30,7 @@ export default function OrdersClient() {
     }
 
     return (
-        <DashboardWrapper className="min-h-[534px] px-1! md:px-6!">
+        <DashboardWrapper className="px-1! md:px-6!">
             {orders.length > 0 && (
                 <>
                     {orders.map((order) => {

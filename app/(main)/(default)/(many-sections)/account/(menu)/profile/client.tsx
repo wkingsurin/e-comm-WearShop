@@ -63,7 +63,7 @@ export default function ProfileClient() {
     }
 
     return (
-        <DashboardWrapper className="min-h-auto px-1! md:px-6! min-h-[598px]!">
+        <DashboardWrapper className="px-1! md:px-6!">
             <ProfileCard title="Personal information">
                 <div className="flex flex-col items-start gap-4">
                     <div className="flex gap-3 items-center">

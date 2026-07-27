@@ -29,7 +29,7 @@ export function FavoritesClient() {
     }
 
     return (
-        <DashboardWrapper className="min-h-[534px] px-1! md:px-6!">
+        <DashboardWrapper className="px-1! md:px-6!">
             <div
                 className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1 lg:gap-5 ${favorites.length > 0 ? "h-auto" : "h-full"}`}
             >
