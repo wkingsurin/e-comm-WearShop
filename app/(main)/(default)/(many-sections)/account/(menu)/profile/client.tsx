@@ -11,10 +11,21 @@ import { EMPTY_USER_PROFILE } from "@/features/profile/constants";
 import useUserProfile from "@/features/profile/hooks/use-user-profile";
 import ValidAddress from "@/features/profile/validate-address";
 import { useUIStore } from "@/lib/store/ui.store";
-import { Globe, Lock, Mail, MapPinHouse, Pen, UserRound } from "lucide-react";
-import { useSession } from "next-auth/react";
+import {
+    Globe,
+    Lock,
+    LogOut,
+    Mail,
+    MapPinHouse,
+    Pen,
+    UserRound,
+} from "lucide-react";
+import { signOut, useSession } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 
 export default function ProfileClient() {
+    const router = useRouter();
+
     const session = useSession();
     const authorized = session.status === "authenticated";
 
@@ -137,6 +148,20 @@ export default function ProfileClient() {
                     </Button>
                 </div>
             </ProfileCard>
+            <Button
+                variant="link"
+                className="md:hidden group/log-out flex justify-start gap-3 w-full h-[50px] px-3 rounded-xl bg-[#F51E1E]/10 transition duration-100 no-underline! cursor-pointer"
+                onClick={async () => {
+                    await signOut({ redirect: false });
+                    router.refresh();
+                    redirect("/auth");
+                }}
+            >
+                <LogOut className="size-5 stroke-[1.5px] stroke-[#F51E1E]" />
+                <p className="font-mono tracking-wide text-[#F51E1E]/75">
+                    Sign out
+                </p>
+            </Button>
         </DashboardWrapper>
     );
 }
