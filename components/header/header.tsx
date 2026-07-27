@@ -13,7 +13,9 @@ export default function Header() {
                 <div className="flex flex-col gap-5 py-[5px] md:pt-[30px] md:pb-[20px]">
                     <div className="flex flex-col md:flex-row justify-between gap-5 md:gap-[50px]">
                         <div className="flex flex-col md:flex-row items-center gap-6 flex-1">
-                            <Logo />
+                            <div className="hidden md:block">
+                                <Logo />
+                            </div>
                             <Search />
                         </div>
                         <UtilityNav />

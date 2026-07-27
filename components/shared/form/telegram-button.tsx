@@ -22,7 +22,7 @@ export default function TelegramButton() {
 	}, []);
 
 	return (
-		<div className="flex flex-col items-center justify-center w-full mt-4 border-t pt-4 border-black/5">
+		<div className="flex flex-col items-center justify-center max-w-[480px] w-full rounded-xl bg-white p-6">
 			<p className="text-xs text-black/40 mb-3 uppercase tracking-wider font-medium">
 				Or sign in with
 			</p>

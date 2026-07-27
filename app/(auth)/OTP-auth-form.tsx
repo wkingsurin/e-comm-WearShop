@@ -119,7 +119,7 @@ export default function OTPAuthForm() {
 	}, [methods.formState.errors]);
 
 	return (
-		<div className="relative flex flex-col items-center w-full">
+		<div className="relative flex flex-col gap-5 items-center w-full">
 			{serverError && (
 				<p className="absolute -top-8 text-red-500 text-center text-sm font-medium">
 					{serverError}
@@ -127,7 +127,7 @@ export default function OTPAuthForm() {
 			)}
 			<FormProvider {...methods}>
 				<Form onSubmit={methods.handleSubmit(onSubmit)}>
-					<div className="flex flex-col items-center gap-10 max-w-[480px] w-full p-6 rounded-xl bg-[#E5E7EB]/25 border border-[#E5E7EB]">
+					<div className="flex flex-col items-center gap-10 max-w-[480px] w-full p-6 rounded-xl bg-white">
 						<div className="flex flex-col items-center gap-4 w-full">
 							<span className="text-lg text-center font-medium leading-md tracking-wider">
 								{step === 1 ? "SIGN IN / REGISTRATION" : "CONFIRMATION"}
