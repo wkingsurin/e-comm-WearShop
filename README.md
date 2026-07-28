@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Проект разработан полностью самостоятельно в качестве pet-project. Основная цель - построить максимально приближенный к коммерческой разработке интернет-магазин с совеременной архитектурой, использованием Server Components, React Query, Prisma, Next.js App Router.
 
-## Getting Started
+# E-Commerce MVP
 
-First, run the development server:
+Полноценный интернет-магазин, разработанный на **Next.js 15 (AppRouter)**, **React**, **Typescript**, **Prisma**, **PostgreSQL**, **ReactQuery** и **NextAuth**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Основной функционал
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Авторизация:
+    - OTP авторизация по Email
+    - Автоматическая регистрация нового пользователя
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![Страница авторизации](./public/about/sign-in.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Каталог товаров
+    - Поиск товаров
+    - Категории
+    - Быстрый просмотр товара
+    - Выбор варианта товара
+    - Добавление в корзину
+    - Добавление в избранное
 
-## Learn More
+![Главная страница](./public/about/main.png)
 
-To learn more about Next.js, take a look at the following resources:
+### Страница товара
+    - Галерея изображений
+    - Выбор цвета
+    - Выбор размера
+    - Выбор количества
+    - Добавление в корзину
+    - Добавление в избранное
+    - Последние просмотренные товары
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Страница товара](./public/about/product-page.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Корзина
+    - Добавление товара
+    - Изменение количества
+    - Удаление товаров
+    - Автоматический пересчёт стоимости
+    - Итоговая стоимость заказа
+    - Переход к оформлению
 
-## Deploy on Vercel
+![Корзина](./public/about/cart.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Оформление заказа
+    - Просмотр состава заказа
+    - Выбор способа оплаты
+    - ВЫбор способа доставки
+    - Редактирование адреса доставки
+    - Оплата заказа
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+![Оформление заказа](./public/about/checkout.png)
+
+### Заказы
+    - История заказов
+    - Детальная информация
+    - Статус заказа
+    - Просмотр товаров
+    - Отмена заказа (до обработки)
+    - Изменение адреса (до обработки)
+
+![Страница заказов](./public/about/orders.png)
+
+### Избранное
+    - Добавление товара
+    - Удаление товара
+    - Список всех избранных товаров
+
+![Страница избранного](./public/about/favorites.png)
+
+### Профиль
+    - Редактирование персональной информации
+    - Базовый адрес доставки
+
+![Профиль](./public/about/profile.png)
+
+## Дополнительные возможности
+    - Последние просмотренные товары
+    - Полностью адаптивный интерфейс
+    - Skeleton загрузка
+    - Оптимистичные обновления (Optimistic UI)
+    - React Query кеширование
+    - Server components + Client components
+    - Server actions
+    - Поддержка гостевого режима с переносом данных после авторизации
+
+## Используемые технолгии
+    - Next.js (App Router)
+    - React
+    - Typescript
+    - Prisma ORM
+    - RostgreSQL
+    - React Query
+    - NextAuth
+    - Zustand
+    - Tailwind v4
+    - Shadcn UI
+
+## Архитектурные особенности
+
+Во время разработки особое внимание уделялось:
+    - разделению сервеной и клиентской логики;
+    - артихектуре приложения;
+    - производительности;
+    - оптимизации запросов;
+    - кешированию данных;
+    - UX и плавности интерфейса.
+
+## Демо
+
+Vercel:
+https://www.code8d.ru/
+
+> Для просмотра из РФ может потробоваться VPN.
