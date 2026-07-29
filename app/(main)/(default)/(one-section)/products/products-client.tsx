@@ -31,10 +31,10 @@ export default function ProductsClient({ products }: { products: IProduct[] }) {
                                 ({products.length})
                             </span>
                         </div>
-                        <div className="flex order-1 lg:order-2 gap-3 w-full md:w-auto lg:absolute lg:-top-[12px] right-0">
+                        {/* <div className="flex order-1 lg:order-2 gap-3 w-full md:w-auto lg:absolute lg:-top-[12px] right-0">
                             <SortSelect />
                             <FiltersButton onOpenFilters={onOpenFilters} />
-                        </div>
+                        </div> */}
                     </div>
                     {openFilters && <Filters />}
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 lg:gap-5">

@@ -38,7 +38,7 @@ export default function LastSeenClient() {
                             <SectionSubtitle>You See</SectionSubtitle>
                             <SectionTitle>Last seen products</SectionTitle>
                         </div>
-                        <SortSelect className="order-1 md:order-2" />
+                        {/* <SortSelect className="order-1 md:order-2" /> */}
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 lg:gap-5">
                         {products.map((product) => {

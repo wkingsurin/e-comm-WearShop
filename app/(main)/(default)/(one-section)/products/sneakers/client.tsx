@@ -22,7 +22,7 @@ export default function SneakersClient({ products }: { products: IProduct[] }) {
                                 ({products.length})
                             </span>
                         </div>
-                        <SortSelect className="flex order-1 lg:order-2 gap-3 lg:absolute lg:-top-[12px] right-0" />
+                        {/* <SortSelect className="flex order-1 lg:order-2 gap-3 lg:absolute lg:-top-[12px] right-0" /> */}
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 lg:gap-5">
                         {products.map((item) => (
