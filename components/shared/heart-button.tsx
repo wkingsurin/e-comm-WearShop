@@ -7,6 +7,7 @@ import { useUIStore } from "@/lib/store/ui.store";
 import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function HeartButton({
     productId,
@@ -16,6 +17,8 @@ export default function HeartButton({
 }: IHeartButtonProps) {
     const session = useSession();
     const unauthorized = session.status === "unauthenticated";
+
+    const router = useRouter();
 
     const { mutate: toggle, isPending } = useToggleFavorite();
 
@@ -44,8 +47,6 @@ export default function HeartButton({
         });
     };
 
-    const openDialog = useUIStore((s) => s.openDialog);
-
     return (
         <Button
             size="icon-lg"
@@ -60,21 +61,11 @@ export default function HeartButton({
                 e.stopPropagation();
 
                 if (unauthorized) {
-                    openDialog({
-                        title: "Sing in to save favorite",
-                        content: (
-                            <div className="flex w-full h-full">
-                                <Link
-                                    href="/auth"
-                                    className="flex items-center justify-center w-full md:w-[240px]! h-10 bg-black rounded-md text-white"
-                                    onClick={() => {
-                                        useUIStore.getState().clearDialog();
-                                    }}
-                                >
-                                    Sign in
-                                </Link>
-                            </div>
-                        ),
+                    openConfirm({
+                        title: "Open the login page?",
+                        content: "Please sign in to save the item to your favorites.",
+                        onConfirm: () => router.push("/auth"),
+                        confirmText: 'Open auth'
                     });
                     return;
                 }

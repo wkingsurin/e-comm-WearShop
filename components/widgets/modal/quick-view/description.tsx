@@ -11,6 +11,8 @@ import { useMemo } from "react";
 import SizeSelector from "../../size-selector/size-selector";
 import { getItemPrices } from "@/lib/money/get-item-price";
 import Counter from "@/components/shared/counter";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Description({
     product,
@@ -34,6 +36,10 @@ export default function Description({
     decrementQuantity: () => void;
     incrementQuantity: () => void;
 }) {
+    const { status } = useSession();
+
+    const router = useRouter();
+
     const { formattedPrice } = getItemPrices(
         currentVariant.price,
         currentVariant.oldPrice!,
@@ -122,13 +128,23 @@ export default function Description({
                         <Button
                             className="flex-1 bg-black"
                             disabled={selectedSize === "" ? true : false}
-                            onClick={() =>
-                                addToCart({
-                                    variantId: currentVariant.id,
-                                    quantity,
-                                    item: itemToCart,
-                                })
-                            }
+                            onClick={() => {
+                                if (status === "authenticated") {
+                                    addToCart({
+                                        variantId: currentVariant.id,
+                                        quantity,
+                                        item: itemToCart,
+                                    });
+                                }
+
+                                useUIStore.getState().openConfirm({
+                                    title: "Open the login page?",
+                                    content:
+                                        "Please sign in to add the item to your cart.",
+                                    onConfirm: () => router.push("/auth"),
+                                    confirmText: "Open auth",
+                                });
+                            }}
                         >
                             <ShoppingBag className="size-4 stroke-[1px]" />
                             Add
