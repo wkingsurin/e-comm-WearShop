@@ -4,6 +4,7 @@ import { ICheckout } from "@/features/checkout/types";
 import { useUpdateCheckout } from "@/features/checkout/hooks/use-update-checkout";
 import { DeliveryMethod as DELIVERY_METHOD } from "@/prisma/generated/prisma/enums";
 import DeliveryMethod from "./delivery-method";
+import { MapPinned, PackageCheck, Truck } from "lucide-react";
 
 export default function DeliverySelector({
     method,
@@ -17,19 +18,19 @@ export default function DeliverySelector({
             id: "1",
             label: "Courier",
             value: DELIVERY_METHOD.COURIER,
-            image: "./payments/image-pay-1.png",
+            icon: Truck,
         },
         {
             id: "2",
             label: "Pick up",
             value: DELIVERY_METHOD.PICKUP,
-            image: "./payments/image-pay-card.png",
+            icon: MapPinned,
         },
         {
             id: "3",
             label: "Post",
             value: DELIVERY_METHOD.POST,
-            image: "./payments/image-pay-3.png",
+            icon: PackageCheck,
         },
     ];
 

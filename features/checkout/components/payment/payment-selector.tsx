@@ -17,19 +17,19 @@ export default function PaymentSelector({
             id: "1",
             label: "PayPal",
             value: PAYMENT_METHOD.PAYPAL,
-            image: "./payments/image-pay-1.png",
+            image: "payments/image-pay-1.png",
         },
         {
             id: "2",
             label: "Visa / Mastercard",
             value: PAYMENT_METHOD.CARD,
-            image: "./payments/image-pay-card.png",
+            image: "payments/image-pay-card.png",
         },
         {
             id: "3",
             label: "Cash",
             value: PAYMENT_METHOD.CASH,
-            image: "./payments/image-pay-3.png",
+            image: "payments/image-pay-3.png",
         },
     ];
 
