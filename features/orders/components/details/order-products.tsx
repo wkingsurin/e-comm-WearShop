@@ -19,7 +19,7 @@ export default function OrderProducts({ items, currency }: IProps) {
                 {items.map((item) => {
                     const colorSize =
                         item.selectedSize.toLowerCase() === "one-size"
-                            ? item.selectedColor
+                            ? `${item.selectedColor} · x${item.quantity}`
                             : `${item.selectedColor} · ${item.selectedSize} · x${item.quantity}`;
 
                     return (
