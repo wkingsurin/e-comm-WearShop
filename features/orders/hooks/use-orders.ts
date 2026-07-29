@@ -1,6 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { orderQueries } from "../query-options";
 
-export function useOrders() {
-	return useQuery(orderQueries.all());
+interface IProps {
+    enabled?: boolean;
+}
+
+export function useOrders({ enabled = true }: IProps = {}) {
+    return useQuery({ ...orderQueries.all(), enabled });
 }

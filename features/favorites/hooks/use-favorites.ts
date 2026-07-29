@@ -3,6 +3,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { favoriteQueries } from "../query-options";
 
-export function useFavorites() {
-    return useQuery(favoriteQueries.all());
+interface IProps {
+    enabled?: boolean;
+}
+
+export function useFavorites({ enabled = true }: IProps = {}) {
+    return useQuery({ ...favoriteQueries.all(), enabled });
 }

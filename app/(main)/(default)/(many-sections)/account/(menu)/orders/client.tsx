@@ -14,7 +14,9 @@ export default function OrdersClient() {
     const session = useSession();
     const authorized = session.status === "authenticated";
 
-    const { data: orders = EMPTY_ORDERS, isPending } = useOrders();
+    const { data: orders = EMPTY_ORDERS, isPending } = useOrders({
+        enabled: authorized,
+    });
 
     if (!authorized) {
         return (
@@ -26,7 +28,7 @@ export default function OrdersClient() {
     }
 
     if (isPending) {
-        return <OrdersSkeleton />
+        return <OrdersSkeleton />;
     }
 
     return (
