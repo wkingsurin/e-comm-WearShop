@@ -79,7 +79,7 @@ export default function Description({
                         {formattedPrice}
                     </span>
                     <Link
-                        href={`/product/${product.id}/${product.variants[0].id}`}
+                        href={`/products/${product.slug}?color=${selectedColorSlug}&size=${selectedSize}`}
                         className="text-lg font-medium uppercase tracking-wider leading-md hover:underline"
                         onClick={() => {
                             useUIStore
