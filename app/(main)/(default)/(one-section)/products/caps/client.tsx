@@ -9,7 +9,7 @@ import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 import { IProduct } from "@/types/store/ui.types";
 
 export default function CapsClient({ products }: { products: IProduct[] }) {
-    const { data: favorites = {} } = useFavoritesMap();
+    const { data: favorites = {}, isPending } = useFavoritesMap();
 
     return (
         <Section>
@@ -30,6 +30,7 @@ export default function CapsClient({ products }: { products: IProduct[] }) {
                                 key={item.id}
                                 data={item}
                                 isFavorite={!!favorites[item.id]}
+                                isPendingFavorite={isPending}
                             />
                         ))}
                     </div>

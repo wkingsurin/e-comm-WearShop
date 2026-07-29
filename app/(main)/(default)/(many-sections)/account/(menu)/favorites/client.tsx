@@ -42,6 +42,7 @@ export function FavoritesClient() {
                                     data={item}
                                     isFavorite={true}
                                     type="Favorite"
+                                    isPendingFavorite={false}
                                 />
                             );
                         })}

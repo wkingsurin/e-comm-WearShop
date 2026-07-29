@@ -12,7 +12,7 @@ import { IProduct } from "@/types/store/ui.types";
 import { useState } from "react";
 
 export default function ProductsClient({ products }: { products: IProduct[] }) {
-    const { data: favorites = {} } = useFavoritesMap();
+    const { data: favorites = {}, isPending } = useFavoritesMap();
 
     const [openFilters, setOpenFilters] = useState<boolean>(false);
 
@@ -44,6 +44,7 @@ export default function ProductsClient({ products }: { products: IProduct[] }) {
                                     key={item.id}
                                     data={item}
                                     isFavorite={!!favorites[item.id]}
+                                    isPendingFavorite={isPending}
                                 />
                             );
                         })}

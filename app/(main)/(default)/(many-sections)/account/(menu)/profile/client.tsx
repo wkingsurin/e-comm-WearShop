@@ -10,6 +10,7 @@ import ProfileSkeleton from "@/features/profile/components/skeleton/profile-skel
 import { EMPTY_USER_PROFILE } from "@/features/profile/constants";
 import useUserProfile from "@/features/profile/hooks/use-user-profile";
 import ValidAddress from "@/features/profile/validate-address";
+import { getQueryClient } from "@/lib/react-query/get-query-client";
 import { useUIStore } from "@/lib/store/ui.store";
 import {
     Globe,
@@ -24,6 +25,8 @@ import { signOut, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 
 export default function ProfileClient() {
+    const queryClient = getQueryClient();
+
     const router = useRouter();
 
     const session = useSession();
@@ -153,8 +156,11 @@ export default function ProfileClient() {
                 className="md:hidden group/log-out flex justify-start gap-3 w-full h-[50px] px-3 rounded-xl bg-[#F51E1E]/10 transition duration-100 no-underline! cursor-pointer"
                 onClick={async () => {
                     await signOut({ redirect: false });
+
+                    queryClient.clear();
+
+                    router.replace("/auth");
                     router.refresh();
-                    redirect("/auth");
                 }}
             >
                 <LogOut className="size-5 stroke-[1.5px] stroke-[#F51E1E]" />
