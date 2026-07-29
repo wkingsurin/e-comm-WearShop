@@ -7,7 +7,6 @@ import DashboardWrapper from "@/components/shared/dashboard-wrapper";
 import OrderContent from "@/features/orders/components/details/order-content";
 import OrderSummary from "@/features/orders/components/details/order-summary";
 import OrderReturn from "@/features/orders/components/details/order-return";
-import OrderConfirmModal from "@/features/orders/components/order-confirm-modal";
 import { useCancelOrder } from "@/features/orders/hooks/use-cancel-order";
 import { OrderStatus } from "@/prisma/generated/prisma/enums";
 import OrderPageSkeleton from "@/features/orders/components/details/skeleton/order-page-skeleton";
@@ -21,8 +20,9 @@ export default function OrderPageClient({ orderId }: { orderId: string }) {
     const handleCancel = () => {
         openConfirm({
             title: "Cancel this order?",
-            content: <OrderConfirmModal data={order} />,
+            content: "This action cannot be undone.",
             onConfirm: () => cancelOrder({ orderId }),
+            confirmText: "Confirm",
         });
     };
 

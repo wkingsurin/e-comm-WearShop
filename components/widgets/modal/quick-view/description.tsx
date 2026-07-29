@@ -135,15 +135,15 @@ export default function Description({
                                         quantity,
                                         item: itemToCart,
                                     });
+                                } else {
+                                    useUIStore.getState().openConfirm({
+                                        title: "Open the login page?",
+                                        content:
+                                            "Please sign in to add the item to your cart.",
+                                        onConfirm: () => router.push("/auth"),
+                                        confirmText: "Open auth",
+                                    });
                                 }
-
-                                useUIStore.getState().openConfirm({
-                                    title: "Open the login page?",
-                                    content:
-                                        "Please sign in to add the item to your cart.",
-                                    onConfirm: () => router.push("/auth"),
-                                    confirmText: "Open auth",
-                                });
                             }}
                         >
                             <ShoppingBag className="size-4 stroke-[1px]" />
