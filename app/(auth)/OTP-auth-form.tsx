@@ -13,9 +13,6 @@ import DigitField from "@/components/shared/form/digit-field";
 import { Button } from "@/components/ui/button";
 import FormInput from "@/components/shared/form/form-input";
 import { getQueryClient } from "@/lib/react-query/get-query-client";
-import { favoriteQueries } from "@/features/favorites/query-options";
-import { cartQueries } from "@/features/cart/query-options";
-import { userProfileQueries } from "@/features/profile/query-options";
 import { queryKeys } from "@/lib/react-query/query-keys";
 
 interface IEmail {
@@ -194,7 +191,7 @@ export default function OTPAuthForm() {
                     </div>
                 </Form>
             </FormProvider>
-            {step === 1 && <TelegramButton />}
+            {/* {step === 1 && <TelegramButton />} */}
         </div>
     );
 }
