@@ -2,13 +2,19 @@ import Face from "./face";
 import Description from "./description";
 import { IProductCardProps } from "@/types/components/widgets/product-card.types";
 import { getDefaultVariant } from "@/lib/selectors/product.selectors";
+import ProductCardSkeleton from "./skeleton/product-card-skeleton";
 
 export default function ProductCard({
     data,
     isFavorite,
+    isPendingFavorite,
     type = "Default",
 }: IProductCardProps) {
     const defaultVariant = getDefaultVariant(data);
+
+    if (isPendingFavorite) {
+        return <ProductCardSkeleton />;
+    }
 
     return (
         <div

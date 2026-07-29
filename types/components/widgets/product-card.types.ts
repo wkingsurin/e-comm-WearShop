@@ -1,28 +1,29 @@
 import { IProduct, IVariant } from "../../store/ui.types";
 
 export interface IDiscountProps {
-	value: string;
+    value: string;
 }
 
 export interface IFastViewButtonProps {
-	data: IProduct;
-	variantId: string;
+    data: IProduct;
+    variantId: string;
 }
 
 export interface IProductCardProps {
-	data: IProduct;
-	isFavorite: boolean;
-	type?: "Default" | "Favorite";
+    data: IProduct;
+    isFavorite: boolean;
+    isPendingFavorite: boolean;
+    type?: "Default" | "Favorite";
 }
 
 export interface IProductDescriptionProps {
-	data: IProduct;
-	defaultVariant: IVariant;
+    data: IProduct;
+    defaultVariant: IVariant;
 }
 
 export interface IProductFaceProps {
-	data: IProduct;
-	isFavorite: boolean;
-	defaultVariant: IVariant;
-	disablePicking?: boolean;
+    data: IProduct;
+    isFavorite: boolean;
+    defaultVariant: IVariant;
+    disablePicking?: boolean;
 }
