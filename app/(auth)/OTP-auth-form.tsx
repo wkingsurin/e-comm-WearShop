@@ -16,6 +16,7 @@ import { getQueryClient } from "@/lib/react-query/get-query-client";
 import { favoriteQueries } from "@/features/favorites/query-options";
 import { cartQueries } from "@/features/cart/query-options";
 import { userProfileQueries } from "@/features/profile/query-options";
+import { queryKeys } from "@/lib/react-query/query-keys";
 
 interface IEmail {
     email: string;
@@ -96,14 +97,16 @@ export default function OTPAuthForm() {
         }
 
         if (result.ok) {
-            queryClient.clear();
-
-            queryClient.prefetchQuery(favoriteQueries.map());
-            queryClient.prefetchQuery(cartQueries.all());
-            queryClient.prefetchQuery(userProfileQueries.all());
-
             localStorage.removeItem("user-cart");
             localStorage.removeItem("user-favorites");
+
+            queryClient.clear();
+
+            queryClient.invalidateQueries({ queryKey: queryKeys.favorites });
+            queryClient.invalidateQueries({ queryKey: queryKeys.favoritesMap });
+            queryClient.invalidateQueries({ queryKey: queryKeys.cart });
+            queryClient.invalidateQueries({ queryKey: queryKeys.profile });
+
             router.push("/products");
             router.refresh();
         }

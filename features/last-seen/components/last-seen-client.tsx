@@ -47,6 +47,7 @@ export default function LastSeenClient() {
                                     key={product.id}
                                     data={product}
                                     isFavorite={!!favorites[product.id]}
+                                    isPendingFavorite={isPendingFavorties}
                                 />
                             );
                         })}

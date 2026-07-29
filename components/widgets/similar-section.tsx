@@ -10,7 +10,7 @@ import SectionSubtitle from "../shared/section-subtitle";
 import { useFavoritesMap } from "@/features/favorites/hooks/use-favorites-map";
 
 export default function SimilarSection() {
-    const { data: favorites = {} } = useFavoritesMap();
+    const { data: favorites = {}, isPending } = useFavoritesMap();
 
     const similarProducts = useSimilarStore((s) => s.similarProducts);
 
@@ -33,6 +33,7 @@ export default function SimilarSection() {
                                 key={item.id}
                                 data={item}
                                 isFavorite={!!favorites[item.id]}
+                                isPendingFavorite={isPending}
                             />
                         ))}
                     </div>
