@@ -1,13 +1,13 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import FastViewButton from "./fast-view-button";
 import { IProductFaceProps } from "@/types/components/widgets/product-card.types";
 import HeartButton from "@/components/shared/heart-button";
 import { useAddLastSeen } from "@/features/last-seen/hooks/use-add-last-seen";
+import ProductCarousel from "./carousel";
 
-export default function Face({
+export default function GalleryMobile({
     data,
     defaultVariant,
     isFavorite,
@@ -37,15 +37,7 @@ export default function Face({
                 isFavorite={isFavorite}
                 size="sm"
             />
-            <div className="absolute z-1 w-full h-full bg-transparent group-hover/card:bg-black/15 transition-brand"></div>
-            <Image
-                src={defaultColor.images[0].src}
-                alt={data.title}
-                width={332}
-                height={480}
-                priority
-                className="rounded-xl w-[180px] h-[200px] object-contain scale-99 group-hover/card:scale-101 transition-brand"
-            />
+            <ProductCarousel images={defaultColor.images} />
         </Link>
     );
 }
