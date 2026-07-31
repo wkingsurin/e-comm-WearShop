@@ -7,6 +7,7 @@ export default function ColorSelector({
 	changeActiveColorId,
 	defaultSize,
 	type,
+	resetQuantity
 }: IColorsProps) {
 	return (
 		<ColorSelectorWrapper
@@ -15,6 +16,7 @@ export default function ColorSelector({
 			changeActiveColorId={changeActiveColorId}
 			defaultSize={defaultSize}
 			type={type}
+			resetQuantity={resetQuantity}
 		/>
 	);
 }

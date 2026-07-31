@@ -14,6 +14,7 @@ interface IProps {
     quantity: number;
     incrementItem: () => void;
     decrementItem: () => void;
+    resetQuantity: () => void;
 }
 
 export default function Description({
@@ -24,6 +25,7 @@ export default function Description({
     quantity,
     incrementItem,
     decrementItem,
+    resetQuantity,
 }: IProps) {
     const { formattedPrice } = getItemPrices(
         currentVariant.price,
@@ -63,12 +65,14 @@ export default function Description({
                 colors={colors}
                 type="Page"
                 defaultSize={defaultSize}
+                resetQuantity={resetQuantity}
             />
 
             {currentVariant.attributes.size.toLowerCase() !== "one-size" && (
                 <SizeSelector
                     sizes={availableSizes}
                     initialSize={currentVariant.attributes.size}
+                    resetQuantity={resetQuantity}
                 />
             )}
 

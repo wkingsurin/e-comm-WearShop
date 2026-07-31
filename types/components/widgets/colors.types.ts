@@ -1,35 +1,38 @@
 import { IColorOption } from "@/types/store/ui.types";
 
 export interface IColorsProps {
-	colors: IColorOption[];
-	defaultSize?: string;
-	activeColorId?: string;
-	changeActiveColorId?: (color: string) => void;
-	type: "Modal" | "Page";
+    colors: IColorOption[];
+    defaultSize?: string;
+    activeColorId?: string;
+    changeActiveColorId?: (color: string) => void;
+    type: "Modal" | "Page";
+    resetQuantity: () => void;
 }
 
 export interface IColorsLinkProps {
-	id: string;
-	name: string;
-	slug: string;
-	previewImage: string;
-	isActive: boolean;
-	defaultSize: string;
+    id: string;
+    name: string;
+    slug: string;
+    previewImage: string;
+    isActive: boolean;
+    defaultSize: string;
+    resetQuantity: () => void;
 }
 
 export interface IColorsOptionProps {
-	id: string;
-	name: string;
-	slug: string;
-	previewImage: string;
-	isActive: boolean;
-	changeActiveColorId: (color: string) => void;
+    id: string;
+    name: string;
+    slug: string;
+    previewImage: string;
+    isActive: boolean;
+    changeActiveColorId: (color: string) => void;
 }
 
 export interface IColorsWrapperProps {
-	colors: IColorOption[];
-	defaultSize?: string;
-	activeColorId?: string;
-	changeActiveColorId?: (color: string) => void;
-	type: "Modal" | "Page";
+    colors: IColorOption[];
+    defaultSize?: string;
+    activeColorId?: string;
+    changeActiveColorId?: (color: string) => void;
+    type: "Modal" | "Page";
+    resetQuantity: () => void;
 }

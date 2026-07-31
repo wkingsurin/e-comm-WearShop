@@ -82,6 +82,7 @@ export default function ProductClient({ product }: IProps) {
     const decrementItem = () => {
         setQuantity(quantity > 1 ? quantity - 1 : quantity);
     };
+    const resetQuantity = () => setQuantity(1);
 
     const itemToCart = mapProductToCartItem(
         product,
@@ -132,6 +133,7 @@ export default function ProductClient({ product }: IProps) {
                                     activeColorId={selectedColorId}
                                     incrementItem={incrementItem}
                                     decrementItem={decrementItem}
+                                    resetQuantity={resetQuantity}
                                     quantity={quantity}
                                 />
                                 {currentVariant.stock === 0 && (

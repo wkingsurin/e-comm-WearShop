@@ -9,6 +9,7 @@ export default function ColorSelectorWrapper({
     changeActiveColorId,
     defaultSize,
     type,
+    resetQuantity,
 }: IColorsWrapperProps) {
     const searchParams = useSearchParams();
     const urlSlug = searchParams.get("color");
@@ -46,6 +47,7 @@ export default function ColorSelectorWrapper({
                                 previewImage={color.images[0].src}
                                 defaultSize={defaultSize}
                                 isActive={urlSlug === color.slug}
+                                resetQuantity={resetQuantity}
                             />
                         );
                     }

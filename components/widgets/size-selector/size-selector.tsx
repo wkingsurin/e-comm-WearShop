@@ -13,6 +13,7 @@ export default function SizeSelector({
     sizes,
     initialSize,
     onChangeSize,
+    resetQuantity,
 }: ISizesProps) {
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -21,15 +22,14 @@ export default function SizeSelector({
         const params = new URLSearchParams(searchParams.toString());
 
         params.set("size", size);
+        resetQuantity();
 
         router.replace(`?${params.toString()}`);
     };
 
     return (
         <div className="flex flex-col gap-[6px] w-full">
-            <span className="font-medium leading-lg tracking-wider">
-                Size
-            </span>
+            <span className="font-medium leading-lg tracking-wider">Size</span>
             <Select
                 onValueChange={(value) => {
                     if (!value) return;
@@ -55,7 +55,11 @@ export default function SizeSelector({
                                 disabled={!s.isAvailable}
                             >
                                 {s.value}{" "}
-                                {!s.isAvailable && <p className="absolute left-11">(Out of stock)</p>}
+                                {!s.isAvailable && (
+                                    <p className="absolute left-11">
+                                        (Out of stock)
+                                    </p>
+                                )}
                             </SelectItem>
                         ))}
                     </SelectGroup>
