@@ -6,7 +6,6 @@ import { IHeartButtonProps } from "@/types/components/shared/shared.types";
 import { useUIStore } from "@/lib/store/ui.store";
 import { useToggleFavorite } from "@/features/favorites/hooks/use-toggle-favorite";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function HeartButton({
@@ -33,10 +32,10 @@ export default function HeartButton({
 
     const handleDelete = () => {
         openConfirm({
-            title: "Delete favorite?",
+            title: "Remove from favorites?",
             content: (
-                <p className="font-sans font-medium tracking-wider">
-                    You’re sure? Undo this isn’t possible!
+                <p className="font-sans tracking-wider">
+                    You`re sure? Undo this isn`t possible!
                 </p>
             ),
             confirmText: "Delete",
@@ -63,9 +62,10 @@ export default function HeartButton({
                 if (unauthorized) {
                     openConfirm({
                         title: "Open the login page?",
-                        content: "Please sign in to save the item to your favorites.",
+                        content:
+                            "Please sign in to save the item to your favorites.",
                         onConfirm: () => router.push("/auth"),
-                        confirmText: 'Open auth'
+                        confirmText: "Open auth",
                     });
                     return;
                 }

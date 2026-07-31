@@ -19,7 +19,7 @@ export default function CartItem({ data }: ICartItemProps) {
 
     const handleDelete = () => {
         openConfirm({
-            title: "Delete this prodict?",
+            title: "Remove this item?",
             content: "You`re sure? Undo this isn`t possible!",
             confirmText: "Confirm",
             cancelText: "Cancel",

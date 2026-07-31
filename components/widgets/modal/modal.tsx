@@ -7,7 +7,7 @@ export default function Modal({ className, children }: IModalProps) {
 	return (
 		<div className={`relative w-full md:w-auto md:max-w-[720px] ${style}`}>
 			<div
-				className="w-full px-2 py-4 md:p-4 bg-white rounded-xl border-[1px] border-[#E5E7EB] shadow-[0_0_12px_-3px_rgba(0,0,0,0.1)]"
+				className="w-full px-2 py-4 md:p-4 bg-white rounded-xl shadow-[0_0_12px_-3px_rgba(0,0,0,0.1)]"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{children}

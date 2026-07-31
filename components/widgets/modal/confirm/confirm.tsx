@@ -19,9 +19,9 @@ export default function ConfirmModal() {
 	return (
 		<Modal>
 			<div className="flex flex-col items-end justify-between gap-6 w-full md:w-[480px] min-h-[160px]">
-				<div className="flex flex-col gap-4 w-full">
+				<div className="flex flex-col gap-3 w-full">
 					<div className="flex items-center justify-between">
-						<span className="font-sans font-medium text-xl tracking-wider leading-lg">
+						<span className="font-sans font-medium text-lg tracking-wider leading-base">
 							{confirmData.title}
 						</span>
 					</div>
