@@ -8,7 +8,7 @@ interface IProps {
     productName: string;
 }
 
-export default function Gallery({ images, productName }: IProps) {
+export default function GalleryDesktop({ images, productName }: IProps) {
     const [activeImageIdx, setActiveImageIdx] = useState<number>(0);
 
     const selectImage = (index: number) => {
@@ -20,7 +20,7 @@ export default function Gallery({ images, productName }: IProps) {
 
     return (
         <div
-            className="relative lg:sticky lg:top-[154px] flex gap-3 w-full max-w-[572px] h-[545px] md:h-[640px]"
+            className="relative lg:sticky lg:top-[154px] flex gap-3 w-full h-full"
             draggable={false}
         >
             <CarouselSpacing

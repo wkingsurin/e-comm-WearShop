@@ -3,7 +3,6 @@
 import Container from "@/components/shared/container";
 import Section from "@/components/shared/section";
 import SectionTitle from "@/components/shared/section-title";
-import Gallery from "./gallery";
 import Description from "./description";
 import SellMenu from "./sell-menu";
 import { IProduct } from "@/types/store/ui.types";
@@ -18,6 +17,8 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import ProductMenu from "./product-menu";
 import { mapProductToCartItem } from "@/app/mappers/mapper";
+import GalleryDesktop from "./gallery-desktop";
+import GalleryMobile from "./gallery-mobile";
 
 interface IProps {
     product: IProduct;
@@ -113,11 +114,16 @@ export default function ProductClient({ product }: IProps) {
                             </SectionTitle>
                         </div>
                         <div className="flex flex-col lg:flex-row gap-5 min-h-[545px] md:min-h-[640px]">
-                            <Gallery
-                                key={currentVariant.id}
-                                productName={product.title}
-                                images={images}
-                            />
+                            <div className="hidden md:block w-full max-w-[572px] h-[545px] md:h-[640px]">
+                                <GalleryDesktop
+                                    key={currentVariant.id}
+                                    productName={product.title}
+                                    images={images}
+                                />
+                            </div>
+                            <div className="block md:hidden w-full max-w-[572px] h-[545px] md:h-[640px]">
+                                <GalleryMobile images={images} />
+                            </div>
                             <div className="flex flex-col lg:flex-row gap-4 items-start justify-between w-full">
                                 <Description
                                     product={product}
