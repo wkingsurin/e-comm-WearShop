@@ -2,5 +2,5 @@ export interface ISizesProps {
     sizes: { value: string; isAvailable: boolean }[];
     initialSize: string;
     onChangeSize?: (size: string) => void;
-    resetQuantity: () => void;
+    resetQuantity?: () => void;
 }

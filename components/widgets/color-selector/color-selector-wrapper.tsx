@@ -47,7 +47,9 @@ export default function ColorSelectorWrapper({
                                 previewImage={color.images[0].src}
                                 defaultSize={defaultSize}
                                 isActive={urlSlug === color.slug}
-                                resetQuantity={resetQuantity}
+                                resetQuantity={
+                                    resetQuantity ? resetQuantity : () => {}
+                                }
                             />
                         );
                     }

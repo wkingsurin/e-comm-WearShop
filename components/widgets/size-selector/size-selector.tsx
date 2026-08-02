@@ -22,7 +22,9 @@ export default function SizeSelector({
         const params = new URLSearchParams(searchParams.toString());
 
         params.set("size", size);
-        resetQuantity();
+        if (resetQuantity) {
+            resetQuantity();
+        }
 
         router.replace(`?${params.toString()}`);
     };

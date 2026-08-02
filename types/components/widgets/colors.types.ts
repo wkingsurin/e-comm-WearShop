@@ -6,7 +6,7 @@ export interface IColorsProps {
     activeColorId?: string;
     changeActiveColorId?: (color: string) => void;
     type: "Modal" | "Page";
-    resetQuantity: () => void;
+    resetQuantity?: () => void;
 }
 
 export interface IColorsLinkProps {
@@ -34,5 +34,5 @@ export interface IColorsWrapperProps {
     activeColorId?: string;
     changeActiveColorId?: (color: string) => void;
     type: "Modal" | "Page";
-    resetQuantity: () => void;
+    resetQuantity?: () => void;
 }
