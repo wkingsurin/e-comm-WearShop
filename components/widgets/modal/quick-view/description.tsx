@@ -1,18 +1,16 @@
 import Link from "next/link";
-import ColorSelector from "../../color-selector/color-selector";
-import { Button } from "@/components/ui/button";
-import { Minus, Plus, ShoppingBag } from "lucide-react";
 import { useUIStore } from "@/lib/store/ui.store";
 import { IColorOption, IProduct, IVariant } from "@/types/store/ui.types";
 import PageLink from "./page-link";
 import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
 import { mapProductToCartItem } from "@/app/mappers/mapper";
-import { useMemo } from "react";
-import SizeSelector from "../../size-selector/size-selector";
+import { useEffect, useMemo } from "react";
 import { getItemPrices } from "@/lib/money/get-item-price";
 import Counter from "@/components/shared/counter";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import ButtonToCart from "../../button";
+import { useAddToCartButton } from "../../use-add-to-cart-button";
+import ColorSelector from "../../color-selector/color-selector";
+import SizeSelector from "../../size-selector/size-selector";
 
 export default function Description({
     product,
@@ -36,16 +34,14 @@ export default function Description({
     decrementQuantity: () => void;
     incrementQuantity: () => void;
 }) {
-    const { status } = useSession();
-
-    const router = useRouter();
-
     const { formattedPrice } = getItemPrices(
         currentVariant.price,
         currentVariant.oldPrice!,
     );
 
-    const { mutate: addToCart } = useAddToCart();
+    const { mutateAsync: addToCart } = useAddToCart();
+
+    const { state, start, success, fail, reset } = useAddToCartButton();
 
     const selectedColorSlug = product.options.color.find(
         (c) => c.id === activeColorId,
@@ -76,6 +72,30 @@ export default function Description({
         },
         quantity,
     );
+
+    const handleAdd = async () => {
+        if (state === "pending") return;
+
+        try {
+            start();
+
+            await addToCart({
+                variantId: currentVariant.id,
+                quantity,
+                item: itemToCart,
+            });
+
+            success();
+        } catch (err) {
+            fail();
+
+            setTimeout(() => {
+                reset();
+            }, 1500);
+        }
+    };
+
+    useEffect(() => reset(), [currentVariant.id, quantity]);
 
     return (
         <div className="flex flex-col items-center gap-6 max-w-[258px] w-full">
@@ -108,7 +128,7 @@ export default function Description({
                 changeActiveColorId={selectColor}
                 type="Modal"
             />
-            <div className="flex flex-col items-center gap-2 w-full">
+            <div className="flex flex-col items-center gap-3 w-full">
                 {currentVariant.attributes.size.toLowerCase() !==
                     "one-size" && (
                     <SizeSelector
@@ -118,37 +138,14 @@ export default function Description({
                     />
                 )}
                 {currentVariant.stock !== 0 && (
-                    <div className="flex items-center gap-4 w-full">
+                    <div className="flex items-center gap-3 w-full">
                         <Counter
                             quantity={quantity}
                             stock={currentVariant.stock}
                             decrement={decrementQuantity}
                             increment={incrementQuantity}
                         />
-                        <Button
-                            className="flex-1 bg-black"
-                            disabled={selectedSize === "" ? true : false}
-                            onClick={() => {
-                                if (status === "authenticated") {
-                                    addToCart({
-                                        variantId: currentVariant.id,
-                                        quantity,
-                                        item: itemToCart,
-                                    });
-                                } else {
-                                    useUIStore.getState().openConfirm({
-                                        title: "Open the login page?",
-                                        content:
-                                            "Please sign in to add the item to your cart.",
-                                        onConfirm: () => router.push("/auth"),
-                                        confirmText: "Open auth",
-                                    });
-                                }
-                            }}
-                        >
-                            <ShoppingBag className="size-4 stroke-[1px]" />
-                            Add
-                        </Button>
+                        <ButtonToCart state={state} onClick={handleAdd} />
                     </div>
                 )}
                 {currentVariant.stock === 0 && (

@@ -1,11 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { ShoppingBag, Truck } from "lucide-react";
+import { Truck } from "lucide-react";
 import { IProduct, IVariant } from "@/types/store/ui.types";
 import HeartButton from "@/components/shared/heart-button";
 import { useAddToCart } from "@/features/cart/hooks/use-add-to-cart";
 import { getItemPrices } from "@/lib/money/get-item-price";
 import Counter from "@/components/shared/counter";
 import { ICartItem } from "@/features/cart/types";
+import ButtonToCart from "@/components/widgets/button";
+import { useAddToCartButton } from "@/components/widgets/use-add-to-cart-button";
 
 interface IProps {
     product: IProduct;
@@ -31,7 +32,30 @@ export default function SellMenu({
         currentVariant.oldPrice!,
     );
 
-    const { mutate: addItem } = useAddToCart();
+    const { mutateAsync: addItem } = useAddToCart();
+    const { state, start, success, fail, reset } = useAddToCartButton();
+
+    const handleAdd = async () => {
+        if (state === "pending") return;
+
+        try {
+            start();
+
+            await addItem({
+                variantId: currentVariant.id,
+                quantity,
+                item: itemToCart,
+            });
+
+            success();
+        } catch (err) {
+            fail();
+
+            setTimeout(() => {
+                reset();
+            }, 1500);
+        }
+    };
 
     return (
         <div className="hidden md:flex relative lg:sticky lg:top-[154px] flex-col gap-5 w-full hover:shadow-[0_0_12px_-3px_rgba(0,0,0,.1)] transition-brand">
@@ -61,23 +85,7 @@ export default function SellMenu({
                     </div>
                     <div className="flex flex-col gap-2">
                         <div className="relative flex gap-3">
-                            <Button
-                                className="flex-1 bg-black"
-                                disabled={currentVariant.attributes.size === ""}
-                                onClick={() => {
-                                    if (!currentVariant.attributes.size)
-                                        return console.log(`Select size!!!`);
-
-                                    addItem({
-                                        variantId: currentVariant.id,
-                                        quantity,
-                                        item: itemToCart,
-                                    });
-                                }}
-                            >
-                                <ShoppingBag className="size-4 stroke-[1px]" />
-                                Pack
-                            </Button>
+                            <ButtonToCart state={state} onClick={handleAdd} />
                             <HeartButton
                                 productId={product.id}
                                 isFavorite={isFavorite}
