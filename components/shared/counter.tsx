@@ -15,7 +15,7 @@ export default function Counter({
     decrement,
 }: IProps) {
     return (
-        <div className="group/counter flex rounded-xl bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
+        <div className="group/counter flex rounded-md bg-white border-[0.5px] border-black/10 hover:border-black/15 hover:shadow-[0_0_9px_-3px_var(--black)]/25 transition-brand">
             <Button
                 className="flex gap-3 w-[50px] h-[50px] md:w-10 md:h-10 bg-white hover:bg-white"
                 onClick={decrement}
